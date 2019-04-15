@@ -1,39 +1,69 @@
 #include "entity_manager.hpp"
 
-EntityManager::EntityManager()
+EntityManager::EntityManager(Dexode::EventBus* eventbus)
 {
+	this->eventbus = eventbus;
 }
 
 EntityManager::~EntityManager()
 {
-	/*std::for_each(this->entities.begin(), this->entities.end(), [&](const std::pair<std::string, Entity>& ref) {
-		delete &ref.second;
-	});*/
+	for (std::map<int, Entity*>::iterator it = this->entities.begin(); it != this->entities.end(); ++it)
+	{
+		delete it->second;
+	}
 }
 
-Player& EntityManager::GetPlayer()
+Entity * EntityManager::getEntity(int entity_id)
 {
-	auto player = this->entities["player"];
-	return (Player&)(*player);
+	for (std::map<int, Entity*>::iterator it = this->entities.begin(); it != this->entities.end(); ++it)
+	{
+		if (it->second->id == entity_id)
+		{
+			return this->entities[it->second->id];
+		}
+	}
 }
 
-void EntityManager::CreateEntity(std::string entity_name, ENTITY_TYPE entity_type, sf::Sprite entity_sprite)
+Entity * EntityManager::getEntity(std::string entity_name)
+{
+	for (std::map<int, Entity*>::iterator it = this->entities.begin(); it != this->entities.end(); ++it)
+	{
+		if (it->second->name == entity_name)
+		{
+			return this->entities[it->second->id];
+		}
+	}
+}
+
+std::vector<Entity*> EntityManager::getEntities(ENTITY_TYPE entity_type)
+{
+	std::vector<Entity*> entities;
+
+	for (std::map<int, Entity*>::iterator it = this->entities.begin(); it != this->entities.end(); ++it)
+	{
+		if (it->second->type == entity_type)
+		{
+			entities.push_back(it->second);
+		}
+	}
+
+	return entities;
+}
+
+void EntityManager::createEntity(int entity_id, std::string entity_name, ENTITY_TYPE entity_type, sf::Sprite entity_sprite)
 {
 	switch (entity_type)
 	{
-	case ENTITY_TYPE::PLAYER:
-	{
-		Entity* entity = new Player(entity_sprite);
-		this->entities[entity_name] = entity;
-
-		break;
-	}
 	default:
 	{
-		Entity* entity = new Enemy(entity_sprite);
-		this->entities[entity_name] = entity;
-
+		this->entities[entity_id] = new Enemy(entity_id, entity_name, entity_sprite, this->eventbus);
+		this->entities[entity_id]->name = std::string(entity_name);
 		break;
 	}
 	}
+}
+
+bool EntityManager::move(int x, int y, Entity * entity, Map * map)
+{
+	return false;
 }

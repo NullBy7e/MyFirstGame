@@ -3,50 +3,28 @@
 #include <SFML/Graphics.hpp>
 
 #include "entity_type.hpp"
+#include "move_action.hpp"
+
+#include "entity_events.hpp"
+#include "eventbus/EventBus.hpp"
 
 class Entity : public sf::Drawable
 {
 public:
-	Entity(sf::Sprite& sprite, ENTITY_TYPE type)
-	{
-		this->sprite = new sf::Sprite();
-		memcpy(this->sprite, &sprite, sizeof(sprite));
+	Entity(int id, std::string name, sf::Sprite sprite, ENTITY_TYPE type, Dexode::EventBus* eventbus);
+	virtual ~Entity();
 
-		this->type = type;
-	}
+	sf::Sprite& getSprite();
 
-	virtual ~Entity()
-	{
-		delete sprite;
-	};
+	virtual void domove(sf::Vector2f offset);
+	virtual void move(sf::Vector2f offset);
+	virtual void setPosition(sf::Vector2f position);
+	virtual void inflictDamage(int health_damage);
+	virtual void update(float x, float y);
+	virtual void move(MOVE_ACTION move_action);
+	virtual void move(int move_action);
 
-	sf::Sprite& getSprite() {
-		return *sprite;
-	}
-
-	virtual void setPosition(sf::Vector2f position)
-	{
-		sprite->setPosition(position);
-	}
-
-	virtual void inflictDamage(int health_damage)
-	{
-		current_health -= health_damage;
-
-		if (current_health <= 0)
-		{
-			is_dead = true;
-			current_health = 0;
-		}
-	}
-
-	int getHealthPercentage()
-	{
-		if (current_health == 0)
-			return 0;
-
-		return (int)(current_health * 100.0 / max_health);
-	}
+	int getHealthPercentage();
 
 	/* entity stats */
 	float current_health;
@@ -56,6 +34,13 @@ public:
 	bool is_dead = false;
 
 	ENTITY_TYPE type;
+
+	std::string name;
+
+	int id;
+
+	float move_speed = 5;
+	Dexode::EventBus* eventbus;
 
 protected:
 	sf::Sprite* sprite;

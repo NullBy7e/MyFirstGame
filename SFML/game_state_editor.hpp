@@ -18,7 +18,7 @@ private:
 	sf::View gameView;
 	sf::View guiView;
 
-	Map map;
+	Map * map;
 public:
 
 	virtual void draw(const float dt);
@@ -26,4 +26,5 @@ public:
 	virtual void handleInput();
 
 	GameStateEditor(Game* game);
+	~GameStateEditor();
 };

@@ -13,6 +13,10 @@ GameStateStart::GameStateStart(Game* game)
 	this->view.setCenter(pos);
 }
 
+GameStateStart::~GameStateStart()
+{
+}
+
 void GameStateStart::draw(const float dt)
 {
 	this->game->window.setView(this->view);

@@ -76,15 +76,15 @@ void Game::loadTextures()
 	texmgr.loadTexture("player", "textures/sprites/player/knight_f_run_anim_f1.png");
 }
 
-void Game::loadEntities()
+void Game::createPlayer()
 {
-	this->entmgr.CreateEntity("player", ENTITY_TYPE::PLAYER, sf::Sprite(texmgr.getRef("player")));
+	this->player = new Player(0, "player", sf::Sprite(texmgr.getRef("player")), nullptr);
 }
 
 Game::Game()
 {
 	this->loadTextures();
-	this->loadEntities();
+	this->createPlayer();
 
 	this->window.create(sf::VideoMode(1280, 1024), "SFML", sf::Style::Titlebar | sf::Style::Close);
 	this->window.setFramerateLimit(60);
@@ -96,4 +96,6 @@ Game::~Game()
 {
 	while (!this->states.empty())
 		popState();
+
+	delete player;
 }

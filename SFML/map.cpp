@@ -7,10 +7,24 @@
 #include <iostream>
 
 #include "map.hpp"
+#include "entity_events.hpp"
 
 Map::Map(Game* game)
 {
 	this->game = game;
+	this->entmgr = new EntityManager(eventbus);
+
+	eventbus->listen<Events::EntityMoveEvent>
+		([](const auto& event)
+	{
+		event.entity->domove(sf::Vector2f(event.x, event.y));
+	});
+}
+
+Map::~Map()
+{
+	delete this->entmgr;
+	delete this->eventbus;
 }
 
 void Map::draw(sf::RenderWindow& window, float dt)
@@ -46,13 +60,14 @@ void Map::draw(sf::RenderWindow& window, float dt)
 	/* draw the player  */
 	if (this->player_spawned)
 	{
-		window.draw(this->game->entmgr.GetPlayer());
+		window.draw(*this->game->player);
 	}
 
 	/* draw enemies */
-	for (int i = 0; i < this->enemy_sprites.size(); ++i)
+	for (auto entity : this->entmgr->getEntities(ENTITY_TYPE::ENEMY))
 	{
-		window.draw(this->enemy_sprites[i]);
+		(static_cast<Enemy*>(entity))->updateOVH();
+		window.draw(*entity);
 	}
 }
 
@@ -84,8 +99,10 @@ void Map::createEntities()
 
 			if (object.type == "enemy_boss")
 			{
-				/* if the enemy sprite has not been created yet */
-				if (this->enemy_sprites.find(object.id) == this->enemy_sprites.end())
+				auto entity = this->entmgr->getEntity(object.id);
+
+				/* if the entity has not been created yet */
+				if (entity == nullptr)
 				{
 					auto new_sprite = sf::Sprite(this->sprites[object.gid]);
 					sf::Vector2f targetSize(object.width, object.height);
@@ -107,7 +124,8 @@ void Map::createEntities()
 						new_sprite.setPosition(sf::Vector2f(object.x + object.width, (object.y - object.height)));
 					}
 
-					this->enemy_sprites[object.id] = new_sprite;
+					/* create the entity */
+					this->entmgr->createEntity(object.id, object.name, ENTITY_TYPE::ENEMY, new_sprite);
 				}
 			}
 
@@ -117,21 +135,27 @@ void Map::createEntities()
 				/* player spawn point */
 				if (!this->player_spawned && object.name == "player_start")
 				{
-					auto& player = this->game->entmgr.GetPlayer();
+					auto player = this->game->player;
 
 					sf::Vector2f targetSize(object.width, object.height);
 
-					auto bounds = player.getSprite().getLocalBounds();
+					auto bounds = player->getSprite().getLocalBounds();
 					auto factorX = targetSize.x / bounds.width;
 					auto factorY = targetSize.y / bounds.height;
 
 					/* set the scale of the sprite to that of the object */
-					player.getSprite().setScale(factorX, factorY);
-					player.setPosition(sf::Vector2f(object.x, (object.y - object.height)));
+					player->getSprite().setScale(factorX, factorY);
+					player->setPosition(sf::Vector2f(object.x, (object.y - object.height)));
 
+					player->eventbus = this->eventbus;
 					this->player_spawned = true;
 				}
 			}
 		}
 	}
+}
+
+bool Map::move(int x, int y, Entity * entity)
+{
+	return false;
 }

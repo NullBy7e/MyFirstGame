@@ -16,6 +16,7 @@ class Map
 public:
 	Map() {};
 	Map(Game* game);
+	~Map();
 
 	sf::Vector2u size;
 	sf::Vector2u tileSize;
@@ -26,9 +27,6 @@ public:
 	std::map<int, sf::Sprite> sprites;
 
 	bool player_spawned = false;
-
-	/* maps object id to sprite */
-	std::map<int, sf::Sprite> enemy_sprites;
 
 	/* Draw the map */
 	void draw(sf::RenderWindow& window, float dt);
@@ -41,7 +39,11 @@ public:
 	void addObjectLayer(MapObjectLayer layer);
 	void createEntities();
 
-private:
+	bool move(int x, int y, Entity* entity);
 
+	EntityManager* entmgr;
+
+	Dexode::EventBus* eventbus = new Dexode::EventBus();
+private:
 	Game* game;
 };

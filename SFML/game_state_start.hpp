@@ -19,4 +19,5 @@ public:
 	virtual void handleInput();
 
 	GameStateStart(Game* game);
+	~GameStateStart();
 };

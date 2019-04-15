@@ -21,9 +21,18 @@
   <ItemGroup>
     <ClInclude Include="enemy.hpp" />
     <ClInclude Include="entity.hpp" />
+    <ClInclude Include="entity_events.hpp" />
     <ClInclude Include="entity_health_bar.hpp" />
     <ClInclude Include="entity_manager.hpp" />
     <ClInclude Include="entity_type.hpp" />
+    <ClInclude Include="eventbus\AsyncEventBus.hpp" />
+    <ClInclude Include="eventbus\EventBus.hpp" />
+    <ClInclude Include="eventbus\EventCollector.hpp" />
+    <ClInclude Include="eventbus\internal\AsyncCallbackVector.hpp" />
+    <ClInclude Include="eventbus\internal\CallbackVector.hpp" />
+    <ClInclude Include="eventbus\internal\common.hpp" />
+    <ClInclude Include="eventbus\internal\TransactionCallbackVector.hpp" />
+    <ClInclude Include="eventbus\TokenHolder.hpp" />
     <ClInclude Include="game.hpp" />
     <ClInclude Include="game_state.hpp" />
     <ClInclude Include="game_state_editor.hpp" />
@@ -54,7 +63,10 @@
     <ClInclude Include="tmx_tile_layer.hpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="enemy.cpp" />
+    <ClCompile Include="entity.cpp" />
     <ClCompile Include="entity_manager.cpp" />
+    <ClCompile Include="eventbus\AsyncEventBus.cpp" />
     <ClCompile Include="game.cpp" />
     <ClCompile Include="game_state_editor.cpp" />
     <ClCompile Include="game_state_start.cpp" />
@@ -68,6 +80,8 @@
     <ClCompile Include="map_object_layer.cpp" />
     <ClCompile Include="map_object_property.cpp" />
     <ClCompile Include="map_tile_layer.cpp" />
+    <ClCompile Include="move_action.hpp" />
+    <ClCompile Include="player.cpp" />
     <ClCompile Include="texture_manager.cpp" />
     <ClCompile Include="tinyxml2\tinyxml2.cpp" />
     <ClCompile Include="tmx_layer.cpp" />
@@ -140,9 +154,10 @@
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>external\SFML-2.5.1\include;external\LUA\include</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>SFML_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <LanguageStandard>stdcpp17</LanguageStandard>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>stdafx.hpp</PrecompiledHeaderFile>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
     </ClCompile>
     <Link>
       <AdditionalLibraryDirectories>external\SFML-2.5.1\lib;external\LUA\lib</AdditionalLibraryDirectories>
@@ -157,8 +172,9 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>external\SFML-2.5.1\include;external\LUA\include;external\Lime2D\include;</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>external\SFML-2.5.1\include;external\LUA\include</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>SFML_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>

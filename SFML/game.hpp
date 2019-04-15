@@ -16,7 +16,7 @@ class Game
 private:
 
 	void loadTextures();
-	void loadEntities();
+	void createPlayer();
 
 public:
 	std::stack<GameState*> states;
@@ -24,7 +24,6 @@ public:
 	sf::RenderWindow window;
 
 	TextureManager texmgr;
-	EntityManager entmgr;
 
 	sf::Sprite background;
 
@@ -34,6 +33,8 @@ public:
 	GameState* peekState();
 
 	void gameLoop();
+
+	Player* player;
 
 	Game();
 	~Game();

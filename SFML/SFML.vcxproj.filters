@@ -37,6 +37,21 @@
     <Filter Include="Header Files\ui">
       <UniqueIdentifier>{b6eac80c-3af9-47ab-a5b0-53e2187a314a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\entities">
+      <UniqueIdentifier>{aaac560d-bea3-408a-86b6-9536d814d247}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\eventbus">
+      <UniqueIdentifier>{f745d194-afb0-4635-ac57-281be371da7b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\eventbus\internal">
+      <UniqueIdentifier>{62b2330b-0334-4f93-a997-b8a9e8e3359c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\eventbus">
+      <UniqueIdentifier>{4304b42b-fe61-4d9c-ac49-cc8faebec424}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\events">
+      <UniqueIdentifier>{0f7baebf-94d1-4994-a804-c49f0dead3bf}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="game_state.hpp">
@@ -123,20 +138,47 @@
     <ClInclude Include="player.hpp">
       <Filter>Header Files\entities</Filter>
     </ClInclude>
-    <ClInclude Include="entity_manager.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="entity.hpp">
       <Filter>Header Files\entities</Filter>
     </ClInclude>
     <ClInclude Include="entity_health_bar.hpp">
       <Filter>Header Files\ui</Filter>
     </ClInclude>
+    <ClInclude Include="enemy.hpp">
+      <Filter>Header Files\entities</Filter>
+    </ClInclude>
     <ClInclude Include="entity_type.hpp">
       <Filter>Header Files\entities</Filter>
     </ClInclude>
-    <ClInclude Include="enemy.hpp">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="entity_manager.hpp">
+      <Filter>Header Files\entities</Filter>
+    </ClInclude>
+    <ClInclude Include="eventbus\AsyncEventBus.hpp">
+      <Filter>Header Files\eventbus</Filter>
+    </ClInclude>
+    <ClInclude Include="eventbus\EventBus.hpp">
+      <Filter>Header Files\eventbus</Filter>
+    </ClInclude>
+    <ClInclude Include="eventbus\EventCollector.hpp">
+      <Filter>Header Files\eventbus</Filter>
+    </ClInclude>
+    <ClInclude Include="eventbus\TokenHolder.hpp">
+      <Filter>Header Files\eventbus</Filter>
+    </ClInclude>
+    <ClInclude Include="eventbus\internal\AsyncCallbackVector.hpp">
+      <Filter>Header Files\eventbus\internal</Filter>
+    </ClInclude>
+    <ClInclude Include="eventbus\internal\CallbackVector.hpp">
+      <Filter>Header Files\eventbus\internal</Filter>
+    </ClInclude>
+    <ClInclude Include="eventbus\internal\common.hpp">
+      <Filter>Header Files\eventbus\internal</Filter>
+    </ClInclude>
+    <ClInclude Include="eventbus\internal\TransactionCallbackVector.hpp">
+      <Filter>Header Files\eventbus\internal</Filter>
+    </ClInclude>
+    <ClInclude Include="entity_events.hpp">
+      <Filter>Header Files\events</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -214,6 +256,21 @@
     </ClCompile>
     <ClCompile Include="entity_manager.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="player.cpp">
+      <Filter>Source Files\entities</Filter>
+    </ClCompile>
+    <ClCompile Include="enemy.cpp">
+      <Filter>Source Files\entities</Filter>
+    </ClCompile>
+    <ClCompile Include="entity.cpp">
+      <Filter>Source Files\entities</Filter>
+    </ClCompile>
+    <ClCompile Include="move_action.hpp">
+      <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="eventbus\AsyncEventBus.cpp">
+      <Filter>Source Files\eventbus</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

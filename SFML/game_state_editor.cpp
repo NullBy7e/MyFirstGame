@@ -6,7 +6,7 @@
 
 void GameStateEditor::draw(const float dt)
 {
-	map.draw(this->game->window, dt);
+	map->draw(this->game->window, dt);
 }
 
 void GameStateEditor::update(const float dt)
@@ -17,6 +17,13 @@ void GameStateEditor::update(const float dt)
 void GameStateEditor::handleInput()
 {
 	sf::Event event;
+
+	bool upFlag = false;
+	bool downFlag = false;
+	bool leftFlag = false;
+	bool rightFlag = false;
+
+	int pressedKey;
 
 	while (this->game->window.pollEvent(event))
 	{
@@ -37,29 +44,35 @@ void GameStateEditor::handleInput()
 				float(event.size.width) / float(this->game->background.getTexture()->getSize().x),
 				float(event.size.height) / float(this->game->background.getTexture()->getSize().y));
 
-			this->game->entmgr.GetPlayer().repositionUi(event.size.width, event.size.height);
+			this->game->player->repositionUi(event.size.width, event.size.height);
 			break;
 		}
 		case sf::Event::KeyPressed:
 		{
-			if (event.key.code == sf::Keyboard::Tilde)
+			switch (event.key.code)
 			{
+			case sf::Keyboard::Tilde:
 				this->mapEditorOpened = !this->mapEditorOpened;
+				break;
+			case sf::Keyboard::Up:
+			case sf::Keyboard::Down:
+			case sf::Keyboard::Left:
+			case sf::Keyboard::Right:
+				this->game->player->move((int)event.key.code);
+				break;
 			}
-
 			break;
 		}
+
 		default: break;
 		}
 	}
-
-	return;
 }
 
 GameStateEditor::GameStateEditor(Game* game)
 {
 	this->game = game;
-	map = Map(game);
+	map = new Map(game);
 
 	sf::Vector2f pos = sf::Vector2f(this->game->window.getSize());
 	this->guiView.setSize(pos);
@@ -136,7 +149,7 @@ GameStateEditor::GameStateEditor(Game* game)
 		);
 
 		/* add the layer to the map */
-		map.addTileLayer(map_tile_layer);
+		map->addTileLayer(map_tile_layer);
 	}
 
 	/* get object layers */
@@ -173,23 +186,28 @@ GameStateEditor::GameStateEditor(Game* game)
 		);
 
 		/* add the layer to the map */
-		map.addObjectLayer(map_object_layer);
+		map->addObjectLayer(map_object_layer);
 	}
 
 	/* set map size */
-	map.size.x = tmx_map.width;
-	map.size.y = tmx_map.height;
+	map->size.x = tmx_map.width;
+	map->size.y = tmx_map.height;
 
 	/* set the tilesize */
-	map.tileSize.x = tmx_map.tile_width;
-	map.tileSize.y = tmx_map.tile_height;
+	map->tileSize.x = tmx_map.tile_width;
+	map->tileSize.y = tmx_map.tile_height;
 
 	/* set available sprites */
-	map.setSprites(sprites);
+	map->setSprites(sprites);
 
 	/* create entities */
-	map.createEntities();
+	map->createEntities();
 
 	/* reposition UI */
-	this->game->entmgr.GetPlayer().repositionUi(this->game->window.getSize().x, this->game->window.getSize().y);
+	this->game->player->repositionUi(this->game->window.getSize().x, this->game->window.getSize().y);
+}
+
+GameStateEditor::~GameStateEditor()
+{
+	delete this->map;
 }
