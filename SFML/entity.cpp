@@ -55,7 +55,7 @@ void Entity::update(float x, float y)
 
 void Entity::move(int move_action)
 {
-	move(static_cast<MOVE_ACTION>(move_action));
+	move((MOVE_ACTION)(move_action));
 }
 
 void Entity::move(MOVE_ACTION move_action)

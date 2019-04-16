@@ -18,13 +18,6 @@ void GameStateEditor::handleInput()
 {
 	sf::Event event;
 
-	bool upFlag = false;
-	bool downFlag = false;
-	bool leftFlag = false;
-	bool rightFlag = false;
-
-	int pressedKey;
-
 	while (this->game->window.pollEvent(event))
 	{
 		switch (event.type)

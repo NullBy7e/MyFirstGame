@@ -60,6 +60,7 @@ void Map::draw(sf::RenderWindow& window, float dt)
 	/* draw the player  */
 	if (this->player_spawned)
 	{
+		this->game->player->updateOVH();
 		window.draw(*this->game->player);
 	}
 
@@ -99,7 +100,8 @@ void Map::createEntities()
 
 			if (object.type == "enemy_boss")
 			{
-				auto entity = this->entmgr->getEntity(object.id);
+				Entity* entity = NULL;
+				entity = this->entmgr->getEntity(object.id);
 
 				/* if the entity has not been created yet */
 				if (entity == nullptr)

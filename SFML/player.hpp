@@ -10,9 +10,9 @@ public:
 
 	void repositionUi(const int width, const int height);
 	void inflictDamage(int health_damage);
-
+	void updateOVH();
 private:
 	void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 
-	EntityHealthBar health_bar = EntityHealthBar(100, 20);
+	EntityHealthBar health_bar = EntityHealthBar(100, 5);
 };

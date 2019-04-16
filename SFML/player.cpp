@@ -20,6 +20,14 @@ void Player::inflictDamage(int health_damage)
 	this->health_bar.setHealthPercentage(this->getHealthPercentage());
 }
 
+void Player::updateOVH()
+{
+	this->health_bar.setPosition(
+		sf::Vector2f(this->getSprite().getPosition().x - this->getSprite().getLocalBounds().width,
+			this->getSprite().getPosition().y - this->getSprite().getLocalBounds().height + 25)
+	);
+}
+
 void Player::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
 	target.draw(*sprite, states);

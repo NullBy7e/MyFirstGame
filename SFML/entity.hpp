@@ -42,6 +42,11 @@ public:
 	float move_speed = 5;
 	Dexode::EventBus* eventbus;
 
+	int left_tile;
+	int right_tile;
+	int up_tile;
+	int down_tile;
+
 protected:
 	sf::Sprite* sprite;
 };
