@@ -150,8 +150,22 @@ std::vector<TmxTileLayer> TmxParser::getMapTileLayers(const XMLElement & mapElem
 		/* CSV data can contain newlines, so let's make sure to get rid of them! */
 		map_layer_csv.erase(std::remove(map_layer_csv.begin(), map_layer_csv.end(), '\n'), map_layer_csv.end());
 
+		/* split CSV data into array */
+		std::vector<TmxTile> used_tiles;
+		std::stringstream ss(map_layer_csv);
+
+		int x;
+		while (ss >> x)
+		{
+			TmxTile tile(x);
+			used_tiles.push_back(tile);
+
+			if (ss.peek() == ',')
+				ss.ignore();
+		}
+
 		/* let's create the tmx layer */
-		TmxTileLayer layer(map_layer_id, map_layer_name, map_layer_width, map_layer_height, map_layer_csv);
+		TmxTileLayer layer(map_layer_id, map_layer_name, map_layer_width, map_layer_height, used_tiles);
 
 		/* add it to the vector */
 		layers.push_back(layer);

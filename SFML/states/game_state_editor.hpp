@@ -2,14 +2,10 @@
 
 #include <SFML/Graphics.hpp>
 
-#include "tmx_parser.hpp"
-#include "game_state.hpp"
+#include "../tmx/tmx_parser.hpp"
+#include "../states/game_state.hpp"
 
-#include "map.hpp"
-#include "map_tile_layer.hpp"
-#include "map_object_layer.hpp"
-#include "map_object.hpp"
-#include "map_object_property.hpp"
+#include "../core/map.hpp"
 
 class GameStateEditor : public GameState
 {

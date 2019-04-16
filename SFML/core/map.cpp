@@ -7,7 +7,7 @@
 #include <iostream>
 
 #include "map.hpp"
-#include "entity_events.hpp"
+#include "../events/entity_events.hpp"
 
 Map::Map(Game* game)
 {
@@ -46,10 +46,10 @@ void Map::draw(sf::RenderWindow& window, float dt)
 				auto tile_index = (row * this->size.x) + col;
 
 				/* the tile number to draw */
-				auto tile_number = layer.tiles_to_draw[tile_index];
+				auto tile = layer.tiles[tile_index];
 
 				/* get the sprite that belongs to the tile number */
-				auto sprite = this->sprites[tile_number];
+				auto sprite = this->sprites[tile.id];
 				sprite.setPosition(sf::Vector2f(tile_x_pos, tile_y_pos));
 
 				window.draw(sprite);
@@ -60,8 +60,10 @@ void Map::draw(sf::RenderWindow& window, float dt)
 	/* draw the player  */
 	if (this->player_spawned)
 	{
-		this->game->player->updateOVH();
-		window.draw(*this->game->player);
+		auto player = *this->game->getPlayer();
+
+		player.updateOVH();
+		window.draw(player);
 	}
 
 	/* draw enemies */
@@ -77,12 +79,12 @@ void Map::setSprites(std::map<int, sf::Sprite> sprites)
 	this->sprites = sprites;
 }
 
-void Map::addTileLayer(MapTileLayer layer)
+void Map::addTileLayer(TmxTileLayer layer)
 {
 	this->tile_layers.push_back(layer);
 }
 
-void Map::addObjectLayer(MapObjectLayer layer)
+void Map::addObjectLayer(TmxObjectLayer layer)
 {
 	this->object_layers.push_back(layer);
 }
@@ -137,7 +139,7 @@ void Map::createEntities()
 				/* player spawn point */
 				if (!this->player_spawned && object.name == "player_start")
 				{
-					auto player = this->game->player;
+					auto player = this->game->getPlayer();
 
 					sf::Vector2f targetSize(object.width, object.height);
 
@@ -155,9 +157,4 @@ void Map::createEntities()
 			}
 		}
 	}
-}
-
-bool Map::move(int x, int y, Entity * entity)
-{
-	return false;
 }

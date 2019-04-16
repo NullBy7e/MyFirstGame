@@ -34,9 +34,6 @@
     <Filter Include="Header Files\entities">
       <UniqueIdentifier>{39369e42-995d-4655-8169-607a3a58ee7f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\ui">
-      <UniqueIdentifier>{b6eac80c-3af9-47ab-a5b0-53e2187a314a}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\entities">
       <UniqueIdentifier>{aaac560d-bea3-408a-86b6-9536d814d247}</UniqueIdentifier>
     </Filter>
@@ -52,26 +49,29 @@
     <Filter Include="Header Files\events">
       <UniqueIdentifier>{0f7baebf-94d1-4994-a804-c49f0dead3bf}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\states">
+      <UniqueIdentifier>{fa5fd474-58c9-4512-9831-c261dba3299e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\core">
+      <UniqueIdentifier>{f6ad5240-dff3-4259-afce-7f62655bf1c8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\managers">
+      <UniqueIdentifier>{20072623-240a-4d3d-a0bb-e89bb2356c0d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\core">
+      <UniqueIdentifier>{4f0cd8e4-49d1-4d38-b664-2d6819ab621e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\states">
+      <UniqueIdentifier>{3065f9ca-ad21-4a43-af07-debb9fe0da80}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\managers">
+      <UniqueIdentifier>{6dc5b94f-7370-494b-b9f2-6a32298d28e0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\enums">
+      <UniqueIdentifier>{5907d14b-60f0-4003-b8ed-ae66614f3749}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="game_state.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="game.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="game_state_start.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="game_state_editor.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="texture_manager.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="map.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="tinyxml2\tinyxml2.h">
       <Filter>Header Files\tinyxml2</Filter>
     </ClInclude>
@@ -92,66 +92,6 @@
     </ClInclude>
     <ClInclude Include="imgui\imstb_truetype.h">
       <Filter>Header Files\imgui</Filter>
-    </ClInclude>
-    <ClInclude Include="tmx_tileset_image.hpp">
-      <Filter>Header Files\tmx</Filter>
-    </ClInclude>
-    <ClInclude Include="tmx_tileset.hpp">
-      <Filter>Header Files\tmx</Filter>
-    </ClInclude>
-    <ClInclude Include="tmx_parser.hpp">
-      <Filter>Header Files\tmx</Filter>
-    </ClInclude>
-    <ClInclude Include="tmx_map.hpp">
-      <Filter>Header Files\tmx</Filter>
-    </ClInclude>
-    <ClInclude Include="tmx_layer.hpp">
-      <Filter>Header Files\tmx</Filter>
-    </ClInclude>
-    <ClInclude Include="tmx_tile_layer.hpp">
-      <Filter>Header Files\tmx</Filter>
-    </ClInclude>
-    <ClInclude Include="tmx_object.hpp">
-      <Filter>Header Files\tmx</Filter>
-    </ClInclude>
-    <ClInclude Include="tmx_object_layer.hpp">
-      <Filter>Header Files\tmx</Filter>
-    </ClInclude>
-    <ClInclude Include="tmx_object_property.hpp">
-      <Filter>Header Files\tmx</Filter>
-    </ClInclude>
-    <ClInclude Include="map_tile_layer.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="map_layer.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="map_object_layer.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="map_object_property.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="map_object.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="player.hpp">
-      <Filter>Header Files\entities</Filter>
-    </ClInclude>
-    <ClInclude Include="entity.hpp">
-      <Filter>Header Files\entities</Filter>
-    </ClInclude>
-    <ClInclude Include="entity_health_bar.hpp">
-      <Filter>Header Files\ui</Filter>
-    </ClInclude>
-    <ClInclude Include="enemy.hpp">
-      <Filter>Header Files\entities</Filter>
-    </ClInclude>
-    <ClInclude Include="entity_type.hpp">
-      <Filter>Header Files\entities</Filter>
-    </ClInclude>
-    <ClInclude Include="entity_manager.hpp">
-      <Filter>Header Files\entities</Filter>
     </ClInclude>
     <ClInclude Include="eventbus\AsyncEventBus.hpp">
       <Filter>Header Files\eventbus</Filter>
@@ -177,29 +117,80 @@
     <ClInclude Include="eventbus\internal\TransactionCallbackVector.hpp">
       <Filter>Header Files\eventbus\internal</Filter>
     </ClInclude>
-    <ClInclude Include="entity_events.hpp">
+    <ClInclude Include="core\collision.hpp">
+      <Filter>Header Files\core</Filter>
+    </ClInclude>
+    <ClInclude Include="entities\enemy.hpp">
+      <Filter>Header Files\entities</Filter>
+    </ClInclude>
+    <ClInclude Include="entities\entity.hpp">
+      <Filter>Header Files\entities</Filter>
+    </ClInclude>
+    <ClInclude Include="events\entity_events.hpp">
       <Filter>Header Files\events</Filter>
+    </ClInclude>
+    <ClInclude Include="entities\entity_health_bar.hpp">
+      <Filter>Header Files\entities</Filter>
+    </ClInclude>
+    <ClInclude Include="managers\entity_manager.hpp">
+      <Filter>Header Files\managers</Filter>
+    </ClInclude>
+    <ClInclude Include="enums\entity_type.hpp">
+      <Filter>Header Files\enums</Filter>
+    </ClInclude>
+    <ClInclude Include="core\game.hpp">
+      <Filter>Header Files\core</Filter>
+    </ClInclude>
+    <ClInclude Include="states\game_state.hpp">
+      <Filter>Header Files\states</Filter>
+    </ClInclude>
+    <ClInclude Include="states\game_state_editor.hpp">
+      <Filter>Header Files\states</Filter>
+    </ClInclude>
+    <ClInclude Include="states\game_state_start.hpp">
+      <Filter>Header Files\states</Filter>
+    </ClInclude>
+    <ClInclude Include="core\map.hpp">
+      <Filter>Header Files\core</Filter>
+    </ClInclude>
+    <ClInclude Include="entities\player.hpp">
+      <Filter>Header Files\entities</Filter>
+    </ClInclude>
+    <ClInclude Include="managers\texture_manager.hpp">
+      <Filter>Header Files\managers</Filter>
+    </ClInclude>
+    <ClInclude Include="tmx\tmx_tileset_image.hpp">
+      <Filter>Header Files\tmx</Filter>
+    </ClInclude>
+    <ClInclude Include="tmx\tmx_layer.hpp">
+      <Filter>Header Files\tmx</Filter>
+    </ClInclude>
+    <ClInclude Include="tmx\tmx_map.hpp">
+      <Filter>Header Files\tmx</Filter>
+    </ClInclude>
+    <ClInclude Include="tmx\tmx_object.hpp">
+      <Filter>Header Files\tmx</Filter>
+    </ClInclude>
+    <ClInclude Include="tmx\tmx_object_layer.hpp">
+      <Filter>Header Files\tmx</Filter>
+    </ClInclude>
+    <ClInclude Include="tmx\tmx_object_property.hpp">
+      <Filter>Header Files\tmx</Filter>
+    </ClInclude>
+    <ClInclude Include="tmx\tmx_parser.hpp">
+      <Filter>Header Files\tmx</Filter>
+    </ClInclude>
+    <ClInclude Include="tmx\tmx_tile.hpp">
+      <Filter>Header Files\tmx</Filter>
+    </ClInclude>
+    <ClInclude Include="tmx\tmx_tile_layer.hpp">
+      <Filter>Header Files\tmx</Filter>
+    </ClInclude>
+    <ClInclude Include="tmx\tmx_tileset.hpp">
+      <Filter>Header Files\tmx</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="game.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="main.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="game_state_start.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="game_state_editor.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="texture_manager.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="map.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="tinyxml2\tinyxml2.cpp">
       <Filter>Source Files\tinyxml2</Filter>
     </ClCompile>
@@ -212,65 +203,74 @@
     <ClCompile Include="imgui\imgui_widgets.cpp">
       <Filter>Source Files\imgui</Filter>
     </ClCompile>
-    <ClCompile Include="tmx_tileset_image.cpp">
-      <Filter>Source Files\tmx</Filter>
-    </ClCompile>
-    <ClCompile Include="tmx_tileset.cpp">
-      <Filter>Source Files\tmx</Filter>
-    </ClCompile>
-    <ClCompile Include="tmx_parser.cpp">
-      <Filter>Source Files\tmx</Filter>
-    </ClCompile>
-    <ClCompile Include="tmx_map.cpp">
-      <Filter>Source Files\tmx</Filter>
-    </ClCompile>
-    <ClCompile Include="tmx_layer.cpp">
-      <Filter>Source Files\tmx</Filter>
-    </ClCompile>
-    <ClCompile Include="tmx_tile_layer.cpp">
-      <Filter>Source Files\tmx</Filter>
-    </ClCompile>
-    <ClCompile Include="tmx_object.cpp">
-      <Filter>Source Files\tmx</Filter>
-    </ClCompile>
-    <ClCompile Include="tmx_object_layer.cpp">
-      <Filter>Source Files\tmx</Filter>
-    </ClCompile>
-    <ClCompile Include="tmx_object_property.cpp">
-      <Filter>Source Files\tmx</Filter>
-    </ClCompile>
-    <ClCompile Include="map_layer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="map_object_layer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="map_tile_layer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="map_object_property.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="map_object.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="entity_manager.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="player.cpp">
-      <Filter>Source Files\entities</Filter>
-    </ClCompile>
-    <ClCompile Include="enemy.cpp">
-      <Filter>Source Files\entities</Filter>
-    </ClCompile>
-    <ClCompile Include="entity.cpp">
-      <Filter>Source Files\entities</Filter>
-    </ClCompile>
-    <ClCompile Include="move_action.hpp">
-      <Filter>Header Files</Filter>
-    </ClCompile>
     <ClCompile Include="eventbus\AsyncEventBus.cpp">
       <Filter>Source Files\eventbus</Filter>
+    </ClCompile>
+    <ClCompile Include="core\collision.cpp">
+      <Filter>Source Files\core</Filter>
+    </ClCompile>
+    <ClCompile Include="entities\enemy.cpp">
+      <Filter>Source Files\entities</Filter>
+    </ClCompile>
+    <ClCompile Include="entities\entity.cpp">
+      <Filter>Source Files\entities</Filter>
+    </ClCompile>
+    <ClCompile Include="managers\entity_manager.cpp">
+      <Filter>Source Files\managers</Filter>
+    </ClCompile>
+    <ClCompile Include="core\game.cpp">
+      <Filter>Source Files\core</Filter>
+    </ClCompile>
+    <ClCompile Include="states\game_state_editor.cpp">
+      <Filter>Source Files\states</Filter>
+    </ClCompile>
+    <ClCompile Include="states\game_state_start.cpp">
+      <Filter>Source Files\states</Filter>
+    </ClCompile>
+    <ClCompile Include="core\main.cpp">
+      <Filter>Source Files\core</Filter>
+    </ClCompile>
+    <ClCompile Include="core\map.cpp">
+      <Filter>Source Files\core</Filter>
+    </ClCompile>
+    <ClCompile Include="entities\player.cpp">
+      <Filter>Source Files\entities</Filter>
+    </ClCompile>
+    <ClCompile Include="managers\texture_manager.cpp">
+      <Filter>Source Files\managers</Filter>
+    </ClCompile>
+    <ClCompile Include="tmx\tmx_layer.cpp">
+      <Filter>Source Files\tmx</Filter>
+    </ClCompile>
+    <ClCompile Include="tmx\tmx_map.cpp">
+      <Filter>Source Files\tmx</Filter>
+    </ClCompile>
+    <ClCompile Include="tmx\tmx_object.cpp">
+      <Filter>Source Files\tmx</Filter>
+    </ClCompile>
+    <ClCompile Include="tmx\tmx_object_layer.cpp">
+      <Filter>Source Files\tmx</Filter>
+    </ClCompile>
+    <ClCompile Include="tmx\tmx_object_property.cpp">
+      <Filter>Source Files\tmx</Filter>
+    </ClCompile>
+    <ClCompile Include="tmx\tmx_parser.cpp">
+      <Filter>Source Files\tmx</Filter>
+    </ClCompile>
+    <ClCompile Include="tmx\tmx_tile.cpp">
+      <Filter>Source Files\tmx</Filter>
+    </ClCompile>
+    <ClCompile Include="tmx\tmx_tile_layer.cpp">
+      <Filter>Source Files\tmx</Filter>
+    </ClCompile>
+    <ClCompile Include="tmx\tmx_tileset.cpp">
+      <Filter>Source Files\tmx</Filter>
+    </ClCompile>
+    <ClCompile Include="tmx\tmx_tileset_image.cpp">
+      <Filter>Source Files\tmx</Filter>
+    </ClCompile>
+    <ClCompile Include="enums\move_action.hpp">
+      <Filter>Header Files\enums</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -2,7 +2,7 @@
 
 #include "game_state.hpp"
 #include "game_state_editor.hpp"
-#include "map.hpp"
+#include "../core/map.hpp"
 
 void GameStateEditor::draw(const float dt)
 {
@@ -37,7 +37,7 @@ void GameStateEditor::handleInput()
 				float(event.size.width) / float(this->game->background.getTexture()->getSize().x),
 				float(event.size.height) / float(this->game->background.getTexture()->getSize().y));
 
-			this->game->player->repositionUi(event.size.width, event.size.height);
+			this->game->getPlayer()->repositionUi(event.size.width, event.size.height);
 			break;
 		}
 		case sf::Event::KeyPressed:
@@ -51,7 +51,7 @@ void GameStateEditor::handleInput()
 			case sf::Keyboard::Down:
 			case sf::Keyboard::Left:
 			case sf::Keyboard::Right:
-				this->game->player->move((int)event.key.code);
+				this->game->getPlayer()->move((int)event.key.code);
 				break;
 			}
 			break;
@@ -119,67 +119,15 @@ GameStateEditor::GameStateEditor(Game* game)
 	/* get tile layers */
 	for (int i = 0; i < tmx_map.tile_layers.size(); i++)
 	{
-		auto tile_layer = tmx_map.tile_layers[i];
-
-		/* split CSV data into array */
-		std::vector<int> used_tiles;
-		std::stringstream ss(tile_layer.csvData);
-
-		int x;
-		while (ss >> x)
-		{
-			used_tiles.push_back(x);
-			if (ss.peek() == ',')
-				ss.ignore();
-		}
-
-		/* create map tile layer */
-		MapTileLayer map_tile_layer(
-			used_tiles,
-			tile_layer.name,
-			tile_layer.width,
-			tile_layer.height
-		);
-
 		/* add the layer to the map */
-		map->addTileLayer(map_tile_layer);
+		map->addTileLayer(tmx_map.tile_layers[i]);
 	}
 
 	/* get object layers */
 	for (int i = 0; i < tmx_map.object_layers.size(); i++)
 	{
-		auto object_layer = tmx_map.object_layers[i];
-
-		std::vector<MapObject> objects;
-		for (int x = 0; x < object_layer.objects.size(); x++)
-		{
-			auto object = object_layer.objects[x];
-			MapObject map_object(
-				object.id,
-				object.name,
-				object.type,
-				object.x,
-				object.y,
-				object.width,
-				object.height,
-				object.gid,
-				object.flipped_horizontally,
-				object.flipped_vertically,
-				object.flipped_diagonally
-			);
-
-			objects.push_back(map_object);
-		}
-
-		/* create map object layer */
-		MapObjectLayer map_object_layer(
-			object_layer.id,
-			object_layer.name,
-			objects
-		);
-
 		/* add the layer to the map */
-		map->addObjectLayer(map_object_layer);
+		map->addObjectLayer(tmx_map.object_layers[i]);
 	}
 
 	/* set map size */
@@ -197,7 +145,7 @@ GameStateEditor::GameStateEditor(Game* game)
 	map->createEntities();
 
 	/* reposition UI */
-	this->game->player->repositionUi(this->game->window.getSize().x, this->game->window.getSize().y);
+	this->game->getPlayer()->repositionUi(this->game->window.getSize().x, this->game->window.getSize().y);
 }
 
 GameStateEditor::~GameStateEditor()

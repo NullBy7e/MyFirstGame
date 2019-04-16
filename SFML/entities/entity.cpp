@@ -5,9 +5,7 @@ Entity::Entity(int id, std::string name, sf::Sprite sprite, ENTITY_TYPE type, De
 	id = int(id);
 	name = std::string(name);
 
-	this->sprite = new sf::Sprite();
-	memcpy(this->sprite, &sprite, sizeof(sprite));
-
+	this->sprite = sf::Sprite(sprite);
 	this->type = type;
 
 	this->eventbus = eventbus;
@@ -19,7 +17,7 @@ Entity::~Entity()
 
 sf::Sprite& Entity::getSprite()
 {
-	return *sprite;
+	return sprite;
 }
 
 void Entity::move(sf::Vector2f offset)
@@ -29,12 +27,12 @@ void Entity::move(sf::Vector2f offset)
 
 void Entity::domove(sf::Vector2f offset)
 {
-	this->sprite->move(offset);
+	this->sprite.move(offset);
 }
 
 void Entity::setPosition(sf::Vector2f position)
 {
-	sprite->setPosition(position);
+	sprite.setPosition(position);
 }
 
 void Entity::inflictDamage(int health_damage)

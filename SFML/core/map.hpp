@@ -1,15 +1,15 @@
 #pragma once
 
-#include <SFML/Graphics.hpp>
-
 #include <string>
 #include <map>
 #include <vector>
 
-#include "game.hpp"
+#include <SFML/Graphics.hpp>
 
-#include "map_tile_layer.hpp"
-#include "map_object_layer.hpp"
+#include "../tmx/tmx_tile_layer.hpp"
+#include "../tmx/tmx_object_layer.hpp"
+
+#include "game.hpp"
 
 class Map
 {
@@ -21,8 +21,8 @@ public:
 	sf::Vector2u size;
 	sf::Vector2u tileSize;
 
-	std::vector<MapTileLayer> tile_layers;
-	std::vector<MapObjectLayer> object_layers;
+	std::vector<TmxTileLayer> tile_layers;
+	std::vector<TmxObjectLayer> object_layers;
 
 	std::map<int, sf::Sprite> sprites;
 
@@ -34,12 +34,10 @@ public:
 	/* Set the sprites to use */
 	void setSprites(std::map<int, sf::Sprite>);
 
-	void addTileLayer(MapTileLayer layer);
+	void addTileLayer(TmxTileLayer layer);
+	void addObjectLayer(TmxObjectLayer layer);
 
-	void addObjectLayer(MapObjectLayer layer);
 	void createEntities();
-
-	bool move(int x, int y, Entity* entity);
 
 	EntityManager* entmgr;
 

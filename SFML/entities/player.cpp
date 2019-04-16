@@ -30,6 +30,6 @@ void Player::updateOVH()
 
 void Player::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
-	target.draw(*sprite, states);
+	target.draw(sprite, states);
 	target.draw(health_bar, states);
 }

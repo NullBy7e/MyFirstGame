@@ -5,8 +5,8 @@
 #include <SFML/System.hpp>
 
 #include "game.hpp"
-#include "game_state.hpp"
-#include "texture_manager.hpp"
+#include "../states/game_state.hpp"
+#include "../managers/texture_manager.hpp"
 
 void Game::pushState(GameState* state)
 {
@@ -79,6 +79,11 @@ void Game::loadTextures()
 void Game::createPlayer()
 {
 	this->player = new Player(0, "player", sf::Sprite(texmgr.getRef("player")), nullptr);
+}
+
+Player* Game::getPlayer()
+{
+	return this->player;
 }
 
 Game::Game()

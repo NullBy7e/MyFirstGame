@@ -11,13 +11,13 @@
 #include <map>
 #include <vector>
 
+#include "../tinyxml2/tinyxml2.h"
+
 #include "tmx_map.hpp"
 #include "tmx_tileset.hpp"
 #include "tmx_layer.hpp"
 #include "tmx_tile_layer.hpp"
 #include "tmx_object_layer.hpp"
-
-#include "tinyxml2/tinyxml2.h"
 
 using namespace tinyxml2;
 

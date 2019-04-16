@@ -13,7 +13,7 @@ EntityManager::~EntityManager()
 	}
 }
 
-Entity * EntityManager::getEntity(int entity_id)
+Entity* EntityManager::getEntity(int entity_id)
 {
 	for (std::map<int, Entity*>::iterator it = this->entities.begin(); it != this->entities.end(); ++it)
 	{
@@ -24,7 +24,7 @@ Entity * EntityManager::getEntity(int entity_id)
 	}
 }
 
-Entity * EntityManager::getEntity(std::string entity_name)
+Entity* EntityManager::getEntity(std::string entity_name)
 {
 	for (std::map<int, Entity*>::iterator it = this->entities.begin(); it != this->entities.end(); ++it)
 	{
@@ -61,9 +61,4 @@ void EntityManager::createEntity(int entity_id, std::string entity_name, ENTITY_
 		break;
 	}
 	}
-}
-
-bool EntityManager::move(int x, int y, Entity * entity, Map * map)
-{
-	return false;
 }

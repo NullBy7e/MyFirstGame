@@ -6,8 +6,8 @@
 
 #include <SFML/Graphics.hpp>
 
-#include "texture_manager.hpp"
-#include "entity_manager.hpp"
+#include "../managers/texture_manager.hpp"
+#include "../managers/entity_manager.hpp"
 
 class GameState;
 
@@ -34,8 +34,11 @@ public:
 
 	void gameLoop();
 
-	Player* player;
+	Player* getPlayer();
 
 	Game();
 	~Game();
+
+private:
+	Player* player;
 };
