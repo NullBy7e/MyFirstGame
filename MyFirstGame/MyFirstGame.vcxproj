@@ -22,7 +22,7 @@
     <ClInclude Include="external\tinyxml2\tinyxml2.h" />
     <ClInclude Include="game.h" />
     <ClInclude Include="main.h" />
-    <ClInclude Include="tile_engine.h" />
+    <ClInclude Include="texture_manager.hpp" />
     <ClInclude Include="tmx\tmx_layer.hpp" />
     <ClInclude Include="tmx\tmx_map.hpp" />
     <ClInclude Include="tmx\tmx_object.hpp" />
@@ -40,7 +40,7 @@
     <ClCompile Include="external\tinyxml2\tinyxml2.cc" />
     <ClCompile Include="game.cc" />
     <ClCompile Include="main.cc" />
-    <ClCompile Include="tile_engine.cc" />
+    <ClCompile Include="texture_manager.cpp" />
     <ClCompile Include="tmx\tmx_layer.cpp" />
     <ClCompile Include="tmx\tmx_map.cpp" />
     <ClCompile Include="tmx\tmx_object.cpp" />

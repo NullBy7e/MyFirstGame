@@ -2,6 +2,7 @@
 
 #include "window.h"
 #include "tmx/tmx_parser.hpp"
+#include "texture_manager.hpp"
 
 class Game
 {
