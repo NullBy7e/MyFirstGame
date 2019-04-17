@@ -28,13 +28,17 @@ SOFTWARE.
 
 #include "tmx_layer.hpp"
 #include "tmx_tile.hpp"
+#include "tmx_chunk.hpp"
 
 class TmxTileLayer :
 	public TmxLayer
 {
 public:
 	TmxTileLayer(const int id, const std::string name, const int width, const int height, const std::vector<TmxTile> tiles);
+	TmxTileLayer(const int id, const std::string name, const int width, const int height, const std::vector<TmxChunk> chunks);
+
 	~TmxTileLayer();
 
 	std::vector<TmxTile> tiles;
+	std::vector<TmxChunk> chunks;
 };

@@ -35,7 +35,7 @@ SOFTWARE.
 #include <map>
 #include <vector>
 
-#include "../tinyxml2/tinyxml2.h"
+#include "../external/tinyxml2/tinyxml2.h"
 
 #include "tmx_map.hpp"
 #include "tmx_tileset.hpp"

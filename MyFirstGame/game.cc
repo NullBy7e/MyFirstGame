@@ -17,6 +17,9 @@ void Game::Load()
 
 void Game::Loop()
 {
+	TmxParser parser;
+	auto map = parser.parse("maps/level1/level1.tmx");
+
 	while (this->window_.isOpen())
 	{
 		this->window_.HandleInput();

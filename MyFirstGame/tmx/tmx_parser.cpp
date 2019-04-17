@@ -169,30 +169,75 @@ std::vector<TmxTileLayer> TmxParser::getMapTileLayers(const XMLElement & mapElem
 			exit(EXIT_FAILURE);
 		}
 
-		auto map_layer_csv = std::string(data_child->GetText());
-
-		/* CSV data can contain newlines, so let's make sure to get rid of them! */
-		map_layer_csv.erase(std::remove(map_layer_csv.begin(), map_layer_csv.end(), '\n'), map_layer_csv.end());
-
-		/* split CSV data into array */
-		std::vector<TmxTile> used_tiles;
-		std::stringstream ss(map_layer_csv);
-
-		int x;
-		while (ss >> x)
+		auto chunknullcheck = data_child->FirstChildElement("chunk");
+		if (chunknullcheck != NULL)
 		{
-			TmxTile tile(x);
-			used_tiles.push_back(tile);
+			std::vector<TmxChunk> chunks;
 
-			if (ss.peek() == ',')
-				ss.ignore();
+			for (auto chunk = data_child->FirstChildElement("chunk"); chunk != NULL; chunk = chunk->NextSiblingElement("chunk"))
+			{
+				auto chunk_x = cStrToFloat(chunk->Attribute("x"));
+				auto chunk_y = cStrToFloat(chunk->Attribute("y"));
+
+				auto chunk_width = cStrToInt(chunk->Attribute("width"));
+				auto chunk_height = cStrToInt(chunk->Attribute("height"));
+
+				auto chunk_csv = std::string(chunk->GetText());
+
+				/* CSV data can contain newlines, so let's make sure to get rid of them! */
+				chunk_csv.erase(std::remove(chunk_csv.begin(), chunk_csv.end(), '\n'), chunk_csv.end());
+
+				/* split CSV data into array */
+				std::vector<TmxTile> chunk_tiles;
+				std::stringstream ss(chunk_csv);
+
+				int x;
+				while (ss >> x)
+				{
+					TmxTile tile(x);
+					chunk_tiles.push_back(tile);
+
+					if (ss.peek() == ',')
+						ss.ignore();
+				}
+
+				TmxChunk tmx_chunk(chunk_x, chunk_y, chunk_width, chunk_height, chunk_tiles);
+				chunks.push_back(tmx_chunk);
+			}
+
+			/* let's create the tmx layer */
+			TmxTileLayer layer(map_layer_id, map_layer_name, map_layer_width, map_layer_height, chunks);
+
+			/* add it to the vector */
+			layers.push_back(layer);
 		}
+		else
+		{
+			auto map_layer_csv = std::string(data_child->GetText());
 
-		/* let's create the tmx layer */
-		TmxTileLayer layer(map_layer_id, map_layer_name, map_layer_width, map_layer_height, used_tiles);
+			/* CSV data can contain newlines, so let's make sure to get rid of them! */
+			map_layer_csv.erase(std::remove(map_layer_csv.begin(), map_layer_csv.end(), '\n'), map_layer_csv.end());
 
-		/* add it to the vector */
-		layers.push_back(layer);
+			/* split CSV data into array */
+			std::vector<TmxTile> used_tiles;
+			std::stringstream ss(map_layer_csv);
+
+			int x;
+			while (ss >> x)
+			{
+				TmxTile tile(x);
+				used_tiles.push_back(tile);
+
+				if (ss.peek() == ',')
+					ss.ignore();
+			}
+
+			/* let's create the tmx layer */
+			TmxTileLayer layer(map_layer_id, map_layer_name, map_layer_width, map_layer_height, used_tiles);
+
+			/* add it to the vector */
+			layers.push_back(layer);
+		}
 	}
 
 	return layers;

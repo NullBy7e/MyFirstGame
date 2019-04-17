@@ -29,6 +29,11 @@ TmxTileLayer::TmxTileLayer(const int id, const std::string name, const int width
 	this->tiles = tiles;
 }
 
+TmxTileLayer::TmxTileLayer(const int id, const std::string name, const int width, const int height, const std::vector<TmxChunk> chunks) : TmxLayer(id, name, width, height)
+{
+	this->chunks = chunks;
+}
+
 TmxTileLayer::~TmxTileLayer()
 {
 }

@@ -1,6 +1,7 @@
 #pragma once
 
 #include "window.h"
+#include "tmx/tmx_parser.hpp"
 
 class Game
 {

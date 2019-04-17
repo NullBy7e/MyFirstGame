@@ -78,6 +78,9 @@
     <ClInclude Include="external\tinyxml2\tinyxml2.h">
       <Filter>Header Files\external\tinyxml2</Filter>
     </ClInclude>
+    <ClInclude Include="tmx\tmx_chunk.hpp">
+      <Filter>Header Files\tmx</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="tmx\tmx_layer.cpp">
@@ -124,6 +127,9 @@
     </ClCompile>
     <ClCompile Include="external\tinyxml2\tinyxml2.cc">
       <Filter>Source Files\external\tinyxml2</Filter>
+    </ClCompile>
+    <ClCompile Include="tmx\tmx_chunk.cpp">
+      <Filter>Source Files\tmx</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
