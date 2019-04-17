@@ -1,6 +1,0 @@
-namespace Events
-{
-	struct EntityMoveEvent
-	{
-	};
-}

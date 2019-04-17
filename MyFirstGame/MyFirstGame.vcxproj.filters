@@ -1,0 +1,129 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Source Files\tmx">
+      <UniqueIdentifier>{f1899589-f604-4b5c-a469-82e855e4e836}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\tmx">
+      <UniqueIdentifier>{bab2c3b2-c3b1-4660-87c3-6101d610ebf7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\external">
+      <UniqueIdentifier>{7353350c-e01e-4169-b4dd-6a3b790e0dae}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\external\tinyxml2">
+      <UniqueIdentifier>{a8f55680-e081-4248-8540-539ca773db05}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\external">
+      <UniqueIdentifier>{6561a1fa-6f8a-41a2-907b-91a656a4d2e7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\external\tinyxml2">
+      <UniqueIdentifier>{9da417fb-b3cc-454a-aca4-91a033ad9f2b}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="tmx\tmx_layer.hpp">
+      <Filter>Header Files\tmx</Filter>
+    </ClInclude>
+    <ClInclude Include="tmx\tmx_object_layer.hpp">
+      <Filter>Header Files\tmx</Filter>
+    </ClInclude>
+    <ClInclude Include="tmx\tmx_object.hpp">
+      <Filter>Header Files\tmx</Filter>
+    </ClInclude>
+    <ClInclude Include="tmx\tmx_map.hpp">
+      <Filter>Header Files\tmx</Filter>
+    </ClInclude>
+    <ClInclude Include="tmx\tmx_object_property.hpp">
+      <Filter>Header Files\tmx</Filter>
+    </ClInclude>
+    <ClInclude Include="tmx\tmx_tile.hpp">
+      <Filter>Header Files\tmx</Filter>
+    </ClInclude>
+    <ClInclude Include="tmx\tmx_parser.hpp">
+      <Filter>Header Files\tmx</Filter>
+    </ClInclude>
+    <ClInclude Include="tmx\tmx_tile_layer.hpp">
+      <Filter>Header Files\tmx</Filter>
+    </ClInclude>
+    <ClInclude Include="tmx\tmx_tileset.hpp">
+      <Filter>Header Files\tmx</Filter>
+    </ClInclude>
+    <ClInclude Include="tmx\tmx_tileset_image.hpp">
+      <Filter>Header Files\tmx</Filter>
+    </ClInclude>
+    <ClInclude Include="main.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="tile_engine.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="window.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="game.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\tinyxml2\tinyxml2.h">
+      <Filter>Header Files\external\tinyxml2</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="tmx\tmx_layer.cpp">
+      <Filter>Source Files\tmx</Filter>
+    </ClCompile>
+    <ClCompile Include="tmx\tmx_map.cpp">
+      <Filter>Source Files\tmx</Filter>
+    </ClCompile>
+    <ClCompile Include="tmx\tmx_object.cpp">
+      <Filter>Source Files\tmx</Filter>
+    </ClCompile>
+    <ClCompile Include="tmx\tmx_object_layer.cpp">
+      <Filter>Source Files\tmx</Filter>
+    </ClCompile>
+    <ClCompile Include="tmx\tmx_object_property.cpp">
+      <Filter>Source Files\tmx</Filter>
+    </ClCompile>
+    <ClCompile Include="tmx\tmx_parser.cpp">
+      <Filter>Source Files\tmx</Filter>
+    </ClCompile>
+    <ClCompile Include="tmx\tmx_tile.cpp">
+      <Filter>Source Files\tmx</Filter>
+    </ClCompile>
+    <ClCompile Include="tmx\tmx_tile_layer.cpp">
+      <Filter>Source Files\tmx</Filter>
+    </ClCompile>
+    <ClCompile Include="tmx\tmx_tileset.cpp">
+      <Filter>Source Files\tmx</Filter>
+    </ClCompile>
+    <ClCompile Include="tmx\tmx_tileset_image.cpp">
+      <Filter>Source Files\tmx</Filter>
+    </ClCompile>
+    <ClCompile Include="tile_engine.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="window.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="game.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="external\tinyxml2\tinyxml2.cc">
+      <Filter>Source Files\external\tinyxml2</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>
