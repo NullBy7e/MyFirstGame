@@ -71,12 +71,6 @@ void Game::Loop()
 	auto player_start_tile_offset_x = viewport_tile_width / 2;
 	auto player_start_tile_offset_y = viewport_tile_height / 3.2;
 
-	/* The main view ontains all the columns and rows except those that are drawn in the viewport */
-	sf::View main(window_.getDefaultView());
-	main.setCenter(map_dimensions);
-	main.setSize(map_dimensions);
-	main.move(screen_dimensions.x, screen_dimensions.y);
-
 	/* the viewport view is used to enable side-scrolling, it acts as a camera for the player */
 	sf::View viewport;
 	viewport.setCenter(sf::Vector2f(player_start_tile_x * tile_size.x, player_start_tile_y * tile_size.y));
