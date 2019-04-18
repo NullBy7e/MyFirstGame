@@ -8,5 +8,8 @@ public:
 	Window();
 	~Window();
 
-	void HandleInput();
+	void HandleInput(sf::View& viewport);
+
+	sf::Vector2f oldPos;
+	bool moving = false;
 };

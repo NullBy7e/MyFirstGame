@@ -12,6 +12,7 @@ public:
 
 	void Load();
 	void Loop();
+	void DrawXYChart();
 
 	Window window_;
 };

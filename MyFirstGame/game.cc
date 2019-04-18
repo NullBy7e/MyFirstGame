@@ -12,7 +12,7 @@ void Game::Load()
 {
 	this->window_.create(sf::VideoMode(1280, 1024), "MyFirstGame", sf::Style::Titlebar | sf::Style::Close);
 	this->window_.setFramerateLimit(60);
-	this->window_.setMouseCursorVisible(false);
+	this->window_.setMouseCursorVisible(true);
 }
 
 void Game::Loop()
@@ -27,10 +27,6 @@ void Game::Loop()
 	/* load the map */
 	TmxParser parser;
 	auto map = parser.parse("maps/level1/level1.tmx");
-
-	auto tile_size = sf::Vector2i(64, 64);
-	auto viewport_width = screen_dimensions.x / tile_size.x;
-	auto viewport_height = screen_dimensions.y / tile_size.y;
 
 	/* array that maps tile number to sprite */
 	std::map<int, sf::Sprite> sprites;
@@ -71,25 +67,47 @@ void Game::Loop()
 		}
 	}
 
-	/* the default view */
+	auto tile_size = sf::Vector2f(64, 64);
+
+	auto map_tile_width = 80;
+	auto map_tile_height = 64;
+
+	auto map_dimensions = sf::Vector2f(map_tile_width * tile_size.x, map_tile_height * tile_size.y);
+
+	/* pixel dimensions of the viewport */
+	auto viewport_dimensions = sf::Vector2f(screen_dimensions.x, screen_dimensions.y);
+
+	/* viewport width and height in tile amount */
+	auto viewport_tile_width = viewport_dimensions.x / tile_size.x;
+	auto viewport_tile_height = viewport_dimensions.y / tile_size.y;
+
+	/* this is what contains all the columns and rows except those that are drawn in the viewport */
 	sf::View main(window_.getDefaultView());
+	main.setCenter(map_dimensions);
+	main.setSize(map_dimensions);
+	main.move(screen_dimensions.x, screen_dimensions.y);
 
-	/* view that's always centered on the player */
-	sf::View center;
-	center.reset(sf::FloatRect(0, 0, screen_dimensions.x, screen_dimensions.y));
-	center.setCenter(sf::Vector2f(screen_dimensions.x / 2, screen_dimensions.y / 2));
+	/* the tile numbers at which the player starts */
+	auto player_start_tile_x = 0;
+	auto player_start_tile_y = 29;
 
-	/* load the player */
-	auto player_texture = texmgr.getRef("player");
-	sf::Sprite player_sprite(player_texture);
+	/*
+	 * the offset is substracted from the final viewport position.
+	 * we're doing this so that the viewport starts at the player_start_x-y at the left bottom
+	 * corner of the viewport
+	*/
+	auto player_start_tile_offset_x = viewport_tile_width / 2;
+	auto player_start_tile_offset_y = viewport_tile_height / 3.2;
 
-	/* set player position */
-	player_sprite.setPosition(center.getCenter());
+	sf::View viewport;
+	viewport.setCenter(sf::Vector2f(player_start_tile_x * tile_size.x, player_start_tile_y * tile_size.y));
+	viewport.move(sf::Vector2f(player_start_tile_offset_x * tile_size.x, -(player_start_tile_offset_y * tile_size.y)));
+	viewport.setSize(viewport_dimensions);
 
 	while (window_.isOpen())
 	{
 		/* handle window events */
-		window_.HandleInput();
+		window_.HandleInput(viewport);
 
 		/* clear */
 		this->window_.clear(sf::Color::Black);
@@ -97,21 +115,18 @@ void Game::Loop()
 		/* set the main view */
 		window_.setView(main);
 
-		/* set the center view */
-		window_.setView(center);
-
-		/* draw each tile layer one by one */
-		for (int i = 0; i < map.tile_layers.size(); ++i)
+		/* draw the columns and rows until the start of the main viewport */
+		for (auto layer : map.tile_layers)
 		{
-			auto layer = map.tile_layers[i];
-
-			/* draw rows */
-			for (int row = 0; row < (center.getSize().y / tile_size.y); ++row)
+			for (int col = 0; col < viewport_tile_width; ++col)
 			{
-				/* start drawing columns starting from the maps center */
-				for (int col = 0; col < (center.getSize().x / tile_size.x); ++col)
+				if (col < 0) //nothing to draw?
+					continue;
+
+				for (int row = 0; row < viewport_tile_height; ++row)
 				{
-					//std::cout << "draw col " << col << " row " << row << std::endl;
+					if (row < 0) //nothing to draw?
+						continue;
 
 					auto tile_y_pos = row * tile_size.y;
 					auto tile_x_pos = col * tile_size.x;
@@ -120,8 +135,6 @@ void Game::Loop()
 
 					/* the tile number to draw */
 					auto tile = layer.tiles[tile_index];
-
-					std::cout << "x " << tile_x_pos << " y " << tile_y_pos << std::endl;
 
 					/* get the sprite that belongs to the tile number */
 					auto sprite = sprites[tile.id];
@@ -132,8 +145,145 @@ void Game::Loop()
 			}
 		}
 
-		/* draw the player  */
-		window_.draw(player_sprite);
+		/* set the viewport view */
+		window_.setView(viewport);
+
+		for (auto layer : map.tile_layers)
+		{
+			for (int col = ((viewport.getCenter().x / tile_size.x) - viewport_tile_width); col < map_tile_width; ++col)
+			{
+				if (col < 0) //nothing to draw?
+					continue;
+
+				for (int row = ((viewport.getCenter().y / tile_size.y) - viewport_tile_height); row < map_tile_height; ++row)
+				{
+					if (row < 0) //nothing to draw?
+						continue;
+
+					auto tile_y_pos = row * tile_size.y;
+					auto tile_x_pos = col * tile_size.x;
+
+					auto tile_index = (row * map.width) + col;
+
+					/* the tile number to draw */
+					auto tile = layer.tiles[tile_index];
+
+					/* get the sprite that belongs to the tile number */
+					auto sprite = sprites[tile.id];
+					sprite.setPosition(sf::Vector2f(tile_x_pos, tile_y_pos));
+
+					window_.draw(sprite);
+				}
+			}
+		}
+
+		/* display all drawn stuff */
+		window_.display();
+	}
+}
+
+void Game::DrawXYChart()
+{
+	/* screen dimensions (window size) */
+	sf::Vector2i screen_dimensions(1280, 1024);
+
+	/* font */
+	sf::Font font;
+	if (!font.loadFromFile("fonts/arial.ttf"))
+	{
+		std::cout << "Error loading font\n";
+	}
+
+	auto tile_size = sf::Vector2f(64, 64);
+
+	auto map_tile_width = 40;
+	auto map_tile_height = 32;
+
+	auto viewport_tile_width = screen_dimensions.x / tile_size.x;
+	auto viewport_tile_height = screen_dimensions.y / tile_size.y;
+
+	auto viewport_dimensions = sf::Vector2f(screen_dimensions.x, screen_dimensions.y);
+
+	/* this is what contains all the columns and rows except those that are drawn in the viewport */
+	sf::View main(window_.getDefaultView());
+
+	sf::View viewport;
+	viewport.setCenter(viewport_dimensions);
+	viewport.setSize(viewport_dimensions);
+	viewport.move(screen_dimensions.x / 2, screen_dimensions.y / 2);
+
+	sf::Text text;
+	text.setFont(font);
+	text.setCharacterSize(18);
+	text.setFillColor(sf::Color::Black);
+
+	sf::Text text2;
+	text2.setFont(font);
+	text2.setCharacterSize(18);
+	text2.setFillColor(sf::Color::Black);
+
+	sf::RectangleShape tile;
+	tile.setSize(tile_size);
+	tile.setOutlineThickness(1.f);
+	tile.setOutlineColor(sf::Color::Black);
+
+	while (window_.isOpen())
+	{
+		/* handle window events */
+		window_.HandleInput(viewport);
+
+		/* clear */
+		this->window_.clear(sf::Color::Black);
+
+		/* set the main view */
+		window_.setView(main);
+
+		/* draw the columns and rows until the start of the main viewport */
+		for (int col = 0; col < viewport_tile_width; ++col)
+		{
+			for (int row = 0; row < viewport_tile_height; ++row)
+			{
+				sf::RectangleShape square(tile);
+				square.setPosition(sf::Vector2f(col * tile_size.x, row * tile_size.y));
+
+				text.setString(sf::String("X " + std::to_string((int)(row * tile_size.y))));
+				text.setPosition(sf::Vector2f(col * tile_size.x, row * tile_size.y));
+
+				text2.setString(sf::String("Y " + std::to_string((int)(col * tile_size.x))));
+				text2.setPosition(sf::Vector2f(col * tile_size.x, (row * tile_size.y) + 25));
+
+				window_.draw(square);
+
+				window_.draw(text);
+				window_.draw(text2);
+			}
+		}
+
+		/* set the viewport view */
+		window_.setView(viewport);
+
+		/* draw the columns and rows for the viewport */
+		for (int col = viewport_tile_width; col < map_tile_width; ++col)
+		{
+			for (int row = viewport_tile_height; row < map_tile_height; ++row)
+			{
+				sf::RectangleShape square(tile);
+				square.setPosition(sf::Vector2f(col * tile_size.x, row * tile_size.y));
+
+				text.setString(sf::String("X " + std::to_string((int)(row * tile_size.y))));
+				text.setPosition(sf::Vector2f(col * tile_size.x, row * tile_size.y));
+
+				text2.setString(sf::String("Y " + std::to_string((int)(col * tile_size.x))));
+				text2.setPosition(sf::Vector2f(col * tile_size.x, (row * tile_size.y) + 25));
+
+				window_.draw(square);
+
+				window_.draw(text);
+				window_.draw(text2);
+			}
+		}
+
+		viewport.move(-2.f, .0f);
 
 		/* display all drawn stuff */
 		window_.display();
