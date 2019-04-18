@@ -1,18 +1,9 @@
 #include "game.h"
 
-Game::Game()
-{
-}
-
-Game::~Game()
-{
-}
-
 void Game::Load()
 {
 	this->window_.create(sf::VideoMode(1280, 1024), "MyFirstGame", sf::Style::Titlebar | sf::Style::Close);
 	this->window_.setFramerateLimit(60);
-	this->window_.setMouseCursorVisible(true);
 }
 
 void Game::Loop()
@@ -34,35 +25,29 @@ void Game::Loop()
 	for (int i = 0; i < map.tilesets.size(); i++)
 	{
 		auto tileset = map.tilesets[i];
+		texmgr.loadTexture(tileset.name, tileset.image.image_source);
 
-		sf::Texture* tex = new sf::Texture();
-		if (tex->loadFromFile(tileset.image.image_source))
+		auto& tex = texmgr.getRef(tileset.name);
+
+		/* iterate through each row */
+		for (int row = 0; row < (tileset.tile_count / tileset.columns); ++row)
 		{
-			tex->setSmooth(true);
+			/* indicates at which Y pos this row starts */
+			auto row_start_y_pos = row * tileset.tile_height;
 
-			/* iterate through each row */
-			for (int row = 0; row < (tileset.tile_count / tileset.columns); ++row)
+			/* iterate through each column */
+			for (int col = 0; col < tileset.columns; col++)
 			{
-				/* indicates at which Y pos this row starts */
-				auto row_start_y_pos = row * tileset.tile_height;
+				/* the tile number used by Tiled */
+				auto tn = (tileset.first_gid + col) + (row * tileset.columns);
 
-				/* iterate through each column */
-				for (int col = 0; col < tileset.columns; col++)
-				{
-					/* the tile number used by Tiled */
-					auto tn = (tileset.first_gid + col) + (row * tileset.columns);
+				/* X & Y pos calculation */
+				auto xpos = col * tileset.tile_width;
+				auto ypos = row_start_y_pos;
 
-					/* X & Y pos calculation */
-					auto xpos = col * tileset.tile_width;
-					auto ypos = row_start_y_pos;
-
-					/* Make a new sprite */
-					sf::Sprite sprite;
-					sprite.setTexture(*tex);
-					sprite.setTextureRect(sf::IntRect(xpos, ypos, tileset.tile_width, tileset.tile_height));
-
-					sprites[tn] = sprite;
-				}
+				/* Make a new sprite */
+				sf::Sprite sprite(tex, sf::IntRect(xpos, ypos, tileset.tile_width, tileset.tile_height));
+				sprites[tn] = sprite;
 			}
 		}
 	}
@@ -89,7 +74,7 @@ void Game::Loop()
 
 	/* the tile numbers at which the player starts */
 	auto player_start_tile_x = 0;
-	auto player_start_tile_y = 29;
+	auto player_start_tile_y = 61;
 
 	/*
 	 * the offset is substracted from the final viewport position.

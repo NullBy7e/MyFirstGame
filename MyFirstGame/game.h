@@ -7,9 +7,6 @@
 class Game
 {
 public:
-	Game();
-	~Game();
-
 	void Load();
 	void Loop();
 	void DrawXYChart();
