@@ -19,9 +19,11 @@ void Game::Loop()
 	TmxParser parser;
 	auto map = parser.parse("maps/level1/level1.tmx");
 
-	/* array that maps tile number to sprite */
+	/* array that maps tile number to sprite (contains all sprites from the tileset and the number that
+	 * Tiled would normally assign to it */
 	std::map<int, sf::Sprite> sprites;
 
+	/* iterate through each tileset */
 	for (int i = 0; i < map.tilesets.size(); i++)
 	{
 		auto tileset = map.tilesets[i];
@@ -52,42 +54,34 @@ void Game::Loop()
 		}
 	}
 
-	auto tile_size = sf::Vector2f(64, 64);
+	/* local map properties */
+	auto tile_size = sf::Vector2f(map.tile_width, map.tile_height);
 
-	auto map_tile_width = 80;
-	auto map_tile_height = 64;
-
+	auto map_tile_width = map.width;
+	auto map_tile_height = map.height;
 	auto map_dimensions = sf::Vector2f(map_tile_width * tile_size.x, map_tile_height * tile_size.y);
 
-	/* pixel dimensions of the viewport */
 	auto viewport_dimensions = sf::Vector2f(screen_dimensions.x, screen_dimensions.y);
-
-	/* viewport width and height in tile amount */
 	auto viewport_tile_width = viewport_dimensions.x / tile_size.x;
 	auto viewport_tile_height = viewport_dimensions.y / tile_size.y;
 
-	/* this is what contains all the columns and rows except those that are drawn in the viewport */
+	auto player_start_tile_x = 0;
+	auto player_start_tile_y = 13;
+
+	auto player_start_tile_offset_x = viewport_tile_width / 2;
+	auto player_start_tile_offset_y = viewport_tile_height / 3.2;
+
+	/* The main view ontains all the columns and rows except those that are drawn in the viewport */
 	sf::View main(window_.getDefaultView());
 	main.setCenter(map_dimensions);
 	main.setSize(map_dimensions);
 	main.move(screen_dimensions.x, screen_dimensions.y);
 
-	/* the tile numbers at which the player starts */
-	auto player_start_tile_x = 0;
-	auto player_start_tile_y = 61;
-
-	/*
-	 * the offset is substracted from the final viewport position.
-	 * we're doing this so that the viewport starts at the player_start_x-y at the left bottom
-	 * corner of the viewport
-	*/
-	auto player_start_tile_offset_x = viewport_tile_width / 2;
-	auto player_start_tile_offset_y = viewport_tile_height / 3.2;
-
+	/* the viewport view is used to enable side-scrolling, it acts as a camera for the player */
 	sf::View viewport;
 	viewport.setCenter(sf::Vector2f(player_start_tile_x * tile_size.x, player_start_tile_y * tile_size.y));
-	viewport.move(sf::Vector2f(player_start_tile_offset_x * tile_size.x, -(player_start_tile_offset_y * tile_size.y)));
 	viewport.setSize(viewport_dimensions);
+	viewport.move(sf::Vector2f(player_start_tile_offset_x * tile_size.x, -(player_start_tile_offset_y * tile_size.y)));
 
 	while (window_.isOpen())
 	{
@@ -97,42 +91,10 @@ void Game::Loop()
 		/* clear */
 		this->window_.clear(sf::Color::Black);
 
-		/* set the main view */
-		window_.setView(main);
-
-		/* draw the columns and rows until the start of the main viewport */
-		for (auto layer : map.tile_layers)
-		{
-			for (int col = 0; col < viewport_tile_width; ++col)
-			{
-				if (col < 0) //nothing to draw?
-					continue;
-
-				for (int row = 0; row < viewport_tile_height; ++row)
-				{
-					if (row < 0) //nothing to draw?
-						continue;
-
-					auto tile_y_pos = row * tile_size.y;
-					auto tile_x_pos = col * tile_size.x;
-
-					auto tile_index = (row * map.width) + col;
-
-					/* the tile number to draw */
-					auto tile = layer.tiles[tile_index];
-
-					/* get the sprite that belongs to the tile number */
-					auto sprite = sprites[tile.id];
-					sprite.setPosition(sf::Vector2f(tile_x_pos, tile_y_pos));
-
-					window_.draw(sprite);
-				}
-			}
-		}
-
 		/* set the viewport view */
 		window_.setView(viewport);
 
+		/* draw every tile that's inside the viewport */
 		for (auto layer : map.tile_layers)
 		{
 			for (int col = ((viewport.getCenter().x / tile_size.x) - viewport_tile_width); col < map_tile_width; ++col)
@@ -145,24 +107,20 @@ void Game::Loop()
 					if (row < 0) //nothing to draw?
 						continue;
 
-					auto tile_y_pos = row * tile_size.y;
-					auto tile_x_pos = col * tile_size.x;
-
-					auto tile_index = (row * map.width) + col;
-
 					/* the tile number to draw */
-					auto tile = layer.tiles[tile_index];
+					auto tile = layer.tiles[(row * map.width) + col];
 
 					/* get the sprite that belongs to the tile number */
 					auto sprite = sprites[tile.id];
-					sprite.setPosition(sf::Vector2f(tile_x_pos, tile_y_pos));
+
+					/* set the sprite's position */
+					sprite.setPosition(sf::Vector2f(col * tile_size.x, row * tile_size.y));
 
 					window_.draw(sprite);
 				}
 			}
 		}
 
-		/* display all drawn stuff */
 		window_.display();
 	}
 }
