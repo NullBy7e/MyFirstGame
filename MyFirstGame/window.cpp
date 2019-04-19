@@ -27,7 +27,7 @@ SOFTWARE.
 using namespace mfg::core;
 using namespace mfg::components;
 
-void window::handleInput(player& player, sf::View& viewport)
+void window::handleInput(player& player, sf::View& viewport, sf::Vector2f map_dimensions)
 {
 	sf::Event event;
 
@@ -44,12 +44,32 @@ void window::handleInput(player& player, sf::View& viewport)
 			{
 			case sf::Keyboard::A:
 			{
-				player.sprite.move(sf::Vector2f(-15, 0));
+				auto move = -15;
+
+				auto player_x_pos = player.sprite.getPosition().x;
+				auto delta = (player_x_pos + move) - player_x_pos;
+
+				auto can_move = player_x_pos + delta > 0;
+
+				if (can_move)
+				{
+					player.sprite.move(sf::Vector2f(move, 0));
+				}
 				break;
 			}
 			case sf::Keyboard::D:
 			{
-				player.sprite.move(sf::Vector2f(15, 0));
+				auto move = 15;
+
+				auto player_x_pos = player.sprite.getPosition().x;
+				auto delta = (player_x_pos + move) - player_x_pos;
+
+				auto can_move = player_x_pos + delta < (map_dimensions.x - 64);
+
+				if (can_move)
+				{
+					player.sprite.move(sf::Vector2f(move, 0));
+				}
 				break;
 			}
 

@@ -157,7 +157,7 @@ void game::loop()
 	while (window.isOpen())
 	{
 		/* handle window events */
-		window.handleInput(this->player, viewport);
+		window.handleInput(this->player, viewport, map_dimensions);
 
 		/* clear */
 		window.clear(sf::Color::Black);
@@ -218,114 +218,6 @@ void game::loop()
 			this->window.draw(instance.sprite);
 		});
 
-		window.display();
-	}
-}
-
-void game::drawXYChart()
-{
-	/* screen dimensions (window size) */
-	sf::Vector2i screen_dimensions(1280, 1024);
-
-	/* font */
-	sf::Font font;
-	if (!font.loadFromFile("fonts/arial.ttf"))
-	{
-		std::cout << "Error loading font\n";
-	}
-
-	auto tile_size = sf::Vector2f(64, 64);
-
-	auto map_tile_width = 40;
-	auto map_tile_height = 32;
-
-	auto viewport_tile_width = screen_dimensions.x / tile_size.x;
-	auto viewport_tile_height = screen_dimensions.y / tile_size.y;
-
-	auto viewport_dimensions = sf::Vector2f(screen_dimensions.x, screen_dimensions.y);
-
-	/* this is what contains all the columns and rows except those that are drawn in the viewport */
-	sf::View main(window.getDefaultView());
-
-	sf::View viewport;
-	viewport.setCenter(viewport_dimensions);
-	viewport.setSize(viewport_dimensions);
-	viewport.move(screen_dimensions.x / 2, screen_dimensions.y / 2);
-
-	sf::Text text;
-	text.setFont(font);
-	text.setCharacterSize(18);
-	text.setFillColor(sf::Color::Black);
-
-	sf::Text text2;
-	text2.setFont(font);
-	text2.setCharacterSize(18);
-	text2.setFillColor(sf::Color::Black);
-
-	sf::RectangleShape tile;
-	tile.setSize(tile_size);
-	tile.setOutlineThickness(1.f);
-	tile.setOutlineColor(sf::Color::Black);
-
-	while (window.isOpen())
-	{
-		/* handle window events */
-		window.handleInput(this->player, viewport);
-
-		/* clear */
-		window.clear(sf::Color::Black);
-
-		/* set the main view */
-		window.setView(main);
-
-		/* draw the columns and rows until the start of the main viewport */
-		for (int col = 0; col < viewport_tile_width; ++col)
-		{
-			for (int row = 0; row < viewport_tile_height; ++row)
-			{
-				sf::RectangleShape square(tile);
-				square.setPosition(sf::Vector2f(col * tile_size.x, row * tile_size.y));
-
-				text.setString(sf::String("X " + std::to_string((int)(row * tile_size.y))));
-				text.setPosition(sf::Vector2f(col * tile_size.x, row * tile_size.y));
-
-				text2.setString(sf::String("Y " + std::to_string((int)(col * tile_size.x))));
-				text2.setPosition(sf::Vector2f(col * tile_size.x, (row * tile_size.y) + 25));
-
-				window.draw(square);
-
-				window.draw(text);
-				window.draw(text2);
-			}
-		}
-
-		/* set the viewport view */
-		window.setView(viewport);
-
-		/* draw the columns and rows for the viewport */
-		for (int col = viewport_tile_width; col < map_tile_width; ++col)
-		{
-			for (int row = viewport_tile_height; row < map_tile_height; ++row)
-			{
-				sf::RectangleShape square(tile);
-				square.setPosition(sf::Vector2f(col * tile_size.x, row * tile_size.y));
-
-				text.setString(sf::String("X " + std::to_string((int)(row * tile_size.y))));
-				text.setPosition(sf::Vector2f(col * tile_size.x, row * tile_size.y));
-
-				text2.setString(sf::String("Y " + std::to_string((int)(col * tile_size.x))));
-				text2.setPosition(sf::Vector2f(col * tile_size.x, (row * tile_size.y) + 25));
-
-				window.draw(square);
-
-				window.draw(text);
-				window.draw(text2);
-			}
-		}
-
-		viewport.move(-2.f, .0f);
-
-		/* display all drawn stuff */
 		window.display();
 	}
 }

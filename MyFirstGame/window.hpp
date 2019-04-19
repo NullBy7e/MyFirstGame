@@ -37,7 +37,7 @@ namespace mfg
 		class window : public sf::RenderWindow
 		{
 		public:
-			void handleInput(player& player, sf::View& viewport);
+			void handleInput(player& player, sf::View& viewport, sf::Vector2f map_dimensions);
 
 			sf::Vector2f oldPos;
 			bool moving = false;
