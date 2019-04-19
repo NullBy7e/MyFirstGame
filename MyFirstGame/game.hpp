@@ -24,21 +24,19 @@ SOFTWARE.
 
 #pragma once
 
-#include <vector>
+#include "window.hpp"
+#include "tmx/tmx_parser.hpp"
+#include "texture_manager.hpp"
 
-#include "tmx_tile.hpp"
-
-class TmxChunk
+namespace core
 {
-public:
-	TmxChunk(float x, float y, int width, int height, std::vector<TmxTile> tiles);
-	~TmxChunk();
+	class game
+	{
+	public:
+		void load();
+		void loop();
+		void drawXYChart();
 
-	float x;
-	float y;
-
-	int width;
-	int height;
-
-	std::vector<TmxTile> tiles;
-};
+		window window;
+	};
+}

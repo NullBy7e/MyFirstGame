@@ -1,18 +1,45 @@
-#include "game.h"
+/*
+MIT License
 
-void Game::Load()
+Copyright (c) 2019 Youri de Mooij
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+*/
+
+#include "game.hpp"
+#include "entt/entt.hpp"
+
+using namespace core;
+
+void game::load()
 {
-	this->window_.create(sf::VideoMode(1280, 1024), "MyFirstGame", sf::Style::Titlebar | sf::Style::Close);
-	this->window_.setFramerateLimit(60);
+	window.create(sf::VideoMode(1280, 1024), "MyFirstGame", sf::Style::Titlebar | sf::Style::Close);
+	window.setFramerateLimit(60);
 }
 
-void Game::Loop()
+void game::loop()
 {
 	/* screen dimensions (window size) */
 	sf::Vector2i screen_dimensions(1280, 1024);
 
 	/* texture manager */
-	TextureManager texmgr;
+	texture_manager texmgr;
 	texmgr.loadTexture("player", "textures/sprites/player/knight_f_run_anim_f1.png");
 
 	/* load the map */
@@ -77,16 +104,16 @@ void Game::Loop()
 	viewport.setSize(viewport_dimensions);
 	viewport.move(sf::Vector2f(player_start_tile_offset_x * tile_size.x, -(player_start_tile_offset_y * tile_size.y)));
 
-	while (window_.isOpen())
+	while (window.isOpen())
 	{
 		/* handle window events */
-		window_.HandleInput(viewport);
+		window.handleInput(viewport);
 
 		/* clear */
-		this->window_.clear(sf::Color::Black);
+		window.clear(sf::Color::Black);
 
 		/* set the viewport view */
-		window_.setView(viewport);
+		window.setView(viewport);
 
 		/* draw every tile that's inside the viewport */
 		for (auto layer : map.tile_layers)
@@ -110,16 +137,16 @@ void Game::Loop()
 					/* set the sprite's position */
 					sprite.setPosition(sf::Vector2f(col * tile_size.x, row * tile_size.y));
 
-					window_.draw(sprite);
+					window.draw(sprite);
 				}
 			}
 		}
 
-		window_.display();
+		window.display();
 	}
 }
 
-void Game::DrawXYChart()
+void game::drawXYChart()
 {
 	/* screen dimensions (window size) */
 	sf::Vector2i screen_dimensions(1280, 1024);
@@ -142,7 +169,7 @@ void Game::DrawXYChart()
 	auto viewport_dimensions = sf::Vector2f(screen_dimensions.x, screen_dimensions.y);
 
 	/* this is what contains all the columns and rows except those that are drawn in the viewport */
-	sf::View main(window_.getDefaultView());
+	sf::View main(window.getDefaultView());
 
 	sf::View viewport;
 	viewport.setCenter(viewport_dimensions);
@@ -164,16 +191,16 @@ void Game::DrawXYChart()
 	tile.setOutlineThickness(1.f);
 	tile.setOutlineColor(sf::Color::Black);
 
-	while (window_.isOpen())
+	while (window.isOpen())
 	{
 		/* handle window events */
-		window_.HandleInput(viewport);
+		window.handleInput(viewport);
 
 		/* clear */
-		this->window_.clear(sf::Color::Black);
+		window.clear(sf::Color::Black);
 
 		/* set the main view */
-		window_.setView(main);
+		window.setView(main);
 
 		/* draw the columns and rows until the start of the main viewport */
 		for (int col = 0; col < viewport_tile_width; ++col)
@@ -189,15 +216,15 @@ void Game::DrawXYChart()
 				text2.setString(sf::String("Y " + std::to_string((int)(col * tile_size.x))));
 				text2.setPosition(sf::Vector2f(col * tile_size.x, (row * tile_size.y) + 25));
 
-				window_.draw(square);
+				window.draw(square);
 
-				window_.draw(text);
-				window_.draw(text2);
+				window.draw(text);
+				window.draw(text2);
 			}
 		}
 
 		/* set the viewport view */
-		window_.setView(viewport);
+		window.setView(viewport);
 
 		/* draw the columns and rows for the viewport */
 		for (int col = viewport_tile_width; col < map_tile_width; ++col)
@@ -213,16 +240,16 @@ void Game::DrawXYChart()
 				text2.setString(sf::String("Y " + std::to_string((int)(col * tile_size.x))));
 				text2.setPosition(sf::Vector2f(col * tile_size.x, (row * tile_size.y) + 25));
 
-				window_.draw(square);
+				window.draw(square);
 
-				window_.draw(text);
-				window_.draw(text2);
+				window.draw(text);
+				window.draw(text2);
 			}
 		}
 
 		viewport.move(-2.f, .0f);
 
 		/* display all drawn stuff */
-		window_.display();
+		window.display();
 	}
 }

@@ -22,23 +22,17 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#pragma once
+#include <SFML/Graphics.hpp>
+#include "game.hpp"
 
-#include <vector>
+using namespace core;
 
-#include "tmx_tile.hpp"
-
-class TmxChunk
+int main()
 {
-public:
-	TmxChunk(float x, float y, int width, int height, std::vector<TmxTile> tiles);
-	~TmxChunk();
+	game game;
 
-	float x;
-	float y;
+	game.load();
+	game.loop();
 
-	int width;
-	int height;
-
-	std::vector<TmxTile> tiles;
-};
+	return 0;
+}

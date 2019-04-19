@@ -63,15 +63,6 @@
     <ClInclude Include="tmx\tmx_tileset_image.hpp">
       <Filter>Header Files\tmx</Filter>
     </ClInclude>
-    <ClInclude Include="main.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="window.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="game.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="external\tinyxml2\tinyxml2.h">
       <Filter>Header Files\external\tinyxml2</Filter>
     </ClInclude>
@@ -79,6 +70,12 @@
       <Filter>Header Files\tmx</Filter>
     </ClInclude>
     <ClInclude Include="texture_manager.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="window.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="game.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -113,15 +110,6 @@
     <ClCompile Include="tmx\tmx_tileset_image.cpp">
       <Filter>Source Files\tmx</Filter>
     </ClCompile>
-    <ClCompile Include="window.cc">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="game.cc">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="main.cc">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="external\tinyxml2\tinyxml2.cc">
       <Filter>Source Files\external\tinyxml2</Filter>
     </ClCompile>
@@ -131,5 +119,19 @@
     <ClCompile Include="texture_manager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="window.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="game.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="convention.txt">
+      <Filter>Source Files</Filter>
+    </Text>
   </ItemGroup>
 </Project>

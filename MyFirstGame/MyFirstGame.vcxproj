@@ -20,8 +20,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="external\tinyxml2\tinyxml2.h" />
-    <ClInclude Include="game.h" />
-    <ClInclude Include="main.h" />
+    <ClInclude Include="game.hpp" />
     <ClInclude Include="texture_manager.hpp" />
     <ClInclude Include="tmx\tmx_layer.hpp" />
     <ClInclude Include="tmx\tmx_map.hpp" />
@@ -34,12 +33,12 @@
     <ClInclude Include="tmx\tmx_tileset_image.hpp" />
     <ClInclude Include="tmx\tmx_tile_layer.hpp" />
     <ClInclude Include="tmx\tmx_chunk.hpp" />
-    <ClInclude Include="window.h" />
+    <ClInclude Include="window.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="external\tinyxml2\tinyxml2.cc" />
-    <ClCompile Include="game.cc" />
-    <ClCompile Include="main.cc" />
+    <ClCompile Include="game.cpp" />
+    <ClCompile Include="main.cpp" />
     <ClCompile Include="texture_manager.cpp" />
     <ClCompile Include="tmx\tmx_layer.cpp" />
     <ClCompile Include="tmx\tmx_map.cpp" />
@@ -52,7 +51,10 @@
     <ClCompile Include="tmx\tmx_tileset_image.cpp" />
     <ClCompile Include="tmx\tmx_tile_layer.cpp" />
     <ClCompile Include="tmx\tmx_chunk.cpp" />
-    <ClCompile Include="window.cc" />
+    <ClCompile Include="window.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="convention.txt" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
@@ -112,7 +114,7 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>external\SFML-2.5.1\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>external\SFML-2.5.1\include;external\entt\src</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>SFML_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>stdafx.hpp</PrecompiledHeaderFile>
@@ -132,7 +134,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>external\SFML-2.5.1\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>external\SFML-2.5.1\include;external\entt\src</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>SFML_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <LanguageStandard>stdcpplatest</LanguageStandard>
     </ClCompile>

@@ -29,7 +29,7 @@ SOFTWARE.
 
 #include "texture_manager.hpp"
 
-void TextureManager::loadTexture(const std::string& name, const std::string& filename)
+void texture_manager::loadTexture(const std::string& name, const std::string& filename)
 {
 	/* Load the texture */
 	sf::Texture tex;
@@ -41,7 +41,7 @@ void TextureManager::loadTexture(const std::string& name, const std::string& fil
 	return;
 }
 
-sf::Texture& TextureManager::getRef(const std::string& texture)
+sf::Texture& texture_manager::getRef(const std::string& texture)
 {
 	return this->textures.at(texture);
 }

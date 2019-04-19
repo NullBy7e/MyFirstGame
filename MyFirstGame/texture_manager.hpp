@@ -29,13 +29,8 @@ SOFTWARE.
 
 #include <SFML/Graphics.hpp>
 
-class TextureManager
+class texture_manager
 {
-private:
-
-	/* Array of textures used */
-	std::map<std::string, sf::Texture> textures;
-
 public:
 
 	/* Add a texture from a file */
@@ -43,4 +38,9 @@ public:
 
 	/* Translate an id into a reference */
 	sf::Texture& getRef(const std::string& texture);
+
+private:
+
+	/* Array of textures used */
+	std::map<std::string, sf::Texture> textures;
 };

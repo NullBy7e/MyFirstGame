@@ -24,21 +24,16 @@ SOFTWARE.
 
 #pragma once
 
-#include <vector>
+#include <SFML/Graphics.hpp>
 
-#include "tmx_tile.hpp"
-
-class TmxChunk
+namespace core
 {
-public:
-	TmxChunk(float x, float y, int width, int height, std::vector<TmxTile> tiles);
-	~TmxChunk();
+	class window : public sf::RenderWindow
+	{
+	public:
+		void handleInput(sf::View& viewport);
 
-	float x;
-	float y;
-
-	int width;
-	int height;
-
-	std::vector<TmxTile> tiles;
-};
+		sf::Vector2f oldPos;
+		bool moving = false;
+	};
+}
