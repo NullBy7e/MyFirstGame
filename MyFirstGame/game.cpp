@@ -26,14 +26,12 @@ SOFTWARE.
 
 using namespace mfg::core;
 using namespace mfg::components;
+using namespace mfg::caching;
 
 game::game()
 {
 	window.create(sf::VideoMode(1280, 1024), "MyFirstGame", sf::Style::Titlebar | sf::Style::Close);
 	window.setFramerateLimit(60);
-
-	/* texture manager */
-	texmgr.loadTexture("player", "textures/sprites/player/knight_f_run_anim_f1.png");
 
 	/* load the map */
 	TmxParser parser;
@@ -43,9 +41,7 @@ game::game()
 	for (int i = 0; i < map->tilesets.size(); i++)
 	{
 		auto tileset = map->tilesets[i];
-		texmgr.loadTexture(tileset.name, tileset.image.image_source);
-
-		auto& tex = texmgr.getRef(tileset.name);
+		auto tex = textures.load<texture_loader>(entt::hashed_string::to_value(tileset.name.c_str()), tileset.image.image_source);
 
 		/* iterate through each row */
 		for (int row = 0; row < (tileset.tile_count / tileset.columns); ++row)
@@ -64,7 +60,7 @@ game::game()
 				auto ypos = row_start_y_pos;
 
 				/* Make a new sprite */
-				sf::Sprite sprite(tex, sf::IntRect(xpos, ypos, tileset.tile_width, tileset.tile_height));
+				sf::Sprite sprite(tex.get(), sf::IntRect(xpos, ypos, tileset.tile_width, tileset.tile_height));
 				sprites[tn] = sprite;
 			}
 		}
@@ -76,12 +72,15 @@ game::game()
 		for (auto& object : layer.objects)
 		{
 			auto new_sprite = sf::Sprite(sprites[object.gid]);
-			sf::Vector2f targetSize(object.width, object.height);
 
+			/* load player texture into new_sprite here to prevent scale/sizing conflicts */
 			if (object.name == "player_spawn" && object.type == "player")
 			{
-				new_sprite.setTexture(texmgr.getRef("player"), true);
+				auto tex = textures.load<texture_loader>("player"_hs, "../../textures/sprites/player/knight_f_run_anim_f1.png");
+				new_sprite.setTexture(tex.get(), true);
 			}
+
+			sf::Vector2f targetSize(object.width, object.height);
 
 			auto bounds = new_sprite.getLocalBounds();
 
@@ -99,8 +98,6 @@ game::game()
 
 			if (object.name == "player_spawn" && object.type == "player")
 			{
-				new_sprite.setTexture(texmgr.getRef("player"), true);
-
 				this->player = entities.assign<::player>(create_entity(), object.id, object.name,
 					position{
 						x_pos,

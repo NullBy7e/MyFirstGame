@@ -40,6 +40,9 @@
     <Filter Include="Header Files\registries">
       <UniqueIdentifier>{582b4566-8d4a-4cc3-8905-7fe5f1c83c76}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\caching">
+      <UniqueIdentifier>{1e4c3d11-3b2c-4c76-af4a-6f29b0b39b40}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="tmx\tmx_layer.hpp">
@@ -78,9 +81,6 @@
     <ClInclude Include="tmx\tmx_chunk.hpp">
       <Filter>Header Files\tmx</Filter>
     </ClInclude>
-    <ClInclude Include="texture_manager.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="window.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -104,6 +104,12 @@
     </ClInclude>
     <ClInclude Include="registries\entity_registry.hpp">
       <Filter>Header Files\registries</Filter>
+    </ClInclude>
+    <ClInclude Include="caching\cache.hpp">
+      <Filter>Header Files\caching</Filter>
+    </ClInclude>
+    <ClInclude Include="caching\texture_loader.hpp">
+      <Filter>Header Files\caching</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -142,9 +148,6 @@
     </ClCompile>
     <ClCompile Include="tmx\tmx_chunk.cpp">
       <Filter>Source Files\tmx</Filter>
-    </ClCompile>
-    <ClCompile Include="texture_manager.cpp">
-      <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>

@@ -26,12 +26,14 @@ SOFTWARE.
 
 #include "window.hpp"
 #include "tmx/tmx_parser.hpp"
-#include "texture_manager.hpp"
 
 #include "registries/registry.hpp"
 #include "utils/types.hpp"
 
+#include "caching/cache.hpp"
+
 using namespace mfg::registries;
+using namespace mfg::caching;
 
 namespace mfg {
 	namespace core
@@ -40,12 +42,12 @@ namespace mfg {
 		{
 		public:
 			game();
-
 			void loop();
-			void drawXYChart();
 
 		private:
 			window window;
+
+			texture_cache textures;
 
 			entity_registry entities;
 			entt::prototype create_entity{ entities };
@@ -55,8 +57,6 @@ namespace mfg {
 			/* array that maps tile number to sprite (contains all sprites from the tileset and the number that
 			 * Tiled would normally assign to it */
 			std::map<int, sf::Sprite> sprites;
-
-			texture_manager texmgr;
 
 			mfg::components::player player;
 			bool player_spawned;

@@ -19,6 +19,8 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="caching\cache.hpp" />
+    <ClInclude Include="caching\texture_loader.hpp" />
     <ClInclude Include="components\enemy.hpp" />
     <ClInclude Include="components\entity.hpp" />
     <ClInclude Include="components\player.hpp" />
@@ -26,7 +28,6 @@
     <ClInclude Include="game.hpp" />
     <ClInclude Include="registries\entity_registry.hpp" />
     <ClInclude Include="registries\registry.hpp" />
-    <ClInclude Include="texture_manager.hpp" />
     <ClInclude Include="tmx\tmx_layer.hpp" />
     <ClInclude Include="tmx\tmx_map.hpp" />
     <ClInclude Include="tmx\tmx_object.hpp" />
@@ -45,7 +46,6 @@
     <ClCompile Include="external\tinyxml2\tinyxml2.cc" />
     <ClCompile Include="game.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="texture_manager.cpp" />
     <ClCompile Include="tmx\tmx_layer.cpp" />
     <ClCompile Include="tmx\tmx_map.cpp" />
     <ClCompile Include="tmx\tmx_object.cpp" />
