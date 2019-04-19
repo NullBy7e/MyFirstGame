@@ -57,6 +57,9 @@ namespace mfg {
 			std::map<int, sf::Sprite> sprites;
 
 			texture_manager texmgr;
+
+			mfg::components::player player;
+			bool player_spawned;
 		};
 	}
 }

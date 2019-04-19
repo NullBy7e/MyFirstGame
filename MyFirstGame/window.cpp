@@ -25,8 +25,9 @@ SOFTWARE.
 #include "window.hpp"
 
 using namespace mfg::core;
+using namespace mfg::components;
 
-void window::handleInput(sf::View& viewport)
+void window::handleInput(player& player, sf::View& viewport)
 {
 	sf::Event event;
 
@@ -37,6 +38,25 @@ void window::handleInput(sf::View& viewport)
 	{
 		switch (event.type)
 		{
+		case sf::Event::KeyPressed:
+		{
+			switch (event.key.code)
+			{
+			case sf::Keyboard::A:
+			{
+				player.sprite.move(sf::Vector2f(-15, 0));
+				break;
+			}
+			case sf::Keyboard::D:
+			{
+				player.sprite.move(sf::Vector2f(15, 0));
+				break;
+			}
+
+			default: break;
+			}
+			break;
+		}
 		case sf::Event::Closed:
 		{
 			this->close();

@@ -9,6 +9,8 @@ namespace mfg {
 	namespace components {
 		struct player : public entity_component
 		{
+			player() {};
+
 			player(const int id, const std::string name, ::position position, ::scale scale, const sf::Sprite sprite) : entity_component(id, name, position, scale, sprite)
 			{
 			};

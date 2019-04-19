@@ -73,24 +73,23 @@ game::game()
 	/* object layers */
 	for (auto& layer : map->object_layers)
 	{
-		for (auto x = 0; x < layer.objects.size(); ++x)
+		for (auto& object : layer.objects)
 		{
-			auto object = layer.objects[x];
-
 			auto new_sprite = sf::Sprite(sprites[object.gid]);
 			sf::Vector2f targetSize(object.width, object.height);
+
+			if (object.name == "player_spawn" && object.type == "player")
+			{
+				new_sprite.setTexture(texmgr.getRef("player"), true);
+			}
 
 			auto bounds = new_sprite.getLocalBounds();
 
 			float x_scale = targetSize.x / bounds.width;
 			float y_scale = targetSize.y / bounds.height;
 
-			float x_pos;
-			float y_pos;
-
-			/* set initial position */
-			x_pos = object.x;
-			y_pos = object.y - object.height;
+			auto x_pos = object.x;
+			auto y_pos = object.y - object.height;
 
 			/* check flips */
 			if (object.flipped_horizontally)
@@ -98,20 +97,38 @@ game::game()
 				x_pos = object.x + object.width;
 			}
 
-			/* create entity */
-			entities.assign<enemy>(create_entity(),
-				object.id,
-				object.name,
-				position{
-					x_pos,
-					y_pos
-				},
-				scale{
-					x_scale,
-					y_scale
-				},
-				new_sprite
-				);
+			if (object.name == "player_spawn" && object.type == "player")
+			{
+				new_sprite.setTexture(texmgr.getRef("player"), true);
+
+				this->player = entities.assign<::player>(create_entity(), object.id, object.name,
+					position{
+						x_pos,
+						y_pos
+					},
+					scale{
+						x_scale,
+						y_scale
+					},
+					new_sprite
+					);
+
+				player_spawned = true;
+			}
+			else
+			{
+				entities.assign<enemy>(create_entity(), object.id, object.name,
+					position{
+						x_pos,
+						y_pos
+					},
+					scale{
+						x_scale,
+						y_scale
+					},
+					new_sprite
+					);
+			}
 		}
 	}
 }
@@ -132,25 +149,35 @@ void game::loop()
 	auto viewport_tile_width = viewport_dimensions.x / tile_size.x;
 	auto viewport_tile_height = viewport_dimensions.y / tile_size.y;
 
-	auto player_start_tile_x = 0;
-	auto player_start_tile_y = 13;
-
-	auto player_start_tile_offset_x = viewport_tile_width / 2;
-	auto player_start_tile_offset_y = viewport_tile_height / 3.2;
-
 	/* the viewport view is used to enable side-scrolling, it acts as a camera for the player */
 	sf::View viewport;
-	viewport.setCenter(sf::Vector2f(player_start_tile_x * tile_size.x, player_start_tile_y * tile_size.y));
 	viewport.setSize(viewport_dimensions);
-	viewport.move(sf::Vector2f(player_start_tile_offset_x * tile_size.x, -(player_start_tile_offset_y * tile_size.y)));
+	viewport.setCenter(viewport.getCenter().x + tile_size.x * 2.2, viewport.getCenter().y);
 
 	while (window.isOpen())
 	{
 		/* handle window events */
-		window.handleInput(viewport);
+		window.handleInput(this->player, viewport);
 
 		/* clear */
 		window.clear(sf::Color::Black);
+
+		auto viewport_pos_x = player.sprite.getPosition().x;
+		auto viewport_pos_y = player.sprite.getPosition().y;
+
+		/* calculations to ensure that the viewport camera is never centered off the map's edges */
+		auto move_camera_x = viewport_pos_x - (viewport_dimensions.x / 2) > 0 && viewport_pos_x + (viewport_dimensions.x / 2) < map_dimensions.x;
+		auto move_camera_y = viewport_pos_y - (viewport_dimensions.y / 2) > 0 && viewport_pos_y + (viewport_dimensions.y / 2) < map_dimensions.y;
+
+		if (move_camera_x)
+		{
+			viewport.setCenter(viewport_pos_x, viewport.getCenter().y);
+		}
+
+		if (move_camera_y)
+		{
+			viewport.setCenter(viewport.getCenter().x, viewport_pos_y);
+		}
 
 		/* set the viewport view */
 		window.setView(viewport);
@@ -172,7 +199,7 @@ void game::loop()
 					auto tile = layer.tiles[(row * map->width) + col];
 
 					/* get the sprite that belongs to the tile number */
-					auto sprite = sprites[tile.id];
+					auto& sprite = sprites[tile.id];
 
 					/* set the sprite's position */
 					sprite.setPosition(sf::Vector2f(col * tile_size.x, row * tile_size.y));
@@ -180,6 +207,11 @@ void game::loop()
 					window.draw(sprite);
 				}
 			}
+		}
+
+		if (player_spawned)
+		{
+			window.draw(this->player.sprite);
 		}
 
 		entities.view<enemy>().each([this](auto entity, auto &instance) {
@@ -238,7 +270,7 @@ void game::drawXYChart()
 	while (window.isOpen())
 	{
 		/* handle window events */
-		window.handleInput(viewport);
+		window.handleInput(this->player, viewport);
 
 		/* clear */
 		window.clear(sf::Color::Black);

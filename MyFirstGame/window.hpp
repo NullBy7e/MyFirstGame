@@ -26,6 +26,10 @@ SOFTWARE.
 
 #include <SFML/Graphics.hpp>
 
+#include "components/player.hpp"
+
+using namespace mfg::components;
+
 namespace mfg
 {
 	namespace core
@@ -33,7 +37,7 @@ namespace mfg
 		class window : public sf::RenderWindow
 		{
 		public:
-			void handleInput(sf::View& viewport);
+			void handleInput(player& player, sf::View& viewport);
 
 			sf::Vector2f oldPos;
 			bool moving = false;
