@@ -24,7 +24,7 @@ SOFTWARE.
 
 #include "window.hpp"
 
-using namespace core;
+using namespace mfg::core;
 
 void window::handleInput(sf::View& viewport)
 {

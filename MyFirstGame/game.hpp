@@ -28,15 +28,35 @@ SOFTWARE.
 #include "tmx/tmx_parser.hpp"
 #include "texture_manager.hpp"
 
-namespace core
-{
-	class game
-	{
-	public:
-		void load();
-		void loop();
-		void drawXYChart();
+#include "registries/registry.hpp"
+#include "utils/types.hpp"
 
-		window window;
-	};
+using namespace mfg::registries;
+
+namespace mfg {
+	namespace core
+	{
+		class game
+		{
+		public:
+			game();
+
+			void loop();
+			void drawXYChart();
+
+		private:
+			window window;
+
+			entity_registry entities;
+			entt::prototype create_entity{ entities };
+
+			std::unique_ptr<TmxMap> map;
+
+			/* array that maps tile number to sprite (contains all sprites from the tileset and the number that
+			 * Tiled would normally assign to it */
+			std::map<int, sf::Sprite> sprites;
+
+			texture_manager texmgr;
+		};
+	}
 }

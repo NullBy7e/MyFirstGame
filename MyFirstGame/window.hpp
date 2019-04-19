@@ -26,14 +26,17 @@ SOFTWARE.
 
 #include <SFML/Graphics.hpp>
 
-namespace core
+namespace mfg
 {
-	class window : public sf::RenderWindow
+	namespace core
 	{
-	public:
-		void handleInput(sf::View& viewport);
+		class window : public sf::RenderWindow
+		{
+		public:
+			void handleInput(sf::View& viewport);
 
-		sf::Vector2f oldPos;
-		bool moving = false;
-	};
+			sf::Vector2f oldPos;
+			bool moving = false;
+		};
+	}
 }

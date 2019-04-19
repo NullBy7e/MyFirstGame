@@ -22,16 +22,13 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#include <SFML/Graphics.hpp>
 #include "game.hpp"
 
-using namespace core;
+using namespace mfg::core;
 
 int main()
 {
 	game game;
-
-	game.load();
 	game.loop();
 
 	return 0;

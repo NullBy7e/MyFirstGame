@@ -23,37 +23,26 @@ SOFTWARE.
 */
 
 #include "game.hpp"
-#include "entt/entt.hpp"
 
-using namespace core;
+using namespace mfg::core;
+using namespace mfg::components;
 
-void game::load()
+game::game()
 {
 	window.create(sf::VideoMode(1280, 1024), "MyFirstGame", sf::Style::Titlebar | sf::Style::Close);
 	window.setFramerateLimit(60);
-}
-
-void game::loop()
-{
-	/* screen dimensions (window size) */
-	sf::Vector2i screen_dimensions(1280, 1024);
 
 	/* texture manager */
-	texture_manager texmgr;
 	texmgr.loadTexture("player", "textures/sprites/player/knight_f_run_anim_f1.png");
 
 	/* load the map */
 	TmxParser parser;
-	auto map = parser.parse("maps/level1/level1.tmx");
-
-	/* array that maps tile number to sprite (contains all sprites from the tileset and the number that
-	 * Tiled would normally assign to it */
-	std::map<int, sf::Sprite> sprites;
+	map = std::make_unique<TmxMap>(parser.parse("maps/level1/level1.tmx"));
 
 	/* iterate through each tileset */
-	for (int i = 0; i < map.tilesets.size(); i++)
+	for (int i = 0; i < map->tilesets.size(); i++)
 	{
-		auto tileset = map.tilesets[i];
+		auto tileset = map->tilesets[i];
 		texmgr.loadTexture(tileset.name, tileset.image.image_source);
 
 		auto& tex = texmgr.getRef(tileset.name);
@@ -81,11 +70,62 @@ void game::loop()
 		}
 	}
 
-	/* local map properties */
-	auto tile_size = sf::Vector2f(map.tile_width, map.tile_height);
+	/* object layers */
+	for (auto& layer : map->object_layers)
+	{
+		for (auto x = 0; x < layer.objects.size(); ++x)
+		{
+			auto object = layer.objects[x];
 
-	auto map_tile_width = map.width;
-	auto map_tile_height = map.height;
+			auto new_sprite = sf::Sprite(sprites[object.gid]);
+			sf::Vector2f targetSize(object.width, object.height);
+
+			auto bounds = new_sprite.getLocalBounds();
+
+			float x_scale = targetSize.x / bounds.width;
+			float y_scale = targetSize.y / bounds.height;
+
+			float x_pos;
+			float y_pos;
+
+			/* set initial position */
+			x_pos = object.x;
+			y_pos = object.y - object.height;
+
+			/* check flips */
+			if (object.flipped_horizontally)
+			{
+				x_pos = object.x + object.width;
+			}
+
+			/* create entity */
+			entities.assign<enemy>(create_entity(),
+				object.id,
+				object.name,
+				position{
+					x_pos,
+					y_pos
+				},
+				scale{
+					x_scale,
+					y_scale
+				},
+				new_sprite
+				);
+		}
+	}
+}
+
+void game::loop()
+{
+	/* screen dimensions (window size) */
+	sf::Vector2i screen_dimensions(1280, 1024);
+
+	/* local map properties */
+	auto tile_size = sf::Vector2f(map->tile_width, map->tile_height);
+
+	auto map_tile_width = map->width;
+	auto map_tile_height = map->height;
 	auto map_dimensions = sf::Vector2f(map_tile_width * tile_size.x, map_tile_height * tile_size.y);
 
 	auto viewport_dimensions = sf::Vector2f(screen_dimensions.x, screen_dimensions.y);
@@ -116,7 +156,7 @@ void game::loop()
 		window.setView(viewport);
 
 		/* draw every tile that's inside the viewport */
-		for (auto layer : map.tile_layers)
+		for (auto layer : map->tile_layers)
 		{
 			for (int col = ((viewport.getCenter().x / tile_size.x) - viewport_tile_width); col < map_tile_width; ++col)
 			{
@@ -129,7 +169,7 @@ void game::loop()
 						continue;
 
 					/* the tile number to draw */
-					auto tile = layer.tiles[(row * map.width) + col];
+					auto tile = layer.tiles[(row * map->width) + col];
 
 					/* get the sprite that belongs to the tile number */
 					auto sprite = sprites[tile.id];
@@ -141,6 +181,10 @@ void game::loop()
 				}
 			}
 		}
+
+		entities.view<enemy>().each([this](auto entity, auto &instance) {
+			this->window.draw(instance.sprite);
+		});
 
 		window.display();
 	}

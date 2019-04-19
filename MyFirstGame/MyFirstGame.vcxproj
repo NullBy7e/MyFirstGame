@@ -19,8 +19,13 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="components\enemy.hpp" />
+    <ClInclude Include="components\entity.hpp" />
+    <ClInclude Include="components\player.hpp" />
     <ClInclude Include="external\tinyxml2\tinyxml2.h" />
     <ClInclude Include="game.hpp" />
+    <ClInclude Include="registries\entity_registry.hpp" />
+    <ClInclude Include="registries\registry.hpp" />
     <ClInclude Include="texture_manager.hpp" />
     <ClInclude Include="tmx\tmx_layer.hpp" />
     <ClInclude Include="tmx\tmx_map.hpp" />
@@ -33,6 +38,7 @@
     <ClInclude Include="tmx\tmx_tileset_image.hpp" />
     <ClInclude Include="tmx\tmx_tile_layer.hpp" />
     <ClInclude Include="tmx\tmx_chunk.hpp" />
+    <ClInclude Include="utils\types.hpp" />
     <ClInclude Include="window.hpp" />
   </ItemGroup>
   <ItemGroup>

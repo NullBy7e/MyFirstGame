@@ -31,6 +31,15 @@
     <Filter Include="Header Files\external\tinyxml2">
       <UniqueIdentifier>{9da417fb-b3cc-454a-aca4-91a033ad9f2b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\components">
+      <UniqueIdentifier>{6df20adf-4c99-4317-b8d1-02aff75cb132}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\utils">
+      <UniqueIdentifier>{0895ea03-58f9-4bbb-bb10-5b1b466a551c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\registries">
+      <UniqueIdentifier>{582b4566-8d4a-4cc3-8905-7fe5f1c83c76}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="tmx\tmx_layer.hpp">
@@ -77,6 +86,24 @@
     </ClInclude>
     <ClInclude Include="game.hpp">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="components\player.hpp">
+      <Filter>Header Files\components</Filter>
+    </ClInclude>
+    <ClInclude Include="components\enemy.hpp">
+      <Filter>Header Files\components</Filter>
+    </ClInclude>
+    <ClInclude Include="components\entity.hpp">
+      <Filter>Header Files\components</Filter>
+    </ClInclude>
+    <ClInclude Include="utils\types.hpp">
+      <Filter>Header Files\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="registries\registry.hpp">
+      <Filter>Header Files\registries</Filter>
+    </ClInclude>
+    <ClInclude Include="registries\entity_registry.hpp">
+      <Filter>Header Files\registries</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

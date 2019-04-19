@@ -22,11 +22,6 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#include <map>
-#include <string>
-
-#include <SFML/Graphics.hpp>
-
 #include "texture_manager.hpp"
 
 void texture_manager::loadTexture(const std::string& name, const std::string& filename)
