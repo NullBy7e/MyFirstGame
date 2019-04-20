@@ -4,8 +4,11 @@
 
 namespace mfg {
 	namespace components {
-		struct enemy
+		struct sprite : public sf::Sprite
 		{
+			sprite(sf::Sprite sprite) : sf::Sprite(sprite)
+			{
+			}
 		};
 	}
 }

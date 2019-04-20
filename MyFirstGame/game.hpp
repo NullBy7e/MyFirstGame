@@ -24,6 +24,8 @@ SOFTWARE.
 
 #pragma once
 
+#include "MFG.hpp"
+
 #include "window.hpp"
 #include "tmx/tmx_parser.hpp"
 
@@ -31,9 +33,13 @@ SOFTWARE.
 #include "utils/types.hpp"
 
 #include "caching/cache.hpp"
+#include "components/components.hpp"
 
+using namespace mfg;
 using namespace mfg::registries;
 using namespace mfg::caching;
+using namespace mfg::managers;
+using namespace mfg::events;
 
 namespace mfg {
 	namespace core
@@ -42,15 +48,19 @@ namespace mfg {
 		{
 		public:
 			game();
+
+			void draw();
+			void drawTiles();
+			void drawEntities();
+
+			void updateViewport();
+
 			void loop();
 
 		private:
-			window window;
+			std::unique_ptr<window> window;
 
 			texture_cache textures;
-
-			entity_registry entities;
-			entt::prototype create_entity{ entities };
 
 			std::unique_ptr<TmxMap> map;
 
@@ -58,8 +68,22 @@ namespace mfg {
 			 * Tiled would normally assign to it */
 			std::map<int, sf::Sprite> sprites;
 
-			mfg::components::player player;
 			bool player_spawned;
+
+			sf::Vector2i screen_dimensions;
+			sf::Vector2f tile_size;
+
+			int map_tile_width;
+			int map_tile_height;
+			sf::Vector2f map_dimensions;
+
+			sf::Vector2f viewport_dimensions;
+			int viewport_tile_width;
+			int viewport_tile_height;
+
+			sf::View viewport;
+
+			entt::entity player_entity;
 		};
 	}
 }

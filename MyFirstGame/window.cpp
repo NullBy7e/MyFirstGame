@@ -24,102 +24,52 @@ SOFTWARE.
 
 #include "window.hpp"
 
-using namespace mfg::core;
-using namespace mfg::components;
-
-void window::handleInput(player& player, sf::View& viewport, sf::Vector2f map_dimensions)
+namespace mfg
 {
-	sf::Event event;
-
-	float zoom = 1;
-	double accumZoom = 1;
-
-	while (this->pollEvent(event))
+	namespace core
 	{
-		switch (event.type)
+		void window::handleInput(entt::entity player)
 		{
-		case sf::Event::KeyPressed:
-		{
-			switch (event.key.code)
+			sf::Event event;
+
+			auto input = MFG::getSystemManager()->getInputSystem();
+			auto entities = MFG::getEntityManager()->getEntities();
+
+			auto& player_position = entities->get<position>(player);
+
+			while (this->pollEvent(event))
 			{
-			case sf::Keyboard::A:
-			{
-				auto move = -15;
-
-				auto player_x_pos = player.sprite.getPosition().x;
-				auto delta = (player_x_pos + move) - player_x_pos;
-
-				auto can_move = player_x_pos + delta > 0;
-
-				if (can_move)
+				switch (event.type)
 				{
-					player.sprite.move(sf::Vector2f(move, 0));
-				}
-				break;
-			}
-			case sf::Keyboard::D:
-			{
-				auto move = 15;
-
-				auto player_x_pos = player.sprite.getPosition().x;
-				auto delta = (player_x_pos + move) - player_x_pos;
-
-				auto can_move = player_x_pos + delta < (map_dimensions.x - 64);
-
-				if (can_move)
+				case sf::Event::KeyPressed:
 				{
-					player.sprite.move(sf::Vector2f(move, 0));
+					switch (event.key.code)
+					{
+					case sf::Keyboard::W:
+					case sf::Keyboard::A:
+					case sf::Keyboard::S:
+					case sf::Keyboard::D:
+					{
+						player_move move
+						{
+							event.key.code,
+							player_position
+						};
+
+						input->dispatcher.enqueue<player_move>(move);
+						input->dispatcher.update<player_move>();
+					}
+					default: break;
+					}
+					break;
 				}
-				break;
+				case sf::Event::Closed:
+				{
+					this->close();
+					break;
+				}
+				}
 			}
-
-			default: break;
-			}
-			break;
-		}
-		case sf::Event::Closed:
-		{
-			this->close();
-			break;
-		}
-		case sf::Event::MouseButtonPressed:
-			if (event.mouseButton.button == 0) {
-				moving = true;
-				oldPos = sf::Vector2f(sf::Mouse::getPosition(*this));
-			}
-			break;
-		case sf::Event::MouseButtonReleased:
-			moving = false;
-			break;
-		case sf::Event::MouseMoved:
-		{
-			if (!moving)
-				break;
-
-			sf::Vector2f newPos = sf::Vector2f(event.mouseMove.x, event.mouseMove.y);
-			sf::Vector2f deltaPos = oldPos - newPos;
-
-			deltaPos.x *= accumZoom;
-			deltaPos.y *= accumZoom;
-
-			viewport.move(deltaPos);
-			oldPos = newPos;
-
-			break;
-		}
-		case sf::Event::MouseWheelScrolled:
-			if (moving)
-				break;
-
-			if (event.mouseWheelScroll.delta <= -1)
-				zoom = std::min(2.f, zoom + .1f);
-			else if (event.mouseWheelScroll.delta >= 1)
-				zoom = std::max(.5f, zoom - .1f);
-
-			accumZoom *= zoom;
-
-			viewport.zoom(zoom);
-			break;
 		}
 	}
 }

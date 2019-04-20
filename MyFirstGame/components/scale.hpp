@@ -4,8 +4,10 @@
 
 namespace mfg {
 	namespace components {
-		struct enemy
+		struct scale
 		{
+			float x;
+			float y;
 		};
 	}
 }

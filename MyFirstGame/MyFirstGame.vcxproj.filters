@@ -43,6 +43,21 @@
     <Filter Include="Header Files\caching">
       <UniqueIdentifier>{1e4c3d11-3b2c-4c76-af4a-6f29b0b39b40}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\systems">
+      <UniqueIdentifier>{f088d12c-910b-4874-8fe2-3b5574745928}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\managers">
+      <UniqueIdentifier>{a99d7f0c-a421-4450-8a2e-646371f2752f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\systems">
+      <UniqueIdentifier>{c2d5dea9-1158-4df2-9df9-f225a4ef93d4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\managers">
+      <UniqueIdentifier>{4312c893-c7e1-4b7f-9bf5-01a4a2fc881e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\events">
+      <UniqueIdentifier>{42b6043c-bdc0-41ff-ab97-37ab92fd1f1f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="tmx\tmx_layer.hpp">
@@ -93,9 +108,6 @@
     <ClInclude Include="components\enemy.hpp">
       <Filter>Header Files\components</Filter>
     </ClInclude>
-    <ClInclude Include="components\entity.hpp">
-      <Filter>Header Files\components</Filter>
-    </ClInclude>
     <ClInclude Include="utils\types.hpp">
       <Filter>Header Files\utils</Filter>
     </ClInclude>
@@ -110,6 +122,33 @@
     </ClInclude>
     <ClInclude Include="caching\texture_loader.hpp">
       <Filter>Header Files\caching</Filter>
+    </ClInclude>
+    <ClInclude Include="components\position.hpp">
+      <Filter>Header Files\components</Filter>
+    </ClInclude>
+    <ClInclude Include="components\scale.hpp">
+      <Filter>Header Files\components</Filter>
+    </ClInclude>
+    <ClInclude Include="components\components.hpp">
+      <Filter>Header Files\components</Filter>
+    </ClInclude>
+    <ClInclude Include="components\sprite.hpp">
+      <Filter>Header Files\components</Filter>
+    </ClInclude>
+    <ClInclude Include="MFG.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="managers\system_manager.hpp">
+      <Filter>Header Files\managers</Filter>
+    </ClInclude>
+    <ClInclude Include="managers\entity_manager.hpp">
+      <Filter>Header Files\managers</Filter>
+    </ClInclude>
+    <ClInclude Include="systems\input_system.hpp">
+      <Filter>Header Files\systems</Filter>
+    </ClInclude>
+    <ClInclude Include="events\player_move.hpp">
+      <Filter>Header Files\events</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -158,10 +197,17 @@
     <ClCompile Include="game.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <Text Include="convention.txt">
+    <ClCompile Include="MFG.cpp">
       <Filter>Source Files</Filter>
-    </Text>
+    </ClCompile>
+    <ClCompile Include="systems\input_system.cpp">
+      <Filter>Source Files\systems</Filter>
+    </ClCompile>
+    <ClCompile Include="managers\system_manager.cpp">
+      <Filter>Source Files\managers</Filter>
+    </ClCompile>
+    <ClCompile Include="managers\entity_manager.cpp">
+      <Filter>Source Files\managers</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

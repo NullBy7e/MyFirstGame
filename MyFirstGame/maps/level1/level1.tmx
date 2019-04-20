@@ -53,7 +53,7 @@
 </data>
  </layer>
  <objectgroup id="65" name="Actors">
-  <object id="44" name="player_spawn" type="player" gid="256" x="1088" y="960" width="81" height="92"/>
+  <object id="44" name="player_spawn" type="player" gid="256" x="64" y="960" width="81" height="92"/>
   <object id="53" name="guardian" type="enemy" gid="151" x="1920" y="960" width="238" height="266"/>
  </objectgroup>
 </map>

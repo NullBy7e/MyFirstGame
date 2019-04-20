@@ -26,9 +26,18 @@ SOFTWARE.
 
 #include <SFML/Graphics.hpp>
 
-#include "components/player.hpp"
+#include "MFG.hpp"
+
+#include "registries/registry.hpp"
+#include "components/components.hpp"
+
+#include "managers/system_manager.hpp"
+#include "events/player_move.hpp"
 
 using namespace mfg::components;
+using namespace mfg::registries;
+using namespace mfg::managers;
+using namespace mfg::events;
 
 namespace mfg
 {
@@ -37,10 +46,7 @@ namespace mfg
 		class window : public sf::RenderWindow
 		{
 		public:
-			void handleInput(player& player, sf::View& viewport, sf::Vector2f map_dimensions);
-
-			sf::Vector2f oldPos;
-			bool moving = false;
+			void handleInput(entt::entity player);
 		};
 	}
 }

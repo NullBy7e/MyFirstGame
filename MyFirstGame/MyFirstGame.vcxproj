@@ -21,13 +21,21 @@
   <ItemGroup>
     <ClInclude Include="caching\cache.hpp" />
     <ClInclude Include="caching\texture_loader.hpp" />
+    <ClInclude Include="components\components.hpp" />
     <ClInclude Include="components\enemy.hpp" />
-    <ClInclude Include="components\entity.hpp" />
     <ClInclude Include="components\player.hpp" />
+    <ClInclude Include="components\position.hpp" />
+    <ClInclude Include="components\scale.hpp" />
+    <ClInclude Include="components\sprite.hpp" />
+    <ClInclude Include="events\player_move.hpp" />
     <ClInclude Include="external\tinyxml2\tinyxml2.h" />
     <ClInclude Include="game.hpp" />
+    <ClInclude Include="managers\entity_manager.hpp" />
+    <ClInclude Include="managers\system_manager.hpp" />
+    <ClInclude Include="MFG.hpp" />
     <ClInclude Include="registries\entity_registry.hpp" />
     <ClInclude Include="registries\registry.hpp" />
+    <ClInclude Include="systems\input_system.hpp" />
     <ClInclude Include="tmx\tmx_layer.hpp" />
     <ClInclude Include="tmx\tmx_map.hpp" />
     <ClInclude Include="tmx\tmx_object.hpp" />
@@ -46,6 +54,10 @@
     <ClCompile Include="external\tinyxml2\tinyxml2.cc" />
     <ClCompile Include="game.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="managers\entity_manager.cpp" />
+    <ClCompile Include="managers\system_manager.cpp" />
+    <ClCompile Include="MFG.cpp" />
+    <ClCompile Include="systems\input_system.cpp" />
     <ClCompile Include="tmx\tmx_layer.cpp" />
     <ClCompile Include="tmx\tmx_map.cpp" />
     <ClCompile Include="tmx\tmx_object.cpp" />
@@ -58,9 +70,6 @@
     <ClCompile Include="tmx\tmx_tile_layer.cpp" />
     <ClCompile Include="tmx\tmx_chunk.cpp" />
     <ClCompile Include="window.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <Text Include="convention.txt" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
@@ -123,7 +132,8 @@
       <AdditionalIncludeDirectories>external\SFML-2.5.1\include;external\entt\src</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>SFML_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
-      <PrecompiledHeaderFile>stdafx.hpp</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile>
+      </PrecompiledHeaderFile>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <LanguageStandard>stdcpplatest</LanguageStandard>
     </ClCompile>
@@ -143,6 +153,9 @@
       <AdditionalIncludeDirectories>external\SFML-2.5.1\include;external\entt\src</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>SFML_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <LanguageStandard>stdcpplatest</LanguageStandard>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <PrecompiledHeaderFile>
+      </PrecompiledHeaderFile>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
