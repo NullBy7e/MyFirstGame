@@ -26,12 +26,15 @@
     <ClInclude Include="components\player.hpp" />
     <ClInclude Include="components\position.hpp" />
     <ClInclude Include="components\scale.hpp" />
+    <ClInclude Include="components\map.hpp" />
     <ClInclude Include="components\sprite.hpp" />
     <ClInclude Include="events\player_move.hpp" />
     <ClInclude Include="external\tinyxml2\tinyxml2.h" />
     <ClInclude Include="game.hpp" />
     <ClInclude Include="managers\entity_manager.hpp" />
+    <ClInclude Include="managers\map_manager.hpp" />
     <ClInclude Include="managers\system_manager.hpp" />
+    <ClInclude Include="managers\texture_manager.hpp" />
     <ClInclude Include="MFG.hpp" />
     <ClInclude Include="registries\entity_registry.hpp" />
     <ClInclude Include="registries\registry.hpp" />
@@ -55,7 +58,9 @@
     <ClCompile Include="game.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="managers\entity_manager.cpp" />
+    <ClCompile Include="managers\map_manager.cpp" />
     <ClCompile Include="managers\system_manager.cpp" />
+    <ClCompile Include="managers\texture_manager.cpp" />
     <ClCompile Include="MFG.cpp" />
     <ClCompile Include="systems\input_system.cpp" />
     <ClCompile Include="tmx\tmx_layer.cpp" />

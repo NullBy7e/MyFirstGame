@@ -54,36 +54,19 @@ namespace mfg {
 			void drawEntities();
 
 			void updateViewport();
+			void createPlayer();
 
 			void loop();
 
 		private:
 			std::unique_ptr<window> window;
 
-			texture_cache textures;
-
-			std::unique_ptr<TmxMap> map;
-
-			/* array that maps tile number to sprite (contains all sprites from the tileset and the number that
-			 * Tiled would normally assign to it */
-			std::map<int, sf::Sprite> sprites;
-
-			bool player_spawned;
-
 			sf::Vector2i screen_dimensions;
-			sf::Vector2f tile_size;
 
-			int map_tile_width;
-			int map_tile_height;
-			sf::Vector2f map_dimensions;
-
+			sf::View viewport;
 			sf::Vector2f viewport_dimensions;
 			int viewport_tile_width;
 			int viewport_tile_height;
-
-			sf::View viewport;
-
-			entt::entity player_entity;
 		};
 	}
 }

@@ -12,6 +12,8 @@ namespace mfg
 		class system_manager
 		{
 		public:
+			system_manager();
+
 			static input_system* getInputSystem() {
 				if (!inputsys)
 				{
@@ -21,6 +23,7 @@ namespace mfg
 				return inputsys.get();
 			}
 
+			static system_manager* getInstance();
 		private:
 			static std::unique_ptr<input_system> inputsys;
 		};

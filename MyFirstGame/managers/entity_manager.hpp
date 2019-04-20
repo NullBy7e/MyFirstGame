@@ -1,8 +1,10 @@
 #pragma once
 
 #include "../registries//entity_registry.hpp"
+#include "../components/components.hpp"
 
 using namespace mfg::registries;
+using namespace mfg::components;
 
 namespace mfg
 {
@@ -11,16 +13,17 @@ namespace mfg
 		class entity_manager
 		{
 		public:
-			static entity_registry* getEntities() {
-				if (!entities)
-				{
-					entities.reset(new entity_registry);
-				}
+			entity_manager();
 
-				return entities.get();
-			}
-		private:
-			static std::unique_ptr<entity_registry> entities;
+			static entity_registry* getEntities();
+
+			static mfg::components::player getPlayerEntity();
+
+			static entt::entity getPlayer();
+
+			static void setPlayer(unsigned int id);
+
+			static entity_manager* getInstance();
 		};
 	}
 }

@@ -5,3 +5,4 @@
 #include "position.hpp"
 #include "scale.hpp"
 #include "sprite.hpp"
+#include "map.hpp"

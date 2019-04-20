@@ -2,8 +2,10 @@
 
 #include "entt/entt.hpp"
 #include "../events/player_move.hpp"
+#include "../managers/map_manager.hpp"
 
 using namespace mfg::events;
+using namespace mfg::managers;
 
 namespace mfg
 {
@@ -21,6 +23,8 @@ namespace mfg
 
 			void receive(const player_move& e)
 			{
+				auto map = map_manager::getInstance()->getCurrentMap();
+
 				auto move = 0;
 
 				switch (e.key)
@@ -35,7 +39,7 @@ namespace mfg
 					return;
 
 				auto delta = (e.position.x + move) - e.position.x;
-				auto can_move = e.position.x + delta > 0 && e.position.x + delta < (2560 - 64);
+				auto can_move = e.position.x + delta > 0 && e.position.x + delta < ((map->width * map->tile_width) - map->tile_width);
 
 				if (can_move)
 				{

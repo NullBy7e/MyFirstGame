@@ -61,9 +61,17 @@ public:
 	int height;
 	int tile_width;
 	int tile_height;
+	int pixel_width;
+	int pixel_height;
 
 	std::vector<TmxTileset> tilesets;
 
 	std::vector<TmxTileLayer> tile_layers;
 	std::vector<TmxObjectLayer> object_layers;
+
+	/* array that maps tile number to sprite (contains all sprites from the tileset and the number that
+	 * Tiled would normally assign to it */
+	std::map<int, sf::Sprite> sprites;
+
+	bool player_spawned;
 };

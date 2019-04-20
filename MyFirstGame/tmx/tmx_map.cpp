@@ -33,8 +33,12 @@ TmxMap::TmxMap(std::map<std::string, std::string> map_properties, std::vector<Tm
 
 	this->width = cStrToInt(map_properties["width"].c_str());
 	this->height = cStrToInt(map_properties["height"].c_str());
+
 	this->tile_width = cStrToInt(map_properties["tilewidth"].c_str());
 	this->tile_height = cStrToInt(map_properties["tileheight"].c_str());
+
+	this->pixel_width = this->width * this->tile_width;
+	this->pixel_height = this->height * this->tile_height;
 
 	this->tilesets = map_tilesets;
 	this->tile_layers = map_tile_layers;
