@@ -55,6 +55,9 @@
     <Filter Include="Source Files\components">
       <UniqueIdentifier>{9bd2b91a-17f6-4663-9a8a-56f719afc26d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\caching">
+      <UniqueIdentifier>{6cd55f6f-1e0d-44f0-9339-82acd6dae9a9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="tmx\tmx_layer.hpp">
@@ -219,6 +222,15 @@
       <Filter>Source Files\components</Filter>
     </ClCompile>
     <ClCompile Include="components\idle_animation.cpp">
+      <Filter>Source Files\components</Filter>
+    </ClCompile>
+    <ClCompile Include="caching\texture_loader.cpp">
+      <Filter>Source Files\caching</Filter>
+    </ClCompile>
+    <ClCompile Include="components\map.cpp">
+      <Filter>Source Files\components</Filter>
+    </ClCompile>
+    <ClCompile Include="components\sprite.cpp">
       <Filter>Source Files\components</Filter>
     </ClCompile>
   </ItemGroup>

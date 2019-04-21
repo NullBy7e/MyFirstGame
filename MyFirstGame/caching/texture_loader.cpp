@@ -22,17 +22,18 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#pragma once
+#include "texture_loader.hpp"
 
-#include <SFML/Graphics.hpp>
-
-namespace mfg {
-	namespace components {
-		struct map
+namespace mfg
+{
+	namespace caching
+	{
+		std::shared_ptr<sf::Texture> texture_loader::load(std::string texture_path) const
 		{
-			map(int id);
+			sf::Texture tex;
+			tex.loadFromFile(texture_path);
 
-			int id;
-		};
+			return std::shared_ptr<sf::Texture>(new sf::Texture{ tex });
+		}
 	}
 }

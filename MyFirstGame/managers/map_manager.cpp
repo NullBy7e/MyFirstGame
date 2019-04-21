@@ -114,18 +114,18 @@ namespace mfg {
 			return map;
 		}
 
-		int mfg::managers::map_manager::addMap(TmxMap map)
+		int map_manager::addMap(TmxMap map)
 		{
 			maps.push_back(std::make_unique<TmxMap>(map));
 			return maps.size() - 1;
 		}
 
-		TmxMap* mfg::managers::map_manager::getMap(int id)
+		TmxMap* map_manager::getMap(int id)
 		{
 			return maps[id].get();
 		}
 
-		TmxMap* mfg::managers::map_manager::getCurrentMap()
+		TmxMap* map_manager::getCurrentMap()
 		{
 			return currentMap.get();
 		}

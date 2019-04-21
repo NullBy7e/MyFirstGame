@@ -30,9 +30,7 @@ namespace mfg {
 	namespace components {
 		struct sprite : public sf::Sprite
 		{
-			sprite(sf::Sprite sprite) : sf::Sprite(sprite)
-			{
-			}
+			sprite(sf::Sprite sprite);
 		};
 	}
 }

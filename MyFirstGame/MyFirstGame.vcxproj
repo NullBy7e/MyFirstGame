@@ -53,7 +53,10 @@
     <ClInclude Include="window.hpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="caching\texture_loader.cpp" />
     <ClCompile Include="components\idle_animation.cpp" />
+    <ClCompile Include="components\map.cpp" />
+    <ClCompile Include="components\sprite.cpp" />
     <ClCompile Include="components\walk_animation.cpp" />
     <ClCompile Include="external\tinyxml2\tinyxml2.cc" />
     <ClCompile Include="game.cpp" />

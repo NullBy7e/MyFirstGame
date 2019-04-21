@@ -22,17 +22,14 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#pragma once
+#include "sprite.hpp"
 
-#include <SFML/Graphics.hpp>
-
-namespace mfg {
-	namespace components {
-		struct map
+namespace mfg
+{
+	namespace components
+	{
+		sprite::sprite(sf::Sprite sprite) : sf::Sprite(sprite)
 		{
-			map(int id);
-
-			int id;
-		};
+		}
 	}
 }

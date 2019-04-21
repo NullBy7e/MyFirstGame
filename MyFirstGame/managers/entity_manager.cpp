@@ -39,7 +39,7 @@ namespace mfg
 			entities.get<T>(this->getPlayer());
 		}
 
-		mfg::components::player entity_manager::getPlayerEntity()
+		player entity_manager::getPlayerEntity()
 		{
 			auto& entities = getEntities();
 			return entities.get<player>(player_id);

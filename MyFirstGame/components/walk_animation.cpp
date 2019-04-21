@@ -24,10 +24,16 @@ SOFTWARE.
 
 #include "walk_animation.hpp"
 
-mfg::components::walk_animation::walk_animation(entt::entity entity, std::vector<entt::resource_handle<sf::Texture>> anim_textures)
+namespace mfg
 {
-	for (auto texture : anim_textures)
+	namespace components
 	{
-		animation_sprites.push_back(sf::Sprite(texture));
+		walk_animation::walk_animation(entt::entity entity, std::vector<entt::resource_handle<sf::Texture>> anim_textures)
+		{
+			for (auto texture : anim_textures)
+			{
+				animation_sprites.push_back(sf::Sprite(texture));
+			}
+		}
 	}
 }
