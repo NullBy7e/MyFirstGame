@@ -42,15 +42,8 @@ public:
 		std::vector<TmxTileLayer> map_tile_layers,
 		std::vector<TmxObjectLayer> map_object_layers
 	);
-	~TmxMap();
 
-	int cStrToInt(const char * x)
-	{
-		int y;
-		std::stringstream(x) >> y;
-
-		return y;
-	}
+	int cStrToInt(const char * x);
 
 	std::string version;
 	std::string tiled_version;

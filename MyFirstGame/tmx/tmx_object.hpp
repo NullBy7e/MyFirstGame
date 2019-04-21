@@ -44,8 +44,6 @@ public:
 		const bool flipped_vertically,
 		const bool flipped_diagonally);
 
-	~TmxObject();
-
 	int id;
 	std::string name;
 	std::string type;

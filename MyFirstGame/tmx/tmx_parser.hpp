@@ -49,30 +49,14 @@ class TmxParser
 {
 public:
 	TmxParser();
-	~TmxParser();
 
-	TmxMap parse(const std::string&);
+	TmxMap* parse(const std::string&);
 
-	int cStrToInt(const char * x)
-	{
-		int y;
-		std::stringstream(x) >> y;
+	int cStrToInt(const char * x);
 
-		return y;
-	}
+	unsigned int cStrToUInt(const char * x);
 
-	unsigned int cStrToUInt(const char * x)
-	{
-		unsigned int y;
-		std::stringstream(x) >> y;
-
-		return y;
-	}
-
-	float cStrToFloat(const char * x)
-	{
-		return strtof(x, 0);
-	}
+	float cStrToFloat(const char * x);
 
 private:
 	const std::string target_tiled_version = "1.2.3";

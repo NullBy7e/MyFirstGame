@@ -27,7 +27,3 @@ SOFTWARE.
 TmxObjectLayer::TmxObjectLayer(const int id, const std::string name) : TmxLayer(id, name, -1, -1)
 {
 }
-
-TmxObjectLayer::~TmxObjectLayer()
-{
-}

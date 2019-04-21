@@ -24,16 +24,26 @@ SOFTWARE.
 
 #include "tmx_tile_layer.hpp"
 
-TmxTileLayer::TmxTileLayer(const int id, const std::string name, const int width, const int height, const std::vector<TmxTile> tiles) : TmxLayer(id, name, width, height)
+TmxTileLayer::TmxTileLayer(
+	const int id,
+	const std::string name,
+	const int width,
+	const int height,
+	const std::vector<TmxTile> tiles)
+	:
+	tiles(tiles),
+	TmxLayer(id, name, width, height)
 {
-	this->tiles = tiles;
 }
 
-TmxTileLayer::TmxTileLayer(const int id, const std::string name, const int width, const int height, const std::vector<TmxChunk> chunks) : TmxLayer(id, name, width, height)
-{
-	this->chunks = chunks;
-}
-
-TmxTileLayer::~TmxTileLayer()
+TmxTileLayer::TmxTileLayer(
+	const int id,
+	const std::string name,
+	const int width,
+	const int height,
+	const std::vector<TmxChunk> chunks)
+	:
+	chunks(chunks),
+	TmxLayer(id, name, width, height)
 {
 }

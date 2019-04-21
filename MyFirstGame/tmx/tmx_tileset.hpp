@@ -31,8 +31,6 @@ SOFTWARE.
 class TmxTileset
 {
 public:
-	TmxTileset();
-
 	TmxTileset(
 		const int first_gid,
 		const std::string name,
@@ -44,7 +42,6 @@ public:
 		const int image_width,
 		const int image_height
 	);
-	~TmxTileset();
 
 	int first_gid;
 	std::string name;

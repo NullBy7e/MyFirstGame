@@ -114,9 +114,9 @@ namespace mfg {
 			return map;
 		}
 
-		int map_manager::addMap(TmxMap map)
+		int map_manager::addMap(TmxMap* map)
 		{
-			maps.push_back(std::make_unique<TmxMap>(map));
+			maps.push_back(std::unique_ptr<TmxMap>(map));
 			return maps.size() - 1;
 		}
 

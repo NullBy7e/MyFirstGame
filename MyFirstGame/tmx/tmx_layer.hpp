@@ -29,9 +29,7 @@ SOFTWARE.
 class TmxLayer
 {
 public:
-	TmxLayer() {};
-	virtual ~TmxLayer() {};
-
+	TmxLayer();
 	TmxLayer(const int id, const std::string name, const int width, const int height);
 
 	int id;

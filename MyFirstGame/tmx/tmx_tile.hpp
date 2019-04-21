@@ -28,7 +28,6 @@ class TmxTile
 {
 public:
 	TmxTile(int tile_id);
-	~TmxTile();
 
 	int id;
 };

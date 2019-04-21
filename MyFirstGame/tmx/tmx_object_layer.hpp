@@ -34,7 +34,6 @@ class TmxObjectLayer :
 {
 public:
 	TmxObjectLayer(const int id, const std::string name);
-	~TmxObjectLayer();
 
 	std::vector<TmxObject> objects;
 };

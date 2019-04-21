@@ -40,7 +40,7 @@ namespace mfg {
 		public:
 			TmxMap* loadMap(int id, texture_manager* texmgr, entity_manager* entmgr);
 
-			int addMap(TmxMap map);
+			int addMap(TmxMap* map);
 
 			TmxMap* getMap(int id);
 

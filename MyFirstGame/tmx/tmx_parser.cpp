@@ -26,13 +26,7 @@ SOFTWARE.
 
 using namespace tinyxml2;
 
-TmxParser::TmxParser()
-{
-}
-
-TmxParser::~TmxParser()
-{
-}
+TmxParser::TmxParser() {}
 
 std::map<std::string, std::string> TmxParser::getMapElementProperties(const XMLElement& mapElement)
 {
@@ -351,7 +345,7 @@ std::vector<TmxObjectLayer> TmxParser::getMapObjectLayers(const XMLElement & map
 	return layers;
 }
 
-TmxMap TmxParser::parse(const std::string& filename)
+TmxMap* TmxParser::parse(const std::string& filename)
 {
 	XMLDocument doc;
 	doc.LoadFile(filename.c_str());
@@ -360,7 +354,7 @@ TmxMap TmxParser::parse(const std::string& filename)
 	_chdir(std::filesystem::absolute(filename).remove_filename().string().c_str());
 
 	/* YAY! */
-	TmxMap map(
+	auto map = new TmxMap(
 		getMapElementProperties(root_element),
 		getMapTilesets(root_element),
 		getMapTileLayers(root_element),
@@ -368,4 +362,25 @@ TmxMap TmxParser::parse(const std::string& filename)
 	);
 
 	return map;
+}
+
+int TmxParser::cStrToInt(const char * x)
+{
+	int y;
+	std::stringstream(x) >> y;
+
+	return y;
+}
+
+unsigned int TmxParser::cStrToUInt(const char * x)
+{
+	unsigned int y;
+	std::stringstream(x) >> y;
+
+	return y;
+}
+
+float TmxParser::cStrToFloat(const char * x)
+{
+	return strtof(x, 0);
 }
