@@ -34,9 +34,6 @@
     <Filter Include="Header Files\components">
       <UniqueIdentifier>{6df20adf-4c99-4317-b8d1-02aff75cb132}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\utils">
-      <UniqueIdentifier>{0895ea03-58f9-4bbb-bb10-5b1b466a551c}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files\registries">
       <UniqueIdentifier>{582b4566-8d4a-4cc3-8905-7fe5f1c83c76}</UniqueIdentifier>
     </Filter>
@@ -55,8 +52,8 @@
     <Filter Include="Source Files\managers">
       <UniqueIdentifier>{4312c893-c7e1-4b7f-9bf5-01a4a2fc881e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\events">
-      <UniqueIdentifier>{42b6043c-bdc0-41ff-ab97-37ab92fd1f1f}</UniqueIdentifier>
+    <Filter Include="Source Files\components">
+      <UniqueIdentifier>{9bd2b91a-17f6-4663-9a8a-56f719afc26d}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -108,9 +105,6 @@
     <ClInclude Include="components\enemy.hpp">
       <Filter>Header Files\components</Filter>
     </ClInclude>
-    <ClInclude Include="utils\types.hpp">
-      <Filter>Header Files\utils</Filter>
-    </ClInclude>
     <ClInclude Include="registries\registry.hpp">
       <Filter>Header Files\registries</Filter>
     </ClInclude>
@@ -135,20 +129,11 @@
     <ClInclude Include="components\sprite.hpp">
       <Filter>Header Files\components</Filter>
     </ClInclude>
-    <ClInclude Include="MFG.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="managers\system_manager.hpp">
       <Filter>Header Files\managers</Filter>
     </ClInclude>
     <ClInclude Include="managers\entity_manager.hpp">
       <Filter>Header Files\managers</Filter>
-    </ClInclude>
-    <ClInclude Include="systems\input_system.hpp">
-      <Filter>Header Files\systems</Filter>
-    </ClInclude>
-    <ClInclude Include="events\player_move.hpp">
-      <Filter>Header Files\events</Filter>
     </ClInclude>
     <ClInclude Include="components\map.hpp">
       <Filter>Header Files\components</Filter>
@@ -158,6 +143,15 @@
     </ClInclude>
     <ClInclude Include="managers\texture_manager.hpp">
       <Filter>Header Files\managers</Filter>
+    </ClInclude>
+    <ClInclude Include="systems\animation_system.hpp">
+      <Filter>Header Files\systems</Filter>
+    </ClInclude>
+    <ClInclude Include="components\idle_animation.hpp">
+      <Filter>Header Files\components</Filter>
+    </ClInclude>
+    <ClInclude Include="components\walk_animation.hpp">
+      <Filter>Header Files\components</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -206,12 +200,6 @@
     <ClCompile Include="game.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="MFG.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="systems\input_system.cpp">
-      <Filter>Source Files\systems</Filter>
-    </ClCompile>
     <ClCompile Include="managers\system_manager.cpp">
       <Filter>Source Files\managers</Filter>
     </ClCompile>
@@ -223,6 +211,15 @@
     </ClCompile>
     <ClCompile Include="managers\texture_manager.cpp">
       <Filter>Source Files\managers</Filter>
+    </ClCompile>
+    <ClCompile Include="systems\animation_system.cpp">
+      <Filter>Source Files\systems</Filter>
+    </ClCompile>
+    <ClCompile Include="components\walk_animation.cpp">
+      <Filter>Source Files\components</Filter>
+    </ClCompile>
+    <ClCompile Include="components\idle_animation.cpp">
+      <Filter>Source Files\components</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

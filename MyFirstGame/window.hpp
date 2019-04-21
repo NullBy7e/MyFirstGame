@@ -26,18 +26,14 @@ SOFTWARE.
 
 #include <SFML/Graphics.hpp>
 
-#include "MFG.hpp"
+#include "managers/map_manager.hpp"
+#include "managers/entity_manager.hpp"
 
-#include "registries/registry.hpp"
-#include "components/components.hpp"
-
-#include "managers/system_manager.hpp"
-#include "events/player_move.hpp"
+#include "components/position.hpp"
 
 using namespace mfg::components;
 using namespace mfg::registries;
 using namespace mfg::managers;
-using namespace mfg::events;
 
 namespace mfg
 {
@@ -46,7 +42,7 @@ namespace mfg
 		class window : public sf::RenderWindow
 		{
 		public:
-			void handleInput(entt::entity player);
+			void handleInput(map_manager* mapmgr, entity_manager* entmgr);
 		};
 	}
 }

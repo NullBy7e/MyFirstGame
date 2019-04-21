@@ -1,3 +1,27 @@
+/*
+MIT License
+
+Copyright (c) 2019 Youri de Mooij
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+*/
+
 #include "map_manager.hpp"
 #include "texture_manager.hpp"
 #include "entity_manager.hpp"
@@ -5,19 +29,9 @@
 namespace mfg {
 	namespace managers
 	{
-		static map_manager* instance;
-
-		map_manager::map_manager()
-		{
-			instance = this;
-		}
-
-		TmxMap* map_manager::loadMap(int id)
+		TmxMap* map_manager::loadMap(int id, texture_manager* texmgr, entity_manager* entmgr)
 		{
 			auto map = getMap(id);
-
-			auto texmgr = texture_manager::getInstance();
-			auto entmgr = entity_manager::getInstance();
 
 			auto player = entmgr->getPlayer();
 
@@ -56,24 +70,23 @@ namespace mfg {
 			{
 				for (auto& object : layer.objects)
 				{
-					auto new_sprite = sf::Sprite(map->sprites[object.gid]);
-
-					/* load player texture into new_sprite here to prevent scale/sizing conflicts */
-					if (object.name == "player_spawn" && object.type == "player")
-					{
-						auto tex = texmgr->get("player", "../../textures/sprites/player/knight_f_run_anim_f1.png");
-						new_sprite.setTexture(tex.get(), true);
-					}
-
-					sf::Vector2f targetSize(object.width, object.height);
-
-					auto bounds = new_sprite.getLocalBounds();
-
-					float x_scale = targetSize.x / bounds.width;
-					float y_scale = targetSize.y / bounds.height;
-
 					auto x_pos = object.x;
 					auto y_pos = object.y - object.height;
+
+					auto& entities = entmgr->getEntities();
+
+					if (object.name == "player_spawn" && object.type == "player")
+					{
+						entities.assign<position>(player, x_pos, y_pos);
+						entities.assign<mfg::components::map>(player, mfg::components::map{ id });
+
+						map->player_spawned = true;
+						continue;
+					}
+
+					auto new_sprite = sf::Sprite(map->sprites[object.gid]);
+					sf::Vector2f targetSize(object.width, object.height);
+					auto bounds = new_sprite.getLocalBounds();
 
 					/* check flips */
 					if (object.flipped_horizontally)
@@ -81,25 +94,19 @@ namespace mfg {
 						x_pos = object.x + object.width;
 					}
 
-					auto entities = entmgr->getEntities();
-					auto entity = entities->create();
+					auto entity = entities.create();
 
-					if (object.name == "player_spawn" && object.type == "player")
-					{
-						entity = player;
-						entities->assign<mfg::components::map>(entity, mfg::components::map{ id });
+					float x_scale = targetSize.x / bounds.width;
+					float y_scale = targetSize.y / bounds.height;
 
-						map->player_spawned = true;
-					}
+					entities.assign<position>(entity, x_pos, y_pos);
+					entities.assign<scale>(entity, x_scale, y_scale);
+					entities.assign<sprite>(entity, new_sprite);
 
 					if (object.type == "enemy")
 					{
-						entities->assign<enemy>(entity);
+						entities.assign<enemy>(entity);
 					}
-
-					entities->assign<position>(entity, x_pos, y_pos);
-					entities->assign<scale>(entity, x_scale, y_scale);
-					entities->assign<sprite>(entity, new_sprite);
 				}
 			}
 
@@ -121,11 +128,6 @@ namespace mfg {
 		TmxMap* mfg::managers::map_manager::getCurrentMap()
 		{
 			return currentMap.get();
-		}
-
-		map_manager * map_manager::getInstance()
-		{
-			return instance;
 		}
 	}
 }

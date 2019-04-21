@@ -24,22 +24,24 @@ SOFTWARE.
 
 #pragma once
 
-#include "MFG.hpp"
-
 #include "window.hpp"
 #include "tmx/tmx_parser.hpp"
 
 #include "registries/registry.hpp"
-#include "utils/types.hpp"
 
 #include "caching/cache.hpp"
 #include "components/components.hpp"
+
+#include "managers/system_manager.hpp"
+#include "managers/entity_manager.hpp"
+#include "managers/texture_manager.hpp"
+#include "managers/map_manager.hpp"
 
 using namespace mfg;
 using namespace mfg::registries;
 using namespace mfg::caching;
 using namespace mfg::managers;
-using namespace mfg::events;
+using namespace mfg::components;
 
 namespace mfg {
 	namespace core
@@ -67,6 +69,11 @@ namespace mfg {
 			sf::Vector2f viewport_dimensions;
 			int viewport_tile_width;
 			int viewport_tile_height;
+
+			std::unique_ptr<system_manager> sysmgr;
+			std::unique_ptr<entity_manager> entmgr;
+			std::unique_ptr<texture_manager> texmgr;
+			std::unique_ptr<map_manager> mapmgr;
 		};
 	}
 }

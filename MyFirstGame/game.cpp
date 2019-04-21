@@ -24,17 +24,16 @@ SOFTWARE.
 
 #include "game.hpp"
 
-using namespace mfg::components;
-using namespace mfg::caching;
-using namespace mfg::managers;
-
 namespace mfg
 {
 	namespace core
 	{
 		game::game()
 		{
-			MFG::init();
+			sysmgr.reset(new system_manager);
+			entmgr.reset(new entity_manager);
+			texmgr.reset(new texture_manager);
+			mapmgr.reset(new map_manager);
 
 			window.reset(new mfg::core::window());
 			window->create(sf::VideoMode(1280, 1024), "MyFirstGame", sf::Style::Titlebar | sf::Style::Close);
@@ -44,10 +43,8 @@ namespace mfg
 
 			TmxParser parser;
 
-			auto mapmgr = MFG::getMapManager();
 			auto mapId = mapmgr->addMap(parser.parse("maps/level1/level1.tmx"));
-
-			auto map = mapmgr->loadMap(mapId);
+			auto map = mapmgr->loadMap(mapId, texmgr.get(), entmgr.get());
 
 			/* screen dimensions (window size) */
 			screen_dimensions = sf::Vector2i(1280, 1024);
@@ -63,10 +60,8 @@ namespace mfg
 
 		void game::updateViewport()
 		{
-			auto map = MFG::getMapManager()->getCurrentMap();
-
-			auto entmgr = MFG::getEntityManager();
-			auto player_position = entmgr->getEntities()->get<position>(entmgr->getPlayer());
+			auto map = mapmgr->getCurrentMap();
+			auto player_position = entmgr->getEntities().get<position>(entmgr->getPlayer());
 
 			auto viewport_pos_x = player_position.x;
 			auto viewport_pos_y = player_position.y;
@@ -91,7 +86,7 @@ namespace mfg
 
 		void game::drawTiles()
 		{
-			auto map = MFG::getMapManager()->getCurrentMap();
+			auto map = mapmgr->getCurrentMap();
 
 			/* draw every tile that's inside the viewport */
 			for (auto layer : map->tile_layers)
@@ -123,7 +118,7 @@ namespace mfg
 
 		void game::drawEntities()
 		{
-			MFG::getEntityManager()->getEntities()->view<position, scale, sprite>().each([this](auto entity, auto &position, auto& scale, auto &sprite) {
+			entmgr->getEntities().view<position, scale, sprite>().each([this](auto entity, auto &position, auto& scale, auto &sprite) {
 				sprite.setPosition(position.x, position.y);
 				sprite.setScale(scale.x, scale.y);
 
@@ -133,11 +128,14 @@ namespace mfg
 
 		void game::createPlayer()
 		{
-			auto entmgr = MFG::getEntityManager();
-			auto entities = entmgr->getEntities();
+			auto& entities = entmgr->getEntities();
 
-			auto entity = entities->create();
-			entities->assign<player>(entity);
+			auto entity = entities.create();
+			entities.assign<player>(entity);
+
+			auto tex = texmgr->get("player", "textures/sprites/player/knight_f_run_anim_f1.png");
+			entities.assign<sprite>(entity, sf::Sprite(tex));
+			entities.assign<scale>(entity, scale{ 3.5, 3.5 });
 
 			entmgr->setPlayer(entity);
 		}
@@ -156,7 +154,7 @@ namespace mfg
 		{
 			while (window->isOpen())
 			{
-				window->handleInput(MFG::getEntityManager()->getPlayer());
+				window->handleInput(mapmgr.get(), entmgr.get());
 
 				updateViewport();
 				draw();

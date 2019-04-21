@@ -28,14 +28,16 @@ namespace mfg
 {
 	namespace core
 	{
-		void window::handleInput(entt::entity player)
+		void window::handleInput(map_manager* mapmgr, entity_manager* entmgr)
 		{
 			sf::Event event;
 
-			auto input = MFG::getSystemManager()->getInputSystem();
-			auto entities = MFG::getEntityManager()->getEntities();
+			auto map = mapmgr->getCurrentMap();
 
-			auto& player_position = entities->get<position>(player);
+			auto& entities = entmgr->getEntities();
+			auto player = entmgr->getPlayer();
+
+			auto& player_position = entities.get<position>(player);
 
 			while (this->pollEvent(event))
 			{
@@ -50,14 +52,26 @@ namespace mfg
 					case sf::Keyboard::S:
 					case sf::Keyboard::D:
 					{
-						player_move move
-						{
-							event.key.code,
-							player_position
-						};
+						auto move = 0;
 
-						input->dispatcher.enqueue<player_move>(move);
-						input->dispatcher.update<player_move>();
+						switch (event.key.code)
+						{
+						case sf::Keyboard::W: break;
+						case sf::Keyboard::A: move = -25; break;
+						case sf::Keyboard::S: break;
+						case sf::Keyboard::D: move = 25;  break;
+						}
+
+						if (move == 0)
+							return;
+
+						auto delta = (player_position.x + move) - player_position.x;
+						auto can_move = player_position.x + delta > 0 && player_position.x + delta < ((map->width * map->tile_width) - map->tile_width);
+
+						if (can_move)
+						{
+							player_position.x += move;
+						}
 					}
 					default: break;
 					}
