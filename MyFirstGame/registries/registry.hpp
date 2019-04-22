@@ -28,6 +28,6 @@ SOFTWARE.
 
 namespace mfg {
 	namespace registries {
-		using entity = entity_registry::entity_type;
+		using entity = EntityRegistry::entity_type;
 	}
 }

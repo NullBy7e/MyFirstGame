@@ -35,10 +35,10 @@ using namespace mfg::components;
 
 namespace mfg {
 	namespace managers {
-		class map_manager
+		class MapManager
 		{
 		public:
-			TmxMap* loadMap(int id, texture_manager* texmgr, entity_manager* entmgr);
+			TmxMap* loadMap(int id, TextureManager* texmgr, EntityManager* entmgr);
 
 			int addMap(TmxMap* map);
 

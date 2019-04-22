@@ -32,10 +32,10 @@ SOFTWARE.
 
 namespace mfg {
 	namespace components {
-		class run_animation : public entity_animation
+		class RunAnimationComponent : public EntityAnimationComponent
 		{
 		public:
-			run_animation(sf::Sprite* sprite, thor::FrameAnimation frame);
+			RunAnimationComponent(sf::Sprite* sprite, thor::FrameAnimation frame);
 
 			std::string getName() override;
 

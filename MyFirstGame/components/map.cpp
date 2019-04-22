@@ -28,7 +28,7 @@ namespace mfg
 {
 	namespace components
 	{
-		map::map(int id) : id(id)
+		MapComponent::MapComponent(int id) : id(id)
 		{
 		}
 	}

@@ -29,7 +29,7 @@ SOFTWARE.
 namespace mfg {
 	namespace managers
 	{
-		TmxMap* map_manager::loadMap(int id, texture_manager* texmgr, entity_manager* entmgr)
+		TmxMap* MapManager::loadMap(int id, TextureManager* texmgr, EntityManager* entmgr)
 		{
 			auto map = getMap(id);
 
@@ -74,7 +74,7 @@ namespace mfg {
 
 					if (object.name == "player_spawn" && object.type == "player")
 					{
-						auto& player_entity = entities.get<mfg::components::entity>(entmgr->getPlayer());
+						auto& player_entity = entities.get<mfg::components::EntityComponent>(entmgr->getPlayer());
 						player_entity.x = object.x;
 						player_entity.y = object.y;
 
@@ -88,18 +88,18 @@ namespace mfg {
 			return map;
 		}
 
-		int map_manager::addMap(TmxMap* map)
+		int MapManager::addMap(TmxMap* map)
 		{
 			maps.push_back(std::unique_ptr<TmxMap>(map));
 			return maps.size() - 1;
 		}
 
-		TmxMap* map_manager::getMap(int id)
+		TmxMap* MapManager::getMap(int id)
 		{
 			return maps[id].get();
 		}
 
-		TmxMap* map_manager::getCurrentMap()
+		TmxMap* MapManager::getCurrentMap()
 		{
 			return currentMap.get();
 		}

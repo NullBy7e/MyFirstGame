@@ -28,7 +28,7 @@ namespace mfg
 {
 	namespace managers
 	{
-		entt::resource_handle<sf::Texture> texture_manager::get(const std::string texture_name, const std::string texture_path)
+		entt::resource_handle<sf::Texture> TextureManager::get(const std::string texture_name, const std::string texture_path)
 		{
 			return textures.load<texture_loader>(entt::hashed_string::to_value(texture_name.c_str()), texture_path);
 		}

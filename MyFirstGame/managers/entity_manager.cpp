@@ -28,29 +28,29 @@ namespace mfg
 {
 	namespace managers
 	{
-		entity_registry& entity_manager::getEntities()
+		EntityRegistry& EntityManager::getEntities()
 		{
 			return entities;
 		}
 
 		template <class T>
-		T entity_manager::getPlayerComponent()
+		T EntityManager::getPlayerComponent()
 		{
 			entities.get<T>(this->getPlayer());
 		}
 
-		entity entity_manager::getPlayerEntity()
+		EntityComponent EntityManager::getPlayerEntity()
 		{
 			auto& entities = getEntities();
-			return entities.get<entity>(player_id);
+			return entities.get<EntityComponent>(player_id);
 		}
 
-		entt::entity entity_manager::getPlayer()
+		entt::entity EntityManager::getPlayer()
 		{
 			return player_id;
 		}
 
-		void entity_manager::setPlayer(unsigned int id)
+		void EntityManager::setPlayer(unsigned int id)
 		{
 			player_id = id;
 		}

@@ -28,9 +28,9 @@ SOFTWARE.
 
 namespace mfg {
 	namespace components {
-		struct map
+		struct MapComponent
 		{
-			map(int id);
+			MapComponent(int id);
 
 			int id;
 		};

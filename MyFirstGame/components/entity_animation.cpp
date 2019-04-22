@@ -28,15 +28,15 @@ SOFTWARE.
 
 namespace mfg {
 	namespace components {
-		entity_animation::entity_animation(sf::Sprite* sprite, thor::FrameAnimation frame) : sprite(sprite), frame(frame)
+		EntityAnimationComponent::EntityAnimationComponent(sf::Sprite* sprite, thor::FrameAnimation frame) : sprite(sprite), frame(frame)
 		{
 		}
 
-		entity_animation::~entity_animation()
+		EntityAnimationComponent::~EntityAnimationComponent()
 		{
 		}
 
-		std::string entity_animation::getName()
+		std::string EntityAnimationComponent::getName()
 		{
 			return name;
 		}

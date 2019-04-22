@@ -34,12 +34,12 @@ namespace mfg
 {
 	namespace managers
 	{
-		class entity_manager
+		class EntityManager
 		{
 		public:
-			entity_registry& getEntities();
+			EntityRegistry& getEntities();
 
-			mfg::components::entity getPlayerEntity();
+			mfg::components::EntityComponent getPlayerEntity();
 
 			entt::entity getPlayer();
 
@@ -48,7 +48,7 @@ namespace mfg
 			template<class T>
 			T getPlayerComponent();
 		private:
-			entity_registry entities;
+			EntityRegistry entities;
 			entt::entity player_id = -1;
 		};
 	}

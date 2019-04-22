@@ -28,7 +28,7 @@ namespace mfg
 {
 	namespace core
 	{
-		void window::handleInput(system_manager* sysmgr, map_manager* mapmgr, entity_manager* entmgr, sf::Time dt)
+		void Window::handleInput(SystemManager* sysmgr, MapManager* mapmgr, EntityManager* entmgr, sf::Time dt)
 		{
 			sf::Event event;
 
@@ -36,7 +36,7 @@ namespace mfg
 			auto& entities = entmgr->getEntities();
 
 			auto player_entity = entmgr->getPlayer();
-			auto& player = entities.get<mfg::components::entity>(player_entity);
+			auto& player = entities.get<mfg::components::EntityComponent>(player_entity);
 
 			auto animsys = sysmgr->getAnimationSystem();
 
@@ -93,9 +93,9 @@ namespace mfg
 						{
 							player.x += new_pos;
 
-							if (entmgr->getEntities().has<active_animation>(player_entity))
+							if (entmgr->getEntities().has<ActiveAnimationComponent>(player_entity))
 							{
-								auto& anim = entmgr->getEntities().get<active_animation>(player_entity);
+								auto& anim = entmgr->getEntities().get<ActiveAnimationComponent>(player_entity);
 								if (anim.name != "run_animation")
 								{
 									animsys->stopAnimation(player_entity);
@@ -103,7 +103,7 @@ namespace mfg
 							}
 
 							/* play the run_animation */
-							animsys->playAnimation<run_animation>(player_entity);
+							animsys->playAnimation<RunAnimationComponent>(player_entity);
 
 							clock.restart();
 						}
@@ -123,7 +123,7 @@ namespace mfg
 			elapsed_time = clock.getElapsedTime();
 			if (elapsed_time.asSeconds() >= 2)
 			{
-				animsys->playAnimation<idle_animation>(player_entity, LOOP_ANIMATION::YES);
+				animsys->playAnimation<IdleAnimationComponent>(player_entity, LOOP_ANIMATION::YES);
 				elapsed_time = elapsed_time.Zero;
 			}
 
@@ -131,7 +131,7 @@ namespace mfg
 			/* to ensure that it's facing the correct angle */
 			if (player.facing_left || player.facing_right)
 			{
-				auto& anim = entmgr->getEntities().get<active_animation>(player_entity);
+				auto& anim = entmgr->getEntities().get<ActiveAnimationComponent>(player_entity);
 
 				if (player.facing_left)
 					anim.animation->sprite->setScale(-1, 1);

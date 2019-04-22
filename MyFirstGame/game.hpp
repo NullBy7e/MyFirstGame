@@ -48,10 +48,10 @@ using namespace mfg::components;
 namespace mfg {
 	namespace core
 	{
-		class game
+		class Game
 		{
 		public:
-			game();
+			Game();
 
 			void draw();
 			void drawTiles();
@@ -63,7 +63,7 @@ namespace mfg {
 			void loop();
 
 		private:
-			std::unique_ptr<window> window;
+			std::unique_ptr<Window> window;
 
 			sf::Vector2i screen_dimensions;
 
@@ -72,10 +72,10 @@ namespace mfg {
 			int viewport_tile_width;
 			int viewport_tile_height;
 
-			std::unique_ptr<system_manager> sysmgr;
-			std::unique_ptr<entity_manager> entmgr;
-			std::unique_ptr<texture_manager> texmgr;
-			std::unique_ptr<map_manager> mapmgr;
+			std::unique_ptr<SystemManager> sysmgr;
+			std::unique_ptr<EntityManager> entmgr;
+			std::unique_ptr<TextureManager> texmgr;
+			std::unique_ptr<MapManager> mapmgr;
 		};
 	}
 }

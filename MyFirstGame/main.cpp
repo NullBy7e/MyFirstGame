@@ -28,7 +28,7 @@ using namespace mfg::core;
 
 int main()
 {
-	game game;
+	Game game;
 	game.loop();
 
 	return 0;

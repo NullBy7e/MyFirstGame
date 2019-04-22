@@ -44,22 +44,22 @@ namespace mfg
 {
 	namespace systems
 	{
-		class animation_system
+		class AnimationSystem
 		{
 		public:
-			animation_system(entity_manager* entmgr);
+			AnimationSystem(EntityManager* entmgr);
 			thor::Animator<sf::Sprite, std::string>* getAnimator(entt::entity id);
 
 			void animate(sf::Time dt);
 			void stopAnimation(entt::entity entity);
 
-			entity_manager* entmgr;
+			EntityManager* entmgr;
 
 			template<typename T>
-			typename std::enable_if<std::is_base_of<entity_animation, T>::value, void>::type playAnimation(entt::entity, LOOP_ANIMATION = LOOP_ANIMATION::NO);
+			typename std::enable_if<std::is_base_of<EntityAnimationComponent, T>::value, void>::type playAnimation(entt::entity, LOOP_ANIMATION = LOOP_ANIMATION::NO);
 
 			template<typename T>
-			typename std::enable_if<std::is_base_of<entity_animation, T>::value, void>::type addAnimation(entt::entity, T, sf::Time);
+			typename std::enable_if<std::is_base_of<EntityAnimationComponent, T>::value, void>::type addAnimation(entt::entity, T, sf::Time);
 
 		private:
 			std::map<entt::entity, std::unique_ptr<thor::Animator<sf::Sprite, std::string>>> animators;
@@ -67,7 +67,7 @@ namespace mfg
 		};
 
 		template<typename T>
-		inline typename std::enable_if<std::is_base_of<entity_animation, T>::value, void>::type animation_system::playAnimation(entt::entity entity, LOOP_ANIMATION loop)
+		inline typename std::enable_if<std::is_base_of<EntityAnimationComponent, T>::value, void>::type AnimationSystem::playAnimation(entt::entity entity, LOOP_ANIMATION loop)
 		{
 			auto animator = getAnimator(entity);
 
@@ -77,7 +77,7 @@ namespace mfg
 			T& animation_component = entmgr->getEntities().get<T>(entity);
 			DEBUG_MSG("animation_system::playAnimation: " << animation_component.name << ": sprite->" << animation_component.sprite);
 
-			entmgr->getEntities().assign_or_replace<active_animation>(entity, active_animation{ animation_component });
+			entmgr->getEntities().assign_or_replace<ActiveAnimationComponent>(entity, ActiveAnimationComponent{ animation_component });
 
 			animator->playAnimation(animation_component.name, (bool)loop);
 
@@ -85,7 +85,7 @@ namespace mfg
 		}
 
 		template<typename T>
-		inline typename std::enable_if<std::is_base_of<entity_animation, T>::value, void>::type animation_system::addAnimation(entt::entity entity, T animation_component, sf::Time duration)
+		inline typename std::enable_if<std::is_base_of<EntityAnimationComponent, T>::value, void>::type AnimationSystem::addAnimation(entt::entity entity, T animation_component, sf::Time duration)
 		{
 			auto animator = getAnimator(entity);
 

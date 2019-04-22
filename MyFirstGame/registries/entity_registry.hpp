@@ -30,7 +30,7 @@ SOFTWARE.
 
 namespace mfg {
 	namespace registries {
-		class entity_registry : public entt::registry
+		class EntityRegistry : public entt::registry
 		{
 		};
 	}

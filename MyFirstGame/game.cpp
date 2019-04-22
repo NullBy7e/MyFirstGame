@@ -28,14 +28,14 @@ namespace mfg
 {
 	namespace core
 	{
-		game::game()
+		Game::Game()
 		{
-			entmgr.reset(new entity_manager);
-			sysmgr.reset(new system_manager(entmgr.get()));
-			texmgr.reset(new texture_manager);
-			mapmgr.reset(new map_manager);
+			entmgr.reset(new EntityManager);
+			sysmgr.reset(new SystemManager(entmgr.get()));
+			texmgr.reset(new TextureManager);
+			mapmgr.reset(new MapManager);
 
-			window.reset(new mfg::core::window());
+			window.reset(new mfg::core::Window());
 			window->create(sf::VideoMode(1280, 1024), "MyFirstGame", sf::Style::Titlebar | sf::Style::Close);
 			window->setFramerateLimit(60);
 
@@ -57,11 +57,11 @@ namespace mfg
 			viewport.setCenter(viewport.getCenter().x + map->tile_width * 2.2, viewport.getCenter().y);
 		}
 
-		void game::updateViewport()
+		void Game::updateViewport()
 		{
 			auto map = mapmgr->getCurrentMap();
 
-			auto& player = entmgr->getEntities().get<mfg::components::entity>(entmgr->getPlayer());
+			auto& player = entmgr->getEntities().get<mfg::components::EntityComponent>(entmgr->getPlayer());
 			auto player_position = sf::Vector2f(player.x, player.y);
 
 			auto viewport_pos_x = player_position.x;
@@ -85,7 +85,7 @@ namespace mfg
 			window->setView(viewport);
 		}
 
-		void game::drawTiles()
+		void Game::drawTiles()
 		{
 			auto map = mapmgr->getCurrentMap();
 
@@ -117,16 +117,16 @@ namespace mfg
 			}
 		}
 
-		void game::drawEntities()
+		void Game::drawEntities()
 		{
 			entmgr->getEntities().each([this](auto entity)
 			{
-				auto& entity_component = entmgr->getEntities().get<mfg::components::entity>(entity);
+				auto& entity_component = entmgr->getEntities().get<mfg::components::EntityComponent>(entity);
 				auto& sprite = entity_component.sprite;
 
-				if (entmgr->getEntities().has<active_animation>(entity))
+				if (entmgr->getEntities().has<ActiveAnimationComponent>(entity))
 				{
-					active_animation& anim = entmgr->getEntities().get<active_animation>(entity);
+					ActiveAnimationComponent& anim = entmgr->getEntities().get<ActiveAnimationComponent>(entity);
 					sprite = *anim.animation->sprite;
 				}
 				else
@@ -140,7 +140,7 @@ namespace mfg
 			});
 		}
 
-		void game::createPlayer()
+		void Game::createPlayer()
 		{
 			auto& entities = entmgr->getEntities();
 
@@ -149,7 +149,7 @@ namespace mfg
 			auto tex = texmgr->get("player", "textures/sprites/player/animation/knight_m_idle_anim_f0.png");
 			auto player_sprite = sf::Sprite(tex);
 
-			entities.assign<mfg::components::entity>(entity, 0, 0, player_sprite.getLocalBounds().width, player_sprite.getLocalBounds().height, 1, 1, 0, false, player_sprite);
+			entities.assign<mfg::components::EntityComponent>(entity, 0, 0, player_sprite.getLocalBounds().width, player_sprite.getLocalBounds().height, 1, 1, 0, false, player_sprite);
 
 			/* the idle animation data */
 			thor::FrameAnimation idle_frame_data;
@@ -162,7 +162,7 @@ namespace mfg
 			auto player_anim_texture = texmgr->get("idle", "textures/sprites/player/animation/knight_m_idle.png");
 			auto player_anim_sprite = std::make_unique<sf::Sprite>(sf::Sprite(player_anim_texture));
 
-			auto idle = idle_animation{ player_anim_sprite.get(), idle_frame_data };
+			auto idle = IdleAnimationComponent{ player_anim_sprite.get(), idle_frame_data };
 			sysmgr->getAnimationSystem()->addAnimation(entity, idle, sf::seconds(8.f));
 
 			/* the run animation data */
@@ -176,13 +176,13 @@ namespace mfg
 			auto player_anim_texture2 = texmgr->get("run", "textures/sprites/player/animation/knight_m_run.png");
 			auto player_anim_sprite2 = std::make_unique<sf::Sprite>(sf::Sprite(player_anim_texture2));
 
-			auto run = run_animation{ player_anim_sprite2.get(), run_frame_data };
+			auto run = RunAnimationComponent{ player_anim_sprite2.get(), run_frame_data };
 			sysmgr->getAnimationSystem()->addAnimation(entity, run, sf::seconds(1.f));
 
 			entmgr->setPlayer(entity);
 		}
 
-		void game::draw()
+		void Game::draw()
 		{
 			window->clear(sf::Color::Black);
 
@@ -192,14 +192,14 @@ namespace mfg
 			window->display();
 		}
 
-		void game::loop()
+		void Game::loop()
 		{
 			sf::Clock clock;
 
 			auto player = entmgr->getPlayer();
 
 			auto animsys = sysmgr->getAnimationSystem();
-			animsys->playAnimation<idle_animation>(player, LOOP_ANIMATION::YES);
+			animsys->playAnimation<IdleAnimationComponent>(player, LOOP_ANIMATION::YES);
 
 			while (window->isOpen())
 			{

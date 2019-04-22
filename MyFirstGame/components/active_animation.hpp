@@ -34,12 +34,12 @@ SOFTWARE.
 
 namespace mfg {
 	namespace components {
-		class active_animation
+		class ActiveAnimationComponent
 		{
 		public:
-			active_animation(entity_animation& animation);
+			ActiveAnimationComponent(EntityAnimationComponent& animation);
 
-			entity_animation* animation;
+			EntityAnimationComponent* animation;
 
 			std::string name;
 		};

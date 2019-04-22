@@ -28,11 +28,11 @@ namespace mfg
 {
 	namespace components
 	{
-		idle_animation::idle_animation(sf::Sprite* sprite, thor::FrameAnimation frame) : entity_animation(sprite, frame)
+		IdleAnimationComponent::IdleAnimationComponent(sf::Sprite* sprite, thor::FrameAnimation frame) : EntityAnimationComponent(sprite, frame)
 		{
 		}
 
-		std::string idle_animation::getName()
+		std::string IdleAnimationComponent::getName()
 		{
 			return name;
 		}

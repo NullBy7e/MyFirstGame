@@ -132,9 +132,6 @@
     <ClInclude Include="managers\entity_manager.hpp">
       <Filter>Header Files\managers</Filter>
     </ClInclude>
-    <ClInclude Include="components\map.hpp">
-      <Filter>Header Files\components</Filter>
-    </ClInclude>
     <ClInclude Include="managers\map_manager.hpp">
       <Filter>Header Files\managers</Filter>
     </ClInclude>
@@ -163,6 +160,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="components\entity.hpp">
+      <Filter>Header Files\components</Filter>
+    </ClInclude>
+    <ClInclude Include="components\map.hpp">
       <Filter>Header Files\components</Filter>
     </ClInclude>
   </ItemGroup>
@@ -233,9 +233,6 @@
     <ClCompile Include="caching\texture_loader.cpp">
       <Filter>Source Files\caching</Filter>
     </ClCompile>
-    <ClCompile Include="components\map.cpp">
-      <Filter>Source Files\components</Filter>
-    </ClCompile>
     <ClCompile Include="components\active_animation.cpp">
       <Filter>Source Files\components</Filter>
     </ClCompile>
@@ -246,6 +243,9 @@
       <Filter>Source Files\components</Filter>
     </ClCompile>
     <ClCompile Include="components\entity.cpp">
+      <Filter>Source Files\components</Filter>
+    </ClCompile>
+    <ClCompile Include="components\map.cpp">
       <Filter>Source Files\components</Filter>
     </ClCompile>
   </ItemGroup>

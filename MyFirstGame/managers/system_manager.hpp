@@ -36,15 +36,15 @@ namespace mfg
 {
 	namespace managers
 	{
-		class system_manager
+		class SystemManager
 		{
 		public:
-			system_manager(entity_manager* entmgr);
-			animation_system* getAnimationSystem();
+			SystemManager(EntityManager* entmgr);
+			AnimationSystem* getAnimationSystem();
 
-			entity_manager* entmgr;
+			EntityManager* entmgr;
 		private:
-			std::unique_ptr<animation_system> animsys;
+			std::unique_ptr<AnimationSystem> animsys;
 		};
 	}
 }

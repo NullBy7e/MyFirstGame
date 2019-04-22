@@ -40,10 +40,10 @@ namespace mfg
 {
 	namespace core
 	{
-		class window : public sf::RenderWindow
+		class Window : public sf::RenderWindow
 		{
 		public:
-			void handleInput(system_manager* sysmgr, map_manager* mapmgr, entity_manager* entmgr, sf::Time dt);
+			void handleInput(SystemManager* sysmgr, MapManager* mapmgr, EntityManager* entmgr, sf::Time dt);
 
 		private:
 			sf::Clock clock;

@@ -28,11 +28,11 @@ namespace mfg
 {
 	namespace components
 	{
-		run_animation::run_animation(sf::Sprite* sprite, thor::FrameAnimation frame) : entity_animation(sprite, frame)
+		RunAnimationComponent::RunAnimationComponent(sf::Sprite* sprite, thor::FrameAnimation frame) : EntityAnimationComponent(sprite, frame)
 		{
 		}
 
-		std::string run_animation::getName()
+		std::string RunAnimationComponent::getName()
 		{
 			return name;
 		}

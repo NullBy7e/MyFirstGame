@@ -32,7 +32,7 @@ namespace mfg
 {
 	namespace managers
 	{
-		class texture_manager
+		class TextureManager
 		{
 		public:
 			entt::resource_handle<sf::Texture> get(const std::string texture_name, const std::string texture_path);

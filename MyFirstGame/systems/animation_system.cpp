@@ -28,11 +28,11 @@ namespace mfg
 {
 	namespace systems
 	{
-		animation_system::animation_system(entity_manager* entmgr) : entmgr(entmgr)
+		AnimationSystem::AnimationSystem(EntityManager* entmgr) : entmgr(entmgr)
 		{
 		}
 
-		thor::Animator<sf::Sprite, std::string>* animation_system::getAnimator(entt::entity id)
+		thor::Animator<sf::Sprite, std::string>* AnimationSystem::getAnimator(entt::entity id)
 		{
 			if (auto it{ animators.find(id) }; it != std::end(animators))
 			{
@@ -47,11 +47,11 @@ namespace mfg
 			}
 		}
 
-		void animation_system::animate(sf::Time dt)
+		void AnimationSystem::animate(sf::Time dt)
 		{
 			auto& entities = entmgr->getEntities();
 
-			entities.view<active_animation>().each([this, dt](auto entity, auto &active) {
+			entities.view<ActiveAnimationComponent>().each([this, dt](auto entity, auto &active) {
 				auto animator = this->getAnimator(entity);
 
 				animator->animate(*active.animation->sprite);
@@ -59,7 +59,7 @@ namespace mfg
 			});
 		}
 
-		void animation_system::stopAnimation(entt::entity entity)
+		void AnimationSystem::stopAnimation(entt::entity entity)
 		{
 			auto animator = this->getAnimator(entity);
 			animator->stopAnimation();

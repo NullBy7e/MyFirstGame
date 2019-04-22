@@ -32,10 +32,10 @@ SOFTWARE.
 
 namespace mfg {
 	namespace components {
-		class idle_animation : public entity_animation
+		class IdleAnimationComponent : public EntityAnimationComponent
 		{
 		public:
-			idle_animation(sf::Sprite* sprite, thor::FrameAnimation frame);
+			IdleAnimationComponent(sf::Sprite* sprite, thor::FrameAnimation frame);
 
 			std::string getName() override;
 

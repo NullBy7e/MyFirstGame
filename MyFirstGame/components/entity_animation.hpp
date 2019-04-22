@@ -29,11 +29,11 @@ SOFTWARE.
 
 namespace mfg {
 	namespace components {
-		class entity_animation
+		class EntityAnimationComponent
 		{
 		public:
-			entity_animation(sf::Sprite* sprite, thor::FrameAnimation frame);
-			virtual ~entity_animation();
+			EntityAnimationComponent(sf::Sprite* sprite, thor::FrameAnimation frame);
+			virtual ~EntityAnimationComponent();
 
 			virtual std::string getName();
 

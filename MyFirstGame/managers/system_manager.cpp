@@ -28,12 +28,12 @@ namespace mfg
 {
 	namespace managers
 	{
-		system_manager::system_manager(entity_manager* entmgr) : entmgr(entmgr)
+		SystemManager::SystemManager(EntityManager* entmgr) : entmgr(entmgr)
 		{
-			animsys.reset(new animation_system(entmgr));
+			animsys.reset(new AnimationSystem(entmgr));
 		}
 
-		animation_system* system_manager::getAnimationSystem()
+		AnimationSystem* SystemManager::getAnimationSystem()
 		{
 			return animsys.get();
 		}
