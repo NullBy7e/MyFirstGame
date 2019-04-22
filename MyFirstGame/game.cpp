@@ -30,8 +30,8 @@ namespace mfg
 	{
 		game::game()
 		{
-			sysmgr.reset(new system_manager);
 			entmgr.reset(new entity_manager);
+			sysmgr.reset(new system_manager(entmgr.get()));
 			texmgr.reset(new texture_manager);
 			mapmgr.reset(new map_manager);
 
@@ -42,7 +42,6 @@ namespace mfg
 			createPlayer();
 
 			TmxParser parser;
-
 			auto mapId = mapmgr->addMap(parser.parse("maps/level1/level1.tmx"));
 			auto map = mapmgr->loadMap(mapId, texmgr.get(), entmgr.get());
 
@@ -118,10 +117,15 @@ namespace mfg
 
 		void game::drawEntities()
 		{
-			entmgr->getEntities().view<position, scale, sprite>().each([this](auto entity, auto &position, auto& scale, auto &sprite) {
-				sprite.setPosition(position.x, position.y);
-				sprite.setScale(scale.x, scale.y);
+			entmgr->getEntities().view<position, scale, sprite>().each([this](auto entity, auto &position, auto& scale, auto &sprite)
+			{
+				if (entmgr->getEntities().has<active_animation>(entity))
+				{
+					active_animation& anim = entmgr->getEntities().get<active_animation>(entity);
+					sprite = *anim.animation.sprite;
+				}
 
+				sprite.setPosition(position.x, position.y);
 				this->window->draw(sprite);
 			});
 		}
@@ -133,9 +137,39 @@ namespace mfg
 			auto entity = entities.create();
 			entities.assign<player>(entity);
 
-			auto tex = texmgr->get("player", "textures/sprites/player/knight_f_run_anim_f1.png");
-			entities.assign<sprite>(entity, sf::Sprite(tex));
-			entities.assign<scale>(entity, scale{ 3.5, 3.5 });
+			auto tex = texmgr->get("player", "textures/sprites/player/animation/knight_m_idle_anim_f0.png");
+			auto player_sprite = sf::Sprite(tex);
+
+			entities.assign<sprite>(entity, player_sprite);
+			entities.assign<scale>(entity, 1.f, 1.f);
+
+			/* the idle animation data */
+			thor::FrameAnimation idle_frame_data;
+			idle_frame_data.addFrame(2.f, sf::IntRect(0, 0, 64, 112));
+			idle_frame_data.addFrame(2.f, sf::IntRect(0, 112, 64, 112));
+			idle_frame_data.addFrame(2.f, sf::IntRect(0, 224, 64, 112));
+			idle_frame_data.addFrame(2.f, sf::IntRect(0, 336, 64, 112));
+
+			/* player animation texture and the resulting sprite */
+			auto player_anim_texture = texmgr->get("idle", "textures/sprites/player/animation/knight_m_idle.png");
+			auto player_anim_sprite = std::make_unique<sf::Sprite>(sf::Sprite(player_anim_texture));
+
+			auto idle = idle_animation{ player_anim_sprite.get(), idle_frame_data };
+			sysmgr->getAnimationSystem()->addAnimation(entity, idle, sf::seconds(8.f));
+
+			/* the run animation data */
+			thor::FrameAnimation run_frame_data;
+			run_frame_data.addFrame(0.25f, sf::IntRect(0, 0, 64, 112));
+			run_frame_data.addFrame(0.25f, sf::IntRect(0, 112, 64, 112));
+			run_frame_data.addFrame(0.25f, sf::IntRect(0, 224, 64, 112));
+			run_frame_data.addFrame(0.25f, sf::IntRect(0, 336, 64, 112));
+
+			/* player animation texture and the resulting sprite */
+			auto player_anim_texture2 = texmgr->get("run", "textures/sprites/player/animation/knight_m_run.png");
+			auto player_anim_sprite2 = std::make_unique<sf::Sprite>(sf::Sprite(player_anim_texture2));
+
+			auto run = run_animation{ player_anim_sprite2.get(), run_frame_data };
+			sysmgr->getAnimationSystem()->addAnimation(entity, run, sf::seconds(1.f));
 
 			entmgr->setPlayer(entity);
 		}
@@ -152,12 +186,29 @@ namespace mfg
 
 		void game::loop()
 		{
+			sf::Clock clock;
+
+			auto player = entmgr->getPlayer();
+
+			auto animsys = sysmgr->getAnimationSystem();
+			animsys->playAnimation<idle_animation>(player, true);
+
 			while (window->isOpen())
 			{
-				window->handleInput(mapmgr.get(), entmgr.get());
-
-				updateViewport();
+				/* draw everything */
 				draw();
+
+				/* elapsed time since last draw (frame/tick/w.e) */
+				auto dt = clock.getElapsedTime();
+
+				/* handle input */
+				window->handleInput(sysmgr.get(), mapmgr.get(), entmgr.get(), dt);
+
+				/* uodate animations */
+				animsys->animate(clock.restart());
+
+				/* update the viewport */
+				updateViewport();
 			}
 		}
 	}

@@ -24,6 +24,9 @@ SOFTWARE.
 
 #pragma once
 
+#include <filesystem>
+#include <direct.h>
+
 #include <SFML/Graphics.hpp>
 
 #include "entt/entt.hpp"

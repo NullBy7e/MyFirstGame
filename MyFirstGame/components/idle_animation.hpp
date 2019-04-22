@@ -24,19 +24,22 @@ SOFTWARE.
 
 #pragma once
 
+#include <Thor/Animations.hpp>
 #include <SFML/Graphics.hpp>
 
 #include "entt/entt.hpp"
+#include "entity_animation.hpp"
 
 namespace mfg {
 	namespace components {
-		class idle_animation
+		class idle_animation : public entity_animation
 		{
 		public:
-			idle_animation(entt::entity entity, std::vector<entt::resource_handle<sf::Texture>> anim_textures);
+			idle_animation(sf::Sprite* sprite, thor::FrameAnimation frame);
 
-		private:
-			std::vector<sf::Sprite> animation_sprites;
+			std::string getName() override;
+
+			std::string name = "idle_animation";
 		};
 	}
 }

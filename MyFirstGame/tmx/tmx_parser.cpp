@@ -351,6 +351,9 @@ TmxMap* TmxParser::parse(const std::string& filename)
 	doc.LoadFile(filename.c_str());
 
 	auto& root_element = *doc.RootElement();
+
+	auto current_path = std::filesystem::current_path().string();
+
 	_chdir(std::filesystem::absolute(filename).remove_filename().string().c_str());
 
 	/* YAY! */
@@ -360,6 +363,9 @@ TmxMap* TmxParser::parse(const std::string& filename)
 		getMapTileLayers(root_element),
 		getMapObjectLayers(root_element)
 	);
+
+	_chdir(current_path.c_str());
+	current_path = std::filesystem::current_path().string();
 
 	return map;
 }

@@ -24,13 +24,23 @@ SOFTWARE.
 
 #pragma once
 
-#include "enemy.hpp"
-#include "player.hpp"
-#include "position.hpp"
-#include "scale.hpp"
-#include "sprite.hpp"
-#include "map.hpp"
-#include "idle_animation.hpp"
-#include "run_animation.hpp"
-#include "active_animation.hpp"
-#include "entity_animation.hpp"
+#include <Thor/Animations.hpp>
+#include <SFML/Graphics.hpp>
+
+namespace mfg {
+	namespace components {
+		class entity_animation
+		{
+		public:
+			entity_animation(sf::Sprite* sprite, thor::FrameAnimation frame);
+			virtual ~entity_animation();
+
+			virtual std::string getName();
+
+			sf::Sprite* sprite;
+			thor::FrameAnimation frame;
+
+			std::string name = "entity_animation";
+		};
+	}
+}

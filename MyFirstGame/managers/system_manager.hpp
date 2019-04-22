@@ -26,12 +26,25 @@ SOFTWARE.
 
 #include <memory>
 
+#include "../managers/entity_manager.hpp"
+#include "../systems/animation_system.hpp"
+
+using namespace mfg::managers;
+using namespace mfg::systems;
+
 namespace mfg
 {
 	namespace managers
 	{
 		class system_manager
 		{
+		public:
+			system_manager(entity_manager* entmgr);
+			animation_system* getAnimationSystem();
+
+			entity_manager* entmgr;
+		private:
+			std::unique_ptr<animation_system> animsys;
 		};
 	}
 }

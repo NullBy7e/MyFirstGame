@@ -101,6 +101,7 @@ namespace mfg {
 
 					entities.assign<position>(entity, x_pos, y_pos);
 					entities.assign<scale>(entity, x_scale, y_scale);
+					new_sprite.setScale(x_scale, y_scale);
 					entities.assign<sprite>(entity, new_sprite);
 
 					if (object.type == "enemy")

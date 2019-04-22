@@ -24,13 +24,24 @@ SOFTWARE.
 
 #pragma once
 
-#include "enemy.hpp"
-#include "player.hpp"
-#include "position.hpp"
-#include "scale.hpp"
-#include "sprite.hpp"
-#include "map.hpp"
-#include "idle_animation.hpp"
-#include "run_animation.hpp"
-#include "active_animation.hpp"
+#include <cstdint>
+
+#include <Thor/Animations.hpp>
+#include <SFML/Graphics.hpp>
+
+#include "entt/entt.hpp"
 #include "entity_animation.hpp"
+
+namespace mfg {
+	namespace components {
+		class active_animation
+		{
+		public:
+			active_animation(entity_animation& animation);
+
+			entity_animation animation;
+
+			std::string name;
+		};
+	}
+}

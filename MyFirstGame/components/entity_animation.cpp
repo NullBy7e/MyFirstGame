@@ -24,19 +24,21 @@ SOFTWARE.
 
 #pragma once
 
-#include <SFML/Graphics.hpp>
-
-#include "entt/entt.hpp"
+#include "entity_animation.hpp"
 
 namespace mfg {
 	namespace components {
-		class walk_animation
+		entity_animation::entity_animation(sf::Sprite* sprite, thor::FrameAnimation frame) : sprite(sprite), frame(frame)
 		{
-		public:
-			walk_animation(entt::entity entity, std::vector<entt::resource_handle<sf::Texture>> anim_textures);
+		}
 
-		private:
-			std::vector<sf::Sprite> animation_sprites;
-		};
+		entity_animation::~entity_animation()
+		{
+		}
+
+		std::string entity_animation::getName()
+		{
+			return name;
+		}
 	}
 }

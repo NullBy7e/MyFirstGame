@@ -28,16 +28,15 @@ namespace mfg
 {
 	namespace core
 	{
-		void window::handleInput(map_manager* mapmgr, entity_manager* entmgr)
+		void window::handleInput(system_manager* sysmgr, map_manager* mapmgr, entity_manager* entmgr, sf::Time  dt)
 		{
 			sf::Event event;
 
 			auto map = mapmgr->getCurrentMap();
-
 			auto& entities = entmgr->getEntities();
-			auto player = entmgr->getPlayer();
 
-			auto& player_position = entities.get<position>(player);
+			auto player = entmgr->getPlayer();
+			auto animsys = sysmgr->getAnimationSystem();
 
 			while (this->pollEvent(event))
 			{
@@ -52,14 +51,14 @@ namespace mfg
 					case sf::Keyboard::S:
 					case sf::Keyboard::D:
 					{
+						auto& player_position = entities.get<position>(player);
+
 						auto move = 0;
 
 						switch (event.key.code)
 						{
-						case sf::Keyboard::W: break;
-						case sf::Keyboard::A: move = -25; break;
-						case sf::Keyboard::S: break;
-						case sf::Keyboard::D: move = 25;  break;
+						case sf::Keyboard::A: move = -25; break; //facing dir bool in player component
+						case sf::Keyboard::D: move = 25;  break; //draw sprite check bool, do flips
 						}
 
 						if (move == 0)
@@ -71,6 +70,18 @@ namespace mfg
 						if (can_move)
 						{
 							player_position.x += move;
+
+							if (entmgr->getEntities().has<active_animation>(player))
+							{
+								auto& anim = entmgr->getEntities().get<active_animation>(player);
+								if (anim.name != "run_animation")
+								{
+									animsys->stopAnimation(player);
+								}
+							}
+
+							animsys->playAnimation<run_animation>(player);
+							clock.restart();
 						}
 					}
 					default: break;
@@ -79,10 +90,17 @@ namespace mfg
 				}
 				case sf::Event::Closed:
 				{
-					this->close();
+					close();
 					break;
 				}
 				}
+			}
+
+			elapsed_time = clock.getElapsedTime();
+			if (elapsed_time.asSeconds() >= 2)
+			{
+				animsys->playAnimation<idle_animation>(player, true);
+				elapsed_time = elapsed_time.Zero;
 			}
 		}
 	}

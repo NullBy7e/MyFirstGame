@@ -30,8 +30,10 @@ namespace mfg
 	{
 		std::shared_ptr<sf::Texture> texture_loader::load(std::string texture_path) const
 		{
+			auto texture_full_path = std::filesystem::absolute(texture_path).string();
+
 			sf::Texture tex;
-			tex.loadFromFile(texture_path);
+			tex.loadFromFile(texture_full_path);
 
 			return std::shared_ptr<sf::Texture>(new sf::Texture{ tex });
 		}

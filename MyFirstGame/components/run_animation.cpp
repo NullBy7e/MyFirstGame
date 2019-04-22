@@ -22,15 +22,19 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#pragma once
-
-#include "enemy.hpp"
-#include "player.hpp"
-#include "position.hpp"
-#include "scale.hpp"
-#include "sprite.hpp"
-#include "map.hpp"
-#include "idle_animation.hpp"
 #include "run_animation.hpp"
-#include "active_animation.hpp"
-#include "entity_animation.hpp"
+
+namespace mfg
+{
+	namespace components
+	{
+		run_animation::run_animation(sf::Sprite* sprite, thor::FrameAnimation frame) : entity_animation(sprite, frame)
+		{
+		}
+
+		std::string run_animation::getName()
+		{
+			return name;
+		}
+	}
+}

@@ -24,8 +24,11 @@ SOFTWARE.
 
 #pragma once
 
+#include <typeinfo>
+
 #include <SFML/Graphics.hpp>
 
+#include "managers/system_manager.hpp"
 #include "managers/map_manager.hpp"
 #include "managers/entity_manager.hpp"
 
@@ -42,7 +45,11 @@ namespace mfg
 		class window : public sf::RenderWindow
 		{
 		public:
-			void handleInput(map_manager* mapmgr, entity_manager* entmgr);
+			void handleInput(system_manager* sysmgr, map_manager* mapmgr, entity_manager* entmgr, sf::Time dt);
+
+		private:
+			sf::Clock clock;
+			sf::Time elapsed_time;
 		};
 	}
 }

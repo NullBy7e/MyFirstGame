@@ -28,12 +28,13 @@ namespace mfg
 {
 	namespace components
 	{
-		idle_animation::idle_animation(entt::entity entity, std::vector<entt::resource_handle<sf::Texture>> anim_textures)
+		idle_animation::idle_animation(sf::Sprite* sprite, thor::FrameAnimation frame) : entity_animation(sprite, frame)
 		{
-			for (auto texture : anim_textures)
-			{
-				animation_sprites.push_back(sf::Sprite(texture));
-			}
+		}
+
+		std::string idle_animation::getName()
+		{
+			return name;
 		}
 	}
 }

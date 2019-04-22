@@ -58,6 +58,12 @@
     <Filter Include="Source Files\caching">
       <UniqueIdentifier>{6cd55f6f-1e0d-44f0-9339-82acd6dae9a9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\animations">
+      <UniqueIdentifier>{bffae5b6-743f-45d5-b48b-4721fcbce9d1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\animations">
+      <UniqueIdentifier>{242e94ba-6bd3-4596-acf2-d7766f3f9396}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="tmx\tmx_layer.hpp">
@@ -153,7 +159,13 @@
     <ClInclude Include="components\idle_animation.hpp">
       <Filter>Header Files\components</Filter>
     </ClInclude>
-    <ClInclude Include="components\walk_animation.hpp">
+    <ClInclude Include="components\run_animation.hpp">
+      <Filter>Header Files\components</Filter>
+    </ClInclude>
+    <ClInclude Include="components\active_animation.hpp">
+      <Filter>Header Files\components</Filter>
+    </ClInclude>
+    <ClInclude Include="components\entity_animation.hpp">
       <Filter>Header Files\components</Filter>
     </ClInclude>
   </ItemGroup>
@@ -218,9 +230,6 @@
     <ClCompile Include="systems\animation_system.cpp">
       <Filter>Source Files\systems</Filter>
     </ClCompile>
-    <ClCompile Include="components\walk_animation.cpp">
-      <Filter>Source Files\components</Filter>
-    </ClCompile>
     <ClCompile Include="components\idle_animation.cpp">
       <Filter>Source Files\components</Filter>
     </ClCompile>
@@ -231,6 +240,15 @@
       <Filter>Source Files\components</Filter>
     </ClCompile>
     <ClCompile Include="components\sprite.cpp">
+      <Filter>Source Files\components</Filter>
+    </ClCompile>
+    <ClCompile Include="components\active_animation.cpp">
+      <Filter>Source Files\components</Filter>
+    </ClCompile>
+    <ClCompile Include="components\run_animation.cpp">
+      <Filter>Source Files\components</Filter>
+    </ClCompile>
+    <ClCompile Include="components\entity_animation.cpp">
       <Filter>Source Files\components</Filter>
     </ClCompile>
   </ItemGroup>

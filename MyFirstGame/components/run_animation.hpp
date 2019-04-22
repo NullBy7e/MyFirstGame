@@ -22,18 +22,24 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#include "walk_animation.hpp"
+#pragma once
 
-namespace mfg
-{
-	namespace components
-	{
-		walk_animation::walk_animation(entt::entity entity, std::vector<entt::resource_handle<sf::Texture>> anim_textures)
+#include <Thor/Animations.hpp>
+#include <SFML/Graphics.hpp>
+
+#include "entt/entt.hpp"
+#include "entity_animation.hpp"
+
+namespace mfg {
+	namespace components {
+		class run_animation : public entity_animation
 		{
-			for (auto texture : anim_textures)
-			{
-				animation_sprites.push_back(sf::Sprite(texture));
-			}
-		}
+		public:
+			run_animation(sf::Sprite* sprite, thor::FrameAnimation frame);
+
+			std::string getName() override;
+
+			std::string name = "run_animation";
+		};
 	}
 }
