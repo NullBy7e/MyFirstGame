@@ -27,16 +27,12 @@ namespace mfg {
 
 		void entity::setFacingLeft()
 		{
-			sprite.setScale({ -1, 1 });
-
 			facing_right = false;
 			facing_left = true;
 		}
 
 		void entity::setFacingRight()
 		{
-			sprite.setScale({ 1, 1 });
-
 			facing_left = false;
 			facing_right = true;
 		}

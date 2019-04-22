@@ -93,7 +93,9 @@ namespace mfg
 			animation_sprites.emplace_back(std::make_unique<sf::Sprite>(*animation_component.sprite));
 
 			auto& sprite = animation_sprites.back();
+
 			animation_component.sprite = sprite.get();
+			animation_component.sprite->setOrigin({ 32, 64 });
 
 			DEBUG_MSG("animation_system::addAnimation: " << animation_component.name << ": sprite->" << sprite.get());
 

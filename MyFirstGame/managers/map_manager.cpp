@@ -75,44 +75,11 @@ namespace mfg {
 					if (object.name == "player_spawn" && object.type == "player")
 					{
 						auto& player_entity = entities.get<mfg::components::entity>(entmgr->getPlayer());
-
 						player_entity.x = object.x;
-						player_entity.y = object.y - player_entity.sprite.getLocalBounds().height;
+						player_entity.y = object.y;
 
 						map->player_spawned = true;
 						continue;
-					}
-
-					sf::Vector2f targetSize(object.width, object.height);
-					auto new_sprite = sf::Sprite(map->sprites[object.gid]);
-					new_sprite.setOrigin({ new_sprite.getLocalBounds().width, 0 });
-
-					auto bounds = new_sprite.getLocalBounds();
-
-					float x_scale = targetSize.x / bounds.width;
-					float y_scale = targetSize.y / bounds.height;
-
-					auto entity = entities.create();
-
-					new_sprite.setScale(x_scale, y_scale);
-					new_sprite.setRotation(object.rotation);
-
-					auto x_pos = object.x;
-					auto y_pos = object.y - object.height;
-
-					if (object.flipped_horizontally)
-					{
-						x_pos = object.x + object.width;
-					}
-
-					if (!entities.has<mfg::components::entity>(entity))
-					{
-						entities.assign<mfg::components::entity>(entity, x_pos, y_pos, object.width, object.height, x_scale, y_scale, object.rotation, object.flipped_horizontally, new_sprite);
-					}
-
-					if (!entities.has<mfg::components::map>(entity))
-					{
-						entities.assign<mfg::components::map>(entity, mfg::components::map{ id });
 					}
 				}
 			}
