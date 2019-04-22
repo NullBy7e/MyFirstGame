@@ -36,6 +36,8 @@ namespace mfg
 			auto& entities = entmgr->getEntities();
 
 			auto player_entity = entmgr->getPlayer();
+			auto& player = entities.get<mfg::components::entity>(player_entity);
+
 			auto animsys = sysmgr->getAnimationSystem();
 
 			while (this->pollEvent(event))
@@ -51,7 +53,6 @@ namespace mfg
 					case sf::Keyboard::S:
 					case sf::Keyboard::D:
 					{
-						auto& player = entities.get<mfg::components::entity>(player_entity);
 						auto player_position = sf::Vector2f(player.x, player.y);
 
 						auto move_speed = 0.f;
@@ -104,19 +105,6 @@ namespace mfg
 							/* play the run_animation */
 							animsys->playAnimation<run_animation>(player_entity);
 
-							/* we need to update any active animations with the proper scaling values */
-							/* to ensure that it's facing the correct angle */
-							if (player.facing_left || player.facing_right)
-							{
-								auto& anim = entmgr->getEntities().get<active_animation>(player_entity);
-
-								if (player.facing_left)
-									anim.animation->sprite->setScale(-1, 1);
-
-								if (player.facing_right)
-									anim.animation->sprite->setScale(1, 1);
-							}
-
 							clock.restart();
 						}
 					}
@@ -137,6 +125,19 @@ namespace mfg
 			{
 				animsys->playAnimation<idle_animation>(player_entity, LOOP_ANIMATION::YES);
 				elapsed_time = elapsed_time.Zero;
+			}
+
+			/* we need to update any active animations with the proper scaling values */
+			/* to ensure that it's facing the correct angle */
+			if (player.facing_left || player.facing_right)
+			{
+				auto& anim = entmgr->getEntities().get<active_animation>(player_entity);
+
+				if (player.facing_left)
+					anim.animation->sprite->setScale(-1, 1);
+
+				if (player.facing_right)
+					anim.animation->sprite->setScale(1, 1);
 			}
 		}
 	}
