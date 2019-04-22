@@ -39,7 +39,7 @@ namespace mfg
 		public:
 			entity_registry& getEntities();
 
-			mfg::components::player getPlayerEntity();
+			mfg::components::entity getPlayerEntity();
 
 			entt::entity getPlayer();
 

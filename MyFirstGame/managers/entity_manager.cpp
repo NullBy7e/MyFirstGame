@@ -39,10 +39,10 @@ namespace mfg
 			entities.get<T>(this->getPlayer());
 		}
 
-		player entity_manager::getPlayerEntity()
+		entity entity_manager::getPlayerEntity()
 		{
 			auto& entities = getEntities();
-			return entities.get<player>(player_id);
+			return entities.get<entity>(player_id);
 		}
 
 		entt::entity entity_manager::getPlayer()

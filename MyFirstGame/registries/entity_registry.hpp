@@ -26,8 +26,7 @@ SOFTWARE.
 
 #include "entt/entt.hpp"
 
-#include "../components/enemy.hpp"
-#include "../components/player.hpp"
+#include "../components/entity.hpp"
 
 namespace mfg {
 	namespace registries {

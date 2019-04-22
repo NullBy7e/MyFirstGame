@@ -60,7 +60,9 @@ namespace mfg
 		void game::updateViewport()
 		{
 			auto map = mapmgr->getCurrentMap();
-			auto player_position = entmgr->getEntities().get<position>(entmgr->getPlayer());
+
+			auto& player = entmgr->getEntities().get<mfg::components::entity>(entmgr->getPlayer());
+			auto player_position = sf::Vector2f(player.x, player.y);
 
 			auto viewport_pos_x = player_position.x;
 			auto viewport_pos_y = player_position.y;
@@ -117,15 +119,23 @@ namespace mfg
 
 		void game::drawEntities()
 		{
-			entmgr->getEntities().view<position, scale, sprite>().each([this](auto entity, auto &position, auto& scale, auto &sprite)
+			entmgr->getEntities().each([this](auto entity)
 			{
+				auto& entity_component = entmgr->getEntities().get<mfg::components::entity>(entity);
+				auto& sprite = entity_component.sprite;
+
 				if (entmgr->getEntities().has<active_animation>(entity))
 				{
 					active_animation& anim = entmgr->getEntities().get<active_animation>(entity);
-					sprite = *anim.animation.sprite;
+					sprite = *anim.animation->sprite;
+				}
+				else
+				{
+					sprite.setScale({ entity_component.x_scale, entity_component.y_scale });
+					sprite.setRotation(entity_component.rotation);
 				}
 
-				sprite.setPosition(position.x, position.y);
+				sprite.setPosition(entity_component.x, entity_component.y);
 				this->window->draw(sprite);
 			});
 		}
@@ -135,13 +145,10 @@ namespace mfg
 			auto& entities = entmgr->getEntities();
 
 			auto entity = entities.create();
-			entities.assign<player>(entity);
 
 			auto tex = texmgr->get("player", "textures/sprites/player/animation/knight_m_idle_anim_f0.png");
 			auto player_sprite = sf::Sprite(tex);
-
-			entities.assign<sprite>(entity, player_sprite);
-			entities.assign<scale>(entity, 1.f, 1.f);
+			entities.assign<mfg::components::entity>(entity, 0, 0, player_sprite.getLocalBounds().width, player_sprite.getLocalBounds().height, 1, 1, 0, false, player_sprite);
 
 			/* the idle animation data */
 			thor::FrameAnimation idle_frame_data;
@@ -153,6 +160,8 @@ namespace mfg
 			/* player animation texture and the resulting sprite */
 			auto player_anim_texture = texmgr->get("idle", "textures/sprites/player/animation/knight_m_idle.png");
 			auto player_anim_sprite = std::make_unique<sf::Sprite>(sf::Sprite(player_anim_texture));
+
+			player_anim_sprite->setOrigin({ player_anim_sprite->getLocalBounds().width / 2, 0 });
 
 			auto idle = idle_animation{ player_anim_sprite.get(), idle_frame_data };
 			sysmgr->getAnimationSystem()->addAnimation(entity, idle, sf::seconds(8.f));
@@ -167,6 +176,7 @@ namespace mfg
 			/* player animation texture and the resulting sprite */
 			auto player_anim_texture2 = texmgr->get("run", "textures/sprites/player/animation/knight_m_run.png");
 			auto player_anim_sprite2 = std::make_unique<sf::Sprite>(sf::Sprite(player_anim_texture2));
+			player_anim_sprite2->setOrigin({ player_anim_sprite2->getLocalBounds().width / 2, 0 });
 
 			auto run = run_animation{ player_anim_sprite2.get(), run_frame_data };
 			sysmgr->getAnimationSystem()->addAnimation(entity, run, sf::seconds(1.f));
@@ -191,7 +201,7 @@ namespace mfg
 			auto player = entmgr->getPlayer();
 
 			auto animsys = sysmgr->getAnimationSystem();
-			animsys->playAnimation<idle_animation>(player, true);
+			animsys->playAnimation<idle_animation>(player, LOOP_ANIMATION::YES);
 
 			while (window->isOpen())
 			{

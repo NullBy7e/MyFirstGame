@@ -70,43 +70,49 @@ namespace mfg {
 			{
 				for (auto& object : layer.objects)
 				{
-					auto x_pos = object.x;
-					auto y_pos = object.y - object.height;
-
 					auto& entities = entmgr->getEntities();
 
 					if (object.name == "player_spawn" && object.type == "player")
 					{
-						entities.assign<position>(player, x_pos, y_pos);
-						entities.assign<mfg::components::map>(player, mfg::components::map{ id });
+						auto& player_entity = entities.get<mfg::components::entity>(entmgr->getPlayer());
+
+						player_entity.x = object.x;
+						player_entity.y = object.y - player_entity.sprite.getLocalBounds().height;
 
 						map->player_spawned = true;
 						continue;
 					}
 
-					auto new_sprite = sf::Sprite(map->sprites[object.gid]);
 					sf::Vector2f targetSize(object.width, object.height);
+					auto new_sprite = sf::Sprite(map->sprites[object.gid]);
+					new_sprite.setOrigin({ new_sprite.getLocalBounds().width, 0 });
+
 					auto bounds = new_sprite.getLocalBounds();
 
-					/* check flips */
+					float x_scale = targetSize.x / bounds.width;
+					float y_scale = targetSize.y / bounds.height;
+
+					auto entity = entities.create();
+
+					new_sprite.setScale(x_scale, y_scale);
+					new_sprite.setRotation(object.rotation);
+
+					auto x_pos = object.x;
+					auto y_pos = object.y - object.height;
+
 					if (object.flipped_horizontally)
 					{
 						x_pos = object.x + object.width;
 					}
 
-					auto entity = entities.create();
-
-					float x_scale = targetSize.x / bounds.width;
-					float y_scale = targetSize.y / bounds.height;
-
-					entities.assign<position>(entity, x_pos, y_pos);
-					entities.assign<scale>(entity, x_scale, y_scale);
-					new_sprite.setScale(x_scale, y_scale);
-					entities.assign<sprite>(entity, new_sprite);
-
-					if (object.type == "enemy")
+					if (!entities.has<mfg::components::entity>(entity))
 					{
-						entities.assign<enemy>(entity);
+						entities.assign<mfg::components::entity>(entity, x_pos, y_pos, object.width, object.height, x_scale, y_scale, object.rotation, object.flipped_horizontally, new_sprite);
+					}
+
+					if (!entities.has<mfg::components::map>(entity))
+					{
+						entities.assign<mfg::components::map>(entity, mfg::components::map{ id });
 					}
 				}
 			}

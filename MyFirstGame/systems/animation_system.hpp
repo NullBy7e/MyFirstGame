@@ -35,6 +35,8 @@ SOFTWARE.
 #include "../managers/entity_manager.hpp"
 #include "../components/entity_animation.hpp"
 
+#include "../enums/LOOP_ANIMATION.hpp"
+
 using namespace mfg::managers;
 using namespace mfg::components;
 
@@ -54,7 +56,7 @@ namespace mfg
 			entity_manager* entmgr;
 
 			template<typename T>
-			typename std::enable_if<std::is_base_of<entity_animation, T>::value, void>::type playAnimation(entt::entity, bool = false);
+			typename std::enable_if<std::is_base_of<entity_animation, T>::value, void>::type playAnimation(entt::entity, LOOP_ANIMATION = LOOP_ANIMATION::NO);
 
 			template<typename T>
 			typename std::enable_if<std::is_base_of<entity_animation, T>::value, void>::type addAnimation(entt::entity, T, sf::Time);
@@ -65,19 +67,20 @@ namespace mfg
 		};
 
 		template<typename T>
-		inline typename std::enable_if<std::is_base_of<entity_animation, T>::value, void>::type animation_system::playAnimation(entt::entity entity, bool loop)
+		inline typename std::enable_if<std::is_base_of<entity_animation, T>::value, void>::type animation_system::playAnimation(entt::entity entity, LOOP_ANIMATION loop)
 		{
 			auto animator = getAnimator(entity);
 
 			if (animator->isPlayingAnimation())
 				return;
 
-			T animation_component = entmgr->getEntities().get<T>(entity);
+			T& animation_component = entmgr->getEntities().get<T>(entity);
+			DEBUG_MSG("animation_system::playAnimation: " << animation_component.name << ": sprite->" << animation_component.sprite);
+
 			entmgr->getEntities().assign_or_replace<active_animation>(entity, active_animation{ animation_component });
 
-			animator->playAnimation(animation_component.name, loop);
+			animator->playAnimation(animation_component.name, (bool)loop);
 
-			std::cout << "animation_system::playAnimation: " << animation_component.name << std::endl;
 			return;
 		}
 
@@ -92,7 +95,9 @@ namespace mfg
 			auto& sprite = animation_sprites.back();
 			animation_component.sprite = sprite.get();
 
-			/* add idle animation to the animator for the player */
+			DEBUG_MSG("animation_system::addAnimation: " << animation_component.name << ": sprite->" << sprite.get());
+
+			/* add animation to the animator for the player */
 			animator->addAnimation(animation_component.name, animation_component.frame, duration);
 
 			/* add animation component to the player entity */

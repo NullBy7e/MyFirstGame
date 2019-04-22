@@ -39,7 +39,7 @@ namespace mfg {
 		public:
 			active_animation(entity_animation& animation);
 
-			entity_animation animation;
+			entity_animation* animation;
 
 			std::string name;
 		};

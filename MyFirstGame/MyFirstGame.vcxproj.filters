@@ -64,6 +64,9 @@
     <Filter Include="Source Files\animations">
       <UniqueIdentifier>{242e94ba-6bd3-4596-acf2-d7766f3f9396}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\enums">
+      <UniqueIdentifier>{48667db6-b9e8-446a-bb98-e51fed784e1f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="tmx\tmx_layer.hpp">
@@ -108,12 +111,6 @@
     <ClInclude Include="game.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="components\player.hpp">
-      <Filter>Header Files\components</Filter>
-    </ClInclude>
-    <ClInclude Include="components\enemy.hpp">
-      <Filter>Header Files\components</Filter>
-    </ClInclude>
     <ClInclude Include="registries\registry.hpp">
       <Filter>Header Files\registries</Filter>
     </ClInclude>
@@ -126,16 +123,7 @@
     <ClInclude Include="caching\texture_loader.hpp">
       <Filter>Header Files\caching</Filter>
     </ClInclude>
-    <ClInclude Include="components\position.hpp">
-      <Filter>Header Files\components</Filter>
-    </ClInclude>
-    <ClInclude Include="components\scale.hpp">
-      <Filter>Header Files\components</Filter>
-    </ClInclude>
     <ClInclude Include="components\components.hpp">
-      <Filter>Header Files\components</Filter>
-    </ClInclude>
-    <ClInclude Include="components\sprite.hpp">
       <Filter>Header Files\components</Filter>
     </ClInclude>
     <ClInclude Include="managers\system_manager.hpp">
@@ -166,6 +154,15 @@
       <Filter>Header Files\components</Filter>
     </ClInclude>
     <ClInclude Include="components\entity_animation.hpp">
+      <Filter>Header Files\components</Filter>
+    </ClInclude>
+    <ClInclude Include="enums\LOOP_ANIMATION.hpp">
+      <Filter>Header Files\enums</Filter>
+    </ClInclude>
+    <ClInclude Include="macros.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="components\entity.hpp">
       <Filter>Header Files\components</Filter>
     </ClInclude>
   </ItemGroup>
@@ -239,9 +236,6 @@
     <ClCompile Include="components\map.cpp">
       <Filter>Source Files\components</Filter>
     </ClCompile>
-    <ClCompile Include="components\sprite.cpp">
-      <Filter>Source Files\components</Filter>
-    </ClCompile>
     <ClCompile Include="components\active_animation.cpp">
       <Filter>Source Files\components</Filter>
     </ClCompile>
@@ -249,6 +243,9 @@
       <Filter>Source Files\components</Filter>
     </ClCompile>
     <ClCompile Include="components\entity_animation.cpp">
+      <Filter>Source Files\components</Filter>
+    </ClCompile>
+    <ClCompile Include="components\entity.cpp">
       <Filter>Source Files\components</Filter>
     </ClCompile>
   </ItemGroup>

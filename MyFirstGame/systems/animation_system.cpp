@@ -54,7 +54,7 @@ namespace mfg
 			entities.view<active_animation>().each([this, dt](auto entity, auto &active) {
 				auto animator = this->getAnimator(entity);
 
-				animator->animate(*active.animation.sprite);
+				animator->animate(*active.animation->sprite);
 				animator->update(dt);
 			});
 		}

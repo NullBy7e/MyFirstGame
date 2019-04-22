@@ -24,11 +24,7 @@ SOFTWARE.
 
 #pragma once
 
-#include "enemy.hpp"
-#include "player.hpp"
-#include "position.hpp"
-#include "scale.hpp"
-#include "sprite.hpp"
+#include "entity.hpp"
 #include "map.hpp"
 #include "idle_animation.hpp"
 #include "run_animation.hpp"

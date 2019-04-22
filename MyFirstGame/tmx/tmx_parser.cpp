@@ -262,6 +262,13 @@ std::vector<TmxObjectLayer> TmxParser::getMapObjectLayers(const XMLElement & map
 			auto object_type = child2->Attribute("type");
 			auto object_x = cStrToFloat(child2->Attribute("x"));
 			auto object_y = cStrToFloat(child2->Attribute("y"));
+			auto object_rotation = 0.f;
+
+			if (child2->Attribute("rotation") != NULL)
+			{
+				object_rotation = cStrToFloat(child2->Attribute("rotation"));
+			}
+
 			auto object_width = cStrToInt(child2->Attribute("width"));
 			auto object_height = cStrToInt(child2->Attribute("height"));
 			auto object_gid = -1;
@@ -310,6 +317,7 @@ std::vector<TmxObjectLayer> TmxParser::getMapObjectLayers(const XMLElement & map
 				object_type,
 				object_x,
 				object_y,
+				object_rotation,
 				object_width,
 				object_height,
 				object_gid,

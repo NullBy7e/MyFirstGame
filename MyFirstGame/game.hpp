@@ -24,6 +24,8 @@ SOFTWARE.
 
 #pragma once
 
+#include "macros.hpp"
+
 #include "window.hpp"
 #include "tmx/tmx_parser.hpp"
 

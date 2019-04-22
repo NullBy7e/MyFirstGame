@@ -23,17 +23,15 @@
     <ClInclude Include="caching\texture_loader.hpp" />
     <ClInclude Include="components\active_animation.hpp" />
     <ClInclude Include="components\components.hpp" />
-    <ClInclude Include="components\enemy.hpp" />
+    <ClInclude Include="components\entity.hpp" />
     <ClInclude Include="components\entity_animation.hpp" />
     <ClInclude Include="components\idle_animation.hpp" />
-    <ClInclude Include="components\player.hpp" />
-    <ClInclude Include="components\position.hpp" />
-    <ClInclude Include="components\scale.hpp" />
     <ClInclude Include="components\map.hpp" />
-    <ClInclude Include="components\sprite.hpp" />
     <ClInclude Include="components\run_animation.hpp" />
+    <ClInclude Include="enums\LOOP_ANIMATION.hpp" />
     <ClInclude Include="external\tinyxml2\tinyxml2.h" />
     <ClInclude Include="game.hpp" />
+    <ClInclude Include="macros.hpp" />
     <ClInclude Include="managers\entity_manager.hpp" />
     <ClInclude Include="managers\map_manager.hpp" />
     <ClInclude Include="managers\system_manager.hpp" />
@@ -57,10 +55,10 @@
   <ItemGroup>
     <ClCompile Include="caching\texture_loader.cpp" />
     <ClCompile Include="components\active_animation.cpp" />
+    <ClCompile Include="components\entity.cpp" />
     <ClCompile Include="components\entity_animation.cpp" />
     <ClCompile Include="components\idle_animation.cpp" />
     <ClCompile Include="components\map.cpp" />
-    <ClCompile Include="components\sprite.cpp" />
     <ClCompile Include="components\run_animation.cpp" />
     <ClCompile Include="external\tinyxml2\tinyxml2.cc" />
     <ClCompile Include="game.cpp" />
@@ -142,7 +140,7 @@
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>external\SFML-2.5.1\include;external\entt\src;external\thor\include</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>SFML_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>SFML_STATIC;DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>
       </PrecompiledHeaderFile>

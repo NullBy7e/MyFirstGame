@@ -24,15 +24,13 @@ SOFTWARE.
 
 #pragma once
 
-#include <typeinfo>
-
 #include <SFML/Graphics.hpp>
+
+#include "macros.hpp"
 
 #include "managers/system_manager.hpp"
 #include "managers/map_manager.hpp"
 #include "managers/entity_manager.hpp"
-
-#include "components/position.hpp"
 
 using namespace mfg::components;
 using namespace mfg::registries;

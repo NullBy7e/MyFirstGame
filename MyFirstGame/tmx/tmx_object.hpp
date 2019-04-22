@@ -37,6 +37,7 @@ public:
 		const std::string type,
 		const float x,
 		const float y,
+		const float rotation,
 		const int width,
 		const int height,
 		const int gid,
@@ -49,6 +50,7 @@ public:
 	std::string type;
 	float x;
 	float y;
+	float rotation;
 	int width;
 	int height;
 	int gid;
