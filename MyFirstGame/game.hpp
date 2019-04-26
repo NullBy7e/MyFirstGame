@@ -26,7 +26,9 @@ SOFTWARE.
 
 #include "macros.hpp"
 
+#include "map.hpp"
 #include "window.hpp"
+
 #include "tmx/tmx_parser.hpp"
 
 #include "registries/registry.hpp"
@@ -38,6 +40,13 @@ SOFTWARE.
 #include "managers/entity_manager.hpp"
 #include "managers/texture_manager.hpp"
 #include "managers/map_manager.hpp"
+
+#include "map_renderer.hpp"
+#include "player_data.hpp"
+
+#ifdef DEBUG
+#include "debug_overlay.hpp"
+#endif
 
 using namespace mfg;
 using namespace mfg::registries;
@@ -52,25 +61,26 @@ namespace mfg {
 		{
 		public:
 			Game();
-
-			void draw();
-			void drawTiles();
-			void drawEntities();
+			~Game();
 
 			void updateViewport();
-			void createPlayer();
+			PlayerData createPlayerData();
 
 			void loop();
+			void clear();
+			void display();
+		private:
+			sf::Time restartClock();
+			float getElapsedFrameTime();
 
 		private:
 			std::unique_ptr<Window> window;
 
 			sf::Vector2i screen_dimensions;
 
-			sf::View viewport;
-			sf::Vector2f viewport_dimensions;
-			int viewport_tile_width;
-			int viewport_tile_height;
+			std::unique_ptr<Viewport> viewport;
+
+			sf::Clock clock;
 
 			std::unique_ptr<SystemManager> sysmgr;
 			std::unique_ptr<EntityManager> entmgr;

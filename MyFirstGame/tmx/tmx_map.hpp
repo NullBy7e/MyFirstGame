@@ -36,6 +36,7 @@ SOFTWARE.
 class TmxMap
 {
 public:
+	TmxMap();
 	TmxMap(
 		std::map<std::string, std::string> map_properties,
 		std::vector<TmxTileset> map_tilesets,

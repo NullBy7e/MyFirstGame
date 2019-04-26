@@ -28,6 +28,16 @@ namespace mfg
 {
 	namespace managers
 	{
+		TextureManager::TextureManager()
+		{
+			DEBUG_MSG("CTOR " << "	 [" << std::addressof(*this) << "]	TextureManager");
+		}
+
+		TextureManager::~TextureManager()
+		{
+			DEBUG_MSG("DTOR " << "	 [" << std::addressof(*this) << "]	TextureManager");
+		}
+
 		entt::resource_handle<sf::Texture> TextureManager::get(const std::string texture_name, const std::string texture_path)
 		{
 			return textures.load<texture_loader>(entt::hashed_string::to_value(texture_name.c_str()), texture_path);

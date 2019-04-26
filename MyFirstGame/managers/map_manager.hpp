@@ -24,6 +24,9 @@ SOFTWARE.
 
 #pragma once
 
+#include "../macros.hpp"
+
+#include "../map.hpp"
 #include "../tmx//tmx_map.hpp"
 
 #include "texture_manager.hpp"
@@ -31,6 +34,7 @@ SOFTWARE.
 
 #include "../components/components.hpp"
 
+using namespace mfg::core;
 using namespace mfg::components;
 
 namespace mfg {
@@ -38,17 +42,20 @@ namespace mfg {
 		class MapManager
 		{
 		public:
-			TmxMap* loadMap(int id, TextureManager* texmgr, EntityManager* entmgr);
+			MapManager();
+			~MapManager();
 
-			int addMap(TmxMap* map);
+			Map* loadMap(int id, TextureManager* texmgr, EntityManager* entmgr);
 
-			TmxMap* getMap(int id);
+			int addMap(TmxMap map);
 
-			TmxMap* getCurrentMap();
+			Map* getMap(int id);
+
+			Map* getCurrentMap();
 
 		private:
-			std::vector<std::unique_ptr<TmxMap>> maps;
-			std::unique_ptr<TmxMap> currentMap;
+			std::vector<std::unique_ptr<Map>> maps;
+			std::unique_ptr<Map> currentMap;
 		};
 	}
 }

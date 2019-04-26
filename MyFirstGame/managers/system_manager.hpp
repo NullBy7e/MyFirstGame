@@ -40,6 +40,8 @@ namespace mfg
 		{
 		public:
 			SystemManager(EntityManager* entmgr);
+			~SystemManager();
+
 			AnimationSystem* getAnimationSystem();
 
 			EntityManager* entmgr;

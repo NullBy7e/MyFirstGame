@@ -35,7 +35,7 @@ SOFTWARE.
 #include <map>
 #include <vector>
 
-#include "../external/tinyxml2/tinyxml2.h"
+#include "tinyxml2.hpp"
 
 #include "tmx_map.hpp"
 #include "tmx_tileset.hpp"
@@ -50,7 +50,7 @@ class TmxParser
 public:
 	TmxParser();
 
-	TmxMap* parse(const std::string&);
+	TmxMap parse(const std::string&);
 
 	int cStrToInt(const char * x);
 

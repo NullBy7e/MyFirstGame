@@ -24,6 +24,8 @@ SOFTWARE.
 
 #pragma once
 
+#include "../macros.hpp"
+
 #include "../registries//entity_registry.hpp"
 #include "../components/components.hpp"
 
@@ -37,16 +39,14 @@ namespace mfg
 		class EntityManager
 		{
 		public:
-			EntityRegistry& getEntities();
+			EntityManager();
+			~EntityManager();
 
-			mfg::components::EntityComponent getPlayerEntity();
+			EntityRegistry& getEntities();
 
 			entt::entity getPlayer();
 
 			void setPlayer(unsigned int id);
-
-			template<class T>
-			T getPlayerComponent();
 		private:
 			EntityRegistry entities;
 			entt::entity player_id = -1;

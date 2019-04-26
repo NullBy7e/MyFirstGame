@@ -29,77 +29,59 @@ SOFTWARE.
 namespace mfg {
 	namespace managers
 	{
-		TmxMap* MapManager::loadMap(int id, TextureManager* texmgr, EntityManager* entmgr)
+		MapManager::MapManager()
+		{
+			DEBUG_MSG("CTOR " << "	 [" << std::addressof(*this) << "]	MapManager");
+		}
+
+		MapManager::~MapManager()
+		{
+			DEBUG_MSG("DTOR " << "	 [" << std::addressof(*this) << "]	MapManager");
+		}
+
+		Map* MapManager::loadMap(int id, TextureManager* texmgr, EntityManager* entmgr)
 		{
 			auto map = getMap(id);
 
-			auto player = entmgr->getPlayer();
-
-			/* iterate through each tileset */
-			for (int i = 0; i < map->tilesets.size(); i++)
-			{
-				auto tileset = map->tilesets[i];
-				auto tex = texmgr->get(tileset.name, tileset.image.image_source);
-
-				/* iterate through each row */
-				for (int row = 0; row < (tileset.tile_count / tileset.columns); ++row)
-				{
-					/* indicates at which Y pos this row starts */
-					auto row_start_y_pos = row * tileset.tile_height;
-
-					/* iterate through each column */
-					for (int col = 0; col < tileset.columns; col++)
-					{
-						/* the tile number used by Tiled */
-						auto tn = (tileset.first_gid + col) + (row * tileset.columns);
-
-						/* X & Y pos calculation */
-						auto xpos = col * tileset.tile_width;
-						auto ypos = row_start_y_pos;
-
-						/* Make a new sprite */
-						sf::Sprite sprite(tex.get(), sf::IntRect(xpos, ypos, tileset.tile_width, tileset.tile_height));
-
-						map->sprites[tn] = sprite;
-					}
-				}
-			}
-
-			/* object layers */
-			for (auto& layer : map->object_layers)
-			{
-				for (auto& object : layer.objects)
-				{
-					auto& entities = entmgr->getEntities();
-
-					if (object.name == "player_spawn" && object.type == "player")
-					{
-						auto& player_entity = entities.get<mfg::components::EntityComponent>(entmgr->getPlayer());
-						player_entity.x = object.x;
-						player_entity.y = object.y;
-
-						map->player_spawned = true;
-						continue;
-					}
-				}
-			}
+			map->loadSprites(texmgr);
+			map->loadObjects();
 
 			currentMap.reset(map);
 			return map;
 		}
 
-		int MapManager::addMap(TmxMap* map)
+		int MapManager::addMap(TmxMap map)
 		{
-			maps.push_back(std::unique_ptr<TmxMap>(map));
+			auto newMap = new Map();
+
+			newMap->tilesets = map.tilesets;
+			newMap->tile_layers = map.tile_layers;
+			newMap->object_layers = map.object_layers;
+
+			newMap->version = map.version;
+			newMap->tiled_version = map.tiled_version;
+			newMap->orientation = map.orientation;
+			newMap->render_order = map.render_order;
+
+			newMap->width = map.width;
+			newMap->height = map.height;
+
+			newMap->tile_width = map.tile_width;
+			newMap->tile_height = map.tile_height;
+
+			newMap->pixel_width = map.pixel_width;
+			newMap->pixel_height = map.pixel_height;
+
+			maps.push_back(std::unique_ptr<Map>(newMap));
 			return maps.size() - 1;
 		}
 
-		TmxMap* MapManager::getMap(int id)
+		Map* MapManager::getMap(int id)
 		{
 			return maps[id].get();
 		}
 
-		TmxMap* MapManager::getCurrentMap()
+		Map* MapManager::getCurrentMap()
 		{
 			return currentMap.get();
 		}

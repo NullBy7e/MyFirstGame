@@ -19,18 +19,6 @@
     <Filter Include="Header Files\tmx">
       <UniqueIdentifier>{bab2c3b2-c3b1-4660-87c3-6101d610ebf7}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\external">
-      <UniqueIdentifier>{7353350c-e01e-4169-b4dd-6a3b790e0dae}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\external\tinyxml2">
-      <UniqueIdentifier>{a8f55680-e081-4248-8540-539ca773db05}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\external">
-      <UniqueIdentifier>{6561a1fa-6f8a-41a2-907b-91a656a4d2e7}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\external\tinyxml2">
-      <UniqueIdentifier>{9da417fb-b3cc-454a-aca4-91a033ad9f2b}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files\components">
       <UniqueIdentifier>{6df20adf-4c99-4317-b8d1-02aff75cb132}</UniqueIdentifier>
     </Filter>
@@ -58,14 +46,14 @@
     <Filter Include="Source Files\caching">
       <UniqueIdentifier>{6cd55f6f-1e0d-44f0-9339-82acd6dae9a9}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\animations">
-      <UniqueIdentifier>{bffae5b6-743f-45d5-b48b-4721fcbce9d1}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\animations">
-      <UniqueIdentifier>{242e94ba-6bd3-4596-acf2-d7766f3f9396}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files\enums">
       <UniqueIdentifier>{48667db6-b9e8-446a-bb98-e51fed784e1f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\components\old">
+      <UniqueIdentifier>{d1b6b3b2-2417-4083-96bd-328526a8cc14}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\components\old">
+      <UniqueIdentifier>{722016d5-436b-4b6c-84e8-2a1f239d2480}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -99,9 +87,6 @@
     <ClInclude Include="tmx\tmx_tileset_image.hpp">
       <Filter>Header Files\tmx</Filter>
     </ClInclude>
-    <ClInclude Include="external\tinyxml2\tinyxml2.h">
-      <Filter>Header Files\external\tinyxml2</Filter>
-    </ClInclude>
     <ClInclude Include="tmx\tmx_chunk.hpp">
       <Filter>Header Files\tmx</Filter>
     </ClInclude>
@@ -123,9 +108,6 @@
     <ClInclude Include="caching\texture_loader.hpp">
       <Filter>Header Files\caching</Filter>
     </ClInclude>
-    <ClInclude Include="components\components.hpp">
-      <Filter>Header Files\components</Filter>
-    </ClInclude>
     <ClInclude Include="managers\system_manager.hpp">
       <Filter>Header Files\managers</Filter>
     </ClInclude>
@@ -141,29 +123,62 @@
     <ClInclude Include="systems\animation_system.hpp">
       <Filter>Header Files\systems</Filter>
     </ClInclude>
-    <ClInclude Include="components\idle_animation.hpp">
-      <Filter>Header Files\components</Filter>
-    </ClInclude>
-    <ClInclude Include="components\run_animation.hpp">
-      <Filter>Header Files\components</Filter>
-    </ClInclude>
-    <ClInclude Include="components\active_animation.hpp">
-      <Filter>Header Files\components</Filter>
-    </ClInclude>
-    <ClInclude Include="components\entity_animation.hpp">
-      <Filter>Header Files\components</Filter>
-    </ClInclude>
     <ClInclude Include="enums\LOOP_ANIMATION.hpp">
       <Filter>Header Files\enums</Filter>
     </ClInclude>
     <ClInclude Include="macros.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="tmx\tinyxml2.hpp">
+      <Filter>Header Files\tmx</Filter>
+    </ClInclude>
+    <ClInclude Include="components\active_animation.hpp">
+      <Filter>Header Files\components\old</Filter>
+    </ClInclude>
+    <ClInclude Include="components\components.hpp">
+      <Filter>Header Files\components\old</Filter>
+    </ClInclude>
     <ClInclude Include="components\entity.hpp">
+      <Filter>Header Files\components\old</Filter>
+    </ClInclude>
+    <ClInclude Include="components\entity_animation.hpp">
+      <Filter>Header Files\components\old</Filter>
+    </ClInclude>
+    <ClInclude Include="components\idle_animation.hpp">
+      <Filter>Header Files\components\old</Filter>
+    </ClInclude>
+    <ClInclude Include="components\run_animation.hpp">
+      <Filter>Header Files\components\old</Filter>
+    </ClInclude>
+    <ClInclude Include="map.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="components\actor.hpp">
       <Filter>Header Files\components</Filter>
     </ClInclude>
-    <ClInclude Include="components\map.hpp">
+    <ClInclude Include="components\animation.hpp">
       <Filter>Header Files\components</Filter>
+    </ClInclude>
+    <ClInclude Include="components\sprite.hpp">
+      <Filter>Header Files\components</Filter>
+    </ClInclude>
+    <ClInclude Include="components\position.hpp">
+      <Filter>Header Files\components</Filter>
+    </ClInclude>
+    <ClInclude Include="map_renderer.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="viewport.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="player_data.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="components\health.hpp">
+      <Filter>Header Files\components</Filter>
+    </ClInclude>
+    <ClInclude Include="debug_overlay.hpp">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -197,9 +212,6 @@
     <ClCompile Include="tmx\tmx_tileset_image.cpp">
       <Filter>Source Files\tmx</Filter>
     </ClCompile>
-    <ClCompile Include="external\tinyxml2\tinyxml2.cc">
-      <Filter>Source Files\external\tinyxml2</Filter>
-    </ClCompile>
     <ClCompile Include="tmx\tmx_chunk.cpp">
       <Filter>Source Files\tmx</Filter>
     </ClCompile>
@@ -227,26 +239,56 @@
     <ClCompile Include="systems\animation_system.cpp">
       <Filter>Source Files\systems</Filter>
     </ClCompile>
-    <ClCompile Include="components\idle_animation.cpp">
-      <Filter>Source Files\components</Filter>
-    </ClCompile>
     <ClCompile Include="caching\texture_loader.cpp">
       <Filter>Source Files\caching</Filter>
     </ClCompile>
+    <ClCompile Include="tmx\tinyxml2.cpp">
+      <Filter>Source Files\tmx</Filter>
+    </ClCompile>
     <ClCompile Include="components\active_animation.cpp">
-      <Filter>Source Files\components</Filter>
-    </ClCompile>
-    <ClCompile Include="components\run_animation.cpp">
-      <Filter>Source Files\components</Filter>
-    </ClCompile>
-    <ClCompile Include="components\entity_animation.cpp">
-      <Filter>Source Files\components</Filter>
+      <Filter>Source Files\components\old</Filter>
     </ClCompile>
     <ClCompile Include="components\entity.cpp">
+      <Filter>Source Files\components\old</Filter>
+    </ClCompile>
+    <ClCompile Include="components\idle_animation.cpp">
+      <Filter>Source Files\components\old</Filter>
+    </ClCompile>
+    <ClCompile Include="components\run_animation.cpp">
+      <Filter>Source Files\components\old</Filter>
+    </ClCompile>
+    <ClCompile Include="components\entity_animation.cpp">
+      <Filter>Source Files\components\old</Filter>
+    </ClCompile>
+    <ClCompile Include="map.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="components\actor.cpp">
       <Filter>Source Files\components</Filter>
     </ClCompile>
-    <ClCompile Include="components\map.cpp">
+    <ClCompile Include="components\sprite.cpp">
       <Filter>Source Files\components</Filter>
+    </ClCompile>
+    <ClCompile Include="components\position.cpp">
+      <Filter>Source Files\components</Filter>
+    </ClCompile>
+    <ClCompile Include="components\animation.cpp">
+      <Filter>Source Files\components</Filter>
+    </ClCompile>
+    <ClCompile Include="map_renderer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="viewport.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="components\health.cpp">
+      <Filter>Source Files\components</Filter>
+    </ClCompile>
+    <ClCompile Include="player_data.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="debug_overlay.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

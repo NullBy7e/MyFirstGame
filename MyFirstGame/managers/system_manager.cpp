@@ -30,7 +30,14 @@ namespace mfg
 	{
 		SystemManager::SystemManager(EntityManager* entmgr) : entmgr(entmgr)
 		{
+			DEBUG_MSG("CTOR " << "	 [" << std::addressof(*this) << "]	SystemManager");
+
 			animsys.reset(new AnimationSystem(entmgr));
+		}
+
+		SystemManager::~SystemManager()
+		{
+			DEBUG_MSG("DTOR " << "	 [" << std::addressof(*this) << "]	SystemManager");
 		}
 
 		AnimationSystem* SystemManager::getAnimationSystem()

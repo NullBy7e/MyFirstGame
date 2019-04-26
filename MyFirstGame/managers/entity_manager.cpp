@@ -28,21 +28,19 @@ namespace mfg
 {
 	namespace managers
 	{
+		EntityManager::EntityManager()
+		{
+			DEBUG_MSG("CTOR " << "	 [" << std::addressof(*this) << "]	EntityManager");
+		}
+
+		EntityManager::~EntityManager()
+		{
+			DEBUG_MSG("DTOR " << "	 [" << std::addressof(*this) << "]	EntityManager");
+		}
+
 		EntityRegistry& EntityManager::getEntities()
 		{
 			return entities;
-		}
-
-		template <class T>
-		T EntityManager::getPlayerComponent()
-		{
-			entities.get<T>(this->getPlayer());
-		}
-
-		EntityComponent EntityManager::getPlayerEntity()
-		{
-			auto& entities = getEntities();
-			return entities.get<EntityComponent>(player_id);
 		}
 
 		entt::entity EntityManager::getPlayer()

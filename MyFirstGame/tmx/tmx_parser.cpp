@@ -353,7 +353,7 @@ std::vector<TmxObjectLayer> TmxParser::getMapObjectLayers(const XMLElement & map
 	return layers;
 }
 
-TmxMap* TmxParser::parse(const std::string& filename)
+TmxMap TmxParser::parse(const std::string& filename)
 {
 	XMLDocument doc;
 	doc.LoadFile(filename.c_str());
@@ -365,7 +365,7 @@ TmxMap* TmxParser::parse(const std::string& filename)
 	_chdir(std::filesystem::absolute(filename).remove_filename().string().c_str());
 
 	/* YAY! */
-	auto map = new TmxMap(
+	auto map = TmxMap(
 		getMapElementProperties(root_element),
 		getMapTilesets(root_element),
 		getMapTileLayers(root_element),

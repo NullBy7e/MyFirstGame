@@ -24,6 +24,8 @@ SOFTWARE.
 
 #include "tmx_map.hpp"
 
+TmxMap::TmxMap() {};
+
 TmxMap::TmxMap(
 	std::map<std::string, std::string> map_properties,
 	std::vector<TmxTileset> map_tilesets,

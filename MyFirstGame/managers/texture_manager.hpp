@@ -24,6 +24,7 @@ SOFTWARE.
 
 #pragma once
 
+#include "../macros.hpp"
 #include "../caching/cache.hpp"
 
 using namespace mfg::caching;
@@ -35,6 +36,9 @@ namespace mfg
 		class TextureManager
 		{
 		public:
+			TextureManager();
+			~TextureManager();
+
 			entt::resource_handle<sf::Texture> get(const std::string texture_name, const std::string texture_path);
 		private:
 			texture_cache textures;
