@@ -34,6 +34,7 @@ SOFTWARE.
 
 #include "../managers/entity_manager.hpp"
 #include "../components/entity_animation.hpp"
+#include "../components/active_animation.hpp"
 
 #include "../enums/LOOP_ANIMATION.hpp"
 

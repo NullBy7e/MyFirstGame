@@ -3,6 +3,7 @@
 #include <iostream>
 
 #include "macros.hpp"
+#include "window.hpp"
 
 #include "map.hpp"
 #include "viewport.hpp"
@@ -14,14 +15,16 @@ namespace mfg
 		class MapRenderer
 		{
 		public:
-			MapRenderer();
+			MapRenderer(Window& window);
 			~MapRenderer();
 
-			std::vector<sf::Sprite> getSprites(Viewport* viewport, Map* map);
+			void render(Viewport& viewport, Map& map);
 
 		private:
-			std::vector<sf::Sprite> drawTiles(Viewport* viewport, Map* map);
-			std::vector<sf::Sprite> drawEntities(Map* map);
+			void drawTiles(Viewport& viewport, Map& map);
+			void drawEntities(Map& map);
+
+			Window& window;
 		};
 	}
 }

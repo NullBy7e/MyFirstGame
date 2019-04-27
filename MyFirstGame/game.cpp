@@ -32,32 +32,24 @@ namespace mfg
 		{
 			DEBUG_MSG("CTOR " << "	 [" << std::addressof(*this) << "]	Game");
 
-			entmgr.reset(new EntityManager);
-			sysmgr.reset(new SystemManager(entmgr.get()));
-			texmgr.reset(new TextureManager);
-			mapmgr.reset(new MapManager);
-
-			window.reset(new mfg::core::Window());
-			window->create(sf::VideoMode(1280, 1024), "MyFirstGame", sf::Style::Titlebar | sf::Style::Close);
-			window->setFramerateLimit(60);
+			window.create(sf::VideoMode(1280, 1024), "MyFirstGame", sf::Style::Titlebar | sf::Style::Close);
+			window.setFramerateLimit(60);
 
 			TmxParser parser;
-			auto mapId = mapmgr->addMap(parser.parse("maps/level1/level1.tmx"));
-			auto map = mapmgr->loadMap(mapId, texmgr.get(), entmgr.get());
+			auto mapId = mapmgr.addMap(parser.parse("maps/level1/level1.tmx"));
+			auto& map = mapmgr.loadMap(mapId, texmgr.getRef());
 
-			map->setPlayerData(createPlayerData());
+			map.setPlayerData(createPlayerData());
 
 			/* screen dimensions (window size) */
 			screen_dimensions = sf::Vector2i(1280, 1024);
 
-			viewport.reset(new Viewport());
-
-			viewport->setDimensions(sf::Vector2f(screen_dimensions.x, screen_dimensions.y));
-			viewport->setTileWidth(viewport->getDimensions().x / map->tile_width);
-			viewport->setTileHeight(viewport->getDimensions().y / map->tile_height);
+			viewport.setDimensions(sf::Vector2f(screen_dimensions.x, screen_dimensions.y));
+			viewport.setTileWidth(viewport.getDimensions().x / map.tile_width);
+			viewport.setTileHeight(viewport.getDimensions().y / map.tile_height);
 
 			/* the viewport view is used to enable side-scrolling, it acts as a camera for the player */
-			viewport->setCenter(viewport->getCenter().x + map->tile_width * 2.2, viewport->getCenter().y);
+			viewport.setCenter(viewport.getCenter().x + map.tile_width * 2.2, viewport.getCenter().y);
 		}
 
 		Game::~Game()
@@ -67,10 +59,10 @@ namespace mfg
 
 		void Game::updateViewport()
 		{
-			auto map = mapmgr->getCurrentMap();
-			viewport->update(map->getPlayerPosition(), map->getDimensions());
+			auto& map = mapmgr.getCurrentMap();
+			viewport.update(map.getPlayerPosition(), map.getDimensions());
 
-			window->setView(*viewport);
+			window.setView(viewport.getRef());
 		}
 
 		//void Game::drawEntities()
@@ -92,21 +84,22 @@ namespace mfg
 		//		}
 
 		//		sprite.setPosition(entity_component.x, entity_component.y);
-		//		this->window->draw(sprite);
+		//		this->window.draw(sprite);
 		//	});
 		//}
 
 		PlayerData Game::createPlayerData()
 		{
-			PlayerData player_data;
+			auto tex = texmgr.get("player", "textures/sprites/player/animation/knight_m_idle_anim_f0.png");
 
-			player_data.actor = ActorComponent("player");
-			player_data.animation = AnimationComponent();
-			player_data.health = HealthComponent(400);
-			player_data.position = PositionComponent();
-
-			auto tex = texmgr->get("player", "textures/sprites/player/animation/knight_m_idle_anim_f0.png");
-			player_data.sprite = SpriteComponent(sf::Sprite(tex));
+			PlayerData player_data =
+			{
+				ActorComponent("player"),
+				HealthComponent(400),
+				AnimationComponent(),
+				SpriteComponent(sf::Sprite(tex)),
+				PositionComponent()
+			};
 
 			return player_data;
 
@@ -153,40 +146,37 @@ namespace mfg
 		void Game::loop()
 		{
 			sf::Event event;
-			MapRenderer renderer;
+			MapRenderer renderer(window);
 
 #ifdef DEBUG
-			DebugOverlay debug_overlay(mapmgr->getCurrentMap()->getEntityManager(), *window);
+			DebugOverlay debug_overlay(mapmgr.getCurrentMap().getEntityManager(), window);
 #endif
 
-			while (window->isOpen())
+			while (window.isOpen())
 			{
 				clear();
 
-				for (auto sprite : renderer.getSprites(viewport.get(), mapmgr->getCurrentMap()))
-				{
-					window->draw(sprite);
-				}
+				window.pollEvent(event);
+				updateViewport();
+
+				renderer.render(viewport, mapmgr.getCurrentMap());
 
 #ifdef DEBUG
-				window->draw(debug_overlay);
+				window.draw(debug_overlay);
 #endif
 
 				display();
-
-				updateViewport();
-				window->pollEvent(event);
 			}
 		}
 
 		void Game::clear()
 		{
-			window->clear(sf::Color::Black);
+			window.clear(sf::Color::Black);
 		}
 
 		void Game::display()
 		{
-			window->display();
+			window.display();
 		}
 
 		sf::Time Game::restartClock()

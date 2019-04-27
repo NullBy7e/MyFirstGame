@@ -46,12 +46,12 @@ namespace mfg
 			setSize(dimensions);
 		}
 
-		float Viewport::getTileWidth()
+		float Viewport::getTileWidth() const
 		{
 			return tile_width;
 		}
 
-		float Viewport::getTileHeight()
+		float Viewport::getTileHeight() const
 		{
 			return tile_height;
 		}
@@ -59,6 +59,11 @@ namespace mfg
 		sf::Vector2f Viewport::getDimensions()
 		{
 			return dimensions;
+		}
+
+		Viewport& Viewport::getRef()
+		{
+			return *this;
 		}
 	}
 }

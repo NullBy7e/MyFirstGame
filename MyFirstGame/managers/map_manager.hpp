@@ -45,13 +45,13 @@ namespace mfg {
 			MapManager();
 			~MapManager();
 
-			Map* loadMap(int id, TextureManager* texmgr, EntityManager* entmgr);
+			Map& loadMap(int id, TextureManager& texmgr);
 
 			int addMap(TmxMap map);
 
 			Map* getMap(int id);
 
-			Map* getCurrentMap();
+			Map& getCurrentMap();
 
 		private:
 			std::vector<std::unique_ptr<Map>> maps;

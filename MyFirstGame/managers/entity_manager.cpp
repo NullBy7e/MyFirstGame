@@ -38,7 +38,7 @@ namespace mfg
 			DEBUG_MSG("DTOR " << "	 [" << std::addressof(*this) << "]	EntityManager");
 		}
 
-		EntityRegistry& EntityManager::getEntities()
+		entt::registry& EntityManager::getEntities()
 		{
 			return entities;
 		}

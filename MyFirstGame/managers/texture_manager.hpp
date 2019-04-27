@@ -40,6 +40,8 @@ namespace mfg
 			~TextureManager();
 
 			entt::resource_handle<sf::Texture> get(const std::string texture_name, const std::string texture_path);
+
+			TextureManager& getRef();
 		private:
 			texture_cache textures;
 		};

@@ -42,5 +42,10 @@ namespace mfg
 		{
 			return textures.load<texture_loader>(entt::hashed_string::to_value(texture_name.c_str()), texture_path);
 		}
+
+		TextureManager& TextureManager::getRef()
+		{
+			return *this;
+		}
 	}
 }

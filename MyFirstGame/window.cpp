@@ -32,7 +32,7 @@ namespace mfg
 		{
 			sf::Event event;
 
-			auto map = mapmgr->getCurrentMap();
+			auto& map = mapmgr->getCurrentMap();
 			auto& entities = entmgr->getEntities();
 
 			auto player_entity = entmgr->getPlayer();
@@ -87,7 +87,7 @@ namespace mfg
 						auto new_pos = move_speed * dt.asSeconds();
 
 						auto delta = (player_position.x + new_pos) - player_position.x;
-						auto can_move = player_position.x + delta > 0 && player_position.x + delta < ((map->width * map->tile_width) - map->tile_width);
+						auto can_move = player_position.x + delta > 0 && player_position.x + delta < ((map.width * map.tile_width) - map.tile_width);
 
 						if (can_move)
 						{
@@ -139,6 +139,11 @@ namespace mfg
 				if (player.facing_right)
 					anim.animation->sprite->setScale(1, 1);
 			}
+		}
+
+		Window& Window::getRef()
+		{
+			return *this;
 		}
 	}
 }

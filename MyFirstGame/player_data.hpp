@@ -12,17 +12,6 @@ namespace mfg
 {
 	namespace core
 	{
-		class PlayerData
-		{
-		public:
-			PlayerData();
-			~PlayerData();
-
-			ActorComponent actor;
-			AnimationComponent animation;
-			HealthComponent health;
-			PositionComponent position;
-			SpriteComponent sprite;
-		};
+		using PlayerData = std::tuple<ActorComponent, HealthComponent, AnimationComponent, SpriteComponent, PositionComponent>;
 	}
 }

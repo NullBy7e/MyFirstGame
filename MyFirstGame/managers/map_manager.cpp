@@ -39,7 +39,7 @@ namespace mfg {
 			DEBUG_MSG("DTOR " << "	 [" << std::addressof(*this) << "]	MapManager");
 		}
 
-		Map* MapManager::loadMap(int id, TextureManager* texmgr, EntityManager* entmgr)
+		Map& MapManager::loadMap(int id, TextureManager& texmgr)
 		{
 			auto map = getMap(id);
 
@@ -47,30 +47,27 @@ namespace mfg {
 			map->loadObjects();
 
 			currentMap.reset(map);
-			return map;
+			return map->getRef();
 		}
 
 		int MapManager::addMap(TmxMap map)
 		{
-			auto newMap = new Map();
-
-			newMap->tilesets = map.tilesets;
-			newMap->tile_layers = map.tile_layers;
-			newMap->object_layers = map.object_layers;
-
-			newMap->version = map.version;
-			newMap->tiled_version = map.tiled_version;
-			newMap->orientation = map.orientation;
-			newMap->render_order = map.render_order;
-
-			newMap->width = map.width;
-			newMap->height = map.height;
-
-			newMap->tile_width = map.tile_width;
-			newMap->tile_height = map.tile_height;
-
-			newMap->pixel_width = map.pixel_width;
-			newMap->pixel_height = map.pixel_height;
+			auto newMap = new Map
+			(
+				map.tilesets,
+				map.tile_layers,
+				map.object_layers,
+				map.version,
+				map.tiled_version,
+				map.orientation,
+				map.render_order,
+				map.width,
+				map.height,
+				map.tile_width,
+				map.tile_height,
+				map.pixel_width,
+				map.pixel_height
+			);
 
 			maps.push_back(std::unique_ptr<Map>(newMap));
 			return maps.size() - 1;
@@ -81,9 +78,9 @@ namespace mfg {
 			return maps[id].get();
 		}
 
-		Map* MapManager::getCurrentMap()
+		Map& MapManager::getCurrentMap()
 		{
-			return currentMap.get();
+			return *currentMap.get();
 		}
 	}
 }

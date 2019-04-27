@@ -23,10 +23,12 @@ namespace mfg
 
 			void setDimensions(sf::Vector2f dimensions);
 
-			float getTileWidth();
-			float getTileHeight();
+			float getTileWidth() const;
+			float getTileHeight() const;
 
 			sf::Vector2f getDimensions();
+
+			Viewport& getRef();
 
 		private:
 			float tile_width;

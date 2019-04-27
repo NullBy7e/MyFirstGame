@@ -26,10 +26,8 @@ SOFTWARE.
 
 #include "../macros.hpp"
 
-#include "../registries//entity_registry.hpp"
 #include "../components/components.hpp"
 
-using namespace mfg::registries;
 using namespace mfg::components;
 
 namespace mfg
@@ -42,13 +40,13 @@ namespace mfg
 			EntityManager();
 			~EntityManager();
 
-			EntityRegistry& getEntities();
+			entt::registry& getEntities();
 
 			entt::entity getPlayer();
 
 			void setPlayer(unsigned int id);
 		private:
-			EntityRegistry entities;
+			entt::registry entities;
 			entt::entity player_id = -1;
 		};
 	}

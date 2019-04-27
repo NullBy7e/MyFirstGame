@@ -31,8 +31,6 @@ SOFTWARE.
 
 #include "tmx/tmx_parser.hpp"
 
-#include "registries/registry.hpp"
-
 #include "caching/cache.hpp"
 #include "components/components.hpp"
 
@@ -49,7 +47,6 @@ SOFTWARE.
 #endif
 
 using namespace mfg;
-using namespace mfg::registries;
 using namespace mfg::caching;
 using namespace mfg::managers;
 using namespace mfg::components;
@@ -74,18 +71,15 @@ namespace mfg {
 			float getElapsedFrameTime();
 
 		private:
-			std::unique_ptr<Window> window;
+			Window window;
+			Viewport viewport;
 
 			sf::Vector2i screen_dimensions;
 
-			std::unique_ptr<Viewport> viewport;
-
 			sf::Clock clock;
 
-			std::unique_ptr<SystemManager> sysmgr;
-			std::unique_ptr<EntityManager> entmgr;
-			std::unique_ptr<TextureManager> texmgr;
-			std::unique_ptr<MapManager> mapmgr;
+			TextureManager texmgr;
+			MapManager mapmgr;
 		};
 	}
 }

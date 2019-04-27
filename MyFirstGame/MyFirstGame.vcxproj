@@ -43,8 +43,6 @@
     <ClInclude Include="map.hpp" />
     <ClInclude Include="map_renderer.hpp" />
     <ClInclude Include="player_data.hpp" />
-    <ClInclude Include="registries\entity_registry.hpp" />
-    <ClInclude Include="registries\registry.hpp" />
     <ClInclude Include="systems\animation_system.hpp" />
     <ClInclude Include="tmx\tinyxml2.hpp" />
     <ClInclude Include="tmx\tmx_layer.hpp" />
@@ -82,7 +80,6 @@
     <ClCompile Include="managers\texture_manager.cpp" />
     <ClCompile Include="map.cpp" />
     <ClCompile Include="map_renderer.cpp" />
-    <ClCompile Include="player_data.cpp" />
     <ClCompile Include="systems\animation_system.cpp" />
     <ClCompile Include="tmx\tinyxml2.cpp" />
     <ClCompile Include="tmx\tmx_layer.cpp" />

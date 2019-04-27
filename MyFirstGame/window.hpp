@@ -33,7 +33,6 @@ SOFTWARE.
 #include "managers/entity_manager.hpp"
 
 using namespace mfg::components;
-using namespace mfg::registries;
 using namespace mfg::managers;
 
 namespace mfg
@@ -44,6 +43,8 @@ namespace mfg
 		{
 		public:
 			void handleInput(SystemManager* sysmgr, MapManager* mapmgr, EntityManager* entmgr, sf::Time dt);
+
+			Window& getRef();
 
 		private:
 			sf::Clock clock;
