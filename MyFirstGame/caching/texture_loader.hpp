@@ -35,6 +35,9 @@ namespace mfg
 {
 	namespace caching
 	{
+		using texture_cache = entt::resource_cache<sf::Texture>;
+		using texture_handle = entt::resource_handle<sf::Texture>;
+
 		struct texture_loader : entt::resource_loader<texture_loader, sf::Texture> {
 			std::shared_ptr<sf::Texture> load(std::string texture_path) const;
 		};

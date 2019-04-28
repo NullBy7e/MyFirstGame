@@ -19,7 +19,7 @@ namespace mfg
 		class DebugOverlay : public sf::Transformable, public sf::Drawable
 		{
 		public:
-			DebugOverlay(EntityManager& entmgr, Window& window);
+			DebugOverlay(Window& window, EntityManager& entmgr);
 			~DebugOverlay();
 
 			void draw(sf::RenderTarget& target, sf::RenderStates states) const;

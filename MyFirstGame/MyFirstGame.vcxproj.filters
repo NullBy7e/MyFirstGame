@@ -93,9 +93,6 @@
     <ClInclude Include="game.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="caching\cache.hpp">
-      <Filter>Header Files\caching</Filter>
-    </ClInclude>
     <ClInclude Include="caching\texture_loader.hpp">
       <Filter>Header Files\caching</Filter>
     </ClInclude>

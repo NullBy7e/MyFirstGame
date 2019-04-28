@@ -28,6 +28,12 @@ SOFTWARE.
 
 #include "../components/components.hpp"
 
+#include "../components/actor.hpp"
+#include "../components/animation.hpp"
+#include "../components/health.hpp"
+#include "../components/sprite.hpp"
+#include "../components/position.hpp"
+
 using namespace mfg::components;
 
 namespace mfg
@@ -40,10 +46,19 @@ namespace mfg
 			EntityManager();
 			~EntityManager();
 
+			entt::entity createActor(
+				const std::string& actor_name,
+				const int health,
+				const bool flipped_horizontally,
+				const float width,
+				const float height,
+				const sf::Sprite sprite,
+				const sf::Vector2f position
+			);
+
 			entt::registry& getEntities();
 
 			entt::entity getPlayer();
-
 			void setPlayer(unsigned int id);
 		private:
 			entt::registry entities;

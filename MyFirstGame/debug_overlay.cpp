@@ -4,7 +4,7 @@ namespace mfg
 {
 	namespace core
 	{
-		DebugOverlay::DebugOverlay(EntityManager& entmgr, Window& window) : entmgr(entmgr), window(window)
+		DebugOverlay::DebugOverlay(Window& window, EntityManager& entmgr) : window(window), entmgr(entmgr)
 		{
 			font.loadFromFile("fonts/arial.ttf");
 		}

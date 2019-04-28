@@ -103,18 +103,8 @@ namespace mfg
 			{
 				for (auto& object : layer.objects)
 				{
-					auto is_player = object.name == "player";
-
 					if (object.type == "spawn")
 					{
-						auto entity = entities.create();
-
-						if (is_player)
-						{
-							entity = entmgr.getPlayer();
-							player_spawned = true;
-						}
-
 						auto y_pos = object.y;
 
 						/* if an object in Tiled does not have a sprite, then the Y pos starts at the bottom
@@ -122,16 +112,19 @@ namespace mfg
 						if (object.gid == -1)
 							y_pos += object.height;
 
-						entities.assign<PositionComponent>(entity, object.x, y_pos);
+						auto actor = entmgr.createActor
+						(
+							object.name,
+							300,
+							object.flipped_horizontally,
+							object.width,
+							object.height,
+							sprites[object.gid],
+							sf::Vector2f(object.x, y_pos)
+						);
 
-						/* the player has a custom sprite */
-						if (!is_player)
-						{
-							entities.assign<ActorComponent>(entity, object.name);
-							entities.assign<AnimationComponent>(entity);
-							entities.assign<HealthComponent>(entity, 300);
-							entities.assign<SpriteComponent>(entity, SpriteComponent(object.flipped_horizontally, object.width, object.height, sprites[object.gid]));
-						}
+						if (object.name == "player")
+							entmgr.setPlayer(actor);
 					}
 				}
 			}
@@ -141,10 +134,10 @@ namespace mfg
 		{
 			auto& entities = entmgr.getEntities();
 
-			entities.assign<ActorComponent>(entmgr.getPlayer(), std::get<ActorComponent>(player_data));
-			entities.assign<AnimationComponent>(entmgr.getPlayer(), std::get<AnimationComponent>(player_data));
-			entities.assign<HealthComponent>(entmgr.getPlayer(), std::get<HealthComponent>(player_data));
-			entities.assign<SpriteComponent>(entmgr.getPlayer(), std::get<SpriteComponent>(player_data));
+			entities.assign_or_replace<ActorComponent>(entmgr.getPlayer(), std::get<ActorComponent>(player_data));
+			entities.assign_or_replace<AnimationComponent>(entmgr.getPlayer(), std::get<AnimationComponent>(player_data));
+			entities.assign_or_replace<HealthComponent>(entmgr.getPlayer(), std::get<HealthComponent>(player_data));
+			entities.assign_or_replace<SpriteComponent>(entmgr.getPlayer(), std::get<SpriteComponent>(player_data));
 		}
 
 		sf::Vector2f Map::getEntityPosition(unsigned int entity)
@@ -186,20 +179,10 @@ namespace mfg
 		{
 			std::map<std::pair<float, float>, std::vector<int>> new_mappings;
 
-			for (auto mapping : mappings)
+			std::copy_if(mappings.begin(), mappings.end(), std::inserter(new_mappings, new_mappings.begin()), [begin_x, begin_y, end_y, end_x](const auto m)
 			{
-				auto pair = mapping.first;
-				auto x = pair.first;
-				auto y = pair.second;
-
-				if (x >= begin_x && x <= end_x)
-				{
-					if (y >= begin_y && y <= end_y)
-					{
-						new_mappings[{x, y}] = mappings[{x, y}];
-					}
-				}
-			}
+				return m.first.first >= begin_x && m.first.first <= end_x && m.first.second >= begin_y && m.first.second <= end_y;
+			});
 
 			return new_mappings;
 		}

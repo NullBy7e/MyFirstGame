@@ -49,13 +49,13 @@ namespace mfg {
 
 			int addMap(TmxMap map);
 
-			Map* getMap(int id);
+			Map& getMap(int id);
 
 			Map& getCurrentMap();
 
 		private:
 			std::vector<std::unique_ptr<Map>> maps;
-			std::unique_ptr<Map> currentMap;
+			int currentMap;
 		};
 	}
 }

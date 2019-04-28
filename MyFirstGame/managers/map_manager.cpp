@@ -26,7 +26,8 @@ SOFTWARE.
 #include "texture_manager.hpp"
 #include "entity_manager.hpp"
 
-namespace mfg {
+namespace mfg
+{
 	namespace managers
 	{
 		MapManager::MapManager()
@@ -41,13 +42,13 @@ namespace mfg {
 
 		Map& MapManager::loadMap(int id, TextureManager& texmgr)
 		{
-			auto map = getMap(id);
+			auto& map = getMap(id);
 
-			map->loadSprites(texmgr);
-			map->loadObjects();
+			map.loadSprites(texmgr);
+			map.loadObjects();
 
-			currentMap.reset(map);
-			return map->getRef();
+			currentMap = id;
+			return map;
 		}
 
 		int MapManager::addMap(TmxMap map)
@@ -73,14 +74,14 @@ namespace mfg {
 			return maps.size() - 1;
 		}
 
-		Map* MapManager::getMap(int id)
+		Map& MapManager::getMap(int id)
 		{
-			return maps[id].get();
+			return *maps[id];
 		}
 
 		Map& MapManager::getCurrentMap()
 		{
-			return *currentMap.get();
+			return *maps[currentMap];
 		}
 	}
 }

@@ -31,7 +31,6 @@ SOFTWARE.
 
 #include "tmx/tmx_parser.hpp"
 
-#include "caching/cache.hpp"
 #include "components/components.hpp"
 
 #include "managers/system_manager.hpp"
@@ -47,7 +46,6 @@ SOFTWARE.
 #endif
 
 using namespace mfg;
-using namespace mfg::caching;
 using namespace mfg::managers;
 using namespace mfg::components;
 

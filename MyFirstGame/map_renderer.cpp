@@ -23,7 +23,7 @@ namespace mfg
 		void MapRenderer::drawTiles(Viewport& viewport, Map& map)
 		{
 			/* get XY->tile_id mapping for the current viewport */
-			for (auto mapping : map.getMappings
+			for (auto&[pair, tiles] : map.getMappings
 			(
 				viewport.getViewport().left,
 				viewport.getViewport().top,
@@ -32,10 +32,8 @@ namespace mfg
 				viewport.getViewport().left + viewport.getDimensions().x
 			))
 			{
-				auto pair = mapping.first;
 				auto x = pair.first;
 				auto y = pair.second;
-				auto tiles = mapping.second;
 
 				for (auto tile_id : tiles)
 				{

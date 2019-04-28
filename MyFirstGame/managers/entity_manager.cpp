@@ -38,6 +38,32 @@ namespace mfg
 			DEBUG_MSG("DTOR " << "	 [" << std::addressof(*this) << "]	EntityManager");
 		}
 
+		entt::entity EntityManager::createActor(
+			const std::string & actor_name,
+			const int health,
+			const bool flipped_horizontally,
+			const float width,
+			const float height,
+			const sf::Sprite sprite,
+			const sf::Vector2f position
+		)
+		{
+			auto entity = entities.create();
+
+			entities.assign<ActorComponent>(entity, actor_name);
+			entities.assign<AnimationComponent>(entity);
+			entities.assign<HealthComponent>(entity, health);
+			entities.assign<SpriteComponent>(entity, SpriteComponent(
+				flipped_horizontally,
+				width,
+				height,
+				sprite
+			));
+			entities.assign<PositionComponent>(entity, position.x, position.y);
+
+			return entity;
+		}
+
 		entt::registry& EntityManager::getEntities()
 		{
 			return entities;

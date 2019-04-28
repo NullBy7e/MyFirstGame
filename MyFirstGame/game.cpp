@@ -92,7 +92,7 @@ namespace mfg
 		{
 			auto tex = texmgr.get("player", "textures/sprites/player/animation/knight_m_idle_anim_f0.png");
 
-			PlayerData player_data =
+			return PlayerData
 			{
 				ActorComponent("player"),
 				HealthComponent(400),
@@ -100,8 +100,6 @@ namespace mfg
 				SpriteComponent(sf::Sprite(tex)),
 				PositionComponent()
 			};
-
-			return player_data;
 
 			//auto& entities = entmgr->getEntities();
 
@@ -149,7 +147,7 @@ namespace mfg
 			MapRenderer renderer(window);
 
 #ifdef DEBUG
-			DebugOverlay debug_overlay(mapmgr.getCurrentMap().getEntityManager(), window);
+			DebugOverlay debug_overlay(window, mapmgr.getCurrentMap().getEntityManager());
 #endif
 
 			while (window.isOpen())
