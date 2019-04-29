@@ -1,13 +1,8 @@
 #include "animation.hpp"
 
-namespace mfg {
-	namespace components {
-		AnimationComponent::AnimationComponent()
-		{
-		}
-
-		AnimationComponent::~AnimationComponent()
-		{
-		}
+namespace mfg
+{
+	namespace components
+	{
 	}
 }

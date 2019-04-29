@@ -26,8 +26,6 @@ SOFTWARE.
 
 #include <SFML/Graphics.hpp>
 
-#include "macros.hpp"
-
 #include "managers/system_manager.hpp"
 #include "managers/map_manager.hpp"
 #include "managers/entity_manager.hpp"
@@ -39,7 +37,7 @@ namespace mfg
 {
 	namespace core
 	{
-		class Window : public sf::RenderWindow
+		class Window final : public sf::RenderWindow
 		{
 		public:
 			void handleInput(SystemManager* sysmgr, MapManager* mapmgr, EntityManager* entmgr, sf::Time dt);
@@ -47,8 +45,8 @@ namespace mfg
 			Window& getRef();
 
 		private:
-			sf::Clock clock;
-			sf::Time elapsed_time;
+			sf::Clock clock_;
+			sf::Time  elapsed_time_;
 		};
 	}
 }

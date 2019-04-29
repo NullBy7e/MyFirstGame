@@ -23,14 +23,15 @@ SOFTWARE.
 */
 
 #include "entity_animation.hpp"
+#include <utility>
 
-namespace mfg {
-	namespace components {
-		EntityAnimationComponent::EntityAnimationComponent(sf::Sprite* sprite, thor::FrameAnimation frame) : sprite(sprite), frame(frame)
-		{
-		}
-
-		EntityAnimationComponent::~EntityAnimationComponent()
+namespace mfg
+{
+	namespace components
+	{
+		EntityAnimationComponent::
+		EntityAnimationComponent(sf::Sprite* sprite, thor::FrameAnimation frame) : sprite(sprite),
+		                                                                           frame(std::move(frame))
 		{
 		}
 

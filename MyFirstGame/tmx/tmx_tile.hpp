@@ -27,7 +27,7 @@ SOFTWARE.
 class TmxTile
 {
 public:
-	TmxTile(int tile_id);
+	explicit TmxTile(int tile_id);
 
 	int id;
 };

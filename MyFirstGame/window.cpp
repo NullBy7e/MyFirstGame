@@ -30,13 +30,13 @@ namespace mfg
 	{
 		void Window::handleInput(SystemManager* sysmgr, MapManager* mapmgr, EntityManager* entmgr, sf::Time dt)
 		{
-			sf::Event event;
+			sf::Event event{};
 
-			auto& map = mapmgr->getCurrentMap();
+			auto& map      = mapmgr->getCurrentMap();
 			auto& entities = entmgr->getEntities();
 
-			auto player_entity = entmgr->getPlayer();
-			auto& player = entities.get<mfg::components::EntityComponent>(player_entity);
+			const auto player_entity = entmgr->getPlayer();
+			auto&      player        = entities.get<EntityComponent>(player_entity);
 
 			auto animsys = sysmgr->getAnimationSystem();
 
@@ -45,86 +45,92 @@ namespace mfg
 				switch (event.type)
 				{
 				case sf::Event::KeyPressed:
-				{
-					switch (event.key.code)
 					{
-					case sf::Keyboard::W:
-					case sf::Keyboard::A:
-					case sf::Keyboard::S:
-					case sf::Keyboard::D:
-					{
-						auto player_position = sf::Vector2f(player.x, player.y);
-
-						auto move_speed = 0.f;
-
 						switch (event.key.code)
 						{
+						case sf::Keyboard::W:
 						case sf::Keyboard::A:
-						{
-							if (!player.facing_left)
-							{
-								player.setFacingLeft();
-							}
-
-							move_speed = -player.move_speed;
-							break;
-						}
+						case sf::Keyboard::S:
 						case sf::Keyboard::D:
-						{
-							if (!player.facing_right)
 							{
-								player.setFacingRight();
-							}
+								const auto player_position = sf::Vector2f(player.x, player.y);
 
-							move_speed = player.move_speed;
-							break;
-						}
-						}
+								auto move_speed = 0.f;
 
-						if (move_speed == 0)
-							return;
-
-						auto new_pos = move_speed * dt.asSeconds();
-
-						auto delta = (player_position.x + new_pos) - player_position.x;
-						auto can_move = player_position.x + delta > 0 && player_position.x + delta < ((map.width * map.tile_width) - map.tile_width);
-
-						if (can_move)
-						{
-							player.x += new_pos;
-
-							if (entmgr->getEntities().has<ActiveAnimationComponent>(player_entity))
-							{
-								auto& anim = entmgr->getEntities().get<ActiveAnimationComponent>(player_entity);
-								if (anim.name != "run_animation")
+								switch (event.key.code)
 								{
-									animsys->stopAnimation(player_entity);
+								case sf::Keyboard::A:
+									{
+										if (!player.facing_left)
+										{
+											player.setFacingLeft();
+										}
+
+										move_speed = -player.move_speed;
+										break;
+									}
+								case sf::Keyboard::D:
+									{
+										if (!player.facing_right)
+										{
+											player.setFacingRight();
+										}
+
+										move_speed = player.move_speed;
+										break;
+									}
+								default:
+									break;
+								}
+
+								if (move_speed == 0)
+									return;
+
+								const auto new_pos = move_speed * dt.asSeconds();
+
+								const auto delta    = (player_position.x + new_pos) - player_position.x;
+								const auto can_move = player_position.x + delta > 0 && player_position.x + delta < ((map
+									.width * map.tile_width) - map.tile_width);
+
+								if (can_move)
+								{
+									player.x += new_pos;
+
+									if (entmgr->getEntities().has<ActiveAnimationComponent>(player_entity))
+									{
+										auto& anim = entmgr->getEntities().get<ActiveAnimationComponent>(player_entity);
+										if (anim.name != "run_animation")
+										{
+											animsys->stopAnimation(player_entity);
+										}
+									}
+
+									/* play the run_animation */
+									animsys->playAnimation<RunAnimationComponent>(player_entity);
+
+									clock_.restart();
 								}
 							}
-
-							/* play the run_animation */
-							animsys->playAnimation<RunAnimationComponent>(player_entity);
-
-							clock.restart();
+						default:
+							break;
 						}
+						break;
 					}
-					default: break;
-					}
-					break;
-				}
 				case sf::Event::Closed:
-				{
-					close();
+					{
+						close();
+						break;
+					}
+				default:
 					break;
-				}
 				}
 			}
 
-			elapsed_time = clock.getElapsedTime();
-			if (elapsed_time.asSeconds() >= 2)
+			elapsed_time_ = clock_.getElapsedTime();
+			if (elapsed_time_.asSeconds() >= 2)
 			{
-				animsys->playAnimation<IdleAnimationComponent>(player_entity, LOOP_ANIMATION::YES);
-				elapsed_time = elapsed_time.Zero;
+				animsys->playAnimation<IdleAnimationComponent>(player_entity, loop_animation::yes);
+				elapsed_time_ = sf::Time::Zero;
 			}
 
 			/* we need to update any active animations with the proper scaling values */

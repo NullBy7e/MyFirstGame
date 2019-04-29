@@ -27,17 +27,19 @@ SOFTWARE.
 #include <Thor/Animations.hpp>
 #include <SFML/Graphics.hpp>
 
-namespace mfg {
-	namespace components {
-		class EntityAnimationComponent
+namespace mfg
+{
+	namespace components
+	{
+		class EntityAnimationComponent  // NOLINT(hicpp-special-member-functions, cppcoreguidelines-special-member-functions)
 		{
 		public:
 			EntityAnimationComponent(sf::Sprite* sprite, thor::FrameAnimation frame);
-			virtual ~EntityAnimationComponent();
+			virtual ~EntityAnimationComponent() = default;
 
 			virtual std::string getName();
 
-			sf::Sprite* sprite;
+			sf::Sprite*          sprite;
 			thor::FrameAnimation frame;
 
 			std::string name = "entity_animation";

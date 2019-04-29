@@ -24,15 +24,8 @@ SOFTWARE.
 
 #pragma once
 
-#include "../macros.hpp"
-
 #include "../components/components.hpp"
-
-#include "../components/actor.hpp"
-#include "../components/animation.hpp"
-#include "../components/health.hpp"
 #include "../components/sprite.hpp"
-#include "../components/position.hpp"
 
 using namespace mfg::components;
 
@@ -43,26 +36,21 @@ namespace mfg
 		class EntityManager
 		{
 		public:
-			EntityManager();
-			~EntityManager();
-
 			entt::entity createActor(
 				const std::string& actor_name,
-				const int health,
-				const bool flipped_horizontally,
-				const float width,
-				const float height,
-				const sf::Sprite sprite,
-				const sf::Vector2f position
+				int                health,
+				bool               flipped_horizontally,
+				float              width,
+				float              height,
+				const sf::Sprite&  sprite,
+				sf::Vector2f       position
 			);
-
 			entt::registry& getEntities();
-
-			entt::entity getPlayer();
-			void setPlayer(unsigned int id);
+			entt::entity    getPlayer() const;
+			void            setPlayer(unsigned int id);
 		private:
-			entt::registry entities;
-			entt::entity player_id = -1;
+			entt::registry entities_;
+			entt::entity   player_id_ = -1;
 		};
 	}
 }

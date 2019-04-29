@@ -1,17 +1,18 @@
 #pragma once
 
-namespace mfg {
-	namespace components {
+namespace mfg
+{
+	namespace components
+	{
 		class HealthComponent
 		{
 		public:
-			HealthComponent();
-			HealthComponent(float health);
-			~HealthComponent();
+			         HealthComponent() = default;
+			explicit HealthComponent(float health);
 
-			float getHealth();
+			float getHealth() const;
 		private:
-			float health;
+			float health_{};
 		};
 	}
 }

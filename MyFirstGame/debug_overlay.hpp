@@ -1,11 +1,7 @@
 #pragma once
 
-#include <sstream>
-#include <string>
-
 #include <SFML/Graphics.hpp>
 
-#include "macros.hpp"
 #include "window.hpp"
 
 #include "managers/entity_manager.hpp"
@@ -16,19 +12,18 @@ namespace mfg
 {
 	namespace core
 	{
-		class DebugOverlay : public sf::Transformable, public sf::Drawable
+		class DebugOverlay final : public sf::Transformable, public sf::Drawable
 		{
 		public:
 			DebugOverlay(Window& window, EntityManager& entmgr);
-			~DebugOverlay();
 
-			void draw(sf::RenderTarget& target, sf::RenderStates states) const;
+			void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
 
 		private:
-			Window& window;
-			EntityManager& entmgr;
+			Window&        window_;
+			EntityManager& entmgr_;
 
-			sf::Font font;
+			sf::Font font_;
 		};
 	}
 }

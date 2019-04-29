@@ -28,19 +28,9 @@ namespace mfg
 {
 	namespace managers
 	{
-		TextureManager::TextureManager()
+		texture_handle TextureManager::get(const std::string& texture_name, const std::string& texture_path)
 		{
-			DEBUG_MSG("CTOR " << "	 [" << std::addressof(*this) << "]	TextureManager");
-		}
-
-		TextureManager::~TextureManager()
-		{
-			DEBUG_MSG("DTOR " << "	 [" << std::addressof(*this) << "]	TextureManager");
-		}
-
-		texture_handle TextureManager::get(const std::string texture_name, const std::string texture_path)
-		{
-			return textures.load<texture_loader>(entt::hashed_string::to_value(texture_name.c_str()), texture_path);
+			return textures_.load<TextureLoader>(entt::hashed_string::to_value(texture_name.c_str()), texture_path);
 		}
 
 		TextureManager& TextureManager::getRef()

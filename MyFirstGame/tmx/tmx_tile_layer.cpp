@@ -23,27 +23,28 @@ SOFTWARE.
 */
 
 #include "tmx_tile_layer.hpp"
+#include <utility>
 
 TmxTileLayer::TmxTileLayer(
-	const int id,
-	const std::string name,
-	const int width,
-	const int height,
-	const std::vector<TmxTile> tiles)
+	const int            id,
+	const std::string&   name,
+	const int            width,
+	const int            height,
+	std::vector<TmxTile> tiles)
 	:
-	tiles(tiles),
-	TmxLayer(id, name, width, height)
+	TmxLayer(id, name, width, height),
+	tiles(std::move(tiles))
 {
 }
 
 TmxTileLayer::TmxTileLayer(
-	const int id,
-	const std::string name,
-	const int width,
-	const int height,
-	const std::vector<TmxChunk> chunks)
+	const int             id,
+	const std::string&    name,
+	const int             width,
+	const int             height,
+	std::vector<TmxChunk> chunks)
 	:
-	chunks(chunks),
-	TmxLayer(id, name, width, height)
+	TmxLayer(id, name, width, height),
+	chunks(std::move(chunks))
 {
 }

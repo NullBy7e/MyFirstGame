@@ -1,23 +1,16 @@
 #include "health.hpp"
 
-namespace mfg {
-	namespace components {
-		HealthComponent::HealthComponent()
+namespace mfg
+{
+	namespace components
+	{
+		HealthComponent::HealthComponent(const float health) : health_(health)
 		{
 		}
 
-		HealthComponent::HealthComponent(float health)
+		float HealthComponent::getHealth() const
 		{
-			this->health = health;
-		}
-
-		HealthComponent::~HealthComponent()
-		{
-		}
-
-		float HealthComponent::getHealth()
-		{
-			return health;
+			return health_;
 		}
 	}
 }

@@ -32,23 +32,23 @@ class TmxTileset
 {
 public:
 	TmxTileset(
-		const int first_gid,
-		const std::string name,
-		const int tile_width,
-		const int tile_height,
-		const int tile_count,
-		const int columns,
-		const std::string image_source,
-		const int image_width,
-		const int image_height
+		int                first_gid,
+		std::string        name,
+		int                tile_width,
+		int                tile_height,
+		int                tile_count,
+		int                columns,
+		const std::string& image_source,
+		int                image_width,
+		int                image_height
 	);
 
-	int first_gid;
+	int         first_gid;
 	std::string name;
-	int tile_width;
-	int tile_height;
-	int tile_count;
-	int columns;
+	int         tile_width;
+	int         tile_height;
+	int         tile_count;
+	int         columns;
 
 	TmxTilesetImage image;
 };

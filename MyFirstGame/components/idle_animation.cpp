@@ -28,7 +28,8 @@ namespace mfg
 {
 	namespace components
 	{
-		IdleAnimationComponent::IdleAnimationComponent(sf::Sprite* sprite, thor::FrameAnimation frame) : EntityAnimationComponent(sprite, frame)
+		IdleAnimationComponent::
+		IdleAnimationComponent(sf::Sprite* sprite, const thor::FrameAnimation& frame) : EntityAnimationComponent(sprite, frame)
 		{
 		}
 

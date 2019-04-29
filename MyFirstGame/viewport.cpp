@@ -4,20 +4,12 @@ namespace mfg
 {
 	namespace core
 	{
-		Viewport::Viewport()
+		void Viewport::update(const sf::Vector2f target_position, const sf::Vector2f map_dimensions)
 		{
-			DEBUG_MSG("CTOR " << "	 [" << std::addressof(*this) << "]	Viewport");
-		}
-
-		Viewport::~Viewport()
-		{
-			DEBUG_MSG("DTOR " << "	 [" << std::addressof(*this) << "]	MapRenderer");
-		}
-
-		void Viewport::update(sf::Vector2f target_position, sf::Vector2f map_dimensions)
-		{
-			auto move_camera_x = target_position.x - (getDimensions().x / 2) > 0 && target_position.x + (getDimensions().x / 2) < map_dimensions.x;
-			auto move_camera_y = target_position.y - (getDimensions().y / 2) > 0 && target_position.y + (getDimensions().y / 2) < map_dimensions.y;
+			const auto move_camera_x = target_position.x - (getDimensions().x / 2) > 0 && target_position.x + (
+				getDimensions().x / 2) < map_dimensions.x;
+			const auto move_camera_y = target_position.y - (getDimensions().y / 2) > 0 && target_position.y + (
+				getDimensions().y / 2) < map_dimensions.y;
 
 			if (move_camera_x)
 			{
@@ -30,35 +22,35 @@ namespace mfg
 			}
 		}
 
-		void Viewport::setTileWidth(float width)
+		void Viewport::setTileWidth(const float width)
 		{
-			tile_width = width;
+			tile_width_ = width;
 		}
 
-		void Viewport::setTileHeight(float height)
+		void Viewport::setTileHeight(const float height)
 		{
-			tile_height = height;
+			tile_height_ = height;
 		}
 
-		void Viewport::setDimensions(sf::Vector2f dimensions)
+		void Viewport::setDimensions(const sf::Vector2f dimensions)
 		{
-			this->dimensions = dimensions;
+			this->dimensions_ = dimensions;
 			setSize(dimensions);
 		}
 
 		float Viewport::getTileWidth() const
 		{
-			return tile_width;
+			return tile_width_;
 		}
 
 		float Viewport::getTileHeight() const
 		{
-			return tile_height;
+			return tile_height_;
 		}
 
-		sf::Vector2f Viewport::getDimensions()
+		sf::Vector2f Viewport::getDimensions() const
 		{
-			return dimensions;
+			return dimensions_;
 		}
 
 		Viewport& Viewport::getRef()

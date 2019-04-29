@@ -21,62 +21,55 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
-
 #include "entity_manager.hpp"
+#include "../components/actor.hpp"
+#include "../components/animation.hpp"
+#include "../components/health.hpp"
+#include "../components/position.hpp"
 
 namespace mfg
 {
 	namespace managers
 	{
-		EntityManager::EntityManager()
-		{
-			DEBUG_MSG("CTOR " << "	 [" << std::addressof(*this) << "]	EntityManager");
-		}
-
-		EntityManager::~EntityManager()
-		{
-			DEBUG_MSG("DTOR " << "	 [" << std::addressof(*this) << "]	EntityManager");
-		}
-
 		entt::entity EntityManager::createActor(
-			const std::string & actor_name,
-			const int health,
-			const bool flipped_horizontally,
-			const float width,
-			const float height,
-			const sf::Sprite sprite,
+			const std::string& actor_name,
+			const int          health,
+			const bool         flipped_horizontally,
+			const float        width,
+			const float        height,
+			const sf::Sprite&  sprite,
 			const sf::Vector2f position
 		)
 		{
-			auto entity = entities.create();
+			const auto entity = entities_.create();
 
-			entities.assign<ActorComponent>(entity, actor_name);
-			entities.assign<AnimationComponent>(entity);
-			entities.assign<HealthComponent>(entity, health);
-			entities.assign<SpriteComponent>(entity, SpriteComponent(
-				flipped_horizontally,
-				width,
-				height,
-				sprite
-			));
-			entities.assign<PositionComponent>(entity, position.x, position.y);
+			entities_.assign<ActorComponent>(entity, actor_name);
+			entities_.assign<AnimationComponent>(entity);
+			entities_.assign<HealthComponent>(entity, health);
+			entities_.assign<SpriteComponent>(entity, SpriteComponent(
+				                                  flipped_horizontally,
+				                                  width,
+				                                  height,
+				                                  sprite
+			                                  ));
+			entities_.assign<PositionComponent>(entity, position.x, position.y);
 
 			return entity;
 		}
 
 		entt::registry& EntityManager::getEntities()
 		{
-			return entities;
+			return entities_;
 		}
 
-		entt::entity EntityManager::getPlayer()
+		entt::entity EntityManager::getPlayer() const
 		{
-			return player_id;
+			return player_id_;
 		}
 
-		void EntityManager::setPlayer(unsigned int id)
+		void EntityManager::setPlayer(const unsigned int id)
 		{
-			player_id = id;
+			player_id_ = id;
 		}
 	}
 }

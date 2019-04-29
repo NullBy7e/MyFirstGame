@@ -29,11 +29,10 @@ SOFTWARE.
 #include "tmx_layer.hpp"
 #include "tmx_object.hpp"
 
-class TmxObjectLayer :
-	public TmxLayer
+class TmxObjectLayer : public TmxLayer
 {
 public:
-	TmxObjectLayer(const int id, const std::string name);
+	TmxObjectLayer(int id, const std::string& name);
 
 	std::vector<TmxObject> objects;
 };

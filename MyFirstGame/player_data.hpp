@@ -12,6 +12,7 @@ namespace mfg
 {
 	namespace core
 	{
-		using PlayerData = std::tuple<ActorComponent, HealthComponent, AnimationComponent, SpriteComponent, PositionComponent>;
+		using player_data = std::tuple<ActorComponent, HealthComponent, AnimationComponent, SpriteComponent,
+		                               PositionComponent>;
 	}
 }

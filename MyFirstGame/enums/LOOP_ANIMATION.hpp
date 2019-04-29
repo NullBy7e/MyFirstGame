@@ -1,7 +1,7 @@
 #pragma once
 
-enum class LOOP_ANIMATION : unsigned int
+enum class loop_animation : unsigned int
 {
-	NO = 0,
-	YES = 1
+	no = 0,
+	yes = 1
 };

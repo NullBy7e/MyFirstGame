@@ -23,13 +23,14 @@ SOFTWARE.
 */
 
 #include "tmx_chunk.hpp"
+#include <utility>
 
-TmxChunk::TmxChunk(float x, float y, int width, int height, std::vector<TmxTile> tiles)
+TmxChunk::TmxChunk(const float x, const float y, const int width, const int height, std::vector<TmxTile> tiles)
 	:
 	x(x),
 	y(y),
 	width(width),
 	height(height),
-	tiles(tiles)
+	tiles(std::move(tiles))
 {
 }

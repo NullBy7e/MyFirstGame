@@ -28,7 +28,8 @@ namespace mfg
 {
 	namespace components
 	{
-		RunAnimationComponent::RunAnimationComponent(sf::Sprite* sprite, thor::FrameAnimation frame) : EntityAnimationComponent(sprite, frame)
+		RunAnimationComponent::
+		RunAnimationComponent(sf::Sprite* sprite, const thor::FrameAnimation& frame) : EntityAnimationComponent(sprite, frame)
 		{
 		}
 

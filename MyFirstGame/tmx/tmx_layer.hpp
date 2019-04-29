@@ -29,11 +29,11 @@ SOFTWARE.
 class TmxLayer
 {
 public:
-	TmxLayer();
-	TmxLayer(const int id, const std::string name, const int width, const int height);
+	TmxLayer() = default;
+	TmxLayer(int id, std::string name, int width, int height);
 
-	int id;
+	int         id{};
 	std::string name;
-	int width;
-	int height;
+	int         width{};
+	int         height{};
 };

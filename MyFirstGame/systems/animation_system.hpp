@@ -30,6 +30,8 @@ SOFTWARE.
 #include <Thor/Animations.hpp>
 #include <SFML/Graphics.hpp>
 
+#include "../macros.hpp"
+
 #include "entt/entt.hpp"
 
 #include "../managers/entity_manager.hpp"
@@ -48,27 +50,30 @@ namespace mfg
 		class AnimationSystem
 		{
 		public:
-			AnimationSystem(EntityManager* entmgr);
-			thor::Animator<sf::Sprite, std::string>* getAnimator(entt::entity id);
+			explicit                                 AnimationSystem(EntityManager* entmgr);
+			thor::Animator<sf::Sprite, std::string>* getAnimator(entt::entity       id);
 
-			void animate(sf::Time dt);
+			void animate(sf::Time           dt);
 			void stopAnimation(entt::entity entity);
 
 			EntityManager* entmgr;
 
-			template<typename T>
-			typename std::enable_if<std::is_base_of<EntityAnimationComponent, T>::value, void>::type playAnimation(entt::entity, LOOP_ANIMATION = LOOP_ANIMATION::NO);
+			template <typename T>
+			typename std::enable_if<std::is_base_of<EntityAnimationComponent, T>::value, void>::type playAnimation(
+				entt::entity, loop_animation = loop_animation::no);
 
-			template<typename T>
-			typename std::enable_if<std::is_base_of<EntityAnimationComponent, T>::value, void>::type addAnimation(entt::entity, T, sf::Time);
+			template <typename T>
+			typename std::enable_if<std::is_base_of<EntityAnimationComponent, T>::value, void>::type addAnimation(
+				entt::entity, T, sf::Time);
 
 		private:
-			std::map<entt::entity, std::unique_ptr<thor::Animator<sf::Sprite, std::string>>> animators;
-			std::vector<std::unique_ptr<sf::Sprite>> animation_sprites;
+			std::map<entt::entity, std::unique_ptr<thor::Animator<sf::Sprite, std::string>>> animators_;
+			std::vector<std::unique_ptr<sf::Sprite>>                                         animation_sprites_;
 		};
 
-		template<typename T>
-		inline typename std::enable_if<std::is_base_of<EntityAnimationComponent, T>::value, void>::type AnimationSystem::playAnimation(entt::entity entity, LOOP_ANIMATION loop)
+		template <typename T>
+		typename std::enable_if<std::is_base_of<EntityAnimationComponent, T>::value, void>::type AnimationSystem::
+		playAnimation(const entt::entity entity, loop_animation loop)
 		{
 			auto animator = getAnimator(entity);
 
@@ -78,25 +83,27 @@ namespace mfg
 			T& animation_component = entmgr->getEntities().get<T>(entity);
 			DEBUG_MSG("animation_system::playAnimation: " << animation_component.name << ": sprite->" << animation_component.sprite);
 
-			entmgr->getEntities().assign_or_replace<ActiveAnimationComponent>(entity, ActiveAnimationComponent{ animation_component });
+			entmgr->getEntities().assign_or_replace<ActiveAnimationComponent>(
+				entity, ActiveAnimationComponent{animation_component});
 
-			animator->playAnimation(animation_component.name, (bool)loop);
+			animator->playAnimation(animation_component.name, static_cast<bool>(loop));
 
 			return;
 		}
 
-		template<typename T>
-		inline typename std::enable_if<std::is_base_of<EntityAnimationComponent, T>::value, void>::type AnimationSystem::addAnimation(entt::entity entity, T animation_component, sf::Time duration)
+		template <typename T>
+		typename std::enable_if<std::is_base_of<EntityAnimationComponent, T>::value, void>::type AnimationSystem::
+		addAnimation(entt::entity entity, T animation_component, const sf::Time duration)
 		{
 			auto animator = getAnimator(entity);
 
 			/* create new unique_ptr that points to the components sprite */
-			animation_sprites.emplace_back(std::make_unique<sf::Sprite>(*animation_component.sprite));
+			animation_sprites_.emplace_back(std::make_unique<sf::Sprite>(*animation_component.sprite));
 
-			auto& sprite = animation_sprites.back();
+			auto& sprite = animation_sprites_.back();
 
 			animation_component.sprite = sprite.get();
-			animation_component.sprite->setOrigin({ 32, 64 });
+			animation_component.sprite->setOrigin({32, 64});
 
 			DEBUG_MSG("animation_system::addAnimation: " << animation_component.name << ": sprite->" << sprite.get());
 

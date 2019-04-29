@@ -21,8 +21,8 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
-
 #include "game.hpp"
+#include "debug_overlay.hpp"
 
 namespace mfg
 {
@@ -30,138 +30,138 @@ namespace mfg
 	{
 		Game::Game()
 		{
-			DEBUG_MSG("CTOR " << "	 [" << std::addressof(*this) << "]	Game");
+			window_.create(sf::VideoMode(1280, 1024), "MyFirstGame", sf::Style::Titlebar | sf::Style::Close);
+			window_.setFramerateLimit(60);
 
-			window.create(sf::VideoMode(1280, 1024), "MyFirstGame", sf::Style::Titlebar | sf::Style::Close);
-			window.setFramerateLimit(60);
-
-			TmxParser parser;
-			auto mapId = mapmgr.addMap(parser.parse("maps/level1/level1.tmx"));
-			auto& map = mapmgr.loadMap(mapId, texmgr.getRef());
+			TmxParser  parser;
+			const auto map_id = mapmgr_.addMap(parser.parse("maps/level1/level1.tmx"));
+			auto&      map    = mapmgr_.loadMap(map_id, texmgr_.getRef());
 
 			map.setPlayerData(createPlayerData());
 
 			/* screen dimensions (window size) */
-			screen_dimensions = sf::Vector2i(1280, 1024);
+			screen_dimensions_ = sf::Vector2i(1280, 1024);
 
-			viewport.setDimensions(sf::Vector2f(screen_dimensions.x, screen_dimensions.y));
-			viewport.setTileWidth(viewport.getDimensions().x / map.tile_width);
-			viewport.setTileHeight(viewport.getDimensions().y / map.tile_height);
+			viewport_.setDimensions(sf::Vector2f(screen_dimensions_.x, screen_dimensions_.y));
+			viewport_.setTileWidth(viewport_.getDimensions().x / map.tile_width);
+			viewport_.setTileHeight(viewport_.getDimensions().y / map.tile_height);
 
-			/* the viewport view is used to enable side-scrolling, it acts as a camera for the player */
-			viewport.setCenter(viewport.getCenter().x + map.tile_width * 2.2, viewport.getCenter().y);
-		}
-
-		Game::~Game()
-		{
-			DEBUG_MSG("DTOR " << "	 [" << std::addressof(*this) << "]	 Game");
+			/* the viewport view is used to enable side-scrolling, it acts as a camera for
+			 * the player */
+			viewport_.setCenter(viewport_.getCenter().x + map.tile_width * 2.2, viewport_.getCenter().y);
 		}
 
 		void Game::updateViewport()
 		{
-			auto& map = mapmgr.getCurrentMap();
-			viewport.update(map.getPlayerPosition(), map.getDimensions());
+			auto& map = mapmgr_.getCurrentMap();
+			viewport_.update(map.getPlayerPosition(), map.getDimensions());
 
-			window.setView(viewport.getRef());
+			window_.setView(viewport_.getRef());
 		}
 
-		//void Game::drawEntities()
+		// void Game::drawEntities()
 		//{
 		//	entmgr->getEntities().each([this](auto entity)
 		//	{
-		//		auto& entity_component = entmgr->getEntities().get<mfg::components::EntityComponent>(entity);
-		//		auto& sprite = entity_component.sprite;
-
+		//		auto& entity_component =
+		//entmgr->getEntities().get<mfg::components::EntityComponent>(entity); 		auto&
+		//sprite = entity_component.sprite;
 		//		if (entmgr->getEntities().has<ActiveAnimationComponent>(entity))
 		//		{
-		//			ActiveAnimationComponent& anim = entmgr->getEntities().get<ActiveAnimationComponent>(entity);
-		//			sprite = *anim.animation->sprite;
+		//			ActiveAnimationComponent& anim =
+		//entmgr->getEntities().get<ActiveAnimationComponent>(entity); 			sprite =
+		//*anim.animation->sprite;
 		//		}
 		//		else
 		//		{
-		//			sprite.setScale({ entity_component.x_scale, entity_component.y_scale });
-		//			sprite.setRotation(entity_component.rotation);
+		//			sprite.setScale({ entity_component.x_scale,
+		//entity_component.y_scale }); 			sprite.setRotation(entity_component.rotation);
 		//		}
-
 		//		sprite.setPosition(entity_component.x, entity_component.y);
 		//		this->window.draw(sprite);
 		//	});
 		//}
 
-		PlayerData Game::createPlayerData()
+		player_data Game::createPlayerData()
 		{
-			auto tex = texmgr.get("player", "textures/sprites/player/animation/knight_m_idle_anim_f0.png");
+			const auto tex = texmgr_.get("player", "textures/sprites/player/animation/knight_m_idle_anim_f0.png");
 
-			return PlayerData
-			{
-				ActorComponent("player"),
-				HealthComponent(400),
-				AnimationComponent(),
-				SpriteComponent(sf::Sprite(tex)),
+			return player_data{
+				ActorComponent("player"), HealthComponent(400),
+				AnimationComponent(), SpriteComponent(sf::Sprite(tex)),
 				PositionComponent()
 			};
 
-			//auto& entities = entmgr->getEntities();
+			// auto& entities = entmgr->getEntities();
 
-			//auto entity = entities.create();
+			// auto entity = entities.create();
 
-			//auto tex = texmgr->get("player", "textures/sprites/player/animation/knight_m_idle_anim_f0.png");
-			//auto player_sprite = sf::Sprite(tex);
+			// auto tex = texmgr->get("player",
+			// "textures/sprites/player/animation/knight_m_idle_anim_f0.png"); auto
+			// player_sprite = sf::Sprite(tex);
 
-			//entities.assign<mfg::components::EntityComponent>(entity, 0, 0, player_sprite.getLocalBounds().width, player_sprite.getLocalBounds().height, 1, 1, 0, false, player_sprite);
+			// entities.assign<mfg::components::EntityComponent>(entity, 0, 0,
+			// player_sprite.getLocalBounds().width, player_sprite.getLocalBounds().height,
+			// 1, 1, 0, false, player_sprite);
 
 			///* the idle animation data */
-			//thor::FrameAnimation idle_frame_data;
-			//idle_frame_data.addFrame(2.f, sf::IntRect(0, 0, 64, 112));
-			//idle_frame_data.addFrame(2.f, sf::IntRect(0, 112, 64, 112));
-			//idle_frame_data.addFrame(2.f, sf::IntRect(0, 224, 64, 112));
-			//idle_frame_data.addFrame(2.f, sf::IntRect(0, 336, 64, 112));
+			// thor::FrameAnimation idle_frame_data;
+			// idle_frame_data.addFrame(2.f, sf::IntRect(0, 0, 64, 112));
+			// idle_frame_data.addFrame(2.f, sf::IntRect(0, 112, 64, 112));
+			// idle_frame_data.addFrame(2.f, sf::IntRect(0, 224, 64, 112));
+			// idle_frame_data.addFrame(2.f, sf::IntRect(0, 336, 64, 112));
 
 			///* player animation texture and the resulting sprite */
-			//auto player_anim_texture = texmgr->get("idle", "textures/sprites/player/animation/knight_m_idle.png");
-			//auto player_anim_sprite = std::make_unique<sf::Sprite>(sf::Sprite(player_anim_texture));
+			// auto player_anim_texture = texmgr->get("idle",
+			// "textures/sprites/player/animation/knight_m_idle.png"); auto
+			// player_anim_sprite =
+			// std::make_unique<sf::Sprite>(sf::Sprite(player_anim_texture));
 
-			//auto idle = IdleAnimationComponent{ player_anim_sprite.get(), idle_frame_data };
-			//sysmgr->getAnimationSystem()->addAnimation(entity, idle, sf::seconds(8.f));
+			// auto idle = IdleAnimationComponent{ player_anim_sprite.get(),
+			// idle_frame_data }; sysmgr->getAnimationSystem()->addAnimation(entity, idle,
+			// sf::seconds(8.f));
 
 			///* the run animation data */
-			//thor::FrameAnimation run_frame_data;
-			//run_frame_data.addFrame(0.25f, sf::IntRect(0, 0, 64, 112));
-			//run_frame_data.addFrame(0.25f, sf::IntRect(0, 112, 64, 112));
-			//run_frame_data.addFrame(0.25f, sf::IntRect(0, 224, 64, 112));
-			//run_frame_data.addFrame(0.25f, sf::IntRect(0, 336, 64, 112));
+			// thor::FrameAnimation run_frame_data;
+			// run_frame_data.addFrame(0.25f, sf::IntRect(0, 0, 64, 112));
+			// run_frame_data.addFrame(0.25f, sf::IntRect(0, 112, 64, 112));
+			// run_frame_data.addFrame(0.25f, sf::IntRect(0, 224, 64, 112));
+			// run_frame_data.addFrame(0.25f, sf::IntRect(0, 336, 64, 112));
 
 			///* player animation texture and the resulting sprite */
-			//auto player_anim_texture2 = texmgr->get("run", "textures/sprites/player/animation/knight_m_run.png");
-			//auto player_anim_sprite2 = std::make_unique<sf::Sprite>(sf::Sprite(player_anim_texture2));
+			// auto player_anim_texture2 = texmgr->get("run",
+			// "textures/sprites/player/animation/knight_m_run.png"); auto
+			// player_anim_sprite2 =
+			// std::make_unique<sf::Sprite>(sf::Sprite(player_anim_texture2));
 
-			//auto run = RunAnimationComponent{ player_anim_sprite2.get(), run_frame_data };
-			//sysmgr->getAnimationSystem()->addAnimation(entity, run, sf::seconds(1.f));
+			// auto run = RunAnimationComponent{ player_anim_sprite2.get(), run_frame_data
+			// }; sysmgr->getAnimationSystem()->addAnimation(entity, run,
+			// sf::seconds(1.f));
 
-			//entmgr->setPlayer(entity);
+			// entmgr->setPlayer(entity);
 		}
 
 		void Game::loop()
 		{
-			sf::Event event;
-			MapRenderer renderer(window);
+			sf::Event   event{};
+			MapRenderer renderer(window_);
 
-#ifdef DEBUG
-			DebugOverlay debug_overlay(window, mapmgr.getCurrentMap().getEntityManager());
-#endif
+			#ifdef DEBUG
+			DebugOverlay debug_overlay(window_, mapmgr_.getCurrentMap().getEntityManager());
+			#endif
 
-			while (window.isOpen())
+			while (window_.isOpen())
 			{
 				clear();
 
-				window.pollEvent(event);
+				window_.pollEvent(event);
 				updateViewport();
 
-				renderer.render(viewport, mapmgr.getCurrentMap());
+				renderer.render(viewport_, mapmgr_.getCurrentMap());
 
-#ifdef DEBUG
-				window.draw(debug_overlay);
-#endif
+				#ifdef DEBUG
+				window_.draw(debug_overlay);
+				#endif
 
 				display();
 			}
@@ -169,22 +169,22 @@ namespace mfg
 
 		void Game::clear()
 		{
-			window.clear(sf::Color::Black);
+			window_.clear(sf::Color::Black);
 		}
 
 		void Game::display()
 		{
-			window.display();
+			window_.display();
 		}
 
 		sf::Time Game::restartClock()
 		{
-			return clock.restart();
+			return clock_.restart();
 		}
 
-		float Game::getElapsedFrameTime()
+		float Game::getElapsedFrameTime() const
 		{
-			return clock.getElapsedTime().asSeconds();
+			return clock_.getElapsedTime().asSeconds();
 		}
 	}
 }

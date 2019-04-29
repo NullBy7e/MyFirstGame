@@ -24,36 +24,25 @@ SOFTWARE.
 
 #include "map_manager.hpp"
 #include "texture_manager.hpp"
-#include "entity_manager.hpp"
 
 namespace mfg
 {
 	namespace managers
 	{
-		MapManager::MapManager()
-		{
-			DEBUG_MSG("CTOR " << "	 [" << std::addressof(*this) << "]	MapManager");
-		}
-
-		MapManager::~MapManager()
-		{
-			DEBUG_MSG("DTOR " << "	 [" << std::addressof(*this) << "]	MapManager");
-		}
-
-		Map& MapManager::loadMap(int id, TextureManager& texmgr)
+		Map& MapManager::loadMap(const int id, TextureManager& texmgr)
 		{
 			auto& map = getMap(id);
 
 			map.loadSprites(texmgr);
 			map.loadObjects();
 
-			currentMap = id;
+			current_map_ = id;
 			return map;
 		}
 
-		int MapManager::addMap(TmxMap map)
+		int MapManager::addMap(const TmxMap map)
 		{
-			auto newMap = new Map
+			const auto new_map = new Map
 			(
 				map.tilesets,
 				map.tile_layers,
@@ -70,18 +59,18 @@ namespace mfg
 				map.pixel_height
 			);
 
-			maps.push_back(std::unique_ptr<Map>(newMap));
-			return maps.size() - 1;
+			maps_.push_back(std::unique_ptr<Map>(new_map));
+			return maps_.size() - 1;
 		}
 
-		Map& MapManager::getMap(int id)
+		Map& MapManager::getMap(const int id)
 		{
-			return *maps[id];
+			return *maps_[id];
 		}
 
 		Map& MapManager::getCurrentMap()
 		{
-			return *maps[currentMap];
+			return *maps_[current_map_];
 		}
 	}
 }

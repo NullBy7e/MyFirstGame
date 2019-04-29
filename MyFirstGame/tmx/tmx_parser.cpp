@@ -23,85 +23,88 @@ SOFTWARE.
 */
 
 #include "tmx_parser.hpp"
+#include <sstream>
+#include <direct.h>
+#include <iostream>
 
 using namespace tinyxml2;
 
-TmxParser::TmxParser() {}
-
-std::map<std::string, std::string> TmxParser::getMapElementProperties(const XMLElement& mapElement)
+std::map<std::string, std::string> TmxParser::getMapElementProperties(const XMLElement& map_element) const
 {
-	std::map<std::string, std::string> propMap;
+	std::map<std::string, std::string> prop_map;
 
 	/* map tiledversion attribute */
-	auto map_tiledversion = mapElement.Attribute("tiledversion");
-	propMap["tiledversion"] = map_tiledversion;
+	const auto map_tiledversion = map_element.Attribute("tiledversion");
+	prop_map["tiledversion"]    = map_tiledversion;
 
-	if (map_tiledversion != target_tiled_version)
+	if (map_tiledversion != target_tiled_version_)
 	{
-		std::cout << "tmx_parser ONLY supports version " << target_tiled_version << " of the Tiled TMX format but the target map is made with version " << map_tiledversion << std::endl;
+		std::cout << "tmx_parser ONLY supports version " << target_tiled_version_ <<
+			" of the Tiled TMX format but the target map is made with version " << map_tiledversion << std::endl;
 		system("pause");
 
 		exit(EXIT_FAILURE);
 	}
 
 	/* map version attribute */
-	auto map_version = mapElement.Attribute("version");
-	propMap["version"] = map_version;
+	const auto map_version = map_element.Attribute("version");
+	prop_map["version"]    = map_version;
 
 	/* map orientation attribute */
-	auto map_orientation = mapElement.Attribute("orientation");
-	propMap["orientation"] = map_orientation;
+	const auto map_orientation = map_element.Attribute("orientation");
+	prop_map["orientation"]    = map_orientation;
 
 	/* map renderorder attribute */
-	auto map_renderorder = mapElement.Attribute("renderorder");
-	propMap["renderorder"] = map_renderorder;
+	const auto map_renderorder = map_element.Attribute("renderorder");
+	prop_map["renderorder"]    = map_renderorder;
 
 	/* map width attribute */
-	auto map_width = mapElement.Attribute("width");
-	propMap["width"] = map_width;
+	const auto map_width = map_element.Attribute("width");
+	prop_map["width"]    = map_width;
 
 	/* map height attribute */
-	auto map_height = mapElement.Attribute("height");
-	propMap["height"] = map_height;
+	const auto map_height = map_element.Attribute("height");
+	prop_map["height"]    = map_height;
 
 	/* map tilewidth attribute */
-	auto map_tilewidth = mapElement.Attribute("tilewidth");
-	propMap["tilewidth"] = map_tilewidth;
+	const auto map_tilewidth = map_element.Attribute("tilewidth");
+	prop_map["tilewidth"]    = map_tilewidth;
 
 	/* map tileheight attribute */
-	auto map_tileheight = mapElement.Attribute("tileheight");
-	propMap["tileheight"] = map_tileheight;
+	const auto map_tileheight = map_element.Attribute("tileheight");
+	prop_map["tileheight"]    = map_tileheight;
 
-	return propMap;
+	return prop_map;
 }
 
-std::vector<TmxTileset> TmxParser::getMapTilesets(const XMLElement & mapElement)
+std::vector<TmxTileset> TmxParser::getMapTilesets(const XMLElement& map_element) const
 {
 	std::vector<TmxTileset> tilesets;
 
-	for (auto child = mapElement.FirstChildElement("tileset"); child != NULL; child = child->NextSiblingElement("tileset"))
+	for (auto child = map_element.FirstChildElement("tileset"); child != nullptr; child = child->
+	     NextSiblingElement("tileset"))
 	{
 		/* map tileset firstgid attribute */
-		auto map_tileset_firstgid = cStrToInt(child->Attribute("firstgid"));
+		const auto map_tileset_firstgid = cStrToInt(child->Attribute("firstgid"));
 
 		/* map tileset name attribute */
-		auto map_tileset_name = child->Attribute("name");
+		const auto map_tileset_name = child->Attribute("name");
 
 		/* map tileset tilewidth attribute */
-		auto map_tileset_tilewidth = cStrToInt(child->Attribute("tilewidth"));
+		const auto map_tileset_tilewidth = cStrToInt(child->Attribute("tilewidth"));
 
 		/* map tileset tileheight attribute */
-		auto map_tileset_tileheight = cStrToInt(child->Attribute("tileheight"));
+		const auto map_tileset_tileheight = cStrToInt(child->Attribute("tileheight"));
 
 		/* map tileset tilecount attribute */
-		auto map_tileset_tilecount = cStrToInt(child->Attribute("tilecount"));
+		const auto map_tileset_tilecount = cStrToInt(child->Attribute("tilecount"));
 
 		/* map tileset columns attribute */
-		auto map_tileset_columns = cStrToInt(child->Attribute("columns"));
+		const auto map_tileset_columns = cStrToInt(child->Attribute("columns"));
 
-		auto image = child->FirstChildElement("image");
+		const auto image = child->FirstChildElement("image");
 
-		if (image == NULL)
+		if (image == nullptr)
 		{
 			std::cout << "tmx_parser failed to parse the tileset image " << map_tileset_name << std::endl;
 			system("pause");
@@ -109,11 +112,11 @@ std::vector<TmxTileset> TmxParser::getMapTilesets(const XMLElement & mapElement)
 			exit(EXIT_FAILURE);
 		}
 
-		std::filesystem::path image_path = image->Attribute("source");
-		auto map_tileset_image_source = std::filesystem::absolute(image_path).string();
+		std::filesystem::path image_path               = image->Attribute("source");
+		const auto            map_tileset_image_source = absolute(image_path).string();
 
-		auto map_tileset_image_width = cStrToInt(image->Attribute("width"));
-		auto map_tileset_image_height = cStrToInt(image->Attribute("height"));
+		const auto map_tileset_image_width  = cStrToInt(image->Attribute("width"));
+		const auto map_tileset_image_height = cStrToInt(image->Attribute("height"));
 
 		/* let's create the TmxTileset */
 		TmxTileset tileset(
@@ -135,19 +138,20 @@ std::vector<TmxTileset> TmxParser::getMapTilesets(const XMLElement & mapElement)
 	return tilesets;
 }
 
-std::vector<TmxTileLayer> TmxParser::getMapTileLayers(const XMLElement & mapElement)
+std::vector<TmxTileLayer> TmxParser::getMapTileLayers(const XMLElement& map_element) const
 {
 	std::vector<TmxTileLayer> layers;
 
-	for (auto child = mapElement.FirstChildElement("layer"); child != NULL; child = child->NextSiblingElement("layer"))
+	for (auto child = map_element.FirstChildElement("layer"); child != nullptr; child = child->
+	     NextSiblingElement("layer"))
 	{
-		auto map_layer_id = cStrToInt(child->Attribute("id"));
-		auto map_layer_name = child->Attribute("name");
-		auto map_layer_width = cStrToInt(child->Attribute("width"));
+		auto map_layer_id     = cStrToInt(child->Attribute("id"));
+		auto map_layer_name   = child->Attribute("name");
+		auto map_layer_width  = cStrToInt(child->Attribute("width"));
 		auto map_layer_height = cStrToInt(child->Attribute("height"));
 
 		auto data_child = child->FirstChildElement("data");
-		if (data_child == NULL)
+		if (data_child == nullptr)
 		{
 			std::cout << "tmx_parser failed to parse layer data of " << map_layer_name << std::endl;
 			system("pause");
@@ -155,25 +159,27 @@ std::vector<TmxTileLayer> TmxParser::getMapTileLayers(const XMLElement & mapElem
 			exit(EXIT_FAILURE);
 		}
 
-		if (strcmp(data_child->Attribute("encoding"), "csv") == -1)
+		if (strcmp(data_child->Attribute("encoding"), "csv") != 0)
 		{
-			std::cout << "tmx_parser failed to parse layer data of " << map_layer_name << " - only CSV encoding is supported!" << std::endl;
+			std::cout << "tmx_parser failed to parse layer data of " << map_layer_name <<
+				" - only CSV encoding is supported!" << std::endl;
 			system("pause");
 
 			exit(EXIT_FAILURE);
 		}
 
 		auto chunknullcheck = data_child->FirstChildElement("chunk");
-		if (chunknullcheck != NULL)
+		if (chunknullcheck != nullptr)
 		{
 			std::vector<TmxChunk> chunks;
 
-			for (auto chunk = data_child->FirstChildElement("chunk"); chunk != NULL; chunk = chunk->NextSiblingElement("chunk"))
+			for (auto chunk = data_child->FirstChildElement("chunk"); chunk != nullptr; chunk = chunk->
+			     NextSiblingElement("chunk"))
 			{
 				auto chunk_x = cStrToFloat(chunk->Attribute("x"));
 				auto chunk_y = cStrToFloat(chunk->Attribute("y"));
 
-				auto chunk_width = cStrToInt(chunk->Attribute("width"));
+				auto chunk_width  = cStrToInt(chunk->Attribute("width"));
 				auto chunk_height = cStrToInt(chunk->Attribute("height"));
 
 				auto chunk_csv = std::string(chunk->GetText());
@@ -183,7 +189,7 @@ std::vector<TmxTileLayer> TmxParser::getMapTileLayers(const XMLElement & mapElem
 
 				/* split CSV data into array */
 				std::vector<TmxTile> chunk_tiles;
-				std::stringstream ss(chunk_csv);
+				std::stringstream    ss(chunk_csv);
 
 				int x;
 				while (ss >> x)
@@ -214,7 +220,7 @@ std::vector<TmxTileLayer> TmxParser::getMapTileLayers(const XMLElement & mapElem
 
 			/* split CSV data into array */
 			std::vector<TmxTile> used_tiles;
-			std::stringstream ss(map_layer_csv);
+			std::stringstream    ss(map_layer_csv);
 
 			int x;
 			while (ss >> x)
@@ -237,76 +243,79 @@ std::vector<TmxTileLayer> TmxParser::getMapTileLayers(const XMLElement & mapElem
 	return layers;
 }
 
-std::vector<TmxObjectLayer> TmxParser::getMapObjectLayers(const XMLElement & mapElement)
+std::vector<TmxObjectLayer> TmxParser::getMapObjectLayers(const XMLElement& map_element)
 {
 	std::vector<TmxObjectLayer> layers;
 
-	for (auto child = mapElement.FirstChildElement("objectgroup"); child != NULL; child = child->NextSiblingElement("objectgroup"))
+	for (auto child = map_element.FirstChildElement("objectgroup"); child != nullptr; child = child->
+	     NextSiblingElement("objectgroup"))
 	{
-		auto map_object_layer_id = cStrToInt(child->Attribute("id"));
+		auto map_object_layer_id   = cStrToInt(child->Attribute("id"));
 		auto map_object_layer_name = child->Attribute("name");
 
-		if (child->FirstChildElement("object") == NULL)
+		if (child->FirstChildElement("object") == nullptr)
 		{
 			/* no reason to parse an empty object layer */
 			continue;
 		}
 
-		TmxObjectLayer layer(map_object_layer_id, map_object_layer_name);
+		TmxObjectLayer         layer(map_object_layer_id, map_object_layer_name);
 		std::vector<TmxObject> objects;
 
-		for (auto child2 = child->FirstChildElement("object"); child2 != NULL; child2 = child2->NextSiblingElement("object"))
+		for (auto child2 = child->FirstChildElement("object"); child2 != nullptr; child2 = child2->
+		     NextSiblingElement("object"))
 		{
-			auto object_id = cStrToInt(child2->Attribute("id"));
-			auto object_name = child2->Attribute("name");
-			auto object_type = child2->Attribute("type");
-			auto object_x = cStrToFloat(child2->Attribute("x"));
-			auto object_y = cStrToFloat(child2->Attribute("y"));
+			auto object_id       = cStrToInt(child2->Attribute("id"));
+			auto object_name     = child2->Attribute("name");
+			auto object_type     = child2->Attribute("type");
+			auto object_x        = cStrToFloat(child2->Attribute("x"));
+			auto object_y        = cStrToFloat(child2->Attribute("y"));
 			auto object_rotation = 0.f;
 
-			if (child2->Attribute("rotation") != NULL)
+			if (child2->Attribute("rotation") != nullptr)
 			{
 				object_rotation = cStrToFloat(child2->Attribute("rotation"));
 			}
 
-			auto object_width = cStrToInt(child2->Attribute("width"));
+			auto object_width  = cStrToInt(child2->Attribute("width"));
 			auto object_height = cStrToInt(child2->Attribute("height"));
-			auto object_gid = -1;
+			auto object_gid    = -1;
 
-			bool flipped_horizontally = false;
-			bool flipped_vertically = false;
-			bool flipped_diagonally = false;
+			auto flipped_horizontally = false;
+			auto flipped_vertically   = false;
+			auto flipped_diagonally   = false;
 
 			auto gid = child2->Attribute("gid");
-			if (gid != NULL)
+			if (gid != nullptr)
 			{
 				object_gid = cStrToUInt(gid);
 
-				const unsigned FLIPPED_HORIZONTALLY_FLAG = 0x80000000;
-				const unsigned FLIPPED_VERTICALLY_FLAG = 0x40000000;
-				const unsigned FLIPPED_DIAGONALLY_FLAG = 0x20000000;
+				const auto flipped_horizontally_flag = 0x80000000;
+				const auto flipped_vertically_flag   = 0x40000000;
+				const auto flipped_diagonally_flag   = 0x20000000;
 
-				flipped_horizontally = (object_gid & FLIPPED_HORIZONTALLY_FLAG);
-				flipped_vertically = (object_gid & FLIPPED_VERTICALLY_FLAG);
-				flipped_diagonally = (object_gid & FLIPPED_DIAGONALLY_FLAG);
+				flipped_horizontally = (object_gid & flipped_horizontally_flag);
+				flipped_vertically   = (object_gid & flipped_vertically_flag);
+				flipped_diagonally   = (object_gid & flipped_diagonally_flag);
 
-				object_gid &= ~(FLIPPED_HORIZONTALLY_FLAG |
-					FLIPPED_VERTICALLY_FLAG |
-					FLIPPED_DIAGONALLY_FLAG);
+				object_gid &= ~(flipped_horizontally_flag |
+					flipped_vertically_flag |
+					flipped_diagonally_flag);
 
 				if (flipped_vertically || flipped_diagonally)
 				{
-					std::cout << "tmx_parser failed to parse gid of object " << object_name << " - only the horizontal rotation is currently supported!" << std::endl;
+					std::cout << "tmx_parser failed to parse gid of object " << object_name <<
+						" - only the horizontal rotation is currently supported!" << std::endl;
 					object_gid = -1;
 				}
 			}
 
-			if (object_name == NULL)
+			if (object_name == nullptr)
 			{
 				object_name = "";
 			}
 
-			if (object_type == NULL)
+			if (object_type == nullptr)
 			{
 				object_type = "";
 			}
@@ -326,14 +335,15 @@ std::vector<TmxObjectLayer> TmxParser::getMapObjectLayers(const XMLElement & map
 				flipped_diagonally);
 
 			auto props = child2->FirstChildElement("properties");
-			if (props != NULL)
+			if (props != nullptr)
 			{
 				std::vector<TmxObjectProperty> object_properties;
 
-				for (auto prop = props->FirstChildElement("property"); prop != NULL; prop = prop->NextSiblingElement("property"))
+				for (auto prop = props->FirstChildElement("property"); prop != nullptr; prop = prop->NextSiblingElement(
+					     "property"))
 				{
-					auto prop_name = prop->Attribute("name");
-					auto prop_type = prop->Attribute("type");
+					auto prop_name  = prop->Attribute("name");
+					auto prop_type  = prop->Attribute("type");
 					auto prop_value = prop->Attribute("value");
 
 					TmxObjectProperty property(prop_name, prop_type, prop_value);
@@ -353,7 +363,7 @@ std::vector<TmxObjectLayer> TmxParser::getMapObjectLayers(const XMLElement & map
 	return layers;
 }
 
-TmxMap TmxParser::parse(const std::string& filename)
+TmxMap TmxParser::parse(const std::string& filename) const
 {
 	XMLDocument doc;
 	doc.LoadFile(filename.c_str());
@@ -378,7 +388,7 @@ TmxMap TmxParser::parse(const std::string& filename)
 	return map;
 }
 
-int TmxParser::cStrToInt(const char * x)
+int TmxParser::cStrToInt(const char* x)
 {
 	int y;
 	std::stringstream(x) >> y;
@@ -386,7 +396,7 @@ int TmxParser::cStrToInt(const char * x)
 	return y;
 }
 
-unsigned int TmxParser::cStrToUInt(const char * x)
+unsigned int TmxParser::cStrToUInt(const char* x)
 {
 	unsigned int y;
 	std::stringstream(x) >> y;
@@ -394,7 +404,7 @@ unsigned int TmxParser::cStrToUInt(const char * x)
 	return y;
 }
 
-float TmxParser::cStrToFloat(const char * x)
+float TmxParser::cStrToFloat(const char* x)
 {
-	return strtof(x, 0);
+	return strtof(x, nullptr);
 }

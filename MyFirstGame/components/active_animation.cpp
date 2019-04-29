@@ -24,9 +24,12 @@ SOFTWARE.
 
 #include "active_animation.hpp"
 
-namespace mfg {
-	namespace components {
-		ActiveAnimationComponent::ActiveAnimationComponent(EntityAnimationComponent& animation) : animation(std::addressof(animation))
+namespace mfg
+{
+	namespace components
+	{
+		ActiveAnimationComponent::ActiveAnimationComponent(EntityAnimationComponent& animation) : animation(
+			std::addressof(animation))
 		{
 			name = animation.getName();
 		}

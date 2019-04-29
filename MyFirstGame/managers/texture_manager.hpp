@@ -23,9 +23,6 @@ SOFTWARE.
 */
 
 #pragma once
-
-#include "../macros.hpp"
-
 #include "../caching/texture_loader.hpp"
 
 using namespace mfg::caching;
@@ -37,14 +34,11 @@ namespace mfg
 		class TextureManager
 		{
 		public:
-			TextureManager();
-			~TextureManager();
-
-			texture_handle get(const std::string texture_name, const std::string texture_path);
+			texture_handle get(const std::string& texture_name, const std::string& texture_path);
 
 			TextureManager& getRef();
 		private:
-			texture_cache textures;
+			texture_cache textures_;
 		};
 	}
 }

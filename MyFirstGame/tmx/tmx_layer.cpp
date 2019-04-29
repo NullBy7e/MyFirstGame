@@ -23,13 +23,12 @@ SOFTWARE.
 */
 
 #include "tmx_layer.hpp"
+#include <utility>
 
-TmxLayer::TmxLayer() {}
-
-TmxLayer::TmxLayer(const int id, const std::string name, const int width, const int height)
+TmxLayer::TmxLayer(const int id, std::string name, const int width, const int height)
 	:
 	id(id),
-	name(name),
+	name(std::move(name)),
 	width(width),
 	height(height)
 {

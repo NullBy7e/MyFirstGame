@@ -23,14 +23,15 @@ SOFTWARE.
 */
 
 #include "tmx_object_property.hpp"
+#include <utility>
 
 TmxObjectProperty::TmxObjectProperty(
-	const std::string name,
-	const std::string type,
-	const std::string value)
+	std::string name,
+	std::string type,
+	std::string value)
 	:
-	name(name),
-	type(type),
-	value(value)
+	name(std::move(name)),
+	type(std::move(type)),
+	value(std::move(value))
 {
 }

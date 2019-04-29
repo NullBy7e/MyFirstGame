@@ -23,16 +23,20 @@ SOFTWARE.
 */
 
 #include "tmx_tileset.hpp"
+#include <utility>
 
-TmxTileset::TmxTileset(const int first_gid, const std::string name, const int tile_width, const int tile_height,
-	const int tile_count,
-	const int columns,
-	const std::string image_source,
-	const int image_width,
-	const int image_height)
+TmxTileset::TmxTileset(const int          first_gid,
+                       std::string        name,
+                       const int          tile_width,
+                       const int          tile_height,
+                       const int          tile_count,
+                       const int          columns,
+                       const std::string& image_source,
+                       const int          image_width,
+                       const int          image_height)
 	:
 	first_gid(first_gid),
-	name(name), tile_width(tile_width),
+	name(std::move(name)), tile_width(tile_width),
 	tile_height(tile_height),
 	tile_count(tile_count),
 	columns(columns)

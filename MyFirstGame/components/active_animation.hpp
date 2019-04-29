@@ -24,20 +24,16 @@ SOFTWARE.
 
 #pragma once
 
-#include <cstdint>
-
-#include <Thor/Animations.hpp>
-#include <SFML/Graphics.hpp>
-
-#include "entt/entt.hpp"
 #include "entity_animation.hpp"
 
-namespace mfg {
-	namespace components {
+namespace mfg
+{
+	namespace components
+	{
 		class ActiveAnimationComponent
 		{
 		public:
-			ActiveAnimationComponent(EntityAnimationComponent& animation);
+			explicit ActiveAnimationComponent(EntityAnimationComponent& animation);
 
 			EntityAnimationComponent* animation;
 

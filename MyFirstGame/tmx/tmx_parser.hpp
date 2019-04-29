@@ -25,12 +25,8 @@ SOFTWARE.
 #pragma once
 
 #include <string>
-#include <sstream>
-#include <iostream>
-#include <algorithm>
 
 #include <filesystem>
-#include <direct.h>
 
 #include <map>
 #include <vector>
@@ -39,7 +35,6 @@ SOFTWARE.
 
 #include "tmx_map.hpp"
 #include "tmx_tileset.hpp"
-#include "tmx_layer.hpp"
 #include "tmx_tile_layer.hpp"
 #include "tmx_object_layer.hpp"
 
@@ -48,21 +43,21 @@ using namespace tinyxml2;
 class TmxParser
 {
 public:
-	TmxParser();
+	TmxParser() = default;
 
-	TmxMap parse(const std::string&);
+	TmxMap parse(const std::string&) const;
 
-	int cStrToInt(const char * x);
+	static int cStrToInt(const char* x);
 
-	unsigned int cStrToUInt(const char * x);
+	static unsigned int cStrToUInt(const char* x);
 
-	float cStrToFloat(const char * x);
+	static float cStrToFloat(const char* x);
 
 private:
-	const std::string target_tiled_version = "1.2.3";
+	const std::string target_tiled_version_ = "1.2.3";
 
-	std::map<std::string, std::string> getMapElementProperties(const XMLElement&);
-	std::vector<TmxTileset> getMapTilesets(const XMLElement&);
-	std::vector<TmxTileLayer> getMapTileLayers(const XMLElement&);
-	std::vector<TmxObjectLayer> getMapObjectLayers(const XMLElement&);
+	std::map<std::string, std::string> getMapElementProperties(const XMLElement&) const;
+	std::vector<TmxTileset>            getMapTilesets(const XMLElement&         ) const;
+	std::vector<TmxTileLayer>          getMapTileLayers(const XMLElement&       ) const;
+	static std::vector<TmxObjectLayer> getMapObjectLayers(const XMLElement&     );
 };

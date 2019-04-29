@@ -9,13 +9,12 @@ namespace mfg
 		class ActorComponent
 		{
 		public:
-			ActorComponent(std::string name);
-			ActorComponent();
-			~ActorComponent();
+			explicit ActorComponent(std::string name);
+			         ActorComponent() = default;
 
-			std::string getName();
+			std::string getName() const;
 		private:
-			std::string name;
+			std::string name_;
 		};
 	}
 }

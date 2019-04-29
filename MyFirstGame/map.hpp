@@ -1,7 +1,5 @@
 #pragma once
 
-#include <array>
-
 #include "tmx/tmx_map.hpp"
 
 #include "managers/texture_manager.hpp"
@@ -19,8 +17,8 @@ namespace mfg
 		{
 		public:
 			Map(
-				std::vector<TmxTileset> map_tilesets,
-				std::vector<TmxTileLayer> map_tile_layers,
+				std::vector<TmxTileset>     map_tilesets,
+				std::vector<TmxTileLayer>   map_tile_layers,
 				std::vector<TmxObjectLayer> map_object_layers,
 
 				std::string version,
@@ -36,28 +34,27 @@ namespace mfg
 				int pixel_height
 			);
 
-			~Map();
-
 			void loadSprites(TextureManager& texmgr);
 			void loadObjects();
 
-			void setPlayerData(PlayerData player_data);
+			void setPlayerData(player_data player_data);
 
 			sf::Vector2f getEntityPosition(unsigned int entity);
 			sf::Vector2f getPlayerPosition();
-			sf::Vector2f getDimensions();
+			sf::Vector2f getDimensions() const;
 
-			const entt::view<PositionComponent, SpriteComponent> getEntities();
+			entt::view<PositionComponent, SpriteComponent> getEntities();
 
 			sf::Sprite getSpriteByTileId(int tile_id);
 
-			EntityManager& getEntityManager();
-			Map& getRef();
+			EntityManager&                                      getEntityManager();
+			Map&                                                getRef();
+			std::map<std::pair<float, float>, std::vector<int>> getMappings(float begin_x, float begin_y, float end_y,
+			                                                                float end_x) const;
 
-			const std::map<std::pair<float, float>, std::vector<int>> getMappings(float begin_x, float begin_y, float end_y, float end_x);
 		private:
-			EntityManager entmgr;
-			std::map<std::pair<float, float>, std::vector<int>> mappings;
+			EntityManager                                       entmgr_;
+			std::map<std::pair<float, float>, std::vector<int>> mappings_;
 		};
 	}
 }

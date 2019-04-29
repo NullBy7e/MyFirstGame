@@ -24,17 +24,12 @@ SOFTWARE.
 
 #pragma once
 
-#include "macros.hpp"
-
-#include "map.hpp"
 #include "window.hpp"
 
 #include "tmx/tmx_parser.hpp"
 
 #include "components/components.hpp"
 
-#include "managers/system_manager.hpp"
-#include "managers/entity_manager.hpp"
 #include "managers/texture_manager.hpp"
 #include "managers/map_manager.hpp"
 
@@ -42,42 +37,41 @@ SOFTWARE.
 #include "player_data.hpp"
 
 #ifdef DEBUG
-#include "debug_overlay.hpp"
+// ReSharper disable once CppUnusedIncludeDirective
 #endif
 
 using namespace mfg;
-using namespace mfg::managers;
-using namespace mfg::components;
+using namespace managers;
+using namespace components;
 
-namespace mfg {
+namespace mfg
+{
 	namespace core
 	{
 		class Game
 		{
 		public:
 			Game();
-			~Game();
 
-			void updateViewport();
-			PlayerData createPlayerData();
+			void        updateViewport();
+			player_data createPlayerData();
 
 			void loop();
 			void clear();
 			void display();
 		private:
 			sf::Time restartClock();
-			float getElapsedFrameTime();
+			float    getElapsedFrameTime() const;
 
-		private:
-			Window window;
-			Viewport viewport;
+			Window   window_;
+			Viewport viewport_;
 
-			sf::Vector2i screen_dimensions;
+			sf::Vector2i screen_dimensions_;
 
-			sf::Clock clock;
+			sf::Clock clock_;
 
-			TextureManager texmgr;
-			MapManager mapmgr;
+			TextureManager texmgr_;
+			MapManager     mapmgr_;
 		};
 	}
 }

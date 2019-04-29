@@ -21,7 +21,6 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
-
 #include "animation_system.hpp"
 
 namespace mfg
@@ -32,26 +31,24 @@ namespace mfg
 		{
 		}
 
-		thor::Animator<sf::Sprite, std::string>* AnimationSystem::getAnimator(entt::entity id)
+		thor::Animator<sf::Sprite, std::string>* AnimationSystem::getAnimator(const entt::entity id)
 		{
-			if (auto it{ animators.find(id) }; it != std::end(animators))
+			if (const auto it{animators_.find(id)}; it != std::end(animators_))
 			{
-				return animators[id].get();
+				return animators_[id].get();
 			}
-			else
-			{
-				thor::Animator<sf::Sprite, std::string> animator;
-				animators[id] = std::make_unique<thor::Animator<sf::Sprite, std::string>>(animator);
+			thor::Animator<sf::Sprite, std::string> animator;
+			animators_[id] = std::make_unique<thor::Animator<sf::Sprite, std::string>>(animator);
 
-				return animators[id].get();
-			}
+			return animators_[id].get();
 		}
 
 		void AnimationSystem::animate(sf::Time dt)
 		{
 			auto& entities = entmgr->getEntities();
 
-			entities.view<ActiveAnimationComponent>().each([this, dt](auto entity, auto &active) {
+			entities.view<ActiveAnimationComponent>().each([this, dt](auto entity, auto& active)
+			{
 				auto animator = this->getAnimator(entity);
 
 				animator->animate(*active.animation->sprite);
@@ -59,9 +56,9 @@ namespace mfg
 			});
 		}
 
-		void AnimationSystem::stopAnimation(entt::entity entity)
+		void AnimationSystem::stopAnimation(const entt::entity entity)
 		{
-			auto animator = this->getAnimator(entity);
+			auto animator = getAnimator(entity);
 			animator->stopAnimation();
 		}
 	}

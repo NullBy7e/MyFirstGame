@@ -26,22 +26,22 @@ SOFTWARE.
 
 #include <SFML/Graphics.hpp>
 
-#include "../macros.hpp"
-
-namespace mfg {
-	namespace components {
+namespace mfg
+{
+	namespace components
+	{
 		class EntityComponent
 		{
 		public:
 			EntityComponent(
-				float x,
-				float y,
-				float width,
-				float height,
-				float x_scale,
-				float y_scale,
-				float rotation,
-				bool flipped_horizontally,
+				float      x,
+				float      y,
+				float      width,
+				float      height,
+				float      x_scale,
+				float      y_scale,
+				float      rotation,
+				bool       flipped_horizontally,
 				sf::Sprite sprite);
 
 			void setFacingLeft();
@@ -58,7 +58,7 @@ namespace mfg {
 
 			float rotation;
 
-			bool facing_left = false;
+			bool facing_left  = false;
 			bool facing_right = false;
 
 			bool flipped_horizontally = false;

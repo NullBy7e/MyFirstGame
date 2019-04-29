@@ -24,7 +24,7 @@ SOFTWARE.
 
 #include "game.hpp"
 
-using namespace mfg::core;
+using namespace core;
 
 int main()
 {

@@ -24,4 +24,6 @@ SOFTWARE.
 
 #include "tmx_tile.hpp"
 
-TmxTile::TmxTile(int tile_id) : id(tile_id) {};
+TmxTile::TmxTile(const int tile_id) : id(tile_id)
+{
+};

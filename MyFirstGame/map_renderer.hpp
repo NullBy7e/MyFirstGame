@@ -1,8 +1,5 @@
 #pragma once
 
-#include <iostream>
-
-#include "macros.hpp"
 #include "window.hpp"
 
 #include "map.hpp"
@@ -15,16 +12,15 @@ namespace mfg
 		class MapRenderer
 		{
 		public:
-			MapRenderer(Window& window);
-			~MapRenderer();
+			explicit MapRenderer(Window& window);
 
-			void render(Viewport& viewport, Map& map);
+			void render(Viewport& viewport, Map& map) const;
 
 		private:
-			void drawTiles(Viewport& viewport, Map& map);
-			void drawEntities(Map& map);
+			void drawTiles(Viewport& viewport, Map& map) const;
+			void drawEntities(Map&   map) const;
 
-			Window& window;
+			Window& window_;
 		};
 	}
 }

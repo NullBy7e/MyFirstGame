@@ -2,25 +2,26 @@
 
 #include <SFML/Graphics.hpp>
 
-namespace mfg {
-	namespace components {
-		class SpriteComponent : public sf::Sprite
+namespace mfg
+{
+	namespace components
+	{
+		class SpriteComponent final : public sf::Sprite
 		{
 		public:
-			SpriteComponent(bool mirrored, int width, int height, sf::Sprite sprite);
-			SpriteComponent(int width, int height, sf::Sprite sprite);
+			SpriteComponent(bool  mirrored, float width, float          height, const Sprite& sprite);
+			SpriteComponent(float width, float    height, const Sprite& sprite);
 
-			SpriteComponent(bool mirrored, sf::Sprite sprite);
-			SpriteComponent(sf::Sprite sprite);
+			         SpriteComponent(bool          mirrored, const Sprite& sprite);
+			explicit SpriteComponent(const Sprite& sprite);
 
-			SpriteComponent();
-			~SpriteComponent();
+			SpriteComponent() = default;
 
 			void toggleMirror();
 			void update(sf::Vector2f position);
 
 		private:
-			bool mirrored = false;
+			bool mirrored_ = false;
 		};
 	}
 }

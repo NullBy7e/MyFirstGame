@@ -30,12 +30,14 @@ SOFTWARE.
 #include "entt/entt.hpp"
 #include "entity_animation.hpp"
 
-namespace mfg {
-	namespace components {
+namespace mfg
+{
+	namespace components
+	{
 		class RunAnimationComponent : public EntityAnimationComponent
 		{
 		public:
-			RunAnimationComponent(sf::Sprite* sprite, thor::FrameAnimation frame);
+			RunAnimationComponent(sf::Sprite* sprite, const thor::FrameAnimation& frame);
 
 			std::string getName() override;
 

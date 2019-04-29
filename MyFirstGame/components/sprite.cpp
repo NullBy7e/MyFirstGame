@@ -4,56 +4,52 @@ namespace mfg
 {
 	namespace components
 	{
-		SpriteComponent::SpriteComponent(bool mirrored, int width, int height, sf::Sprite sprite) : SpriteComponent(width, height, sprite)
+		SpriteComponent::
+		SpriteComponent(const bool mirrored, const float width, const float height, const Sprite& sprite) :
+			SpriteComponent(
+				width, height, sprite)
 		{
 			if (mirrored)
 				toggleMirror();
 		}
 
-		SpriteComponent::SpriteComponent(int width, int height, sf::Sprite sprite) : SpriteComponent(sprite)
+		SpriteComponent::
+		SpriteComponent(const float width, const float height, const Sprite& sprite) : SpriteComponent(sprite)
 		{
-			auto bounds = sprite.getLocalBounds();
+			const auto bounds = sprite.getLocalBounds();
 
-			auto factorX = width / bounds.width;
-			auto factorY = height / bounds.height;
+			const auto factor_x = width / bounds.width;
+			const auto factor_y = height / bounds.height;
 
-			if (mirrored)
+			if (mirrored_)
 				toggleMirror();
 			else
-				setScale(factorX, factorY);
+				setScale(factor_x, factor_y);
 		}
 
-		SpriteComponent::SpriteComponent(bool mirrored, sf::Sprite sprite) : SpriteComponent(sprite)
+		SpriteComponent::SpriteComponent(const bool mirrored, const Sprite& sprite) : SpriteComponent(sprite)
 		{
 			if (mirrored)
 				toggleMirror();
 		}
 
-		SpriteComponent::SpriteComponent(sf::Sprite sprite) : sf::Sprite(sprite)
+		SpriteComponent::SpriteComponent(const Sprite& sprite) : Sprite(sprite)
 		{
-			auto bounds = sprite.getLocalBounds();
+			const auto bounds = sprite.getLocalBounds();
 			setOrigin(bounds.width / 2, bounds.height);
-		}
-
-		SpriteComponent::SpriteComponent()
-		{
-		}
-
-		SpriteComponent::~SpriteComponent()
-		{
 		}
 
 		void SpriteComponent::toggleMirror()
 		{
-			mirrored = !mirrored;
+			mirrored_ = !mirrored_;
 
-			if (mirrored)
+			if (mirrored_)
 				setScale(-getScale().x, getScale().y);
 		}
 
-		void SpriteComponent::update(sf::Vector2f pos)
+		void SpriteComponent::update(const sf::Vector2f position)
 		{
-			setPosition(pos);
+			setPosition(position);
 		}
 	}
 }

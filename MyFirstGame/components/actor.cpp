@@ -1,24 +1,17 @@
 #include "actor.hpp"
+#include <utility>
 
 namespace mfg
 {
 	namespace components
 	{
-		ActorComponent::ActorComponent(std::string name) : name(name)
+		ActorComponent::ActorComponent(std::string name) : name_(std::move(name))
 		{
 		}
 
-		ActorComponent::ActorComponent()
+		std::string ActorComponent::getName() const
 		{
-		}
-
-		ActorComponent::~ActorComponent()
-		{
-		}
-
-		std::string ActorComponent::getName()
-		{
-			return name;
+			return name_;
 		}
 	}
 }

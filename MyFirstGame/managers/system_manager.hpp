@@ -39,14 +39,13 @@ namespace mfg
 		class SystemManager
 		{
 		public:
-			SystemManager(EntityManager* entmgr);
-			~SystemManager();
+			explicit SystemManager(EntityManager* entmgr);
 
-			AnimationSystem* getAnimationSystem();
+			AnimationSystem* getAnimationSystem() const;
 
 			EntityManager* entmgr;
 		private:
-			std::unique_ptr<AnimationSystem> animsys;
+			std::unique_ptr<AnimationSystem> animsys_;
 		};
 	}
 }

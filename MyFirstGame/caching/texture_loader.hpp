@@ -25,7 +25,6 @@ SOFTWARE.
 #pragma once
 
 #include <filesystem>
-#include <direct.h>
 
 #include <SFML/Graphics.hpp>
 
@@ -38,8 +37,9 @@ namespace mfg
 		using texture_cache = entt::resource_cache<sf::Texture>;
 		using texture_handle = entt::resource_handle<sf::Texture>;
 
-		struct texture_loader : entt::resource_loader<texture_loader, sf::Texture> {
-			std::shared_ptr<sf::Texture> load(std::string texture_path) const;
+		struct TextureLoader : entt::resource_loader<TextureLoader, sf::Texture>
+		{
+			std::shared_ptr<sf::Texture> load(const std::string& texture_path) const;
 		};
 	}
 }

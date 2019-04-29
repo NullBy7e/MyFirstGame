@@ -26,46 +26,44 @@ SOFTWARE.
 
 #include <map>
 #include <vector>
-#include <sstream>
 
 #include "tmx_tileset.hpp"
-#include "tmx_layer.hpp"
 #include "tmx_tile_layer.hpp"
 #include "tmx_object_layer.hpp"
 
 class TmxMap
 {
 public:
-	TmxMap();
+	TmxMap() = default;
 	TmxMap(
 		std::map<std::string, std::string> map_properties,
-		std::vector<TmxTileset> map_tilesets,
-		std::vector<TmxTileLayer> map_tile_layers,
-		std::vector<TmxObjectLayer> map_object_layers
+		std::vector<TmxTileset>            map_tilesets,
+		std::vector<TmxTileLayer>          map_tile_layers,
+		std::vector<TmxObjectLayer>        map_object_layers
 	);
 
-	int cStrToInt(const char * x);
+	static int cStrToInt(const char* x);
 
 	std::string version;
 	std::string tiled_version;
 	std::string orientation;
 	std::string render_order;
 
-	int width;
-	int height;
-	int tile_width;
-	int tile_height;
-	int pixel_width;
-	int pixel_height;
+	int width{};
+	int height{};
+	int tile_width{};
+	int tile_height{};
+	int pixel_width{};
+	int pixel_height{};
 
 	std::vector<TmxTileset> tilesets;
 
-	std::vector<TmxTileLayer> tile_layers;
+	std::vector<TmxTileLayer>   tile_layers;
 	std::vector<TmxObjectLayer> object_layers;
 
 	/* array that maps tile number to sprite (contains all sprites from the tileset and the number that
 	 * Tiled would normally assign to it */
 	std::map<int, sf::Sprite> sprites;
 
-	bool player_spawned;
+	bool player_spawned{};
 };

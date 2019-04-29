@@ -23,18 +23,21 @@ SOFTWARE.
 */
 
 #include "entity.hpp"
+#include <utility>
 
-namespace mfg {
-	namespace components {
+namespace mfg
+{
+	namespace components
+	{
 		EntityComponent::EntityComponent(
-			float x,
-			float y,
-			float width,
-			float height,
-			float x_scale,
-			float y_scale,
-			float rotation,
-			bool flipped_horizontally,
+			const float      x,
+			const float      y,
+			const float      width,
+			const float      height,
+			const float      x_scale,
+			const float      y_scale,
+			const float      rotation,
+			const bool       flipped_horizontally,
 			sf::Sprite sprite)
 			:
 			x(x),
@@ -45,19 +48,19 @@ namespace mfg {
 			y_scale(y_scale),
 			rotation(rotation),
 			flipped_horizontally(flipped_horizontally),
-			sprite(sprite)
+			sprite(std::move(sprite))
 		{
 		}
 
 		void EntityComponent::setFacingLeft()
 		{
 			facing_right = false;
-			facing_left = true;
+			facing_left  = true;
 		}
 
 		void EntityComponent::setFacingRight()
 		{
-			facing_left = false;
+			facing_left  = false;
 			facing_right = true;
 		}
 	}
