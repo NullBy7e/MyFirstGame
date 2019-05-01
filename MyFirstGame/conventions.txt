@@ -1,0 +1,19 @@
+Compiled with the ideas and opinions of the wonderful lads at the C & C++ Together Discord channel <3
+
+Class names:
+- GameState
+
+Member variables:
+- gameState_
+
+Local variables:
+- game_state
+
+Member function names:
+- load_game()
+
+Code files:
+- GameState.cpp
+
+Header files:
+- GameState.hpp
