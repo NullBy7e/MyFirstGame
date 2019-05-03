@@ -24,7 +24,7 @@ void LevelEditorGameState::update(Window& window, float dt)
 
 void LevelEditorGameState::draw(Window& window, float dt)
 {
-
+	window.draw(grid_);
 }
 
 

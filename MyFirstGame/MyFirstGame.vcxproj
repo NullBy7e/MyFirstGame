@@ -21,6 +21,7 @@
   <ItemGroup>
     <ClCompile Include="core\Game.cpp" />
     <ClCompile Include="core\Window.cpp" />
+    <ClCompile Include="drawables\Grid.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="states\LevelEditorGameState.cpp" />
   </ItemGroup>
@@ -30,6 +31,7 @@
   <ItemGroup>
     <ClInclude Include="core\Game.hpp" />
     <ClInclude Include="core\Window.hpp" />
+    <ClInclude Include="drawables\Grid.hpp" />
     <ClInclude Include="states\GameState.hpp" />
     <ClInclude Include="states\LevelEditorGameState.hpp" />
   </ItemGroup>

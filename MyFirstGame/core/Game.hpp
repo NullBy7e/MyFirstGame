@@ -26,11 +26,8 @@ private:
 		LevelEditor
 	};
 
-	template <GameStates gameState>
-	void switch_to_game_state();
-
-	template <GameStates gameState>
-	void register_game_state();
+	void switch_to_game_state(GameStates game_state);
+	void register_game_state(GameStates game_state);
 
 	/**
 	 * \brief The main window of the game.

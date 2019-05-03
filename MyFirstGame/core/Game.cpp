@@ -3,23 +3,21 @@
 
 Game::Game()
 {
-	register_game_state<GameStates::LevelEditor>();
-	switch_to_game_state<GameStates::LevelEditor>();
+	register_game_state(GameStates::LevelEditor);
+	switch_to_game_state(GameStates::LevelEditor);
 }
 
-template <Game::GameStates gameState>
-void Game::switch_to_game_state()
+void Game::switch_to_game_state(const GameStates game_state)
 {
-	currentGameState_ = gameStates_[gameState];
+	currentGameState_ = gameStates_[game_state];
 }
 
-template <Game::GameStates gameState>
-void Game::register_game_state()
+void Game::register_game_state(const GameStates game_state)
 {
-	switch (gameState)
+	switch (game_state)
 	{
 	case GameStates::LevelEditor:
-		gameStates_[gameState] = std::make_unique<LevelEditorGameState>(LevelEditorGameState{});
+		gameStates_[game_state] = std::make_unique<LevelEditorGameState>(LevelEditorGameState{});
 		break;
 	default:
 		break;

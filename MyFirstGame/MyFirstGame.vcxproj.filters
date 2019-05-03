@@ -25,6 +25,12 @@
     <Filter Include="Header Files\states">
       <UniqueIdentifier>{d210ea10-443a-4bf5-961a-e994ac10c94d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\drawables">
+      <UniqueIdentifier>{025807b5-5779-44ed-b161-902014e0a1df}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\drawables">
+      <UniqueIdentifier>{11e455d0-9f5b-4909-a4f9-db854725f0d1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -38,6 +44,9 @@
     </ClCompile>
     <ClCompile Include="states\LevelEditorGameState.cpp">
       <Filter>Source Files\states</Filter>
+    </ClCompile>
+    <ClCompile Include="drawables\Grid.cpp">
+      <Filter>Source Files\drawables</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -55,6 +64,9 @@
     </ClInclude>
     <ClInclude Include="states\LevelEditorGameState.hpp">
       <Filter>Header Files\states</Filter>
+    </ClInclude>
+    <ClInclude Include="drawables\Grid.hpp">
+      <Filter>Header Files\drawables</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
