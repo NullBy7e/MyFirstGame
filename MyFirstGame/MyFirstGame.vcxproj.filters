@@ -31,6 +31,12 @@
     <Filter Include="Header Files\drawables">
       <UniqueIdentifier>{11e455d0-9f5b-4909-a4f9-db854725f0d1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\map">
+      <UniqueIdentifier>{f230ac5d-a4db-4a92-bcad-b9cc71e41be4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\map">
+      <UniqueIdentifier>{eaeca580-2429-4f31-9279-a9d066e56310}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -47,6 +53,12 @@
     </ClCompile>
     <ClCompile Include="drawables\Grid.cpp">
       <Filter>Source Files\drawables</Filter>
+    </ClCompile>
+    <ClCompile Include="map\MapEditor.cpp">
+      <Filter>Source Files\map</Filter>
+    </ClCompile>
+    <ClCompile Include="map\Map.cpp">
+      <Filter>Source Files\map</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -67,6 +79,12 @@
     </ClInclude>
     <ClInclude Include="drawables\Grid.hpp">
       <Filter>Header Files\drawables</Filter>
+    </ClInclude>
+    <ClInclude Include="map\MapEditor.hpp">
+      <Filter>Header Files\map</Filter>
+    </ClInclude>
+    <ClInclude Include="map\Map.hpp">
+      <Filter>Header Files\map</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

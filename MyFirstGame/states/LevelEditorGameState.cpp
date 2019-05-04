@@ -1,30 +1,33 @@
-#include <SFML/Graphics/Color.hpp>
-
+#include "GameState.hpp"
 #include "LevelEditorGameState.hpp"
 #include "../core/Window.hpp"
 
-void LevelEditorGameState::handle_input(Window& window, float dt)
+LevelEditorGameState::LevelEditorGameState(Window& window): GameState(window)
+{
+}
+
+void LevelEditorGameState::handle_input()
 {
 	sf::Event event{};
 
-	while(window.pollEvent(event))
+	while(window_.poll_event(event))
 	{
 		
 	}
 }
 
-void LevelEditorGameState::clear(Window& window)
+void LevelEditorGameState::clear()
 {
-	window.clear(sf::Color::Black);
+	window_.clear();
 }
 
-void LevelEditorGameState::update(Window& window, float dt)
+void LevelEditorGameState::update()
 {
 }
 
-void LevelEditorGameState::draw(Window& window, float dt)
+void LevelEditorGameState::draw()
 {
-	window.draw(grid_);
+	window_.draw(mapEditor_);
 }
 
 

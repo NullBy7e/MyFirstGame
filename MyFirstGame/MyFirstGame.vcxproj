@@ -23,6 +23,8 @@
     <ClCompile Include="core\Window.cpp" />
     <ClCompile Include="drawables\Grid.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="map\Map.cpp" />
+    <ClCompile Include="map\MapEditor.cpp" />
     <ClCompile Include="states\LevelEditorGameState.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -32,6 +34,8 @@
     <ClInclude Include="core\Game.hpp" />
     <ClInclude Include="core\Window.hpp" />
     <ClInclude Include="drawables\Grid.hpp" />
+    <ClInclude Include="map\Map.hpp" />
+    <ClInclude Include="map\MapEditor.hpp" />
     <ClInclude Include="states\GameState.hpp" />
     <ClInclude Include="states\LevelEditorGameState.hpp" />
   </ItemGroup>
@@ -93,7 +97,7 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>external\SFML-2.5.1\x86\include;external\entt\x86\src;external\thor\x86\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>external\SFML-2.5.1\x86\include;external\entt\x86\src;external\thor\x86\include;external\SFML-2.5.1\src</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>SFML_STATIC;DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>
@@ -132,7 +136,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>external\SFML-2.5.1\x64\include;external\entt\x86\src;external\thor\x86\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>external\SFML-2.5.1\x64\include;external\entt\x86\src;external\thor\x86\include;external\SFML-2.5.1\src</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>SFML_STATIC;DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <SupportJustMyCode>false</SupportJustMyCode>
