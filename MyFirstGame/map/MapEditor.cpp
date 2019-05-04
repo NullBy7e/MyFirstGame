@@ -1,6 +1,7 @@
 #include <filesystem>
 
 #include <SFML/Graphics/RenderTarget.hpp>
+#include <imgui.h>
 
 #include "MapEditor.hpp"
 #include <iostream>
@@ -14,6 +15,8 @@ MapEditor::MapEditor()
 		std::cerr << "The map failed to load due to missing assets, please reinstall the game." << std::endl;
 		return;
 	}
+
+
 }
 
 MapEditor::MapEditor(const Map& map) : map_(map)
@@ -50,4 +53,7 @@ void MapEditor::draw(sf::RenderTarget& target, const sf::RenderStates states) co
 
 	if (map_.has_value())
 		target.draw(map_.value(), states);
+
+	ImGui::Begin("Sample window");
+	ImGui::End();
 }

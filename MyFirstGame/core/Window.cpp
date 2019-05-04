@@ -1,20 +1,33 @@
 #include "Window.hpp"
+#include <imgui-SFML.h>
 
 Window::Window()
 {
 	window_.create(sf::VideoMode(1280, 1024), "MyFirstGame", sf::Style::Titlebar | sf::Style::Close);
 	window_.setFramerateLimit(60);
+	ImGui::SFML::Init(window_);
 }
 
 void Window::display()
 {
-	dt_ = clock_.restart().asSeconds();
 	window_.display();
 }
 
 bool Window::poll_event(sf::Event& event)
 {
-	return window_.pollEvent(event);
+	const auto e = window_.pollEvent(event);
+
+	if (e)
+	{
+		if (event.type == sf::Event::Closed)
+		{
+			window_.close();
+		}
+	}
+
+	dt_ = clock_.restart();
+
+	return e;
 }
 
 void Window::clear()
@@ -30,4 +43,9 @@ void Window::draw(sf::Drawable& drawable)
 bool Window::is_open() const
 {
 	return window_.isOpen();
-;}
+}
+
+sf::RenderWindow& Window::get()
+{
+	return window_;
+}

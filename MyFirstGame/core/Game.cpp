@@ -1,5 +1,6 @@
 #include "Game.hpp"
 #include "../states/LevelEditorGameState.hpp"
+#include <imgui-SFML.h>
 
 Game::Game()
 {
@@ -26,19 +27,17 @@ void Game::register_game_state(const GameStates game_state)
 
 int Game::loop()
 {
-	while (running_)
+	while (window_.is_open())
 	{
-		while (window_.is_open())
-		{
-			currentGameState_->handle_input();
-			currentGameState_->update();
+		currentGameState_->handle_input();
+		currentGameState_->update();
 
-			currentGameState_->clear();
-			currentGameState_->draw();
+		currentGameState_->clear();
+		currentGameState_->draw();
 
-			window_.display();
-		}
+		window_.display();
 	}
 
+	ImGui::SFML::Shutdown();
 	return EXIT_SUCCESS;
 }

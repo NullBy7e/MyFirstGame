@@ -43,6 +43,12 @@
     <Filter Include="Assets\Tilesets">
       <UniqueIdentifier>{2b650235-c824-4fe6-b6a9-bfdab049647c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\ui">
+      <UniqueIdentifier>{5f8f6152-9bf7-45fb-9dc7-80cbc488066d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\ui\imgui">
+      <UniqueIdentifier>{cdd0f237-31a9-43ce-b057-f99912f3fe56}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -68,6 +74,21 @@
     </ClCompile>
     <ClCompile Include="map\TileSet.cpp">
       <Filter>Source Files\map</Filter>
+    </ClCompile>
+    <ClCompile Include="external\imgui\src\imgui.cpp">
+      <Filter>Source Files\ui\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="external\imgui\src\imgui_draw.cpp">
+      <Filter>Source Files\ui\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="external\imgui\src\imgui-SFML.cpp">
+      <Filter>Source Files\ui\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="external\imgui\src\imgui_demo.cpp">
+      <Filter>Source Files\ui\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="external\imgui\src\imgui_widgets.cpp">
+      <Filter>Source Files\ui\imgui</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
