@@ -37,6 +37,12 @@
     <Filter Include="Source Files\map">
       <UniqueIdentifier>{eaeca580-2429-4f31-9279-a9d066e56310}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Assets">
+      <UniqueIdentifier>{6c0a806d-8a6e-4820-a410-a351632cbf64}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Assets\Tilesets">
+      <UniqueIdentifier>{2b650235-c824-4fe6-b6a9-bfdab049647c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -58,6 +64,9 @@
       <Filter>Source Files\map</Filter>
     </ClCompile>
     <ClCompile Include="map\Map.cpp">
+      <Filter>Source Files\map</Filter>
+    </ClCompile>
+    <ClCompile Include="map\TileSet.cpp">
       <Filter>Source Files\map</Filter>
     </ClCompile>
   </ItemGroup>
@@ -86,5 +95,18 @@
     <ClInclude Include="map\Map.hpp">
       <Filter>Header Files\map</Filter>
     </ClInclude>
+    <ClInclude Include="map\TileSet.hpp">
+      <Filter>Header Files\map</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="assets\tilesets\tiny-16.meta">
+      <Filter>Assets\Tilesets</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="assets\tilesets\tiny-16.png">
+      <Filter>Assets\Tilesets</Filter>
+    </Image>
   </ItemGroup>
 </Project>

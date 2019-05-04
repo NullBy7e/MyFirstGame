@@ -3,6 +3,7 @@
 #include "../drawables/Grid.hpp"
 #include "Map.hpp"
 #include <optional>
+#include "TileSet.hpp"
 
 class MapEditor final : public sf::Drawable
 {
@@ -14,5 +15,8 @@ public:
 private:
 	Grid grid_{ {1280, 1024}, {16, 16} };
 	std::optional<Map> map_;
+	std::vector<TileSet> tilesets_;
+
+	bool load_tilesets();
 };
 

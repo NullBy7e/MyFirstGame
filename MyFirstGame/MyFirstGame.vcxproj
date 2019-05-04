@@ -25,6 +25,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="map\Map.cpp" />
     <ClCompile Include="map\MapEditor.cpp" />
+    <ClCompile Include="map\TileSet.cpp" />
     <ClCompile Include="states\LevelEditorGameState.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -36,8 +37,19 @@
     <ClInclude Include="drawables\Grid.hpp" />
     <ClInclude Include="map\Map.hpp" />
     <ClInclude Include="map\MapEditor.hpp" />
+    <ClInclude Include="map\TileSet.hpp" />
     <ClInclude Include="states\GameState.hpp" />
     <ClInclude Include="states\LevelEditorGameState.hpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="assets\tilesets\tiny-16.meta">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="assets\tilesets\tiny-16.png">
+      <DeploymentContent>true</DeploymentContent>
+    </Image>
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
