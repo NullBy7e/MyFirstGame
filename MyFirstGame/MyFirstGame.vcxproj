@@ -26,12 +26,14 @@
     <ClCompile Include="external\imgui\src\imgui.cpp" />
     <ClCompile Include="external\imgui\src\imgui_demo.cpp" />
     <ClCompile Include="external\imgui\src\imgui_draw.cpp" />
+    <ClCompile Include="external\imgui\src\imgui_stdlib.cpp" />
     <ClCompile Include="external\imgui\src\imgui_widgets.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="map\Map.cpp" />
     <ClCompile Include="map\MapEditor.cpp" />
     <ClCompile Include="map\TileSet.cpp" />
     <ClCompile Include="states\LevelEditorGameState.cpp" />
+    <ClCompile Include="ui\MapEditorUi.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="conventions.txt" />
@@ -45,13 +47,16 @@
     <ClInclude Include="map\TileSet.hpp" />
     <ClInclude Include="states\GameState.hpp" />
     <ClInclude Include="states\LevelEditorGameState.hpp" />
+    <ClInclude Include="ui\MapEditorUi.hpp" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="assets\tilesets\grass.meta" />
     <None Include="assets\tilesets\tiny-16.meta">
       <DeploymentContent>true</DeploymentContent>
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Image Include="assets\tilesets\grass.png" />
     <Image Include="assets\tilesets\tiny-16.png">
       <DeploymentContent>true</DeploymentContent>
     </Image>

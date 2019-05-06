@@ -11,15 +11,17 @@ class TileSet
 public:
 	TileSet(const std::string& name, const std::string& path, sf::Vector2i tilesize);
 
+	std::map<int, sf::Sprite>& get_sprites();
+
+	std::string name_;
+	std::string desc_;
+	int stid_{};
+	sf::Vector2i size_;
+
 private:
 	sf::Texture texture_;
 	std::map<int, sf::Sprite> sprites_;
 
 	bool load_meta_file(const std::string& meta_file_path);
 	std::vector<std::string> split(std::string& str_to_split, char delimiter) const;
-
-	std::string name_;
-	std::string desc_;
-	int stid_{};
-	sf::Vector2i size_;
 };

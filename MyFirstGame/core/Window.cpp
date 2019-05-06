@@ -1,11 +1,11 @@
 #include "Window.hpp"
 #include <imgui-SFML.h>
+#include <imgui.h>
 
 Window::Window()
 {
 	window_.create(sf::VideoMode(1280, 1024), "MyFirstGame", sf::Style::Titlebar | sf::Style::Close);
 	window_.setFramerateLimit(60);
-	ImGui::SFML::Init(window_);
 }
 
 void Window::display()

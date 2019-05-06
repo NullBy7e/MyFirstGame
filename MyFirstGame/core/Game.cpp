@@ -18,7 +18,7 @@ void Game::register_game_state(const GameStates game_state)
 	switch (game_state)
 	{
 	case GameStates::LevelEditor:
-		gameStates_[game_state] = std::make_unique<LevelEditorGameState>(LevelEditorGameState{window_});
+		gameStates_[game_state] = std::make_unique<LevelEditorGameState>(window_);
 		break;
 	default:
 		break;
@@ -38,6 +38,5 @@ int Game::loop()
 		window_.display();
 	}
 
-	ImGui::SFML::Shutdown();
 	return EXIT_SUCCESS;
 }

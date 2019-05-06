@@ -49,6 +49,9 @@
     <Filter Include="Source Files\ui\imgui">
       <UniqueIdentifier>{cdd0f237-31a9-43ce-b057-f99912f3fe56}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\ui">
+      <UniqueIdentifier>{b837f87f-2dca-43be-849c-3427325c704b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -90,6 +93,12 @@
     <ClCompile Include="external\imgui\src\imgui_widgets.cpp">
       <Filter>Source Files\ui\imgui</Filter>
     </ClCompile>
+    <ClCompile Include="ui\MapEditorUI.cpp">
+      <Filter>Source Files\ui</Filter>
+    </ClCompile>
+    <ClCompile Include="external\imgui\src\imgui_stdlib.cpp">
+      <Filter>Source Files\ui\imgui</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="conventions.txt" />
@@ -119,14 +128,23 @@
     <ClInclude Include="map\TileSet.hpp">
       <Filter>Header Files\map</Filter>
     </ClInclude>
+    <ClInclude Include="ui\MapEditorUI.hpp">
+      <Filter>Header Files\ui</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="assets\tilesets\tiny-16.meta">
       <Filter>Assets\Tilesets</Filter>
     </None>
+    <None Include="assets\tilesets\grass.meta">
+      <Filter>Assets\Tilesets</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Image Include="assets\tilesets\tiny-16.png">
+      <Filter>Assets\Tilesets</Filter>
+    </Image>
+    <Image Include="assets\tilesets\grass.png">
       <Filter>Assets\Tilesets</Filter>
     </Image>
   </ItemGroup>

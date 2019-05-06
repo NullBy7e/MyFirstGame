@@ -8,6 +8,7 @@ class LevelEditorGameState final : public GameState
 {
 public:
 	explicit LevelEditorGameState(Window& window);
+	~LevelEditorGameState();
 
 	void handle_input() override;
 	void update() override;

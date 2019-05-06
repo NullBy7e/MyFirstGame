@@ -2,9 +2,18 @@
 #include "LevelEditorGameState.hpp"
 #include "../core/Window.hpp"
 #include <imgui-SFML.h>
+#include <imgui.h>
 
 LevelEditorGameState::LevelEditorGameState(Window& window): GameState(window)
 {
+	ImGui::SFML::Init(window.get());
+	ImGui::StyleColorsDark();
+	ImGui::GetIO().FontGlobalScale = 1.5f;
+}
+
+LevelEditorGameState::~LevelEditorGameState()
+{
+	ImGui::SFML::Shutdown();
 }
 
 void LevelEditorGameState::handle_input()
@@ -15,8 +24,6 @@ void LevelEditorGameState::handle_input()
 	{
 		ImGui::SFML::ProcessEvent(event);
 	}
-
-	ImGui::SFML::Update(window_.get(), window_.dt_);
 }
 
 void LevelEditorGameState::clear()
@@ -26,11 +33,15 @@ void LevelEditorGameState::clear()
 
 void LevelEditorGameState::update()
 {
+	ImGui::SFML::Update(window_.get(), window_.dt_);
 }
 
 void LevelEditorGameState::draw()
 {
-	window_.draw(mapEditor_);
+	window_.get().resetGLStates();
+
+	mapEditor_.render(window_);
+
 	ImGui::SFML::Render(window_.get());
 }
 

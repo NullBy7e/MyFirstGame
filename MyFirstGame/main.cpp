@@ -22,9 +22,17 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
+#define VC_EXTRALEAN
+#define WIN32_LEAN_AND_MEAN 
+
 #include "core/Game.hpp"
 
+// ReSharper disable once CppUnusedIncludeDirective
+#include <windows.h> // used by winuser.h internally
+#include <winuser.h>
+
 int main()
-{	
+{
+	SetProcessDPIAware();
 	return Game().loop();
 }

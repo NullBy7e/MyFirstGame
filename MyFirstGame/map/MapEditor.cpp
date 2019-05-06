@@ -1,22 +1,18 @@
 #include <filesystem>
 
-#include <SFML/Graphics/RenderTarget.hpp>
-#include <imgui.h>
-
 #include "MapEditor.hpp"
 #include <iostream>
+#include "../core/Window.hpp"
 
 MapEditor::MapEditor()
 {
-	map_ = Map::create();
+	map_ = Map::create("New map");
 
 	if (!load_tilesets())
 	{
 		std::cerr << "The map failed to load due to missing assets, please reinstall the game." << std::endl;
 		return;
 	}
-
-
 }
 
 MapEditor::MapEditor(const Map& map) : map_(map)
@@ -31,8 +27,20 @@ bool MapEditor::load_tilesets()
 	const auto path = dir_assets + "/" + dir_tilesets;
 
 	if (!std::filesystem::exists(path))
-		std::cerr << "The map failed to load due to missing assets, please reinstall the game." << std::endl;
-	
+		return false;
+
+	auto tileset_count = 0;
+	for (const auto& file : std::filesystem::directory_iterator(path))
+	{
+		if (file.path().filename().extension() != ".png")
+			continue;
+
+		tileset_count++;
+	}
+
+	// reserve space in the vector so that internal references are not invalidated on emplace_back due to internal copy/move operations
+	tilesets_.reserve(tileset_count);
+
 	for (const auto& file : std::filesystem::directory_iterator(path))
 	{
 		if (file.path().filename().extension() != ".png")
@@ -47,13 +55,27 @@ bool MapEditor::load_tilesets()
 	return true;
 }
 
-void MapEditor::draw(sf::RenderTarget& target, const sf::RenderStates states) const
+void MapEditor::render(Window& window)
 {
-	target.draw(grid_, states);
+	window.draw(grid_);
 
 	if (map_.has_value())
-		target.draw(map_.value(), states);
+		window.draw(map_.value());
 
-	ImGui::Begin("Sample window");
-	ImGui::End();
+	ui_.render();
+}
+
+std::vector<TileSet>& MapEditor::get_tilesets()
+{
+	return tilesets_;
+}
+
+std::string& MapEditor::get_map_name()
+{
+	return map_.value().get_name();
+}
+
+std::string& MapEditor::get_map_desc()
+{
+	return map_.value().get_desc();
 }

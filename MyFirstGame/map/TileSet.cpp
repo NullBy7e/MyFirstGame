@@ -5,11 +5,17 @@
 #include <fstream>
 #include <sstream>
 #include <functional>
+#include <imgui.h>
 
 TileSet::TileSet(const std::string& name, const std::string& path, const sf::Vector2i tilesize)
 {
 	std::cout << "Loading tileset " << "\"" << name << "\"" << ":" << "\"" << path << "\"" << std::endl;
-	texture_.loadFromFile(path);
+
+	if(!texture_.loadFromFile(path))
+	{
+		std::cerr << "The tileset failed to load due to missing assets, please reinstall the game." << std::endl;
+		return;
+	}
 
 	// read the meta file
 	const auto meta_file_path = std::filesystem::path(path).parent_path().generic_string() + "/" + std::filesystem::
@@ -38,6 +44,11 @@ TileSet::TileSet(const std::string& name, const std::string& path, const sf::Vec
 			sprites_[sprite_index] = sf::Sprite(texture_, { x_pos, y_pos, tilesize.x, tilesize.y });;
 		}
 	}
+}
+
+std::map<int, sf::Sprite>& TileSet::get_sprites()
+{
+	return sprites_;
 }
 
 bool TileSet::load_meta_file(const std::string& meta_file_path)
