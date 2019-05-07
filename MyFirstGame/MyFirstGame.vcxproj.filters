@@ -9,10 +9,6 @@
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
       <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
     </Filter>
-    <Filter Include="Resources">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
-    </Filter>
     <Filter Include="Headers\core">
       <UniqueIdentifier>{499d41e5-7989-4365-8416-cbaf244fe3ba}</UniqueIdentifier>
     </Filter>
@@ -51,6 +47,31 @@
     </Filter>
     <Filter Include="Headers\ui">
       <UniqueIdentifier>{b837f87f-2dca-43be-849c-3427325c704b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="External">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="External\SFML-2.5.1">
+      <UniqueIdentifier>{8eba572e-c35d-4072-a219-fda02459dff3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="External\SFML-2.5.1\x64">
+      <UniqueIdentifier>{8e1242b0-f119-4a1f-8b19-d8f1aa2c4192}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="External\SFML-2.5.1\x64\lib">
+      <UniqueIdentifier>{357368c3-ef50-4f07-b8af-ee1d63ba133b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="External\SFML-2.5.1\x64\include">
+      <UniqueIdentifier>{e5415dcb-fac3-4829-be87-8d72c402001e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="External\SFML-2.5.1\x86">
+      <UniqueIdentifier>{9017790a-803c-45a2-bb34-5af26ab52185}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="External\SFML-2.5.1\x86\lib">
+      <UniqueIdentifier>{f7b6d093-73f1-43be-b141-e210cd0fac1f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="External\SFML-2.5.1\x86\include">
+      <UniqueIdentifier>{8e1d0d75-f6d3-4164-b201-ae3ff5cc2b2d}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -131,6 +152,594 @@
     <ClInclude Include="ui\MapEditorUI.hpp">
       <Filter>Headers\ui</Filter>
     </ClInclude>
+    <ClInclude Include="external\SFML-2.5.1\x86\include\SFML\Window\Clipboard.hpp">
+      <Filter>External\SFML-2.5.1\x86\include</Filter>
+    </ClInclude>
+    <ClInclude Include="external\SFML-2.5.1\x86\include\SFML\Window\Context.hpp">
+      <Filter>External\SFML-2.5.1\x86\include</Filter>
+    </ClInclude>
+    <ClInclude Include="external\SFML-2.5.1\x86\include\SFML\Window\ContextSettings.hpp">
+      <Filter>External\SFML-2.5.1\x86\include</Filter>
+    </ClInclude>
+    <ClInclude Include="external\SFML-2.5.1\x86\include\SFML\Window\Cursor.hpp">
+      <Filter>External\SFML-2.5.1\x86\include</Filter>
+    </ClInclude>
+    <ClInclude Include="external\SFML-2.5.1\x86\include\SFML\Window\Event.hpp">
+      <Filter>External\SFML-2.5.1\x86\include</Filter>
+    </ClInclude>
+    <ClInclude Include="external\SFML-2.5.1\x86\include\SFML\Window\Export.hpp">
+      <Filter>External\SFML-2.5.1\x86\include</Filter>
+    </ClInclude>
+    <ClInclude Include="external\SFML-2.5.1\x86\include\SFML\Window\GlResource.hpp">
+      <Filter>External\SFML-2.5.1\x86\include</Filter>
+    </ClInclude>
+    <ClInclude Include="external\SFML-2.5.1\x86\include\SFML\Window\Joystick.hpp">
+      <Filter>External\SFML-2.5.1\x86\include</Filter>
+    </ClInclude>
+    <ClInclude Include="external\SFML-2.5.1\x86\include\SFML\Window\Keyboard.hpp">
+      <Filter>External\SFML-2.5.1\x86\include</Filter>
+    </ClInclude>
+    <ClInclude Include="external\SFML-2.5.1\x86\include\SFML\Window\Mouse.hpp">
+      <Filter>External\SFML-2.5.1\x86\include</Filter>
+    </ClInclude>
+    <ClInclude Include="external\SFML-2.5.1\x86\include\SFML\Window\Sensor.hpp">
+      <Filter>External\SFML-2.5.1\x86\include</Filter>
+    </ClInclude>
+    <ClInclude Include="external\SFML-2.5.1\x86\include\SFML\Window\Touch.hpp">
+      <Filter>External\SFML-2.5.1\x86\include</Filter>
+    </ClInclude>
+    <ClInclude Include="external\SFML-2.5.1\x86\include\SFML\Window\VideoMode.hpp">
+      <Filter>External\SFML-2.5.1\x86\include</Filter>
+    </ClInclude>
+    <ClInclude Include="external\SFML-2.5.1\x86\include\SFML\Window\Window.hpp">
+      <Filter>External\SFML-2.5.1\x86\include</Filter>
+    </ClInclude>
+    <ClInclude Include="external\SFML-2.5.1\x86\include\SFML\Window\WindowHandle.hpp">
+      <Filter>External\SFML-2.5.1\x86\include</Filter>
+    </ClInclude>
+    <ClInclude Include="external\SFML-2.5.1\x86\include\SFML\Window\WindowStyle.hpp">
+      <Filter>External\SFML-2.5.1\x86\include</Filter>
+    </ClInclude>
+    <ClInclude Include="external\SFML-2.5.1\x86\include\SFML\Audio.hpp">
+      <Filter>External\SFML-2.5.1\x86\include</Filter>
+    </ClInclude>
+    <ClInclude Include="external\SFML-2.5.1\x86\include\SFML\Config.hpp">
+      <Filter>External\SFML-2.5.1\x86\include</Filter>
+    </ClInclude>
+    <ClInclude Include="external\SFML-2.5.1\x86\include\SFML\GpuPreference.hpp">
+      <Filter>External\SFML-2.5.1\x86\include</Filter>
+    </ClInclude>
+    <ClInclude Include="external\SFML-2.5.1\x86\include\SFML\Graphics.hpp">
+      <Filter>External\SFML-2.5.1\x86\include</Filter>
+    </ClInclude>
+    <ClInclude Include="external\SFML-2.5.1\x86\include\SFML\Main.hpp">
+      <Filter>External\SFML-2.5.1\x86\include</Filter>
+    </ClInclude>
+    <ClInclude Include="external\SFML-2.5.1\x86\include\SFML\Network.hpp">
+      <Filter>External\SFML-2.5.1\x86\include</Filter>
+    </ClInclude>
+    <ClInclude Include="external\SFML-2.5.1\x86\include\SFML\OpenGL.hpp">
+      <Filter>External\SFML-2.5.1\x86\include</Filter>
+    </ClInclude>
+    <ClInclude Include="external\SFML-2.5.1\x86\include\SFML\System.hpp">
+      <Filter>External\SFML-2.5.1\x86\include</Filter>
+    </ClInclude>
+    <ClInclude Include="external\SFML-2.5.1\x86\include\SFML\Window.hpp">
+      <Filter>External\SFML-2.5.1\x86\include</Filter>
+    </ClInclude>
+    <ClInclude Include="external\SFML-2.5.1\x86\include\SFML\Audio\AlResource.hpp">
+      <Filter>External\SFML-2.5.1\x86\include</Filter>
+    </ClInclude>
+    <ClInclude Include="external\SFML-2.5.1\x86\include\SFML\Audio\Export.hpp">
+      <Filter>External\SFML-2.5.1\x86\include</Filter>
+    </ClInclude>
+    <ClInclude Include="external\SFML-2.5.1\x86\include\SFML\Audio\InputSoundFile.hpp">
+      <Filter>External\SFML-2.5.1\x86\include</Filter>
+    </ClInclude>
+    <ClInclude Include="external\SFML-2.5.1\x86\include\SFML\Audio\Listener.hpp">
+      <Filter>External\SFML-2.5.1\x86\include</Filter>
+    </ClInclude>
+    <ClInclude Include="external\SFML-2.5.1\x86\include\SFML\Audio\Music.hpp">
+      <Filter>External\SFML-2.5.1\x86\include</Filter>
+    </ClInclude>
+    <ClInclude Include="external\SFML-2.5.1\x86\include\SFML\Audio\OutputSoundFile.hpp">
+      <Filter>External\SFML-2.5.1\x86\include</Filter>
+    </ClInclude>
+    <ClInclude Include="external\SFML-2.5.1\x86\include\SFML\Audio\Sound.hpp">
+      <Filter>External\SFML-2.5.1\x86\include</Filter>
+    </ClInclude>
+    <ClInclude Include="external\SFML-2.5.1\x86\include\SFML\Audio\SoundBuffer.hpp">
+      <Filter>External\SFML-2.5.1\x86\include</Filter>
+    </ClInclude>
+    <ClInclude Include="external\SFML-2.5.1\x86\include\SFML\Audio\SoundBufferRecorder.hpp">
+      <Filter>External\SFML-2.5.1\x86\include</Filter>
+    </ClInclude>
+    <ClInclude Include="external\SFML-2.5.1\x86\include\SFML\Audio\SoundFileFactory.hpp">
+      <Filter>External\SFML-2.5.1\x86\include</Filter>
+    </ClInclude>
+    <ClInclude Include="external\SFML-2.5.1\x86\include\SFML\Audio\SoundFileReader.hpp">
+      <Filter>External\SFML-2.5.1\x86\include</Filter>
+    </ClInclude>
+    <ClInclude Include="external\SFML-2.5.1\x86\include\SFML\Audio\SoundFileWriter.hpp">
+      <Filter>External\SFML-2.5.1\x86\include</Filter>
+    </ClInclude>
+    <ClInclude Include="external\SFML-2.5.1\x86\include\SFML\Audio\SoundRecorder.hpp">
+      <Filter>External\SFML-2.5.1\x86\include</Filter>
+    </ClInclude>
+    <ClInclude Include="external\SFML-2.5.1\x86\include\SFML\Audio\SoundSource.hpp">
+      <Filter>External\SFML-2.5.1\x86\include</Filter>
+    </ClInclude>
+    <ClInclude Include="external\SFML-2.5.1\x86\include\SFML\Audio\SoundStream.hpp">
+      <Filter>External\SFML-2.5.1\x86\include</Filter>
+    </ClInclude>
+    <ClInclude Include="external\SFML-2.5.1\x86\include\SFML\Graphics\BlendMode.hpp">
+      <Filter>External\SFML-2.5.1\x86\include</Filter>
+    </ClInclude>
+    <ClInclude Include="external\SFML-2.5.1\x86\include\SFML\Graphics\CircleShape.hpp">
+      <Filter>External\SFML-2.5.1\x86\include</Filter>
+    </ClInclude>
+    <ClInclude Include="external\SFML-2.5.1\x86\include\SFML\Graphics\Color.hpp">
+      <Filter>External\SFML-2.5.1\x86\include</Filter>
+    </ClInclude>
+    <ClInclude Include="external\SFML-2.5.1\x86\include\SFML\Graphics\ConvexShape.hpp">
+      <Filter>External\SFML-2.5.1\x86\include</Filter>
+    </ClInclude>
+    <ClInclude Include="external\SFML-2.5.1\x86\include\SFML\Graphics\Drawable.hpp">
+      <Filter>External\SFML-2.5.1\x86\include</Filter>
+    </ClInclude>
+    <ClInclude Include="external\SFML-2.5.1\x86\include\SFML\Graphics\Export.hpp">
+      <Filter>External\SFML-2.5.1\x86\include</Filter>
+    </ClInclude>
+    <ClInclude Include="external\SFML-2.5.1\x86\include\SFML\Graphics\Font.hpp">
+      <Filter>External\SFML-2.5.1\x86\include</Filter>
+    </ClInclude>
+    <ClInclude Include="external\SFML-2.5.1\x86\include\SFML\Graphics\Glsl.hpp">
+      <Filter>External\SFML-2.5.1\x86\include</Filter>
+    </ClInclude>
+    <ClInclude Include="external\SFML-2.5.1\x86\include\SFML\Graphics\Glyph.hpp">
+      <Filter>External\SFML-2.5.1\x86\include</Filter>
+    </ClInclude>
+    <ClInclude Include="external\SFML-2.5.1\x86\include\SFML\Graphics\Image.hpp">
+      <Filter>External\SFML-2.5.1\x86\include</Filter>
+    </ClInclude>
+    <ClInclude Include="external\SFML-2.5.1\x86\include\SFML\Graphics\PrimitiveType.hpp">
+      <Filter>External\SFML-2.5.1\x86\include</Filter>
+    </ClInclude>
+    <ClInclude Include="external\SFML-2.5.1\x86\include\SFML\Graphics\Rect.hpp">
+      <Filter>External\SFML-2.5.1\x86\include</Filter>
+    </ClInclude>
+    <ClInclude Include="external\SFML-2.5.1\x86\include\SFML\Graphics\RectangleShape.hpp">
+      <Filter>External\SFML-2.5.1\x86\include</Filter>
+    </ClInclude>
+    <ClInclude Include="external\SFML-2.5.1\x86\include\SFML\Graphics\RenderStates.hpp">
+      <Filter>External\SFML-2.5.1\x86\include</Filter>
+    </ClInclude>
+    <ClInclude Include="external\SFML-2.5.1\x86\include\SFML\Graphics\RenderTarget.hpp">
+      <Filter>External\SFML-2.5.1\x86\include</Filter>
+    </ClInclude>
+    <ClInclude Include="external\SFML-2.5.1\x86\include\SFML\Graphics\RenderTexture.hpp">
+      <Filter>External\SFML-2.5.1\x86\include</Filter>
+    </ClInclude>
+    <ClInclude Include="external\SFML-2.5.1\x86\include\SFML\Graphics\RenderWindow.hpp">
+      <Filter>External\SFML-2.5.1\x86\include</Filter>
+    </ClInclude>
+    <ClInclude Include="external\SFML-2.5.1\x86\include\SFML\Graphics\Shader.hpp">
+      <Filter>External\SFML-2.5.1\x86\include</Filter>
+    </ClInclude>
+    <ClInclude Include="external\SFML-2.5.1\x86\include\SFML\Graphics\Shape.hpp">
+      <Filter>External\SFML-2.5.1\x86\include</Filter>
+    </ClInclude>
+    <ClInclude Include="external\SFML-2.5.1\x86\include\SFML\Graphics\Sprite.hpp">
+      <Filter>External\SFML-2.5.1\x86\include</Filter>
+    </ClInclude>
+    <ClInclude Include="external\SFML-2.5.1\x86\include\SFML\Graphics\Text.hpp">
+      <Filter>External\SFML-2.5.1\x86\include</Filter>
+    </ClInclude>
+    <ClInclude Include="external\SFML-2.5.1\x86\include\SFML\Graphics\Texture.hpp">
+      <Filter>External\SFML-2.5.1\x86\include</Filter>
+    </ClInclude>
+    <ClInclude Include="external\SFML-2.5.1\x86\include\SFML\Graphics\Transform.hpp">
+      <Filter>External\SFML-2.5.1\x86\include</Filter>
+    </ClInclude>
+    <ClInclude Include="external\SFML-2.5.1\x86\include\SFML\Graphics\Transformable.hpp">
+      <Filter>External\SFML-2.5.1\x86\include</Filter>
+    </ClInclude>
+    <ClInclude Include="external\SFML-2.5.1\x86\include\SFML\Graphics\Vertex.hpp">
+      <Filter>External\SFML-2.5.1\x86\include</Filter>
+    </ClInclude>
+    <ClInclude Include="external\SFML-2.5.1\x86\include\SFML\Graphics\VertexArray.hpp">
+      <Filter>External\SFML-2.5.1\x86\include</Filter>
+    </ClInclude>
+    <ClInclude Include="external\SFML-2.5.1\x86\include\SFML\Graphics\VertexBuffer.hpp">
+      <Filter>External\SFML-2.5.1\x86\include</Filter>
+    </ClInclude>
+    <ClInclude Include="external\SFML-2.5.1\x86\include\SFML\Graphics\View.hpp">
+      <Filter>External\SFML-2.5.1\x86\include</Filter>
+    </ClInclude>
+    <ClInclude Include="external\SFML-2.5.1\x86\include\SFML\Network\Export.hpp">
+      <Filter>External\SFML-2.5.1\x86\include</Filter>
+    </ClInclude>
+    <ClInclude Include="external\SFML-2.5.1\x86\include\SFML\Network\Ftp.hpp">
+      <Filter>External\SFML-2.5.1\x86\include</Filter>
+    </ClInclude>
+    <ClInclude Include="external\SFML-2.5.1\x86\include\SFML\Network\Http.hpp">
+      <Filter>External\SFML-2.5.1\x86\include</Filter>
+    </ClInclude>
+    <ClInclude Include="external\SFML-2.5.1\x86\include\SFML\Network\IpAddress.hpp">
+      <Filter>External\SFML-2.5.1\x86\include</Filter>
+    </ClInclude>
+    <ClInclude Include="external\SFML-2.5.1\x86\include\SFML\Network\Packet.hpp">
+      <Filter>External\SFML-2.5.1\x86\include</Filter>
+    </ClInclude>
+    <ClInclude Include="external\SFML-2.5.1\x86\include\SFML\Network\Socket.hpp">
+      <Filter>External\SFML-2.5.1\x86\include</Filter>
+    </ClInclude>
+    <ClInclude Include="external\SFML-2.5.1\x86\include\SFML\Network\SocketHandle.hpp">
+      <Filter>External\SFML-2.5.1\x86\include</Filter>
+    </ClInclude>
+    <ClInclude Include="external\SFML-2.5.1\x86\include\SFML\Network\SocketSelector.hpp">
+      <Filter>External\SFML-2.5.1\x86\include</Filter>
+    </ClInclude>
+    <ClInclude Include="external\SFML-2.5.1\x86\include\SFML\Network\TcpListener.hpp">
+      <Filter>External\SFML-2.5.1\x86\include</Filter>
+    </ClInclude>
+    <ClInclude Include="external\SFML-2.5.1\x86\include\SFML\Network\TcpSocket.hpp">
+      <Filter>External\SFML-2.5.1\x86\include</Filter>
+    </ClInclude>
+    <ClInclude Include="external\SFML-2.5.1\x86\include\SFML\Network\UdpSocket.hpp">
+      <Filter>External\SFML-2.5.1\x86\include</Filter>
+    </ClInclude>
+    <ClInclude Include="external\SFML-2.5.1\x86\include\SFML\System\Clock.hpp">
+      <Filter>External\SFML-2.5.1\x86\include</Filter>
+    </ClInclude>
+    <ClInclude Include="external\SFML-2.5.1\x86\include\SFML\System\Err.hpp">
+      <Filter>External\SFML-2.5.1\x86\include</Filter>
+    </ClInclude>
+    <ClInclude Include="external\SFML-2.5.1\x86\include\SFML\System\Export.hpp">
+      <Filter>External\SFML-2.5.1\x86\include</Filter>
+    </ClInclude>
+    <ClInclude Include="external\SFML-2.5.1\x86\include\SFML\System\FileInputStream.hpp">
+      <Filter>External\SFML-2.5.1\x86\include</Filter>
+    </ClInclude>
+    <ClInclude Include="external\SFML-2.5.1\x86\include\SFML\System\InputStream.hpp">
+      <Filter>External\SFML-2.5.1\x86\include</Filter>
+    </ClInclude>
+    <ClInclude Include="external\SFML-2.5.1\x86\include\SFML\System\Lock.hpp">
+      <Filter>External\SFML-2.5.1\x86\include</Filter>
+    </ClInclude>
+    <ClInclude Include="external\SFML-2.5.1\x86\include\SFML\System\MemoryInputStream.hpp">
+      <Filter>External\SFML-2.5.1\x86\include</Filter>
+    </ClInclude>
+    <ClInclude Include="external\SFML-2.5.1\x86\include\SFML\System\Mutex.hpp">
+      <Filter>External\SFML-2.5.1\x86\include</Filter>
+    </ClInclude>
+    <ClInclude Include="external\SFML-2.5.1\x86\include\SFML\System\NativeActivity.hpp">
+      <Filter>External\SFML-2.5.1\x86\include</Filter>
+    </ClInclude>
+    <ClInclude Include="external\SFML-2.5.1\x86\include\SFML\System\NonCopyable.hpp">
+      <Filter>External\SFML-2.5.1\x86\include</Filter>
+    </ClInclude>
+    <ClInclude Include="external\SFML-2.5.1\x86\include\SFML\System\Sleep.hpp">
+      <Filter>External\SFML-2.5.1\x86\include</Filter>
+    </ClInclude>
+    <ClInclude Include="external\SFML-2.5.1\x86\include\SFML\System\String.hpp">
+      <Filter>External\SFML-2.5.1\x86\include</Filter>
+    </ClInclude>
+    <ClInclude Include="external\SFML-2.5.1\x86\include\SFML\System\Thread.hpp">
+      <Filter>External\SFML-2.5.1\x86\include</Filter>
+    </ClInclude>
+    <ClInclude Include="external\SFML-2.5.1\x86\include\SFML\System\ThreadLocal.hpp">
+      <Filter>External\SFML-2.5.1\x86\include</Filter>
+    </ClInclude>
+    <ClInclude Include="external\SFML-2.5.1\x86\include\SFML\System\ThreadLocalPtr.hpp">
+      <Filter>External\SFML-2.5.1\x86\include</Filter>
+    </ClInclude>
+    <ClInclude Include="external\SFML-2.5.1\x86\include\SFML\System\Time.hpp">
+      <Filter>External\SFML-2.5.1\x86\include</Filter>
+    </ClInclude>
+    <ClInclude Include="external\SFML-2.5.1\x86\include\SFML\System\Utf.hpp">
+      <Filter>External\SFML-2.5.1\x86\include</Filter>
+    </ClInclude>
+    <ClInclude Include="external\SFML-2.5.1\x86\include\SFML\System\Vector2.hpp">
+      <Filter>External\SFML-2.5.1\x86\include</Filter>
+    </ClInclude>
+    <ClInclude Include="external\SFML-2.5.1\x86\include\SFML\System\Vector3.hpp">
+      <Filter>External\SFML-2.5.1\x86\include</Filter>
+    </ClInclude>
+    <ClInclude Include="external\SFML-2.5.1\x64\include\SFML\Audio\AlResource.hpp">
+      <Filter>External\SFML-2.5.1\x64\include</Filter>
+    </ClInclude>
+    <ClInclude Include="external\SFML-2.5.1\x64\include\SFML\Audio\Export.hpp">
+      <Filter>External\SFML-2.5.1\x64\include</Filter>
+    </ClInclude>
+    <ClInclude Include="external\SFML-2.5.1\x64\include\SFML\Audio\InputSoundFile.hpp">
+      <Filter>External\SFML-2.5.1\x64\include</Filter>
+    </ClInclude>
+    <ClInclude Include="external\SFML-2.5.1\x64\include\SFML\Audio\Listener.hpp">
+      <Filter>External\SFML-2.5.1\x64\include</Filter>
+    </ClInclude>
+    <ClInclude Include="external\SFML-2.5.1\x64\include\SFML\Audio\Music.hpp">
+      <Filter>External\SFML-2.5.1\x64\include</Filter>
+    </ClInclude>
+    <ClInclude Include="external\SFML-2.5.1\x64\include\SFML\Audio\OutputSoundFile.hpp">
+      <Filter>External\SFML-2.5.1\x64\include</Filter>
+    </ClInclude>
+    <ClInclude Include="external\SFML-2.5.1\x64\include\SFML\Audio\Sound.hpp">
+      <Filter>External\SFML-2.5.1\x64\include</Filter>
+    </ClInclude>
+    <ClInclude Include="external\SFML-2.5.1\x64\include\SFML\Audio\SoundBuffer.hpp">
+      <Filter>External\SFML-2.5.1\x64\include</Filter>
+    </ClInclude>
+    <ClInclude Include="external\SFML-2.5.1\x64\include\SFML\Audio\SoundBufferRecorder.hpp">
+      <Filter>External\SFML-2.5.1\x64\include</Filter>
+    </ClInclude>
+    <ClInclude Include="external\SFML-2.5.1\x64\include\SFML\Audio\SoundFileFactory.hpp">
+      <Filter>External\SFML-2.5.1\x64\include</Filter>
+    </ClInclude>
+    <ClInclude Include="external\SFML-2.5.1\x64\include\SFML\Audio\SoundFileReader.hpp">
+      <Filter>External\SFML-2.5.1\x64\include</Filter>
+    </ClInclude>
+    <ClInclude Include="external\SFML-2.5.1\x64\include\SFML\Audio\SoundFileWriter.hpp">
+      <Filter>External\SFML-2.5.1\x64\include</Filter>
+    </ClInclude>
+    <ClInclude Include="external\SFML-2.5.1\x64\include\SFML\Audio\SoundRecorder.hpp">
+      <Filter>External\SFML-2.5.1\x64\include</Filter>
+    </ClInclude>
+    <ClInclude Include="external\SFML-2.5.1\x64\include\SFML\Audio\SoundSource.hpp">
+      <Filter>External\SFML-2.5.1\x64\include</Filter>
+    </ClInclude>
+    <ClInclude Include="external\SFML-2.5.1\x64\include\SFML\Audio\SoundStream.hpp">
+      <Filter>External\SFML-2.5.1\x64\include</Filter>
+    </ClInclude>
+    <ClInclude Include="external\SFML-2.5.1\x64\include\SFML\Graphics\BlendMode.hpp">
+      <Filter>External\SFML-2.5.1\x64\include</Filter>
+    </ClInclude>
+    <ClInclude Include="external\SFML-2.5.1\x64\include\SFML\Graphics\CircleShape.hpp">
+      <Filter>External\SFML-2.5.1\x64\include</Filter>
+    </ClInclude>
+    <ClInclude Include="external\SFML-2.5.1\x64\include\SFML\Graphics\Color.hpp">
+      <Filter>External\SFML-2.5.1\x64\include</Filter>
+    </ClInclude>
+    <ClInclude Include="external\SFML-2.5.1\x64\include\SFML\Graphics\ConvexShape.hpp">
+      <Filter>External\SFML-2.5.1\x64\include</Filter>
+    </ClInclude>
+    <ClInclude Include="external\SFML-2.5.1\x64\include\SFML\Graphics\Drawable.hpp">
+      <Filter>External\SFML-2.5.1\x64\include</Filter>
+    </ClInclude>
+    <ClInclude Include="external\SFML-2.5.1\x64\include\SFML\Graphics\Export.hpp">
+      <Filter>External\SFML-2.5.1\x64\include</Filter>
+    </ClInclude>
+    <ClInclude Include="external\SFML-2.5.1\x64\include\SFML\Graphics\Font.hpp">
+      <Filter>External\SFML-2.5.1\x64\include</Filter>
+    </ClInclude>
+    <ClInclude Include="external\SFML-2.5.1\x64\include\SFML\Graphics\Glsl.hpp">
+      <Filter>External\SFML-2.5.1\x64\include</Filter>
+    </ClInclude>
+    <ClInclude Include="external\SFML-2.5.1\x64\include\SFML\Graphics\Glyph.hpp">
+      <Filter>External\SFML-2.5.1\x64\include</Filter>
+    </ClInclude>
+    <ClInclude Include="external\SFML-2.5.1\x64\include\SFML\Graphics\Image.hpp">
+      <Filter>External\SFML-2.5.1\x64\include</Filter>
+    </ClInclude>
+    <ClInclude Include="external\SFML-2.5.1\x64\include\SFML\Graphics\PrimitiveType.hpp">
+      <Filter>External\SFML-2.5.1\x64\include</Filter>
+    </ClInclude>
+    <ClInclude Include="external\SFML-2.5.1\x64\include\SFML\Graphics\Rect.hpp">
+      <Filter>External\SFML-2.5.1\x64\include</Filter>
+    </ClInclude>
+    <ClInclude Include="external\SFML-2.5.1\x64\include\SFML\Graphics\RectangleShape.hpp">
+      <Filter>External\SFML-2.5.1\x64\include</Filter>
+    </ClInclude>
+    <ClInclude Include="external\SFML-2.5.1\x64\include\SFML\Graphics\RenderStates.hpp">
+      <Filter>External\SFML-2.5.1\x64\include</Filter>
+    </ClInclude>
+    <ClInclude Include="external\SFML-2.5.1\x64\include\SFML\Graphics\RenderTarget.hpp">
+      <Filter>External\SFML-2.5.1\x64\include</Filter>
+    </ClInclude>
+    <ClInclude Include="external\SFML-2.5.1\x64\include\SFML\Graphics\RenderTexture.hpp">
+      <Filter>External\SFML-2.5.1\x64\include</Filter>
+    </ClInclude>
+    <ClInclude Include="external\SFML-2.5.1\x64\include\SFML\Graphics\RenderWindow.hpp">
+      <Filter>External\SFML-2.5.1\x64\include</Filter>
+    </ClInclude>
+    <ClInclude Include="external\SFML-2.5.1\x64\include\SFML\Graphics\Shader.hpp">
+      <Filter>External\SFML-2.5.1\x64\include</Filter>
+    </ClInclude>
+    <ClInclude Include="external\SFML-2.5.1\x64\include\SFML\Graphics\Shape.hpp">
+      <Filter>External\SFML-2.5.1\x64\include</Filter>
+    </ClInclude>
+    <ClInclude Include="external\SFML-2.5.1\x64\include\SFML\Graphics\Sprite.hpp">
+      <Filter>External\SFML-2.5.1\x64\include</Filter>
+    </ClInclude>
+    <ClInclude Include="external\SFML-2.5.1\x64\include\SFML\Graphics\Text.hpp">
+      <Filter>External\SFML-2.5.1\x64\include</Filter>
+    </ClInclude>
+    <ClInclude Include="external\SFML-2.5.1\x64\include\SFML\Graphics\Texture.hpp">
+      <Filter>External\SFML-2.5.1\x64\include</Filter>
+    </ClInclude>
+    <ClInclude Include="external\SFML-2.5.1\x64\include\SFML\Graphics\Transform.hpp">
+      <Filter>External\SFML-2.5.1\x64\include</Filter>
+    </ClInclude>
+    <ClInclude Include="external\SFML-2.5.1\x64\include\SFML\Graphics\Transformable.hpp">
+      <Filter>External\SFML-2.5.1\x64\include</Filter>
+    </ClInclude>
+    <ClInclude Include="external\SFML-2.5.1\x64\include\SFML\Graphics\Vertex.hpp">
+      <Filter>External\SFML-2.5.1\x64\include</Filter>
+    </ClInclude>
+    <ClInclude Include="external\SFML-2.5.1\x64\include\SFML\Graphics\VertexArray.hpp">
+      <Filter>External\SFML-2.5.1\x64\include</Filter>
+    </ClInclude>
+    <ClInclude Include="external\SFML-2.5.1\x64\include\SFML\Graphics\VertexBuffer.hpp">
+      <Filter>External\SFML-2.5.1\x64\include</Filter>
+    </ClInclude>
+    <ClInclude Include="external\SFML-2.5.1\x64\include\SFML\Graphics\View.hpp">
+      <Filter>External\SFML-2.5.1\x64\include</Filter>
+    </ClInclude>
+    <ClInclude Include="external\SFML-2.5.1\x64\include\SFML\Network\Export.hpp">
+      <Filter>External\SFML-2.5.1\x64\include</Filter>
+    </ClInclude>
+    <ClInclude Include="external\SFML-2.5.1\x64\include\SFML\Network\Ftp.hpp">
+      <Filter>External\SFML-2.5.1\x64\include</Filter>
+    </ClInclude>
+    <ClInclude Include="external\SFML-2.5.1\x64\include\SFML\Network\Http.hpp">
+      <Filter>External\SFML-2.5.1\x64\include</Filter>
+    </ClInclude>
+    <ClInclude Include="external\SFML-2.5.1\x64\include\SFML\Network\IpAddress.hpp">
+      <Filter>External\SFML-2.5.1\x64\include</Filter>
+    </ClInclude>
+    <ClInclude Include="external\SFML-2.5.1\x64\include\SFML\Network\Packet.hpp">
+      <Filter>External\SFML-2.5.1\x64\include</Filter>
+    </ClInclude>
+    <ClInclude Include="external\SFML-2.5.1\x64\include\SFML\Network\Socket.hpp">
+      <Filter>External\SFML-2.5.1\x64\include</Filter>
+    </ClInclude>
+    <ClInclude Include="external\SFML-2.5.1\x64\include\SFML\Network\SocketHandle.hpp">
+      <Filter>External\SFML-2.5.1\x64\include</Filter>
+    </ClInclude>
+    <ClInclude Include="external\SFML-2.5.1\x64\include\SFML\Network\SocketSelector.hpp">
+      <Filter>External\SFML-2.5.1\x64\include</Filter>
+    </ClInclude>
+    <ClInclude Include="external\SFML-2.5.1\x64\include\SFML\Network\TcpListener.hpp">
+      <Filter>External\SFML-2.5.1\x64\include</Filter>
+    </ClInclude>
+    <ClInclude Include="external\SFML-2.5.1\x64\include\SFML\Network\TcpSocket.hpp">
+      <Filter>External\SFML-2.5.1\x64\include</Filter>
+    </ClInclude>
+    <ClInclude Include="external\SFML-2.5.1\x64\include\SFML\Network\UdpSocket.hpp">
+      <Filter>External\SFML-2.5.1\x64\include</Filter>
+    </ClInclude>
+    <ClInclude Include="external\SFML-2.5.1\x64\include\SFML\System\Clock.hpp">
+      <Filter>External\SFML-2.5.1\x64\include</Filter>
+    </ClInclude>
+    <ClInclude Include="external\SFML-2.5.1\x64\include\SFML\System\Err.hpp">
+      <Filter>External\SFML-2.5.1\x64\include</Filter>
+    </ClInclude>
+    <ClInclude Include="external\SFML-2.5.1\x64\include\SFML\System\Export.hpp">
+      <Filter>External\SFML-2.5.1\x64\include</Filter>
+    </ClInclude>
+    <ClInclude Include="external\SFML-2.5.1\x64\include\SFML\System\FileInputStream.hpp">
+      <Filter>External\SFML-2.5.1\x64\include</Filter>
+    </ClInclude>
+    <ClInclude Include="external\SFML-2.5.1\x64\include\SFML\System\InputStream.hpp">
+      <Filter>External\SFML-2.5.1\x64\include</Filter>
+    </ClInclude>
+    <ClInclude Include="external\SFML-2.5.1\x64\include\SFML\System\Lock.hpp">
+      <Filter>External\SFML-2.5.1\x64\include</Filter>
+    </ClInclude>
+    <ClInclude Include="external\SFML-2.5.1\x64\include\SFML\System\MemoryInputStream.hpp">
+      <Filter>External\SFML-2.5.1\x64\include</Filter>
+    </ClInclude>
+    <ClInclude Include="external\SFML-2.5.1\x64\include\SFML\System\Mutex.hpp">
+      <Filter>External\SFML-2.5.1\x64\include</Filter>
+    </ClInclude>
+    <ClInclude Include="external\SFML-2.5.1\x64\include\SFML\System\NativeActivity.hpp">
+      <Filter>External\SFML-2.5.1\x64\include</Filter>
+    </ClInclude>
+    <ClInclude Include="external\SFML-2.5.1\x64\include\SFML\System\NonCopyable.hpp">
+      <Filter>External\SFML-2.5.1\x64\include</Filter>
+    </ClInclude>
+    <ClInclude Include="external\SFML-2.5.1\x64\include\SFML\System\Sleep.hpp">
+      <Filter>External\SFML-2.5.1\x64\include</Filter>
+    </ClInclude>
+    <ClInclude Include="external\SFML-2.5.1\x64\include\SFML\System\String.hpp">
+      <Filter>External\SFML-2.5.1\x64\include</Filter>
+    </ClInclude>
+    <ClInclude Include="external\SFML-2.5.1\x64\include\SFML\System\Thread.hpp">
+      <Filter>External\SFML-2.5.1\x64\include</Filter>
+    </ClInclude>
+    <ClInclude Include="external\SFML-2.5.1\x64\include\SFML\System\ThreadLocal.hpp">
+      <Filter>External\SFML-2.5.1\x64\include</Filter>
+    </ClInclude>
+    <ClInclude Include="external\SFML-2.5.1\x64\include\SFML\System\ThreadLocalPtr.hpp">
+      <Filter>External\SFML-2.5.1\x64\include</Filter>
+    </ClInclude>
+    <ClInclude Include="external\SFML-2.5.1\x64\include\SFML\System\Time.hpp">
+      <Filter>External\SFML-2.5.1\x64\include</Filter>
+    </ClInclude>
+    <ClInclude Include="external\SFML-2.5.1\x64\include\SFML\System\Utf.hpp">
+      <Filter>External\SFML-2.5.1\x64\include</Filter>
+    </ClInclude>
+    <ClInclude Include="external\SFML-2.5.1\x64\include\SFML\System\Vector2.hpp">
+      <Filter>External\SFML-2.5.1\x64\include</Filter>
+    </ClInclude>
+    <ClInclude Include="external\SFML-2.5.1\x64\include\SFML\System\Vector3.hpp">
+      <Filter>External\SFML-2.5.1\x64\include</Filter>
+    </ClInclude>
+    <ClInclude Include="external\SFML-2.5.1\x64\include\SFML\Window\Clipboard.hpp">
+      <Filter>External\SFML-2.5.1\x64\include</Filter>
+    </ClInclude>
+    <ClInclude Include="external\SFML-2.5.1\x64\include\SFML\Window\Context.hpp">
+      <Filter>External\SFML-2.5.1\x64\include</Filter>
+    </ClInclude>
+    <ClInclude Include="external\SFML-2.5.1\x64\include\SFML\Window\ContextSettings.hpp">
+      <Filter>External\SFML-2.5.1\x64\include</Filter>
+    </ClInclude>
+    <ClInclude Include="external\SFML-2.5.1\x64\include\SFML\Window\Cursor.hpp">
+      <Filter>External\SFML-2.5.1\x64\include</Filter>
+    </ClInclude>
+    <ClInclude Include="external\SFML-2.5.1\x64\include\SFML\Window\Event.hpp">
+      <Filter>External\SFML-2.5.1\x64\include</Filter>
+    </ClInclude>
+    <ClInclude Include="external\SFML-2.5.1\x64\include\SFML\Window\Export.hpp">
+      <Filter>External\SFML-2.5.1\x64\include</Filter>
+    </ClInclude>
+    <ClInclude Include="external\SFML-2.5.1\x64\include\SFML\Window\GlResource.hpp">
+      <Filter>External\SFML-2.5.1\x64\include</Filter>
+    </ClInclude>
+    <ClInclude Include="external\SFML-2.5.1\x64\include\SFML\Window\Joystick.hpp">
+      <Filter>External\SFML-2.5.1\x64\include</Filter>
+    </ClInclude>
+    <ClInclude Include="external\SFML-2.5.1\x64\include\SFML\Window\Keyboard.hpp">
+      <Filter>External\SFML-2.5.1\x64\include</Filter>
+    </ClInclude>
+    <ClInclude Include="external\SFML-2.5.1\x64\include\SFML\Window\Mouse.hpp">
+      <Filter>External\SFML-2.5.1\x64\include</Filter>
+    </ClInclude>
+    <ClInclude Include="external\SFML-2.5.1\x64\include\SFML\Window\Sensor.hpp">
+      <Filter>External\SFML-2.5.1\x64\include</Filter>
+    </ClInclude>
+    <ClInclude Include="external\SFML-2.5.1\x64\include\SFML\Window\Touch.hpp">
+      <Filter>External\SFML-2.5.1\x64\include</Filter>
+    </ClInclude>
+    <ClInclude Include="external\SFML-2.5.1\x64\include\SFML\Window\VideoMode.hpp">
+      <Filter>External\SFML-2.5.1\x64\include</Filter>
+    </ClInclude>
+    <ClInclude Include="external\SFML-2.5.1\x64\include\SFML\Window\Window.hpp">
+      <Filter>External\SFML-2.5.1\x64\include</Filter>
+    </ClInclude>
+    <ClInclude Include="external\SFML-2.5.1\x64\include\SFML\Window\WindowHandle.hpp">
+      <Filter>External\SFML-2.5.1\x64\include</Filter>
+    </ClInclude>
+    <ClInclude Include="external\SFML-2.5.1\x64\include\SFML\Window\WindowStyle.hpp">
+      <Filter>External\SFML-2.5.1\x64\include</Filter>
+    </ClInclude>
+    <ClInclude Include="external\SFML-2.5.1\x64\include\SFML\Audio.hpp">
+      <Filter>External\SFML-2.5.1\x64\include</Filter>
+    </ClInclude>
+    <ClInclude Include="external\SFML-2.5.1\x64\include\SFML\Config.hpp">
+      <Filter>External\SFML-2.5.1\x64\include</Filter>
+    </ClInclude>
+    <ClInclude Include="external\SFML-2.5.1\x64\include\SFML\GpuPreference.hpp">
+      <Filter>External\SFML-2.5.1\x64\include</Filter>
+    </ClInclude>
+    <ClInclude Include="external\SFML-2.5.1\x64\include\SFML\Graphics.hpp">
+      <Filter>External\SFML-2.5.1\x64\include</Filter>
+    </ClInclude>
+    <ClInclude Include="external\SFML-2.5.1\x64\include\SFML\Main.hpp">
+      <Filter>External\SFML-2.5.1\x64\include</Filter>
+    </ClInclude>
+    <ClInclude Include="external\SFML-2.5.1\x64\include\SFML\Network.hpp">
+      <Filter>External\SFML-2.5.1\x64\include</Filter>
+    </ClInclude>
+    <ClInclude Include="external\SFML-2.5.1\x64\include\SFML\OpenGL.hpp">
+      <Filter>External\SFML-2.5.1\x64\include</Filter>
+    </ClInclude>
+    <ClInclude Include="external\SFML-2.5.1\x64\include\SFML\System.hpp">
+      <Filter>External\SFML-2.5.1\x64\include</Filter>
+    </ClInclude>
+    <ClInclude Include="external\SFML-2.5.1\x64\include\SFML\Window.hpp">
+      <Filter>External\SFML-2.5.1\x64\include</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="assets\tilesets\tiny-16.meta">
@@ -138,6 +747,138 @@
     </None>
     <None Include="assets\tilesets\grass.meta">
       <Filter>Assets\Tilesets</Filter>
+    </None>
+    <None Include="external\SFML-2.5.1\x86\lib\sfml-audio-d.pdb">
+      <Filter>External\SFML-2.5.1\x86\lib</Filter>
+    </None>
+    <None Include="external\SFML-2.5.1\x86\lib\sfml-audio-s-d.pdb">
+      <Filter>External\SFML-2.5.1\x86\lib</Filter>
+    </None>
+    <None Include="external\SFML-2.5.1\x86\lib\sfml-graphics-d.pdb">
+      <Filter>External\SFML-2.5.1\x86\lib</Filter>
+    </None>
+    <None Include="external\SFML-2.5.1\x86\lib\sfml-graphics-s-d.pdb">
+      <Filter>External\SFML-2.5.1\x86\lib</Filter>
+    </None>
+    <None Include="external\SFML-2.5.1\x86\lib\sfml-main-s-d.pdb">
+      <Filter>External\SFML-2.5.1\x86\lib</Filter>
+    </None>
+    <None Include="external\SFML-2.5.1\x86\lib\sfml-network-d.pdb">
+      <Filter>External\SFML-2.5.1\x86\lib</Filter>
+    </None>
+    <None Include="external\SFML-2.5.1\x86\lib\sfml-network-s-d.pdb">
+      <Filter>External\SFML-2.5.1\x86\lib</Filter>
+    </None>
+    <None Include="external\SFML-2.5.1\x86\lib\sfml-system-d.pdb">
+      <Filter>External\SFML-2.5.1\x86\lib</Filter>
+    </None>
+    <None Include="external\SFML-2.5.1\x86\lib\sfml-system-s-d.pdb">
+      <Filter>External\SFML-2.5.1\x86\lib</Filter>
+    </None>
+    <None Include="external\SFML-2.5.1\x86\lib\sfml-window-d.pdb">
+      <Filter>External\SFML-2.5.1\x86\lib</Filter>
+    </None>
+    <None Include="external\SFML-2.5.1\x86\lib\sfml-window-s-d.pdb">
+      <Filter>External\SFML-2.5.1\x86\lib</Filter>
+    </None>
+    <None Include="external\SFML-2.5.1\x86\include\SFML\Audio\SoundFileFactory.inl">
+      <Filter>External\SFML-2.5.1\x86\include</Filter>
+    </None>
+    <None Include="external\SFML-2.5.1\x86\include\SFML\Graphics\Glsl.inl">
+      <Filter>External\SFML-2.5.1\x86\include</Filter>
+    </None>
+    <None Include="external\SFML-2.5.1\x86\include\SFML\Graphics\Rect.inl">
+      <Filter>External\SFML-2.5.1\x86\include</Filter>
+    </None>
+    <None Include="external\SFML-2.5.1\x86\include\SFML\System\String.inl">
+      <Filter>External\SFML-2.5.1\x86\include</Filter>
+    </None>
+    <None Include="external\SFML-2.5.1\x86\include\SFML\System\Thread.inl">
+      <Filter>External\SFML-2.5.1\x86\include</Filter>
+    </None>
+    <None Include="external\SFML-2.5.1\x86\include\SFML\System\ThreadLocalPtr.inl">
+      <Filter>External\SFML-2.5.1\x86\include</Filter>
+    </None>
+    <None Include="external\SFML-2.5.1\x86\include\SFML\System\Utf.inl">
+      <Filter>External\SFML-2.5.1\x86\include</Filter>
+    </None>
+    <None Include="external\SFML-2.5.1\x86\include\SFML\System\Vector2.inl">
+      <Filter>External\SFML-2.5.1\x86\include</Filter>
+    </None>
+    <None Include="external\SFML-2.5.1\x86\include\SFML\System\Vector3.inl">
+      <Filter>External\SFML-2.5.1\x86\include</Filter>
+    </None>
+    <None Include="external\SFML-2.5.1\x64\include\SFML\Audio\SoundFileFactory.inl">
+      <Filter>External\SFML-2.5.1\x64\include</Filter>
+    </None>
+    <None Include="external\SFML-2.5.1\x64\include\SFML\Graphics\Glsl.inl">
+      <Filter>External\SFML-2.5.1\x64\include</Filter>
+    </None>
+    <None Include="external\SFML-2.5.1\x64\include\SFML\Graphics\Rect.inl">
+      <Filter>External\SFML-2.5.1\x64\include</Filter>
+    </None>
+    <None Include="external\SFML-2.5.1\x64\include\SFML\System\String.inl">
+      <Filter>External\SFML-2.5.1\x64\include</Filter>
+    </None>
+    <None Include="external\SFML-2.5.1\x64\include\SFML\System\Thread.inl">
+      <Filter>External\SFML-2.5.1\x64\include</Filter>
+    </None>
+    <None Include="external\SFML-2.5.1\x64\include\SFML\System\ThreadLocalPtr.inl">
+      <Filter>External\SFML-2.5.1\x64\include</Filter>
+    </None>
+    <None Include="external\SFML-2.5.1\x64\include\SFML\System\Utf.inl">
+      <Filter>External\SFML-2.5.1\x64\include</Filter>
+    </None>
+    <None Include="external\SFML-2.5.1\x64\include\SFML\System\Vector2.inl">
+      <Filter>External\SFML-2.5.1\x64\include</Filter>
+    </None>
+    <None Include="external\SFML-2.5.1\x64\include\SFML\System\Vector3.inl">
+      <Filter>External\SFML-2.5.1\x64\include</Filter>
+    </None>
+    <None Include="external\SFML-2.5.1\x64\lib\sfml-audio-d.pdb">
+      <Filter>External\SFML-2.5.1\x64\lib</Filter>
+    </None>
+    <None Include="external\SFML-2.5.1\x64\lib\sfml-audio-s-d.pdb">
+      <Filter>External\SFML-2.5.1\x64\lib</Filter>
+    </None>
+    <None Include="external\SFML-2.5.1\x64\lib\sfml-graphics-d.pdb">
+      <Filter>External\SFML-2.5.1\x64\lib</Filter>
+    </None>
+    <None Include="external\SFML-2.5.1\x64\lib\sfml-graphics-s-d.pdb">
+      <Filter>External\SFML-2.5.1\x64\lib</Filter>
+    </None>
+    <None Include="external\SFML-2.5.1\x64\lib\sfml-main-s-d.pdb">
+      <Filter>External\SFML-2.5.1\x64\lib</Filter>
+    </None>
+    <None Include="external\SFML-2.5.1\x64\lib\sfml-network-d.pdb">
+      <Filter>External\SFML-2.5.1\x64\lib</Filter>
+    </None>
+    <None Include="external\SFML-2.5.1\x64\lib\sfml-network-s-d.pdb">
+      <Filter>External\SFML-2.5.1\x64\lib</Filter>
+    </None>
+    <None Include="external\SFML-2.5.1\x64\lib\sfml-system-d.pdb">
+      <Filter>External\SFML-2.5.1\x64\lib</Filter>
+    </None>
+    <None Include="external\SFML-2.5.1\x64\lib\sfml-system-s-d.pdb">
+      <Filter>External\SFML-2.5.1\x64\lib</Filter>
+    </None>
+    <None Include="external\SFML-2.5.1\x64\lib\sfml-window-d.pdb">
+      <Filter>External\SFML-2.5.1\x64\lib</Filter>
+    </None>
+    <None Include="external\SFML-2.5.1\x64\lib\sfml-window-s-d.pdb">
+      <Filter>External\SFML-2.5.1\x64\lib</Filter>
+    </None>
+    <None Include="external\SFML-2.5.1\x64\readme.md">
+      <Filter>External\SFML-2.5.1\x64</Filter>
+    </None>
+    <None Include="external\SFML-2.5.1\x64\license.md">
+      <Filter>External\SFML-2.5.1\x64</Filter>
+    </None>
+    <None Include="external\SFML-2.5.1\x86\license.md">
+      <Filter>External\SFML-2.5.1\x86</Filter>
+    </None>
+    <None Include="external\SFML-2.5.1\x86\readme.md">
+      <Filter>External\SFML-2.5.1\x86</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
@@ -147,5 +888,181 @@
     <Image Include="assets\tilesets\grass.png">
       <Filter>Assets\Tilesets</Filter>
     </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <Library Include="external\SFML-2.5.1\x86\lib\ogg.lib">
+      <Filter>External\SFML-2.5.1\x86\lib</Filter>
+    </Library>
+    <Library Include="external\SFML-2.5.1\x86\lib\openal32.lib">
+      <Filter>External\SFML-2.5.1\x86\lib</Filter>
+    </Library>
+    <Library Include="external\SFML-2.5.1\x86\lib\sfml-audio.lib">
+      <Filter>External\SFML-2.5.1\x86\lib</Filter>
+    </Library>
+    <Library Include="external\SFML-2.5.1\x86\lib\sfml-audio-d.lib">
+      <Filter>External\SFML-2.5.1\x86\lib</Filter>
+    </Library>
+    <Library Include="external\SFML-2.5.1\x86\lib\sfml-audio-s.lib">
+      <Filter>External\SFML-2.5.1\x86\lib</Filter>
+    </Library>
+    <Library Include="external\SFML-2.5.1\x86\lib\sfml-audio-s-d.lib">
+      <Filter>External\SFML-2.5.1\x86\lib</Filter>
+    </Library>
+    <Library Include="external\SFML-2.5.1\x86\lib\sfml-graphics.lib">
+      <Filter>External\SFML-2.5.1\x86\lib</Filter>
+    </Library>
+    <Library Include="external\SFML-2.5.1\x86\lib\sfml-graphics-d.lib">
+      <Filter>External\SFML-2.5.1\x86\lib</Filter>
+    </Library>
+    <Library Include="external\SFML-2.5.1\x86\lib\sfml-graphics-s.lib">
+      <Filter>External\SFML-2.5.1\x86\lib</Filter>
+    </Library>
+    <Library Include="external\SFML-2.5.1\x86\lib\sfml-graphics-s-d.lib">
+      <Filter>External\SFML-2.5.1\x86\lib</Filter>
+    </Library>
+    <Library Include="external\SFML-2.5.1\x86\lib\sfml-main.lib">
+      <Filter>External\SFML-2.5.1\x86\lib</Filter>
+    </Library>
+    <Library Include="external\SFML-2.5.1\x86\lib\sfml-main-d.lib">
+      <Filter>External\SFML-2.5.1\x86\lib</Filter>
+    </Library>
+    <Library Include="external\SFML-2.5.1\x86\lib\sfml-network.lib">
+      <Filter>External\SFML-2.5.1\x86\lib</Filter>
+    </Library>
+    <Library Include="external\SFML-2.5.1\x86\lib\sfml-network-d.lib">
+      <Filter>External\SFML-2.5.1\x86\lib</Filter>
+    </Library>
+    <Library Include="external\SFML-2.5.1\x86\lib\sfml-network-s.lib">
+      <Filter>External\SFML-2.5.1\x86\lib</Filter>
+    </Library>
+    <Library Include="external\SFML-2.5.1\x86\lib\sfml-network-s-d.lib">
+      <Filter>External\SFML-2.5.1\x86\lib</Filter>
+    </Library>
+    <Library Include="external\SFML-2.5.1\x86\lib\sfml-system.lib">
+      <Filter>External\SFML-2.5.1\x86\lib</Filter>
+    </Library>
+    <Library Include="external\SFML-2.5.1\x86\lib\sfml-system-d.lib">
+      <Filter>External\SFML-2.5.1\x86\lib</Filter>
+    </Library>
+    <Library Include="external\SFML-2.5.1\x86\lib\sfml-system-s.lib">
+      <Filter>External\SFML-2.5.1\x86\lib</Filter>
+    </Library>
+    <Library Include="external\SFML-2.5.1\x86\lib\sfml-system-s-d.lib">
+      <Filter>External\SFML-2.5.1\x86\lib</Filter>
+    </Library>
+    <Library Include="external\SFML-2.5.1\x86\lib\sfml-window.lib">
+      <Filter>External\SFML-2.5.1\x86\lib</Filter>
+    </Library>
+    <Library Include="external\SFML-2.5.1\x86\lib\sfml-window-d.lib">
+      <Filter>External\SFML-2.5.1\x86\lib</Filter>
+    </Library>
+    <Library Include="external\SFML-2.5.1\x86\lib\sfml-window-s.lib">
+      <Filter>External\SFML-2.5.1\x86\lib</Filter>
+    </Library>
+    <Library Include="external\SFML-2.5.1\x86\lib\sfml-window-s-d.lib">
+      <Filter>External\SFML-2.5.1\x86\lib</Filter>
+    </Library>
+    <Library Include="external\SFML-2.5.1\x86\lib\vorbis.lib">
+      <Filter>External\SFML-2.5.1\x86\lib</Filter>
+    </Library>
+    <Library Include="external\SFML-2.5.1\x86\lib\vorbisenc.lib">
+      <Filter>External\SFML-2.5.1\x86\lib</Filter>
+    </Library>
+    <Library Include="external\SFML-2.5.1\x86\lib\vorbisfile.lib">
+      <Filter>External\SFML-2.5.1\x86\lib</Filter>
+    </Library>
+    <Library Include="external\SFML-2.5.1\x86\lib\flac.lib">
+      <Filter>External\SFML-2.5.1\x86\lib</Filter>
+    </Library>
+    <Library Include="external\SFML-2.5.1\x86\lib\freetype.lib">
+      <Filter>External\SFML-2.5.1\x86\lib</Filter>
+    </Library>
+    <Library Include="external\SFML-2.5.1\x64\lib\flac.lib">
+      <Filter>External\SFML-2.5.1\x64\lib</Filter>
+    </Library>
+    <Library Include="external\SFML-2.5.1\x64\lib\freetype.lib">
+      <Filter>External\SFML-2.5.1\x64\lib</Filter>
+    </Library>
+    <Library Include="external\SFML-2.5.1\x64\lib\ogg.lib">
+      <Filter>External\SFML-2.5.1\x64\lib</Filter>
+    </Library>
+    <Library Include="external\SFML-2.5.1\x64\lib\openal32.lib">
+      <Filter>External\SFML-2.5.1\x64\lib</Filter>
+    </Library>
+    <Library Include="external\SFML-2.5.1\x64\lib\sfml-audio.lib">
+      <Filter>External\SFML-2.5.1\x64\lib</Filter>
+    </Library>
+    <Library Include="external\SFML-2.5.1\x64\lib\sfml-audio-d.lib">
+      <Filter>External\SFML-2.5.1\x64\lib</Filter>
+    </Library>
+    <Library Include="external\SFML-2.5.1\x64\lib\sfml-audio-s.lib">
+      <Filter>External\SFML-2.5.1\x64\lib</Filter>
+    </Library>
+    <Library Include="external\SFML-2.5.1\x64\lib\sfml-audio-s-d.lib">
+      <Filter>External\SFML-2.5.1\x64\lib</Filter>
+    </Library>
+    <Library Include="external\SFML-2.5.1\x64\lib\sfml-graphics.lib">
+      <Filter>External\SFML-2.5.1\x64\lib</Filter>
+    </Library>
+    <Library Include="external\SFML-2.5.1\x64\lib\sfml-graphics-d.lib">
+      <Filter>External\SFML-2.5.1\x64\lib</Filter>
+    </Library>
+    <Library Include="external\SFML-2.5.1\x64\lib\sfml-graphics-s.lib">
+      <Filter>External\SFML-2.5.1\x64\lib</Filter>
+    </Library>
+    <Library Include="external\SFML-2.5.1\x64\lib\sfml-graphics-s-d.lib">
+      <Filter>External\SFML-2.5.1\x64\lib</Filter>
+    </Library>
+    <Library Include="external\SFML-2.5.1\x64\lib\sfml-main.lib">
+      <Filter>External\SFML-2.5.1\x64\lib</Filter>
+    </Library>
+    <Library Include="external\SFML-2.5.1\x64\lib\sfml-main-d.lib">
+      <Filter>External\SFML-2.5.1\x64\lib</Filter>
+    </Library>
+    <Library Include="external\SFML-2.5.1\x64\lib\sfml-network.lib">
+      <Filter>External\SFML-2.5.1\x64\lib</Filter>
+    </Library>
+    <Library Include="external\SFML-2.5.1\x64\lib\sfml-network-d.lib">
+      <Filter>External\SFML-2.5.1\x64\lib</Filter>
+    </Library>
+    <Library Include="external\SFML-2.5.1\x64\lib\sfml-network-s.lib">
+      <Filter>External\SFML-2.5.1\x64\lib</Filter>
+    </Library>
+    <Library Include="external\SFML-2.5.1\x64\lib\sfml-network-s-d.lib">
+      <Filter>External\SFML-2.5.1\x64\lib</Filter>
+    </Library>
+    <Library Include="external\SFML-2.5.1\x64\lib\sfml-system.lib">
+      <Filter>External\SFML-2.5.1\x64\lib</Filter>
+    </Library>
+    <Library Include="external\SFML-2.5.1\x64\lib\sfml-system-d.lib">
+      <Filter>External\SFML-2.5.1\x64\lib</Filter>
+    </Library>
+    <Library Include="external\SFML-2.5.1\x64\lib\sfml-system-s.lib">
+      <Filter>External\SFML-2.5.1\x64\lib</Filter>
+    </Library>
+    <Library Include="external\SFML-2.5.1\x64\lib\sfml-system-s-d.lib">
+      <Filter>External\SFML-2.5.1\x64\lib</Filter>
+    </Library>
+    <Library Include="external\SFML-2.5.1\x64\lib\sfml-window.lib">
+      <Filter>External\SFML-2.5.1\x64\lib</Filter>
+    </Library>
+    <Library Include="external\SFML-2.5.1\x64\lib\sfml-window-d.lib">
+      <Filter>External\SFML-2.5.1\x64\lib</Filter>
+    </Library>
+    <Library Include="external\SFML-2.5.1\x64\lib\sfml-window-s.lib">
+      <Filter>External\SFML-2.5.1\x64\lib</Filter>
+    </Library>
+    <Library Include="external\SFML-2.5.1\x64\lib\sfml-window-s-d.lib">
+      <Filter>External\SFML-2.5.1\x64\lib</Filter>
+    </Library>
+    <Library Include="external\SFML-2.5.1\x64\lib\vorbis.lib">
+      <Filter>External\SFML-2.5.1\x64\lib</Filter>
+    </Library>
+    <Library Include="external\SFML-2.5.1\x64\lib\vorbisenc.lib">
+      <Filter>External\SFML-2.5.1\x64\lib</Filter>
+    </Library>
+    <Library Include="external\SFML-2.5.1\x64\lib\vorbisfile.lib">
+      <Filter>External\SFML-2.5.1\x64\lib</Filter>
+    </Library>
   </ItemGroup>
 </Project>
