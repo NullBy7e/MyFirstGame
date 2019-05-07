@@ -1,40 +1,40 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Source Files">
+    <Filter Include="Source">
       <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
       <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
     </Filter>
-    <Filter Include="Header Files">
+    <Filter Include="Headers">
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
       <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
     </Filter>
-    <Filter Include="Resource Files">
+    <Filter Include="Resources">
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="Header Files\core">
+    <Filter Include="Headers\core">
       <UniqueIdentifier>{499d41e5-7989-4365-8416-cbaf244fe3ba}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\core">
+    <Filter Include="Source\core">
       <UniqueIdentifier>{05f8ac52-3f3c-491e-953d-c4dca0575f5b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\states">
+    <Filter Include="Source\states">
       <UniqueIdentifier>{98807b3c-9e89-49e5-b1c9-c56ae9294d58}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\states">
+    <Filter Include="Headers\states">
       <UniqueIdentifier>{d210ea10-443a-4bf5-961a-e994ac10c94d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\drawables">
+    <Filter Include="Source\drawables">
       <UniqueIdentifier>{025807b5-5779-44ed-b161-902014e0a1df}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\drawables">
+    <Filter Include="Headers\drawables">
       <UniqueIdentifier>{11e455d0-9f5b-4909-a4f9-db854725f0d1}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\map">
+    <Filter Include="Headers\map">
       <UniqueIdentifier>{f230ac5d-a4db-4a92-bcad-b9cc71e41be4}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\map">
+    <Filter Include="Source\map">
       <UniqueIdentifier>{eaeca580-2429-4f31-9279-a9d066e56310}</UniqueIdentifier>
     </Filter>
     <Filter Include="Assets">
@@ -43,61 +43,61 @@
     <Filter Include="Assets\Tilesets">
       <UniqueIdentifier>{2b650235-c824-4fe6-b6a9-bfdab049647c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\ui">
+    <Filter Include="Source\ui">
       <UniqueIdentifier>{5f8f6152-9bf7-45fb-9dc7-80cbc488066d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\ui\imgui">
+    <Filter Include="Source\ui\imgui">
       <UniqueIdentifier>{cdd0f237-31a9-43ce-b057-f99912f3fe56}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\ui">
+    <Filter Include="Headers\ui">
       <UniqueIdentifier>{b837f87f-2dca-43be-849c-3427325c704b}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source</Filter>
     </ClCompile>
     <ClCompile Include="core\Game.cpp">
-      <Filter>Source Files\core</Filter>
+      <Filter>Source\core</Filter>
     </ClCompile>
     <ClCompile Include="core\Window.cpp">
-      <Filter>Source Files\core</Filter>
+      <Filter>Source\core</Filter>
     </ClCompile>
     <ClCompile Include="states\LevelEditorGameState.cpp">
-      <Filter>Source Files\states</Filter>
+      <Filter>Source\states</Filter>
     </ClCompile>
     <ClCompile Include="drawables\Grid.cpp">
-      <Filter>Source Files\drawables</Filter>
+      <Filter>Source\drawables</Filter>
     </ClCompile>
     <ClCompile Include="map\MapEditor.cpp">
-      <Filter>Source Files\map</Filter>
+      <Filter>Source\map</Filter>
     </ClCompile>
     <ClCompile Include="map\Map.cpp">
-      <Filter>Source Files\map</Filter>
+      <Filter>Source\map</Filter>
     </ClCompile>
     <ClCompile Include="map\TileSet.cpp">
-      <Filter>Source Files\map</Filter>
+      <Filter>Source\map</Filter>
     </ClCompile>
     <ClCompile Include="external\imgui\src\imgui.cpp">
-      <Filter>Source Files\ui\imgui</Filter>
+      <Filter>Source\ui\imgui</Filter>
     </ClCompile>
     <ClCompile Include="external\imgui\src\imgui_draw.cpp">
-      <Filter>Source Files\ui\imgui</Filter>
+      <Filter>Source\ui\imgui</Filter>
     </ClCompile>
     <ClCompile Include="external\imgui\src\imgui-SFML.cpp">
-      <Filter>Source Files\ui\imgui</Filter>
+      <Filter>Source\ui\imgui</Filter>
     </ClCompile>
     <ClCompile Include="external\imgui\src\imgui_demo.cpp">
-      <Filter>Source Files\ui\imgui</Filter>
+      <Filter>Source\ui\imgui</Filter>
     </ClCompile>
     <ClCompile Include="external\imgui\src\imgui_widgets.cpp">
-      <Filter>Source Files\ui\imgui</Filter>
+      <Filter>Source\ui\imgui</Filter>
     </ClCompile>
     <ClCompile Include="ui\MapEditorUI.cpp">
-      <Filter>Source Files\ui</Filter>
+      <Filter>Source\ui</Filter>
     </ClCompile>
     <ClCompile Include="external\imgui\src\imgui_stdlib.cpp">
-      <Filter>Source Files\ui\imgui</Filter>
+      <Filter>Source\ui\imgui</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -105,31 +105,31 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="core\Game.hpp">
-      <Filter>Header Files\core</Filter>
+      <Filter>Headers\core</Filter>
     </ClInclude>
     <ClInclude Include="core\Window.hpp">
-      <Filter>Header Files\core</Filter>
+      <Filter>Headers\core</Filter>
     </ClInclude>
     <ClInclude Include="states\GameState.hpp">
-      <Filter>Header Files\states</Filter>
+      <Filter>Headers\states</Filter>
     </ClInclude>
     <ClInclude Include="states\LevelEditorGameState.hpp">
-      <Filter>Header Files\states</Filter>
+      <Filter>Headers\states</Filter>
     </ClInclude>
     <ClInclude Include="drawables\Grid.hpp">
-      <Filter>Header Files\drawables</Filter>
+      <Filter>Headers\drawables</Filter>
     </ClInclude>
     <ClInclude Include="map\MapEditor.hpp">
-      <Filter>Header Files\map</Filter>
+      <Filter>Headers\map</Filter>
     </ClInclude>
     <ClInclude Include="map\Map.hpp">
-      <Filter>Header Files\map</Filter>
+      <Filter>Headers\map</Filter>
     </ClInclude>
     <ClInclude Include="map\TileSet.hpp">
-      <Filter>Header Files\map</Filter>
+      <Filter>Headers\map</Filter>
     </ClInclude>
     <ClInclude Include="ui\MapEditorUI.hpp">
-      <Filter>Header Files\ui</Filter>
+      <Filter>Headers\ui</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
