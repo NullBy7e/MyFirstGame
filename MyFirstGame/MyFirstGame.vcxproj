@@ -31,6 +31,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="map\Map.cpp" />
     <ClCompile Include="map\MapEditor.cpp" />
+    <ClCompile Include="map\Sprite.cpp" />
     <ClCompile Include="map\TileSet.cpp" />
     <ClCompile Include="states\LevelEditorGameState.cpp" />
     <ClCompile Include="ui\MapEditorUi.cpp" />
@@ -238,8 +239,10 @@
     <ClInclude Include="external\SFML-2.5.1\x86\include\SFML\Window\Window.hpp" />
     <ClInclude Include="external\SFML-2.5.1\x86\include\SFML\Window\WindowHandle.hpp" />
     <ClInclude Include="external\SFML-2.5.1\x86\include\SFML\Window\WindowStyle.hpp" />
+    <ClInclude Include="Logger.hpp" />
     <ClInclude Include="map\Map.hpp" />
     <ClInclude Include="map\MapEditor.hpp" />
+    <ClInclude Include="map\Sprite.hpp" />
     <ClInclude Include="map\TileSet.hpp" />
     <ClInclude Include="states\GameState.hpp" />
     <ClInclude Include="states\LevelEditorGameState.hpp" />
@@ -419,7 +422,7 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>external\SFML-2.5.1\x86\include;external\SFML-2.5.1\src;external\imgui\src</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>external\SFML-2.5.1\x86\include;external\SFML-2.5.1\src;external\imgui\src;external\spdlog</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>SFML_STATIC;DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>
@@ -441,7 +444,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>external\SFML-2.5.1\x86\include;external\imgui\src</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>external\SFML-2.5.1\x86\include;external\imgui\src;external\spdlog</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>SFML_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <LanguageStandard>stdcpplatest</LanguageStandard>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
@@ -458,7 +461,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>external\SFML-2.5.1\x64\include;external\SFML-2.5.1\src;external\imgui\src</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>external\SFML-2.5.1\x64\include;external\SFML-2.5.1\src;external\imgui\src;external\spdlog</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>SFML_STATIC;DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <SupportJustMyCode>false</SupportJustMyCode>
@@ -471,7 +474,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>external\SFML-2.5.1\x64\include;external\imgui\src</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>external\SFML-2.5.1\x64\include;external\imgui\src;external\spdlog</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>SFML_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <LanguageStandard>stdcpplatest</LanguageStandard>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>

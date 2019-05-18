@@ -79,3 +79,14 @@ std::string& MapEditor::get_map_desc()
 {
 	return map_.value().get_desc();
 }
+
+void MapEditor::set_selected_sprite(TileSet& tile_set, const int sprite_index)
+{
+	selectedSprite_ = std::make_shared<Sprite>(tile_set, sprite_index);
+	ui_.set_selected_sprite(selectedSprite_);
+}
+
+Sprite& MapEditor::get_selected_sprite() const
+{
+	return *selectedSprite_;
+}

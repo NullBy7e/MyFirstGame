@@ -35,6 +35,8 @@ void MapEditorUi::render()
 	}
 
 	ImGui::End();
+
+	selected_sprite();
 }
 
 void MapEditorUi::map_desc_text_input() const
@@ -92,13 +94,19 @@ void MapEditorUi::tileset_sprites() const
 		const auto tex_rect = sf::Vector2f(static_cast<float>(it.second.getTextureRect().left), static_cast<float>(it.second.getTextureRect().top));
 		const auto spr_size = sf::Vector2f(static_cast<float>(it.second.getTextureRect().width), static_cast<float>(it.second.getTextureRect().height));
 		
-		const auto uv0 = ImVec2(tex_rect.x / tex_size.x, tex_rect.y / tex_size.y);
-		const auto uv1 = ImVec2((tex_rect.x + spr_size.x) / tex_size.x, (tex_rect.y + spr_size.y) / tex_size.y);
+		const auto uv0 = get_uv0_coord(tex_size, tex_rect);
+		const auto uv1 = get_uv1_coord(tex_size, tex_rect, spr_size);
 
 		ImGui::SameLine();
-		ImGui::ImageButton(reinterpret_cast<void*>(it.second.getTexture()->getNativeHandle()), ImVec2(64, 64), 
+
+		ImGui::PushID(it.first);
+		if(ImGui::ImageButton(reinterpret_cast<void*>(it.second.getTexture()->getNativeHandle()), ImVec2(64, 64), 
 			ImVec2(uv0),
-			ImVec2((uv1)));
+			ImVec2((uv1))))
+		{
+			mapEditor_.set_selected_sprite(tileset, it.first);
+		}
+		ImGui::PopID();
 
 		sprites_on_current_line++;
 
@@ -108,4 +116,38 @@ void MapEditorUi::tileset_sprites() const
 			sprites_on_current_line = 0;
 		}
 	}
+}
+
+void MapEditorUi::selected_sprite() const
+{
+	if (selectedSprite_ == nullptr)
+		return;
+
+	auto sprite = selectedSprite_->get_sprite();
+
+	const auto mouse = ImGui::GetMousePos();
+	ImGui::SetNextWindowPos({ mouse.x + 20, mouse.y + 10 });
+	if (ImGui::Begin("selectedSprite", nullptr, ImGuiWindowFlags_NoBackground | ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize))
+	{
+		ImGui::Image(reinterpret_cast<void*>(sprite.getTexture()->getNativeHandle()), ImVec2(64, 64),
+			ImVec2(selectedSprite_->get_uv0_coord()),
+			ImVec2((selectedSprite_->get_uv1_coord())));	
+	}
+
+	ImGui::End();
+}
+
+void MapEditorUi::set_selected_sprite(std::shared_ptr<Sprite> sprite)
+{
+	selectedSprite_.swap(sprite);
+}
+
+ImVec2 MapEditorUi::get_uv0_coord(const sf::Vector2f& tex_size, const sf::Vector2f& tex_rect)
+{
+	return ImVec2(tex_rect.x / tex_size.x, tex_rect.y / tex_size.y);
+}
+
+ImVec2 MapEditorUi::get_uv1_coord(const sf::Vector2f& tex_size, const sf::Vector2f& tex_rect, const sf::Vector2f spr_size)
+{
+	return ImVec2((tex_rect.x + spr_size.x) / tex_size.x, (tex_rect.y + spr_size.y) / tex_size.y);
 }

@@ -12,6 +12,7 @@ public:
 	TileSet(const std::string& name, const std::string& path, sf::Vector2i tilesize);
 
 	std::map<int, sf::Sprite>& get_sprites();
+	sf::Sprite get_sprite(const int sprite_index);
 
 	std::string name_;
 	std::string desc_;

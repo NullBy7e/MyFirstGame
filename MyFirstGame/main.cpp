@@ -27,12 +27,7 @@ SOFTWARE.
 
 #include "core/Game.hpp"
 
-// ReSharper disable once CppUnusedIncludeDirective
-#include <windows.h> // used by winuser.h internally
-#include <winuser.h>
-
 int main()
 {
-	SetProcessDPIAware();
 	return Game().loop();
 }

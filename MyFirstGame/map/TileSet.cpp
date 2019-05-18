@@ -5,11 +5,18 @@
 #include <fstream>
 #include <sstream>
 #include <functional>
-#include <imgui.h>
+
+#include "spdlog/spdlog.h"
+#include "spdlog/sinks/stdout_color_sinks.h"
+#include "../Logger.hpp"
 
 TileSet::TileSet(const std::string& name, const std::string& path, const sf::Vector2i tilesize)
 {
-	std::cout << "Loading tileset " << "\"" << name << "\"" << ":" << "\"" << path << "\"" << std::endl;
+	std::stringstream ss;
+	ss << "Loading tileset " << "\"" << name << "\"" << ":" << "\"" << path << "\"";
+
+
+	logger::info << "Loading tileset " << "\"" << name << "\"" << ":" << "\"" << path << "\"";
 
 	if(!texture_.loadFromFile(path))
 	{
@@ -49,6 +56,11 @@ TileSet::TileSet(const std::string& name, const std::string& path, const sf::Vec
 std::map<int, sf::Sprite>& TileSet::get_sprites()
 {
 	return sprites_;
+}
+
+sf::Sprite TileSet::get_sprite(const int sprite_index)
+{
+	return sprites_[sprite_index];
 }
 
 bool TileSet::load_meta_file(const std::string& meta_file_path)

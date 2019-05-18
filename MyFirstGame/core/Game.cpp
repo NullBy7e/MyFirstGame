@@ -1,6 +1,5 @@
 #include "Game.hpp"
 #include "../states/LevelEditorGameState.hpp"
-#include <imgui-SFML.h>
 
 Game::Game()
 {
