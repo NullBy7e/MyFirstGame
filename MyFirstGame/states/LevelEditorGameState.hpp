@@ -1,7 +1,6 @@
 #pragma once
 
 #include "GameState.hpp"
-#include "../drawables/Grid.hpp"
 #include "../map/MapEditor.hpp"
 
 class LevelEditorGameState final : public GameState

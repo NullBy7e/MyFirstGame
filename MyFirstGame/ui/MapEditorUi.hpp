@@ -10,7 +10,6 @@ class MapEditorUi
 public:
 	explicit MapEditorUi(MapEditor& map_editor);
 	void render();
-	void set_selected_sprite(std::shared_ptr<Sprite> sprite);
 
 private:
 	void map_name_text_input() const;
@@ -28,8 +27,6 @@ private:
 
 	bool propertiesTabEnabled_ = true;
 	bool tilesetsTabEnabled_ = true;
-	bool selectedSpriteEnabled_ = true;
 
-	std::shared_ptr<Sprite> selectedSprite_;
 	MapEditor& mapEditor_;
 };

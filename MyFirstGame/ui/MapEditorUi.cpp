@@ -120,26 +120,22 @@ void MapEditorUi::tileset_sprites() const
 
 void MapEditorUi::selected_sprite() const
 {
-	if (selectedSprite_ == nullptr)
+	const auto selected_sprite = mapEditor_.get_selected_sprite();
+	if (selected_sprite == nullptr)
 		return;
 
-	auto sprite = selectedSprite_->get_sprite();
+	auto sprite = selected_sprite->get_sprite();
 
 	const auto mouse = ImGui::GetMousePos();
 	ImGui::SetNextWindowPos({ mouse.x + 20, mouse.y + 10 });
 	if (ImGui::Begin("selectedSprite", nullptr, ImGuiWindowFlags_NoBackground | ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize))
 	{
 		ImGui::Image(reinterpret_cast<void*>(sprite.getTexture()->getNativeHandle()), ImVec2(64, 64),
-			ImVec2(selectedSprite_->get_uv0_coord()),
-			ImVec2((selectedSprite_->get_uv1_coord())));	
+			ImVec2(selected_sprite->get_uv0_coord()),
+			ImVec2((selected_sprite->get_uv1_coord())));
 	}
 
 	ImGui::End();
-}
-
-void MapEditorUi::set_selected_sprite(std::shared_ptr<Sprite> sprite)
-{
-	selectedSprite_.swap(sprite);
 }
 
 ImVec2 MapEditorUi::get_uv0_coord(const sf::Vector2f& tex_size, const sf::Vector2f& tex_rect)

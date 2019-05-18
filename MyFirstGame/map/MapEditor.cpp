@@ -65,6 +65,26 @@ void MapEditor::render(Window& window)
 	ui_.render();
 }
 
+void MapEditor::process_event(const sf::Event& event)
+{
+	switch(event.type)
+	{
+	case sf::Event::MouseButtonPressed:
+		mouseButtonPressed_ = true;
+		mouseButton_ = event.mouseButton.button;
+
+		if (event.mouseButton.button == sf::Mouse::Right)
+		{
+			clear_selected_sprite();
+		}
+		break;
+	case sf::Event::MouseButtonReleased:
+		mouseButtonPressed_ = false;
+		break;
+	default: break;
+	}
+}
+
 std::vector<TileSet>& MapEditor::get_tilesets()
 {
 	return tilesets_;
@@ -83,10 +103,14 @@ std::string& MapEditor::get_map_desc()
 void MapEditor::set_selected_sprite(TileSet& tile_set, const int sprite_index)
 {
 	selectedSprite_ = std::make_shared<Sprite>(tile_set, sprite_index);
-	ui_.set_selected_sprite(selectedSprite_);
 }
 
-Sprite& MapEditor::get_selected_sprite() const
+std::shared_ptr<Sprite>& MapEditor::get_selected_sprite()
 {
-	return *selectedSprite_;
+	return selectedSprite_;
+}
+
+void MapEditor::clear_selected_sprite()
+{
+	selectedSprite_.reset();
 }

@@ -23,6 +23,7 @@ void LevelEditorGameState::handle_input()
 	while(window_.poll_event(event))
 	{
 		ImGui::SFML::ProcessEvent(event);
+		mapEditor_.process_event(event);
 	}
 }
 
