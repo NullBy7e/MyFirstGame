@@ -86,7 +86,7 @@ private:
 	/**
 	 * \brief the Grid UI component of the map editor.
 	 */
-	Grid grid_{ {1280, 1024}, {64, 64} };
+	std::optional<Grid> grid_;
 
 	/**
 	 * \brief the map that this map editor edits, optional because a map editor isn't required to have a map to edit by default.

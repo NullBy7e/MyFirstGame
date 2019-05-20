@@ -4,7 +4,8 @@
 
 Window::Window()
 {
-	window_.create(sf::VideoMode(1280, 1024), "MyFirstGame", sf::Style::Titlebar | sf::Style::Close);
+	sf::VideoMode desktop = sf::VideoMode().getDesktopMode();
+	window_.create(desktop, "MyFirstGame", sf::Style::None);
 	window_.setFramerateLimit(60);
 }
 

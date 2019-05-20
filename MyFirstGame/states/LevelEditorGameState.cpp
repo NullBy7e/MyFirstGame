@@ -9,6 +9,7 @@ LevelEditorGameState::LevelEditorGameState(Window& window): GameState(window)
 	ImGui::SFML::Init(window.get());
 	ImGui::StyleColorsDark();
 	ImGui::GetIO().FontGlobalScale = 1.5f;
+
 }
 
 LevelEditorGameState::~LevelEditorGameState()

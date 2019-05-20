@@ -57,7 +57,14 @@ bool MapEditor::load_tilesets()
 
 void MapEditor::render(Window& window)
 {
-	window.draw(grid_);
+	if (grid_.has_value())
+	{
+		window.draw(grid_.value());
+	}
+	else 
+	{
+		grid_ = Grid{ { (float)window.get().getSize().x, (float)window.get().getSize().y }, { 64, 64 } };
+	}
 
 	if (map_.has_value())
 		window.draw(map_.value());
