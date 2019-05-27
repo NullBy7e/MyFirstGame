@@ -7,6 +7,7 @@
 #include "../ui/MapEditorUI.hpp"
 #include "Sprite.hpp"
 #include "../external/SFML-2.5.1/x86/include/SFML/Window/Mouse.hpp"
+#include "Tile.hpp"
 
 namespace sf {
 	class Event;
@@ -66,6 +67,25 @@ public:
 	 * \return the selected sprite wrapped in a shared_ptr.
 	 */
 	std::shared_ptr<Sprite>& get_selected_sprite();
+
+	/**
+	 * \brief returns the column and row number relative to the given mouse pos.
+	 * \param mouse_pos the position of the mouse.
+	 * \return 
+	 */
+	std::pair<unsigned int, unsigned int> get_column_row_at_mouse_pos(sf::Vector2i mouse_pos);
+
+	/**
+	 * \brief adds the selected sprite to the tile that's positioned relative to the mouse pos.
+	 * \param mouse_pos the position of the mouse.
+	 */
+	void add_selected_sprite_to_tile(sf::Vector2i mouse_pos);
+
+	/**
+	 * \brief removes the clicked tile.
+	 * \param mouse_pos the position of the mouse.
+	 */
+	void clear_clicked_tile(sf::Vector2i mouse_pos);
 
 	/**
 	 * \brief clears the selected sprite.

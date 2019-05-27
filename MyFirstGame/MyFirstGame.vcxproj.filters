@@ -123,6 +123,9 @@
     <ClCompile Include="map\Sprite.cpp">
       <Filter>Source\map</Filter>
     </ClCompile>
+    <ClCompile Include="map\Tile.cpp">
+      <Filter>Source\map</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="conventions.txt" />
@@ -747,6 +750,9 @@
       <Filter>Headers</Filter>
     </ClInclude>
     <ClInclude Include="map\Sprite.hpp">
+      <Filter>Headers\map</Filter>
+    </ClInclude>
+    <ClInclude Include="map\Tile.hpp">
       <Filter>Headers\map</Filter>
     </ClInclude>
   </ItemGroup>

@@ -49,7 +49,7 @@ bool MapEditor::load_tilesets()
 		auto file_name_no_ext = file.path().filename().replace_extension().generic_string();
 		auto file_path = file.path().generic_string();
 
-		tilesets_.emplace_back(file_name_no_ext, file_path, sf::Vector2i(16, 16));
+		tilesets_.emplace_back(file_name_no_ext, file_path, sf::Vector2u(16, 16));
 	}
 
 	return true;
@@ -63,7 +63,7 @@ void MapEditor::render(Window& window)
 	}
 	else 
 	{
-		grid_ = Grid{ { (float)window.get().getSize().x, (float)window.get().getSize().y }, { 64, 64 } };
+		grid_ = Grid{ window.get().getSize(), map_->get_tile_size() };
 	}
 
 	if (map_.has_value())
@@ -80,9 +80,21 @@ void MapEditor::process_event(const sf::Event& event)
 		mouseButtonPressed_ = true;
 		mouseButton_ = event.mouseButton.button;
 
+		if (event.mouseButton.button == sf::Mouse::Left)
+		{
+			add_selected_sprite_to_tile({ event.mouseButton.x, event.mouseButton.y });
+		}
+
 		if (event.mouseButton.button == sf::Mouse::Right)
 		{
-			clear_selected_sprite();
+			if(selectedSprite_ == nullptr)
+			{
+				clear_clicked_tile({ event.mouseButton.x, event.mouseButton.y });
+			}
+			else
+			{
+				clear_selected_sprite();
+			}		
 		}
 		break;
 	case sf::Event::MouseButtonReleased:
@@ -109,12 +121,34 @@ std::string& MapEditor::get_map_desc()
 
 void MapEditor::set_selected_sprite(TileSet& tile_set, const int sprite_index)
 {
+	clear_selected_sprite();
 	selectedSprite_ = std::make_shared<Sprite>(tile_set, sprite_index);
 }
 
 std::shared_ptr<Sprite>& MapEditor::get_selected_sprite()
 {
 	return selectedSprite_;
+}
+
+std::pair<unsigned, unsigned> MapEditor::get_column_row_at_mouse_pos(sf::Vector2i mouse_pos)
+{
+	return {(mouse_pos.x / map_->get_tile_size().x), mouse_pos.y / map_->get_tile_size().y};
+}
+
+void MapEditor::add_selected_sprite_to_tile(const sf::Vector2i mouse_pos)
+{
+	const auto selected_sprite = get_selected_sprite();
+	if (selected_sprite == nullptr)
+		return;
+
+	const auto pair = get_column_row_at_mouse_pos(mouse_pos);
+	map_->add_tile(pair.first, pair.second, *selected_sprite);
+}
+
+void MapEditor::clear_clicked_tile(const sf::Vector2i mouse_pos)
+{
+	const auto pair = get_column_row_at_mouse_pos(mouse_pos);
+	map_->remove_tile(pair.first, pair.second);
 }
 
 void MapEditor::clear_selected_sprite()

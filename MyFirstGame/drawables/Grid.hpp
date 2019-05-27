@@ -6,7 +6,7 @@
 class Grid final : public sf::Drawable
 {
 public:
-	Grid(sf::Vector2f grid_size, sf::Vector2f tile_size);
+	Grid(sf::Vector2u grid_size, sf::Vector2u tile_size);
 	void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
 
 private:

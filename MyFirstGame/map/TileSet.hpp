@@ -9,7 +9,7 @@
 class TileSet
 {
 public:
-	TileSet(const std::string& name, const std::string& path, sf::Vector2i tilesize);
+	TileSet(const std::string& name, const std::string& path, sf::Vector2u tilesize);
 
 	std::map<int, sf::Sprite>& get_sprites();
 	sf::Sprite get_sprite(const int sprite_index);
@@ -17,7 +17,7 @@ public:
 	std::string name_;
 	std::string desc_;
 	int stid_{};
-	sf::Vector2i size_;
+	sf::Vector2u size_;
 
 private:
 	sf::Texture texture_;

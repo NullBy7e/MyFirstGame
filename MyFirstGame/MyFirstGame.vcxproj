@@ -32,6 +32,7 @@
     <ClCompile Include="map\Map.cpp" />
     <ClCompile Include="map\MapEditor.cpp" />
     <ClCompile Include="map\Sprite.cpp" />
+    <ClCompile Include="map\Tile.cpp" />
     <ClCompile Include="map\TileSet.cpp" />
     <ClCompile Include="states\LevelEditorGameState.cpp" />
     <ClCompile Include="ui\MapEditorUi.cpp" />
@@ -243,6 +244,7 @@
     <ClInclude Include="map\Map.hpp" />
     <ClInclude Include="map\MapEditor.hpp" />
     <ClInclude Include="map\Sprite.hpp" />
+    <ClInclude Include="map\Tile.hpp" />
     <ClInclude Include="map\TileSet.hpp" />
     <ClInclude Include="states\GameState.hpp" />
     <ClInclude Include="states\LevelEditorGameState.hpp" />
@@ -368,7 +370,7 @@
     <VCProjectVersion>15.0</VCProjectVersion>
     <ProjectGuid>{335D80B1-876B-470A-B405-3C96EB4A7273}</ProjectGuid>
     <RootNamespace>SFML</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.17134.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
