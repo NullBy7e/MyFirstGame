@@ -15,7 +15,6 @@ TileSet::TileSet(const std::string& name, const std::string& path, const sf::Vec
 	std::stringstream ss;
 	ss << "Loading tileset " << "\"" << name << "\"" << ":" << "\"" << path << "\"";
 
-
 	logger::info << "Loading tileset " << "\"" << name << "\"" << ":" << "\"" << path << "\"";
 
 	if(!texture_.loadFromFile(path))
@@ -35,8 +34,8 @@ TileSet::TileSet(const std::string& name, const std::string& path, const sf::Vec
 	}
 
 	// slice up the image into multiple sf::Texture
-	const unsigned int cols = texture_.getSize().x / tilesize.x;
-	const unsigned int rows = texture_.getSize().y / tilesize.y;
+	const auto cols = texture_.getSize().x / tilesize.x;
+	const auto rows = texture_.getSize().y / tilesize.y;
 
 	// each col + row combination contains a sprite
 	for (auto col = 0u; col < cols; ++col)

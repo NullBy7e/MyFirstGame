@@ -1,7 +1,7 @@
 #pragma once
 #include <imgui.h>
 #include "../map/Sprite.hpp"
-#include <optional>
+#include "../core/Window.hpp"
 
 class MapEditor;
 
@@ -9,7 +9,9 @@ class MapEditorUi
 {
 public:
 	explicit MapEditorUi(MapEditor& map_editor);
-	void render();
+	void render(Window& window);
+
+	bool is_mouse_inside() const;
 
 private:
 	void map_name_text_input() const;
@@ -20,13 +22,22 @@ private:
 	void tileset_sprites() const;
 	void selected_sprite() const;
 
+	void tile_picker(Window& window);
+	bool is_mouse_inside_tilepicker() const;
+
 	static ImVec2 get_uv0_coord(const sf::Vector2f& tex_size, const sf::Vector2f& tex_rect);
 	static ImVec2 get_uv1_coord(const sf::Vector2f& tex_size, const sf::Vector2f& tex_rect, sf::Vector2f spr_size);
 
 	int tilesetComboSelectedItemIndex_ = -1;
 
 	bool propertiesTabEnabled_ = true;
-	bool tilesetsTabEnabled_ = true;
-
 	MapEditor& mapEditor_;
+
+	float tilePickerW_;
+	float tilePickerH_;
+
+	float tilepickerX_;
+	float tilepickerY_;
+
+	bool tilepickerVisible_;
 };

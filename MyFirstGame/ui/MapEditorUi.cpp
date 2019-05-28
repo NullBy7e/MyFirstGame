@@ -8,35 +8,43 @@ MapEditorUi::MapEditorUi(MapEditor& map_editor) : mapEditor_(map_editor)
 {
 }
 
-void MapEditorUi::render()
+void MapEditorUi::render(Window& window)
 {
-	ImGui::Begin("Map Editor");
+	tile_picker(window);
 
-	if (ImGui::BeginTabBar("TabItems"))
-	{
-		if (ImGui::BeginTabItem("Properties", &propertiesTabEnabled_))
-		{
-			map_name_text_input();
-			map_desc_text_input();
+	//ImGui::Begin("Map Editor");
 
-			ImGui::EndTabItem();
-		}
+	//if (ImGui::BeginTabBar("TabItems"))
+	//{
+	//	if (ImGui::BeginTabItem("Properties", &propertiesTabEnabled_))
+	//	{
+	//		map_name_text_input();
+	//		map_desc_text_input();
 
-		if (ImGui::BeginTabItem("Tilesets", &tilesetsTabEnabled_))
-		{
-			tileset_combo();
-			tileset_info();
-			tileset_sprites();
+	//		ImGui::EndTabItem();
+	//	}
 
-			ImGui::EndTabItem();
-		}
+	//	if (ImGui::BeginTabItem("Tilesets", &tilesetsTabEnabled_))
+	//	{
+	//		tileset_combo();
+	//		tileset_info();
+	//		tileset_sprites();
 
-		ImGui::EndTabBar();
-	}
+	//		ImGui::EndTabItem();
+	//	}
 
-	ImGui::End();
+	//	ImGui::EndTabBar();
+	//}
 
+	//ImGui::End();
+
+	// draws the selected sprite (if any) next to the mouse cursor.
 	selected_sprite();
+}
+
+bool MapEditorUi::is_mouse_inside() const
+{
+	return is_mouse_inside_tilepicker();
 }
 
 void MapEditorUi::map_desc_text_input() const
@@ -63,7 +71,7 @@ void MapEditorUi::tileset_combo()
 		ss << tset.name_ << '\0';
 	}
 
-	ImGui::Combo("Tilesets", &tilesetComboSelectedItemIndex_, ss.str().c_str());
+	ImGui::Combo("", &tilesetComboSelectedItemIndex_, ss.str().c_str());
 }
 
 void MapEditorUi::tileset_info() const
@@ -85,22 +93,22 @@ void MapEditorUi::tileset_sprites() const
 
 	ImGui::NewLine();
 
-	const auto sprites_to_display_per_line = 10;
+	const auto sprites_to_display_per_line = 3;
 	auto sprites_on_current_line = 0;
 
-	for(const auto& it : sprites)
+	for (const auto& it : sprites)
 	{
 		const auto tex_size = sf::Vector2f(static_cast<float>(it.second.getTexture()->getSize().x), static_cast<float>(it.second.getTexture()->getSize().y));
 		const auto tex_rect = sf::Vector2f(static_cast<float>(it.second.getTextureRect().left), static_cast<float>(it.second.getTextureRect().top));
 		const auto spr_size = sf::Vector2f(static_cast<float>(it.second.getTextureRect().width), static_cast<float>(it.second.getTextureRect().height));
-		
+
 		const auto uv0 = get_uv0_coord(tex_size, tex_rect);
 		const auto uv1 = get_uv1_coord(tex_size, tex_rect, spr_size);
 
 		ImGui::SameLine();
 
 		ImGui::PushID(it.first);
-		if(ImGui::ImageButton(reinterpret_cast<void*>(it.second.getTexture()->getNativeHandle()), ImVec2(64, 64), 
+		if (ImGui::ImageButton(reinterpret_cast<void*>(it.second.getTexture()->getNativeHandle()), ImVec2(64, 64),
 			ImVec2(uv0),
 			ImVec2((uv1))))
 		{
@@ -110,7 +118,7 @@ void MapEditorUi::tileset_sprites() const
 
 		sprites_on_current_line++;
 
-		if(sprites_on_current_line == sprites_to_display_per_line)
+		if (sprites_on_current_line == sprites_to_display_per_line)
 		{
 			ImGui::NewLine();
 			sprites_on_current_line = 0;
@@ -121,7 +129,7 @@ void MapEditorUi::tileset_sprites() const
 void MapEditorUi::selected_sprite() const
 {
 	const auto selected_sprite = mapEditor_.get_selected_sprite();
-	if (selected_sprite == nullptr)
+	if (!selected_sprite)
 		return;
 
 	auto sprite = selected_sprite->get_sprite();
@@ -136,6 +144,52 @@ void MapEditorUi::selected_sprite() const
 	}
 
 	ImGui::End();
+}
+
+void MapEditorUi::tile_picker(Window& window)
+{
+	tilePickerW_ = 256;
+	tilePickerH_ = 640;
+
+	tilepickerX_ = static_cast<float>(window.get().getSize().x - tilePickerW_);
+	tilepickerY_ = 0;
+
+	ImGui::SetNextWindowSize({ tilePickerW_, tilePickerH_ }); //4 tiles in width, 10 tiles in height
+	ImGui::SetNextWindowPos({ tilepickerX_ , tilepickerY_ });
+
+	tilepickerVisible_ = ImGui::Begin("Tilepicker", nullptr, ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoResize);
+	if (tilepickerVisible_)
+	{
+		tileset_combo();
+		tileset_sprites();
+	}
+
+	ImGui::End();
+}
+
+bool MapEditorUi::is_mouse_inside_tilepicker() const
+{
+	const auto mouse = ImGui::GetMousePos();
+
+	const auto start_x = tilepickerX_;
+	const auto start_y = tilepickerY_;
+
+	const auto end_x = tilepickerX_ + tilePickerW_;
+	const auto inside_x = mouse.x > start_x && mouse.x < end_x;
+
+	if (!tilepickerVisible_)
+	{
+		//tilepicker collapsed but the titlebar is still there so check if the mouse is in it.
+		const auto inside_tb_x = inside_x;
+		const auto inside_tb_y = mouse.y > start_y && mouse.y < (start_y + 30);
+
+		return inside_tb_x && inside_tb_y;
+	}
+
+	const auto end_y = tilepickerY_ + tilePickerH_;
+	const auto inside_y = mouse.y > start_y && mouse.y < end_y;
+
+	return inside_x && inside_y;
 }
 
 ImVec2 MapEditorUi::get_uv0_coord(const sf::Vector2f& tex_size, const sf::Vector2f& tex_rect)

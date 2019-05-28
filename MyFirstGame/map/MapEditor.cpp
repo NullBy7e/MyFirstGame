@@ -69,7 +69,7 @@ void MapEditor::render(Window& window)
 	if (map_.has_value())
 		window.draw(map_.value());
 
-	ui_.render();
+	ui_.render(window);
 }
 
 void MapEditor::process_event(const sf::Event& event)
@@ -80,6 +80,11 @@ void MapEditor::process_event(const sf::Event& event)
 		mouseButtonPressed_ = true;
 		mouseButton_ = event.mouseButton.button;
 
+		if(ui_.is_mouse_inside())
+		{
+			break;
+		}
+
 		if (event.mouseButton.button == sf::Mouse::Left)
 		{
 			add_selected_sprite_to_tile({ event.mouseButton.x, event.mouseButton.y });
@@ -87,7 +92,7 @@ void MapEditor::process_event(const sf::Event& event)
 
 		if (event.mouseButton.button == sf::Mouse::Right)
 		{
-			if(selectedSprite_ == nullptr)
+			if(!selectedSprite_)
 			{
 				clear_clicked_tile({ event.mouseButton.x, event.mouseButton.y });
 			}
@@ -138,7 +143,7 @@ std::pair<unsigned, unsigned> MapEditor::get_column_row_at_mouse_pos(sf::Vector2
 void MapEditor::add_selected_sprite_to_tile(const sf::Vector2i mouse_pos)
 {
 	const auto selected_sprite = get_selected_sprite();
-	if (selected_sprite == nullptr)
+	if (!selected_sprite)
 		return;
 
 	const auto pair = get_column_row_at_mouse_pos(mouse_pos);

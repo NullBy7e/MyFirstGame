@@ -66,7 +66,6 @@ void Map::remove_tile(const unsigned int column, const unsigned int row)
 	}
 }
 
-
 std::map<std::pair<unsigned int, unsigned int>, Tile>& Map::get_tiles()
 {
 	return tiles_;
