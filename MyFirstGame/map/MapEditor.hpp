@@ -91,6 +91,11 @@ public:
 	 * \brief clears the selected sprite.
 	 */
 	void clear_selected_sprite();
+
+	/**
+	 * \brief rotates the selected sprite clock-wise.
+	 */
+	void rotate_selected_sprite();
 private:
 	/**
 	 * \brief loads the tilesets for this map editor.

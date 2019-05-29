@@ -2,6 +2,7 @@
 #include <imgui.h>
 #include "../map/Sprite.hpp"
 #include "../core/Window.hpp"
+#include <array>
 
 class MapEditor;
 

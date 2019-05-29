@@ -76,6 +76,15 @@ void MapEditor::process_event(const sf::Event& event)
 {
 	switch(event.type)
 	{
+	case sf::Event::KeyPressed:
+		if(event.key.code == sf::Keyboard::Key::R)
+		{
+			if (!selectedSprite_)
+				break;
+			
+			rotate_selected_sprite();
+		}
+		break;
 	case sf::Event::MouseButtonPressed:
 		mouseButtonPressed_ = true;
 		mouseButton_ = event.mouseButton.button;
@@ -159,4 +168,16 @@ void MapEditor::clear_clicked_tile(const sf::Vector2i mouse_pos)
 void MapEditor::clear_selected_sprite()
 {
 	selectedSprite_.reset();
+}
+
+void MapEditor::rotate_selected_sprite()
+{
+	const auto selected_sprite = get_selected_sprite();
+	if (!selected_sprite)
+		return;
+
+	if (selected_sprite->get_rotation() >= 360) //reset
+		selected_sprite->set_rotation(0);
+
+	selected_sprite->rotate(90);
 }

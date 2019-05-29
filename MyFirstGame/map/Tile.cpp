@@ -13,10 +13,16 @@ Tile::Tile(const unsigned int column, const unsigned int row, const sf::Vector2u
 void Tile::draw(sf::RenderTarget& target, const sf::RenderStates states) const
 {
 	auto sprite = sprite_.get_sprite();
-	sprite.setPosition(column_ * size_.x, row_ * size_.y);
 
-	const auto scale = sf::Vector2u{ (size_.x / sprite_.get_tile_set().size_.x), (size_.y / sprite_.get_tile_set().size_.y) };
+	const auto x_pos = (column_ * size_.x) + size_.x / 2;
+	const auto y_pos = (row_ * size_.y) + size_.y / 2;
+
+	sprite.setPosition(x_pos, y_pos);
+
+	const auto scale = sf::Vector2f{ (static_cast<float>(size_.x) / static_cast<float>(sprite_.get_tile_set().size_.x)), (static_cast<float>(size_.y) / static_cast<float>(sprite_.get_tile_set().size_.y)) };
 	sprite.setScale(scale.x, scale.y);
-	
+	sprite.setRotation(sprite_.get_rotation());
+	sprite.setOrigin(sprite.getLocalBounds().width / 2, sprite.getLocalBounds().height / 2);
+
 	target.draw(sprite);
 }

@@ -10,6 +10,8 @@ MapEditorUi::MapEditorUi(MapEditor& map_editor) : mapEditor_(map_editor)
 
 void MapEditorUi::render(Window& window)
 {
+	ImGui::ShowMetricsWindow(nullptr);
+
 	tile_picker(window);
 
 	//ImGui::Begin("Map Editor");
@@ -128,19 +130,36 @@ void MapEditorUi::tileset_sprites() const
 
 void MapEditorUi::selected_sprite() const
 {
+	// no need to draw the selected sprite if the mouse is inside any of the ui elements.
+	if (is_mouse_inside())
+		return;
+
 	const auto selected_sprite = mapEditor_.get_selected_sprite();
 	if (!selected_sprite)
 		return;
 
 	auto sprite = selected_sprite->get_sprite();
 
+	constexpr auto M_PI = 3.14159265358979323846;
+	auto sprite_rotation = selected_sprite->get_rotation();
+	auto radians = sprite_rotation * M_PI / 180;
+
 	const auto mouse = ImGui::GetMousePos();
-	ImGui::SetNextWindowPos({ mouse.x + 20, mouse.y + 10 });
-	if (ImGui::Begin("selectedSprite", nullptr, ImGuiWindowFlags_NoBackground | ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize))
+	ImGui::SetNextWindowPos(mouse);
+	
+	auto uvs = selected_sprite->get_uvs();
+
+	if (ImGui::Begin("selectedSprite", nullptr, ImGuiWindowFlags_NoBackground | ImGuiWindowFlags_NoTitleBar))
 	{
-		ImGui::Image(reinterpret_cast<void*>(sprite.getTexture()->getNativeHandle()), ImVec2(64, 64),
-			ImVec2(selected_sprite->get_uv0_coord()),
-			ImVec2((selected_sprite->get_uv1_coord())));
+		ImGui::ImageQuad(
+			reinterpret_cast<void*>(sprite.getTexture()->getNativeHandle()),
+			{ 64, 64 },
+			radians,
+			uvs[0],
+			uvs[1],
+			uvs[2],
+			uvs[3]
+		);
 	}
 
 	ImGui::End();

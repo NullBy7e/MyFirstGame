@@ -922,6 +922,34 @@ void ImGui::Image(ImTextureID user_texture_id, const ImVec2& size, const ImVec2&
     }
 }
 
+void ImGui::ImageQuad(ImTextureID user_texture_id, const ImVec2& size, float angle, const ImVec2& uv0, const ImVec2& uv1, const ImVec2& uv2, const ImVec2& uv3)
+{
+	ImGuiWindow* window = GetCurrentWindow();
+	if (window->SkipItems)
+		return;
+
+	ImRect bb(window->DC.CursorPos, window->DC.CursorPos + size);
+	ItemSize(bb);
+	if (!ItemAdd(bb, 0))
+		return;
+
+	const auto cos_a = cosf(angle);
+	const auto sin_a = sinf(angle);
+
+	auto bbvecmin = ImVec2(bb.Min.x, bb.Min.y);
+	auto bbvecmax = ImVec2(bb.Max.x, bb.Max.y);
+
+	ImVec2 pos[4] =
+	{
+		ImVec2((bbvecmin.x + (-size.x * 0.5f) * cos_a - (-size.y * 0.5f) * sin_a), (bbvecmin.y + (-size.x * 0.5f) * sin_a + (-size.y * 0.5f) * cos_a)),
+		ImVec2((bbvecmin.x + (+size.x * 0.5f) * cos_a - (-size.y * 0.5f) * sin_a), (bbvecmin.y + (+size.x * 0.5f) * sin_a + (-size.y * 0.5f) * cos_a)),
+		ImVec2((bbvecmin.x + (+size.x * 0.5f) * cos_a - (+size.y * 0.5f) * sin_a), (bbvecmin.y + (+size.x * 0.5f) * sin_a + (+size.y * 0.5f) * cos_a)),
+		ImVec2((bbvecmin.x + (-size.x * 0.5f) * cos_a - (+size.y * 0.5f) * sin_a), (bbvecmin.y + (-size.x * 0.5f) * sin_a + (+size.y * 0.5f) * cos_a))
+	};
+
+	window->DrawList->AddImageQuad(user_texture_id, pos[0], pos[1], pos[2], pos[3], uv0, uv1, uv2, uv3, IM_COL32_WHITE);
+}
+
 // frame_padding < 0: uses FramePadding from style (default)
 // frame_padding = 0: no framing
 // frame_padding > 0: set framing size
