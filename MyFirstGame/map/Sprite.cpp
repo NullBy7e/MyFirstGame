@@ -44,10 +44,10 @@ std::array<ImVec2, 4> Sprite::get_uvs() const
 {
 	return 	
 	{
-		ImVec2(uv0_.x, uv0_.y),
-		ImVec2(uv1_.x, uv0_.y),
-		ImVec2(uv1_.x, uv1_.y),
-		ImVec2(uv0_.x, uv1_.y)
+		ImVec2(uv0_.x, uv0_.y), //top left
+		ImVec2(uv1_.x, uv0_.y), //top right
+		ImVec2(uv1_.x, uv1_.y), //bottom right
+		ImVec2(uv0_.x, uv1_.y)  //bottom left
 	};
 }
 

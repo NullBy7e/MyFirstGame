@@ -7,6 +7,7 @@
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/Graphics/Sprite.hpp>
 #include <SFML/Graphics/Texture.hpp>
+#include <SFML/Graphics/RenderTexture.hpp>
 #include <SFML/Window/Event.hpp>
 #include <SFML/Window/Touch.hpp>
 #include <SFML/Window/Window.hpp>
@@ -478,6 +479,15 @@ namespace ImGui
 
 
 	/////////////// Image Overloads
+
+	void Image(const sf::RenderTexture& texture, const sf::Vector2f& size, const sf::FloatRect& textureRect,
+		const sf::Color& tintColor, const sf::Color& borderColor)
+	{
+		sf::Vector2f textureSize = static_cast<sf::Vector2f>(texture.getSize());
+		ImVec2 uv0(textureRect.left / textureSize.x, (textureRect.top + textureRect.height) / textureSize.y);
+		ImVec2 uv1((textureRect.left + textureRect.width) / textureSize.x, textureRect.top / textureSize.y);
+		ImGui::Image((void*)texture.getTexture().getNativeHandle(), size, uv0, uv1, tintColor, borderColor);
+	}
 
 	void Image(const sf::Texture& texture,
 		const sf::Color& tintColor, const sf::Color& borderColor)

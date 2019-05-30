@@ -936,15 +936,24 @@ void ImGui::ImageQuad(ImTextureID user_texture_id, const ImVec2& size, float ang
 	const auto cos_a = cosf(angle);
 	const auto sin_a = sinf(angle);
 
-	auto bbvecmin = ImVec2(bb.Min.x, bb.Min.y);
-	auto bbvecmax = ImVec2(bb.Max.x, bb.Max.y);
+	auto rot_top_left		= ImRotate(ImVec2(-size.x * angle, -size.y * angle), cos_a, sin_a);
+	auto rot_top_right		= ImRotate(ImVec2(+size.x * angle, -size.y * angle), cos_a, sin_a);
+	auto rot_bottom_right	= ImRotate(ImVec2(+size.x * angle, +size.y * angle), cos_a, sin_a);
+	auto rot_bottom_left	= ImRotate(ImVec2(-size.x * angle, +size.y * angle), cos_a, sin_a);
 
 	ImVec2 pos[4] =
 	{
-		ImVec2((bbvecmin.x + (-size.x * 0.5f) * cos_a - (-size.y * 0.5f) * sin_a), (bbvecmin.y + (-size.x * 0.5f) * sin_a + (-size.y * 0.5f) * cos_a)),
-		ImVec2((bbvecmin.x + (+size.x * 0.5f) * cos_a - (-size.y * 0.5f) * sin_a), (bbvecmin.y + (+size.x * 0.5f) * sin_a + (-size.y * 0.5f) * cos_a)),
-		ImVec2((bbvecmin.x + (+size.x * 0.5f) * cos_a - (+size.y * 0.5f) * sin_a), (bbvecmin.y + (+size.x * 0.5f) * sin_a + (+size.y * 0.5f) * cos_a)),
-		ImVec2((bbvecmin.x + (-size.x * 0.5f) * cos_a - (+size.y * 0.5f) * sin_a), (bbvecmin.y + (-size.x * 0.5f) * sin_a + (+size.y * 0.5f) * cos_a))
+		//top left
+		ImVec2(bb.Min.x, bb.Min.y) + rot_top_left,
+
+		//top right
+		ImVec2(bb.Max.x, bb.Min.y) + rot_top_right,
+
+		//bottom right
+		ImVec2(bb.Max.x, bb.Max.y) + rot_bottom_right,
+
+		//bottom left
+		ImVec2(bb.Min.x, bb.Max.y) + rot_bottom_left
 	};
 
 	window->DrawList->AddImageQuad(user_texture_id, pos[0], pos[1], pos[2], pos[3], uv0, uv1, uv2, uv3, IM_COL32_WHITE);
