@@ -1,11 +1,10 @@
 #include "MapEditorUi.hpp"
 
+#include "../helpers/MathHelper.hpp"
 #include "../map/MapEditor.hpp"
 #include <imgui_stdlib.h>
 #include <sstream>
 
-#define _USE_MATH_DEFINES
-#include <math.h>
 
 #include "imgui-SFML.h"
 
@@ -104,13 +103,6 @@ void MapEditorUi::tileset_sprites() const
 
 	for (const auto& it : sprites)
 	{
-		const auto tex_size = sf::Vector2f(static_cast<float>(it.second.getTexture()->getSize().x), static_cast<float>(it.second.getTexture()->getSize().y));
-		const auto tex_rect = sf::Vector2f(static_cast<float>(it.second.getTextureRect().left), static_cast<float>(it.second.getTextureRect().top));
-		const auto spr_size = sf::Vector2f(static_cast<float>(it.second.getTextureRect().width), static_cast<float>(it.second.getTextureRect().height));
-
-		const auto uv0 = get_uv0_coord(tex_size, tex_rect);
-		const auto uv1 = get_uv1_coord(tex_size, tex_rect, spr_size);
-
 		ImGui::SameLine();
 
 		ImGui::PushID(it.first);
@@ -140,20 +132,16 @@ void MapEditorUi::selected_sprite() const
 	if (!selected_sprite)
 		return;
 
-	auto sprite = selected_sprite->get_sprite();
-
-	auto sprite_rotation = selected_sprite->get_rotation();
-	auto radians = (sprite_rotation / 180) * M_PI;
-
 	const auto mouse = ImGui::GetMousePos();
-	ImGui::SetNextWindowPos({mouse.x + 30, mouse.y});
-	auto uvs = selected_sprite->get_uvs();
+	ImGui::SetNextWindowPos({mouse.x + 10, mouse.y});
 
-
-	if (ImGui::Begin("selectedSprite", nullptr, ImGuiWindowFlags_NoBackground | ImGuiWindowFlags_NoTitleBar))
+	if (ImGui::Begin("selectedSprite", nullptr, ImGuiWindowFlags_NoBackground | ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize))
 	{
+		auto radians = MathHelper::DegreesToRadians(selected_sprite->get_rotation());
+		auto uvs = selected_sprite->get_uvs();
+
 		ImGui::ImageQuad(
-			reinterpret_cast<void*>(sprite.getTexture()->getNativeHandle()),
+			reinterpret_cast<void*>(selected_sprite->get_sprite().getTexture()->getNativeHandle()),
 			{ 64, 64 },
 			radians,
 			uvs[0],
@@ -164,22 +152,6 @@ void MapEditorUi::selected_sprite() const
 	}
 
 	ImGui::End();
-
-	//auto draw_list = ImGui::GetWindowDrawList();
-	//auto size = ImVec2(64, 64);
-
-	//const ImVec2 p = ImGui::GetCursorScreenPos();
-	//ImGui::Dummy(size);
-
-	//ImVec2 a(p.x, p.y); // top left
-	//ImVec2 c(p.x + size.x, p.y + size.y); // bottom right
-	//ImVec2 b(c.x, a.y); // top right
-	//ImVec2 d(a.x, c.y); // bottom left
-
-	//draw_list->PushTextureID(reinterpret_cast<void*>(sprite.getTexture()->getNativeHandle()));
-	//draw_list->PrimReserve(6, 4);
-	//draw_list->PrimQuadUV(a, b, c, d, uvs[0], uvs[1], uvs[2], uvs[3], IM_COL32_WHITE);
-	//draw_list->PopTextureID();
 }
 
 void MapEditorUi::tile_picker(Window& window)

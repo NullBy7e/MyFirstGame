@@ -240,6 +240,7 @@
     <ClInclude Include="external\SFML-2.5.1\x86\include\SFML\Window\Window.hpp" />
     <ClInclude Include="external\SFML-2.5.1\x86\include\SFML\Window\WindowHandle.hpp" />
     <ClInclude Include="external\SFML-2.5.1\x86\include\SFML\Window\WindowStyle.hpp" />
+    <ClInclude Include="helpers\MathHelper.hpp" />
     <ClInclude Include="Logger.hpp" />
     <ClInclude Include="map\Map.hpp" />
     <ClInclude Include="map\MapEditor.hpp" />

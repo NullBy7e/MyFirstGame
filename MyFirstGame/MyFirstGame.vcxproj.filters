@@ -73,6 +73,9 @@
     <Filter Include="External\SFML-2.5.1\x86\include">
       <UniqueIdentifier>{8e1d0d75-f6d3-4164-b201-ae3ff5cc2b2d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Headers\helpers">
+      <UniqueIdentifier>{b6285f34-81d7-474d-a72a-3b3f4482739e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -754,6 +757,9 @@
     </ClInclude>
     <ClInclude Include="map\Tile.hpp">
       <Filter>Headers\map</Filter>
+    </ClInclude>
+    <ClInclude Include="helpers\MathHelper.hpp">
+      <Filter>Headers\helpers</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
