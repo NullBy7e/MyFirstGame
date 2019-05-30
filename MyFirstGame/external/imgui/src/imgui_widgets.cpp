@@ -924,37 +924,51 @@ void ImGui::Image(ImTextureID user_texture_id, const ImVec2& size, const ImVec2&
 
 void ImGui::ImageQuad(ImTextureID user_texture_id, const ImVec2& size, float angle, const ImVec2& uv0, const ImVec2& uv1, const ImVec2& uv2, const ImVec2& uv3)
 {
+	// many thanks to aleksige50() [[using god: cpp]] for helping me with the calculations!
+
 	ImGuiWindow* window = GetCurrentWindow();
 	if (window->SkipItems)
 		return;
 
 	ImRect bb(window->DC.CursorPos, window->DC.CursorPos + size);
+
+	//resize bb to fit the new item
 	ItemSize(bb);
 	if (!ItemAdd(bb, 0))
 		return;
 
-	const auto cos_a = cosf(angle);
-	const auto sin_a = sinf(angle);
-
-	auto rot_top_left		= ImRotate(ImVec2(-size.x * angle, -size.y * angle), cos_a, sin_a);
-	auto rot_top_right		= ImRotate(ImVec2(+size.x * angle, -size.y * angle), cos_a, sin_a);
-	auto rot_bottom_right	= ImRotate(ImVec2(+size.x * angle, +size.y * angle), cos_a, sin_a);
-	auto rot_bottom_left	= ImRotate(ImVec2(-size.x * angle, +size.y * angle), cos_a, sin_a);
+	auto cos_a = cosf(angle);
+	auto sin_a = sinf(angle);
 
 	ImVec2 pos[4] =
 	{
 		//top left
-		ImVec2(bb.Min.x, bb.Min.y) + rot_top_left,
+		{bb.Min.x, bb.Min.y},
 
 		//top right
-		ImVec2(bb.Max.x, bb.Min.y) + rot_top_right,
+		{bb.Max.x, bb.Min.y},
 
 		//bottom right
-		ImVec2(bb.Max.x, bb.Max.y) + rot_bottom_right,
+		{bb.Max.x, bb.Max.y},
 
 		//bottom left
-		ImVec2(bb.Min.x, bb.Max.y) + rot_bottom_left
+		{bb.Min.x, bb.Max.y}
 	};
+
+	ImVec2 quad[4] = 
+	{
+		{-1, -1}, {1, -1}, {1, 1}, {-1, 1}
+	};
+
+	auto cntr = ImVec2(bb.Min.x + ((bb.Max.x - bb.Min.x) / 2), bb.Min.y + ((bb.Max.y - bb.Min.y) / 2));
+	for (auto i = 0; i < 4; i++)
+	{
+		auto& p = pos[i];
+		auto v = ImRotate(ImVec2(quad[i].x * (bb.Max.x - bb.Min.x) / (2 * sqrt(2)), quad[i].y * (bb.Max.y - bb.Min.y) / (2 * sqrt(2))), cos_a, sin_a) + ImVec2(cntr.x, cntr.y);
+
+		p.x = v.x;
+		p.y = v.y;
+	}	
 
 	window->DrawList->AddImageQuad(user_texture_id, pos[0], pos[1], pos[2], pos[3], uv0, uv1, uv2, uv3, IM_COL32_WHITE);
 }
@@ -973,7 +987,8 @@ bool ImGui::ImageButton(ImTextureID user_texture_id, const ImVec2& size, const I
     const ImGuiStyle& style = g.Style;
 
     // Default to using texture ID as ID. User can still push string/integer prefixes.
-    // We could hash the size/uv to create a unique ID but that would prevent the user from animating UV.
+    // We could hash the size/uv to create a unique ID but that would pr
+//	ImRect bb(window->DC.CursorPos, window->DC.CursorPos + size);event the user from animating UV.
     PushID((void*)(intptr_t)user_texture_id);
     const ImGuiID id = window->GetID("#image");
     PopID();

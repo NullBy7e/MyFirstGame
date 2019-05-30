@@ -178,7 +178,7 @@ void MapEditor::rotate_selected_sprite()
 
 	if (selected_sprite->get_rotation() >= 360) //reset
 	{
-		selected_sprite->set_rotation(0);
+		selected_sprite->set_rotation(90);
 		return;
 	}
 

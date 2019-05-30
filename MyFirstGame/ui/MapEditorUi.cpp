@@ -147,8 +147,8 @@ void MapEditorUi::selected_sprite() const
 
 	const auto mouse = ImGui::GetMousePos();
 	ImGui::SetNextWindowPos({mouse.x + 30, mouse.y});
-	
 	auto uvs = selected_sprite->get_uvs();
+
 
 	if (ImGui::Begin("selectedSprite", nullptr, ImGuiWindowFlags_NoBackground | ImGuiWindowFlags_NoTitleBar))
 	{
