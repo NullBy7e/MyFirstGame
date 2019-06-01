@@ -4,7 +4,7 @@
 #include "Map.hpp"
 #include <optional>
 #include "TileSet.hpp"
-#include "../ui/MapEditorUI.hpp"
+#include "../ui/mapeditor/MapEditorUi.hpp"
 #include "Sprite.hpp"
 #include "../external/SFML-2.5.1/x86/include/SFML/Window/Mouse.hpp"
 #include "Tile.hpp"
@@ -44,7 +44,7 @@ public:
 	/**
 	 * \return vector of available tilesets.
 	 */
-	std::vector<TileSet>& get_tilesets();
+	std::vector<TileSet>* get_tilesets();
 
 	/**
 	 * \return the name of the map that this editor is for.
@@ -57,16 +57,16 @@ public:
 	std::string& get_map_desc();
 
 	/**
+	 * \return the selected sprite wrapped in a shared_ptr.
+	 */
+	std::shared_ptr<Sprite> get_selected_sprite() const;
+
+	/**
 	 * \brief sets the selected sprite.
 	 * \param tile_set the tileset that the sprite belongs to.
 	 * \param sprite_index the tileset index of the sprite.
 	 */
 	void set_selected_sprite(TileSet& tile_set, const int sprite_index);
-
-	/**
-	 * \return the selected sprite wrapped in a shared_ptr.
-	 */
-	std::shared_ptr<Sprite>& get_selected_sprite();
 
 	/**
 	 * \brief returns the column and row number relative to the given mouse pos.
@@ -95,7 +95,7 @@ public:
 	/**
 	 * \brief rotates the selected sprite clock-wise.
 	 */
-	void rotate_selected_sprite();
+	void rotate_selected_sprite() const;
 private:
 	/**
 	 * \brief loads the tilesets for this map editor.

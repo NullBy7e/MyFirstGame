@@ -35,7 +35,9 @@
     <ClCompile Include="map\Tile.cpp" />
     <ClCompile Include="map\TileSet.cpp" />
     <ClCompile Include="states\LevelEditorGameState.cpp" />
-    <ClCompile Include="ui\MapEditorUi.cpp" />
+    <ClCompile Include="ui\mapeditor\MapEditorUi.cpp" />
+    <ClCompile Include="ui\mapeditor\Tilepicker.cpp" />
+    <ClCompile Include="ui\mapeditor\UiElement.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="conventions.txt" />
@@ -249,7 +251,10 @@
     <ClInclude Include="map\TileSet.hpp" />
     <ClInclude Include="states\GameState.hpp" />
     <ClInclude Include="states\LevelEditorGameState.hpp" />
-    <ClInclude Include="ui\MapEditorUi.hpp" />
+    <ClInclude Include="ui\mapeditor\MapEditorUi.hpp" />
+    <ClInclude Include="ui\mapeditor\Tilepicker.hpp" />
+    <ClInclude Include="ui\mapeditor\UiElement.hpp" />
+    <ClInclude Include="ui\mapeditor\UiElementCallbackInterface.hpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="assets\tilesets\grass.meta" />
@@ -418,7 +423,10 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
-  <PropertyGroup />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <CodeAnalysisRuleSet>NativeRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <RunCodeAnalysis>false</RunCodeAnalysis>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
@@ -469,6 +477,7 @@
       <LanguageStandard>stdcpp17</LanguageStandard>
       <SupportJustMyCode>false</SupportJustMyCode>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <EnablePREfast>false</EnablePREfast>
     </ClCompile>
     <Link>
       <AdditionalLibraryDirectories>external\SFML-2.5.1\x64\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>

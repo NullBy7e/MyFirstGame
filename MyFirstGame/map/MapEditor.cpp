@@ -118,9 +118,9 @@ void MapEditor::process_event(const sf::Event& event)
 	}
 }
 
-std::vector<TileSet>& MapEditor::get_tilesets()
+std::vector<TileSet>* MapEditor::get_tilesets()
 {
-	return tilesets_;
+	return &tilesets_;
 }
 
 std::string& MapEditor::get_map_name()
@@ -133,15 +133,15 @@ std::string& MapEditor::get_map_desc()
 	return map_.value().get_desc();
 }
 
+std::shared_ptr<Sprite> MapEditor::get_selected_sprite() const
+{
+	return selectedSprite_;
+}
+
 void MapEditor::set_selected_sprite(TileSet& tile_set, const int sprite_index)
 {
 	clear_selected_sprite();
 	selectedSprite_ = std::make_shared<Sprite>(tile_set, sprite_index);
-}
-
-std::shared_ptr<Sprite>& MapEditor::get_selected_sprite()
-{
-	return selectedSprite_;
 }
 
 std::pair<unsigned, unsigned> MapEditor::get_column_row_at_mouse_pos(sf::Vector2i mouse_pos)
@@ -170,7 +170,7 @@ void MapEditor::clear_selected_sprite()
 	selectedSprite_.reset();
 }
 
-void MapEditor::rotate_selected_sprite()
+void MapEditor::rotate_selected_sprite() const
 {
 	const auto selected_sprite = get_selected_sprite();
 	if (!selected_sprite)

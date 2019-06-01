@@ -76,6 +76,12 @@
     <Filter Include="Headers\helpers">
       <UniqueIdentifier>{b6285f34-81d7-474d-a72a-3b3f4482739e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Headers\ui\mapeditor">
+      <UniqueIdentifier>{19364a5a-184e-4bca-baa1-8d32fbe2c09d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\ui\mapeditor">
+      <UniqueIdentifier>{8c567242-d3a7-4694-85c5-3c6017aab7ff}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -117,9 +123,6 @@
     <ClCompile Include="external\imgui\src\imgui_widgets.cpp">
       <Filter>Source\ui\imgui</Filter>
     </ClCompile>
-    <ClCompile Include="ui\MapEditorUI.cpp">
-      <Filter>Source\ui</Filter>
-    </ClCompile>
     <ClCompile Include="external\imgui\src\imgui_stdlib.cpp">
       <Filter>Source\ui\imgui</Filter>
     </ClCompile>
@@ -128,6 +131,15 @@
     </ClCompile>
     <ClCompile Include="map\Tile.cpp">
       <Filter>Source\map</Filter>
+    </ClCompile>
+    <ClCompile Include="ui\mapeditor\MapEditorUi.cpp">
+      <Filter>Source\ui\mapeditor</Filter>
+    </ClCompile>
+    <ClCompile Include="ui\mapeditor\UiElement.cpp">
+      <Filter>Source\ui\mapeditor</Filter>
+    </ClCompile>
+    <ClCompile Include="ui\mapeditor\Tilepicker.cpp">
+      <Filter>Source\ui\mapeditor</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -157,9 +169,6 @@
     </ClInclude>
     <ClInclude Include="map\TileSet.hpp">
       <Filter>Headers\map</Filter>
-    </ClInclude>
-    <ClInclude Include="ui\MapEditorUI.hpp">
-      <Filter>Headers\ui</Filter>
     </ClInclude>
     <ClInclude Include="external\SFML-2.5.1\x86\include\SFML\Window\Clipboard.hpp">
       <Filter>External\SFML-2.5.1\x86\include</Filter>
@@ -760,6 +769,18 @@
     </ClInclude>
     <ClInclude Include="helpers\MathHelper.hpp">
       <Filter>Headers\helpers</Filter>
+    </ClInclude>
+    <ClInclude Include="ui\mapeditor\MapEditorUi.hpp">
+      <Filter>Headers\ui\mapeditor</Filter>
+    </ClInclude>
+    <ClInclude Include="ui\mapeditor\UiElement.hpp">
+      <Filter>Headers\ui\mapeditor</Filter>
+    </ClInclude>
+    <ClInclude Include="ui\mapeditor\Tilepicker.hpp">
+      <Filter>Headers\ui\mapeditor</Filter>
+    </ClInclude>
+    <ClInclude Include="ui\mapeditor\UiElementCallbackInterface.hpp">
+      <Filter>Headers\ui\mapeditor</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
